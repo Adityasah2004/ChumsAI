@@ -1,4 +1,5 @@
-import Navbar from './components/Navbar'
+import Head from './components/Navbar'
+import HomePage from './pages/LandingPage';
 import Services from './components/ServicesCard'
 import Features from './components/Features'
 import Industry from './components/Industry'
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Navbar/>
+      <Head/>
       <Services/>
       <Features/>
       <Industry/>
