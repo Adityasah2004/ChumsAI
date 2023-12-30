@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Footer,
   FooterBrand,
@@ -8,8 +8,8 @@ import {
   FooterLink,
   FooterLinkGroup,
   FooterTitle,
-} from 'flowbite-react';
-import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+} from "flowbite-react";
+import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 function Down() {
   return (

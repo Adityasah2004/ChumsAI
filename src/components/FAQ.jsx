@@ -1,5 +1,10 @@
-import React from 'react';
-import { Accordion, AccordionContent, AccordionPanel, AccordionTitle } from 'flowbite-react';
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionPanel,
+  AccordionTitle,
+} from "flowbite-react";
 
 function FAQ() {
   return (
@@ -12,7 +17,8 @@ function FAQ() {
           </AccordionTitle>
           <AccordionContent className="bg-white dark:bg-gray-800 p-3">
             <p className="mb-2 text-gray-500 dark:text-gray-400">
-              Our AI platform stands out due to its advanced features, personalized interactions, and seamless integration capabilities.
+              Our AI platform stands out due to its advanced features,
+              personalized interactions, and seamless integration capabilities.
             </p>
           </AccordionContent>
         </AccordionPanel>
@@ -22,7 +28,8 @@ function FAQ() {
           </AccordionTitle>
           <AccordionContent className="bg-white dark:bg-gray-800 p-3">
             <p className="mb-2 text-gray-500 dark:text-gray-400">
-              Integration is straightforward with our provided APIs and documentation. Our support team is also available to assist you.
+              Integration is straightforward with our provided APIs and
+              documentation. Our support team is also available to assist you.
             </p>
           </AccordionContent>
         </AccordionPanel>
@@ -32,7 +39,9 @@ function FAQ() {
           </AccordionTitle>
           <AccordionContent className="bg-white dark:bg-gray-800 p-3">
             <p className="mb-2 text-gray-500 dark:text-gray-400">
-              Yes, our AI platform is highly customizable, and we work closely with clients to tailor solutions to their specific industry requirements.
+              Yes, our AI platform is highly customizable, and we work closely
+              with clients to tailor solutions to their specific industry
+              requirements.
             </p>
           </AccordionContent>
         </AccordionPanel>
@@ -42,7 +51,9 @@ function FAQ() {
           </AccordionTitle>
           <AccordionContent className="bg-white dark:bg-gray-800 p-3">
             <p className="mb-2 text-gray-500 dark:text-gray-400">
-              We provide ongoing support, including regular updates, troubleshooting, and assistance to ensure optimal performance post-implementation.
+              We provide ongoing support, including regular updates,
+              troubleshooting, and assistance to ensure optimal performance
+              post-implementation.
             </p>
           </AccordionContent>
         </AccordionPanel>
@@ -52,4 +63,3 @@ function FAQ() {
 }
 
 export default FAQ;
-

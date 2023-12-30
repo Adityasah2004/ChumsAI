@@ -93,7 +93,6 @@ function Industry() {
 
 export default Industry;
 
-
 <style>
   {`
     .card-with-hover {
