@@ -12,7 +12,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -38,7 +38,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -64,7 +64,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -90,7 +90,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -116,7 +116,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -141,7 +141,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -167,7 +167,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src/assets/img.jpg"
+                  src="https://github.com/Adityasah2004/ChumsAI/blob/main/src/assets/img.jpg"
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
