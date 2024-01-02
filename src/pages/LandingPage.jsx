@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Button } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { FaDiscord } from "react-icons/fa";
-import "../styles/LandingPage.css"; 
+import "../styles/LandingPage.css";
 
 const LandingPage = () => {
   const circle1Ref = useRef(null);
@@ -62,13 +62,11 @@ const LandingPage = () => {
 
   return (
     <div className="relative h-screen overflow-hidden">
-      {/* Circles for background */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div ref={circle1Ref} className="circle circle-1"></div>
         <div ref={circle2Ref} className="circle circle-2"></div>
       </div>
 
-      {/* Rest of the content */}
       <div className="flex justify-center items-center h-full">
         <div className="text-left w-1/2 p-10">
           <h1 className="text-4xl font-bold mb-4">

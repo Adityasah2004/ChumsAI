@@ -1,12 +1,11 @@
 import Head from './components/Navbar'
-import HomePage from './pages/LandingPage';
-import Services from './components/ServicesCard'
-import Features from './components/Features'
+import LandingPage from './pages/LandingPage';
+import AboutPage from './pages/About';
 import Industry from './components/Industry'
 import FAQ from './components/FAQ'
 import Down from './components/Footer'
 import './App.css'
-import LandingPage from './pages/LandingPage';
+
 
 function App() {
 
@@ -14,8 +13,7 @@ function App() {
     <>
       <Head/>
       <LandingPage/>
-      <Services/>
-      <Features/>
+      <AboutPage/>
       <Industry/>
       <FAQ/>
       <Down/>
