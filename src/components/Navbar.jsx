@@ -7,6 +7,7 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
+import { HiOutlineArrowRight } from "react-icons/hi";
 
 function Component() {
   // Custom CSS
@@ -43,6 +44,7 @@ function Component() {
             gradientDuoTone="purpleToBlue"
           >
             SIGN UP
+            <HiOutlineArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <NavbarToggle />
         </div>

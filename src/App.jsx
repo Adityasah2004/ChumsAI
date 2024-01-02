@@ -6,12 +6,14 @@ import Industry from './components/Industry'
 import FAQ from './components/FAQ'
 import Down from './components/Footer'
 import './App.css'
+import LandingPage from './pages/LandingPage';
 
 function App() {
 
   return (
     <>
       <Head/>
+      <LandingPage/>
       <Services/>
       <Features/>
       <Industry/>
