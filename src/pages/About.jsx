@@ -10,7 +10,7 @@ const AboutPage = () => {
       <div className="flex justify-center items-center m-16">
         <div className="w-1/2">
           <img
-            src="src\assets\About.png"
+            src="src/assets/About.png"
             alt="About Page Image"
             className="w-full h-auto"
           />

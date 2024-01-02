@@ -1,7 +1,7 @@
 import Head from './components/Navbar'
 import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/About';
-import Industry from './components/Industry'
+import WhyUs from './pages/WhyUs';
 import FAQ from './components/FAQ'
 import Down from './components/Footer'
 import './App.css'
@@ -14,7 +14,7 @@ function App() {
       <Head/>
       <LandingPage/>
       <AboutPage/>
-      <Industry/>
+      <WhyUs/>
       <FAQ/>
       <Down/>
       </>

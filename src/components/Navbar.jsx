@@ -52,8 +52,8 @@ function Component() {
           <NavbarLink href="#" active>
             Home
           </NavbarLink>
-          <NavbarLink href="#">Services</NavbarLink>
           <NavbarLink href="#">About</NavbarLink>
+          <NavbarLink href="#">Why us</NavbarLink>
           <NavbarLink href="#">Contact</NavbarLink>
         </NavbarCollapse>
       </Navbar>
