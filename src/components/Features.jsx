@@ -4,7 +4,7 @@ function Features() {
   return (
     <div className="py-8 text-center">
       <h2 className="text-3xl font-bold mb-6">OUR FEATURES</h2>
-      <div className="h-24 sm:h-32 xl:h-40 2xl:h-48">
+      <div className="h-auto sm:h-32 xl:h-40 2xl:h-48">
         <Carousel
           onSlideChange={(index) => console.log("onSlideChange()", index)}
         >
@@ -208,6 +208,13 @@ function Features() {
             }
             100% {
               background-position: 100% 100%;
+            }
+          }
+          /* Media query for mobile view */
+          @media (max-width: 640px) {
+            .h-auto {
+              width: 500px;
+              height: 300px; /* Adjust the height as needed */
             }
           }
         `}

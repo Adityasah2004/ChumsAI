@@ -17,7 +17,7 @@ const DropText1= () => {
   };
 
   return (
-    <div className="text-center mt-16">
+    <div className="text-center  mt-16">
       <h1 className="text-3xl font-bold mb-4">INTEGRATION</h1>
       <p className="text-lg text-gray-600 mb-6">
         Integration Solutions forSeamless Operations
@@ -70,7 +70,6 @@ const DropText1= () => {
           onClick={() => toggleDropdown("dropdown2")}
         />
       </div>
-      <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mt-6" />
     </div>
   );
 };

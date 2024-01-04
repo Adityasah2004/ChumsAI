@@ -6,9 +6,9 @@ import DropText2 from "../components/DropDown2";
 const WhyUs = () => {
   return (
     <div className="m-8">
-        <h2 className="text-3xl font-bold mb-4">WHAT WE DO?</h2>
-      <div className="flex justify-center items-center m-16">
-        <div className="w-1/2">
+      <h2 className="text-3xl font-bold mb-4">WHAT WE DO?</h2>
+      <div className="flex flex-col md:flex-row md:justify-center md:items-center md:m-16">
+        <div className="md:w-1/2">
           <img
             src="src/assets/why.webp"
             alt="Why Page Image"
@@ -16,7 +16,7 @@ const WhyUs = () => {
           />
         </div>
 
-        <div className="text-left w-1/2 p-10">
+        <div className="text-left md:w-1/2 md:p-10">
           <h1 className="text-4xl font-bold mb-4">WHY CHUMSAI?</h1>
           <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
           <p className="text-lg text-gray-600 mb-4">
@@ -33,8 +33,8 @@ const WhyUs = () => {
         </div>
       </div>
       <Industry />
-      <DropText1/>
-      <DropText2/>
+      <DropText1 />
+      <DropText2 />
     </div>
   );
 };

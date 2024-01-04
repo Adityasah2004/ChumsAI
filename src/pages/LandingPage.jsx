@@ -67,36 +67,37 @@ const LandingPage = () => {
         <div ref={circle2Ref} className="circle circle-2"></div>
       </div>
 
-      <div className="flex justify-center items-center h-full">
-        <div className="text-left w-1/2 p-10">
-          <h1 className="text-4xl font-bold mb-4">
-            YOUR OWN PERSONALIZED AI HUMANOID 3D COMPANION
-          </h1>
-          <p className="text-lg text-gray-600">
-            Build & Discover your AI Friend and Work companion to
-          </p>
-          <div className="mt-8">
-            <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
-            <div className="flex flex-wrap gap-4">
-              <Button gradientDuoTone="purpleToBlue">
-                Create Your Companion
-                <HiOutlineArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button outline gradientDuoTone="purpleToBlue">
-                Discord
-                <FaDiscord className="text-purple-500 text-2xl ml-2" />
-              </Button>
+      <div className="flex flex-col lg:flex-row justify-center items-center h-full">
+        <div className="lg:w-1/2 order-2 lg:order-1">
+          <div className="text-center lg:text-left lg:p-10">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+              YOUR OWN PERSONALIZED AI HUMANOID 3D COMPANION
+            </h1>
+            <p className="text-lg lg:text-xl text-gray-600">
+              Build & Discover your AI Friend and Work companion to
+            </p>
+            <div className="mt-8">
+              <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
+              <div className="flex flex-col lg:flex-row lg:gap-4">
+                <Button gradientDuoTone="purpleToBlue">
+                  Create Your Companion
+                  <HiOutlineArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button outline gradientDuoTone="purpleToBlue" className="mt-4 lg:mt-0">
+                  Discord
+                  <FaDiscord className="text-purple-500 text-2xl ml-2" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="w-1/2">
+        <div className="lg:w-1/2 order-1 lg:order-2">
           <iframe
-            title="Embedded Frame"
-            className="w-full h-screen"
-            src=""
+            src="D:/ADITYA/VScode programs/ChumsAI/src/pages/LandingPage.jsx"
             frameBorder="0"
-            allowFullScreen
+            width="100%"
+            height="500"
           ></iframe>
         </div>
       </div>

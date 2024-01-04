@@ -4,8 +4,8 @@ function Services() {
   return (
     <div className="py-8 text-center">
       <h2 className="text-3xl font-bold mb-6">OUR SERVICES</h2>
-      <div className="flex justify-between space-x-4">
-        <Card href="#" className="max-w-sm card-with-hover">
+      <div className="flex flex-col md:flex-row md:justify-between space-y-8 md:space-y-0 md:space-x-4">
+        <Card href="#" className="max-w-sm card-with-hover md:w-1/3">
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             AI Companion
           </h5>
@@ -17,7 +17,7 @@ function Services() {
           </p>
         </Card>  
 
-        <Card href="#" className="max-w-sm card-with-hover">
+        <Card href="#" className="max-w-sm card-with-hover md:w-1/3">
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Voice-enabled AI Companion
           </h5>
@@ -28,7 +28,7 @@ function Services() {
           </p>
         </Card>
 
-        <Card href="#" className="max-w-sm card-with-hover">
+        <Card href="#" className="max-w-sm card-with-hover md:w-1/3">
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             3D AI Companion
           </h5>

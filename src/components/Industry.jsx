@@ -2,17 +2,17 @@ import { Card } from "flowbite-react";
 
 function Industry() {
   const generateCardContent = (title, description, imageUrl) => (
-    <div className="text-left max-w-sm flex items-center ">
-      <div>
-        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {title}
-        </h5>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          {description}
-        </p>
-      </div>
-      <div className="w-1/3">
-        <img src={imageUrl} alt={title} className="w-full h-auto ml-14" />
+    <div className="text-left max-w-lg mx-auto p-4 md:p-0">
+      <div className="flex rounded-lg overflow-hidden">
+        <div className="p-6 w-1/2">
+          <h5 className="text-xl font-bold mb-2">{title}</h5>
+          <p>{description}</p>
+        </div>
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-1/2 h-auto object-cover object-center"
+        />
       </div>
     </div>
   );
@@ -78,14 +78,11 @@ function Industry() {
     </Card>
   ));
 
-  const splitIndex = Math.ceil(cards.length / 2);
-
   return (
     <div className="text-center mb-8">
       <h2 className="text-3xl font-bold mb-4">INDUSTRY</h2>
-      <div className="flex">
-        <div className="w-1/2 pr-4">{cards.slice(0, splitIndex)}</div>
-        <div className="w-1/2 pl-4">{cards.slice(splitIndex)}</div>
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
+        {cards}
       </div>
     </div>
   );
@@ -98,6 +95,7 @@ export default Industry;
     .card-with-hover {
       transition: background-position 0.5s ease;
       background-size: 400% 400%;
+      margin-bottom: 1rem;
     }
 
     .card-with-hover:hover {
