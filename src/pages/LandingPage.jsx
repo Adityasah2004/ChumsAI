@@ -53,7 +53,7 @@ const LandingPage = () => {
         circle2.style.left = `${randomPosition2.x}px`;
       };
 
-      setInterval(moveCirclesRandomly, 5000);
+      setInterval(moveCirclesRandomly, 2000);
       moveCirclesRandomly();
     };
 
@@ -83,7 +83,11 @@ const LandingPage = () => {
                   Create Your Companion
                   <HiOutlineArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button outline gradientDuoTone="purpleToBlue" className="mt-4 lg:mt-0">
+                <Button
+                  outline
+                  gradientDuoTone="purpleToBlue"
+                  className="mt-4 lg:mt-0"
+                >
                   Discord
                   <FaDiscord className="text-purple-500 text-2xl ml-2" />
                 </Button>
@@ -93,12 +97,7 @@ const LandingPage = () => {
         </div>
 
         <div className="lg:w-1/2 order-1 lg:order-2">
-          <iframe
-            src="D:/ADITYA/VScode programs/ChumsAI/src/pages/LandingPage.jsx"
-            frameBorder="0"
-            width="100%"
-            height="500"
-          ></iframe>
+          <iframe src="" frameBorder="0" width="100%" height="500"></iframe>
         </div>
       </div>
     </div>

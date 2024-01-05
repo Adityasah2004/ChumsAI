@@ -15,19 +15,20 @@ Before you begin, ensure you have the following installed on your machine:
 git clone https://github.com/ChumsAI/Landing-Page.git
 cd vite-react-project
 
-# Installation 
+# Installation
 
 npm install
 
-# Running the application 
+# Running the application
 - Development Mode
 npm run dev
 
-- Production Mode 
+- Production Mode
 npm run
 ```
 
-## Folder Structure 
+## Folder Structure
+
 ```bash
 ChumsAI/
   ├── public/         # Static assets (e.g., images, fonts)
@@ -47,9 +48,11 @@ ChumsAI/
   ├── README.md       # Project README file
   └── ...             # Other configuration files
 ```
-## Contributors 
+
+## Contributors
 
 [@Adityasah2004](https://github.com/Adityasah2004)
 
 ## License
+
 This project is licensed under the MIT License.

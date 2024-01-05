@@ -2,7 +2,7 @@ import { Dropdown } from "flowbite-react";
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const DropText1= () => {
+const DropText1 = () => {
   const [dropdown1, setDropdown1] = useState(false);
   const [dropdown2, setDropdown2] = useState(false);
 

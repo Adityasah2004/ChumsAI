@@ -20,7 +20,7 @@ function Component() {
       height: 60px; 
       background-color: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(4px); 
-      z-index: 50; 
+      z-index: 50;
     }
   `;
 
@@ -54,6 +54,7 @@ function Component() {
           </NavbarLink>
           <NavbarLink href="#">About</NavbarLink>
           <NavbarLink href="#">Why us</NavbarLink>
+          <NavbarLink href="#">Blogs</NavbarLink>
           <NavbarLink href="#">Contact</NavbarLink>
         </NavbarCollapse>
       </Navbar>

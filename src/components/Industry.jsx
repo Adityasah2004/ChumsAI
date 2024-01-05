@@ -11,7 +11,8 @@ function Industry() {
         <img
           src={imageUrl}
           alt={title}
-          className="w-1/2 h-auto object-cover object-center"
+          className="w-1/2 object-contain object-center"
+          style={{ width: "250px", height: "150px" }}
         />
       </div>
     </div>
@@ -22,49 +23,49 @@ function Industry() {
       title: "Education",
       description:
         "Personalizes learning, interactive tutorials, adapts to student needs, fosters engagement.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/education.png",
     },
     {
       title: "Healthcare",
       description:
         "Assists in patient monitoring, medication reminders, emotional support, enhances well-being.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/healtcare.png",
     },
     {
       title: "Entertainment",
       description:
         "Enhances gaming, interactive storytelling, providing engaging experiences.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/entertainment.png",
     },
     {
       title: "Customer Service",
       description:
         "Handles queries, provides instant assistance, enhances user experience with empathy.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/coustomer services.png",
     },
     {
       title: "Fashion",
       description:
         "Acts as a virtual stylist, recommends personalized fashion choices, revolutionizes shopping.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/fashion.png",
     },
     {
       title: "Real Estate",
       description:
         "Offers virtual property tours, answers queries, provides detailed information, improves efficiency.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/real estate.png",
     },
     {
       title: "Automotive",
       description:
         "Aids drivers with navigation, vehicle info, maintenance reminders, enhances driving experience.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/automotive.png",
     },
     {
       title: "Retail",
       description:
         "Offers personalized shopping recommendations, helps navigate products, provides engaging experience.",
-      imageUrl: "url_to_education_image.jpg",
+      imageUrl: "src/assets/retail.png",
     },
   ];
 

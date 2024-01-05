@@ -8,7 +8,7 @@ const AboutPage = () => {
   return (
     <div className="m-8">
       <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 m-6 md:m-16">
-        <div className="md:w-1/2">
+        <div className=" md:w-1/2">
           <img
             src="src/assets/About.png"
             alt="About Page Image"
@@ -29,7 +29,7 @@ const AboutPage = () => {
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <Button outline gradientDuoTone="purpleToBlue">
               Learn more
-              <HiExternalLink className="text-purple-500 text-xl md:text-2xl ml-2" />
+              <HiExternalLink className="text-black text-xl md:text-2xl ml-2" />
             </Button>
           </div>
         </div>
