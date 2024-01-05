@@ -10,6 +10,7 @@ import {
   FooterTitle,
 } from "flowbite-react";
 import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import logo from '/logo.svg';
 
 function Down() {
   return (
@@ -19,7 +20,7 @@ function Down() {
           <div>
             <FooterBrand
               href="#"
-              src="src/assets/logo.jpg"
+              src={logo}
               alt="ChumsAI Logo"
               name="ChumsAI"
             />
@@ -51,9 +52,9 @@ function Down() {
           </div>
         </div>
         <FooterDivider />
-        <div className="w-full sm:flex sm:items-center sm:justify-between">
+        <div className="m-2 w-full sm:flex sm:items-center sm:justify-between">
           <FooterCopyright href="#" by="ChumsAI™" year={2023} />
-          <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+          <div className="mt-4 m-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <FooterIcon href="#" icon={FaDiscord} />
             <FooterIcon href="#" icon={FaFacebook} />
             <FooterIcon href="#" icon={FaTwitter} />

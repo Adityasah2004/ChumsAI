@@ -1,4 +1,12 @@
 import { Card } from "flowbite-react";
+import Education from '../assets/education.png';
+import Healthcare from '../assets/healtcare.png';
+import Entertainment from '../assets/entertainment.png';
+import CustomerService from '../assets/coustomer services.png';
+import Fashion from '../assets/fashion.png';
+import RealEstate from '../assets/real estate.png';
+import Automotive from '../assets/automotive.png';
+import Retail from '../assets/retail.png';
 
 function Industry() {
   const generateCardContent = (title, description, imageUrl) => (
@@ -23,49 +31,49 @@ function Industry() {
       title: "Education",
       description:
         "Personalizes learning, interactive tutorials, adapts to student needs, fosters engagement.",
-      imageUrl: "src/assets/education.png",
+      imageUrl: Education,
     },
     {
       title: "Healthcare",
       description:
         "Assists in patient monitoring, medication reminders, emotional support, enhances well-being.",
-      imageUrl: "src/assets/healtcare.png",
+      imageUrl: Healthcare,
     },
     {
       title: "Entertainment",
       description:
         "Enhances gaming, interactive storytelling, providing engaging experiences.",
-      imageUrl: "src/assets/entertainment.png",
+      imageUrl: Entertainment,
     },
     {
       title: "Customer Service",
       description:
         "Handles queries, provides instant assistance, enhances user experience with empathy.",
-      imageUrl: "src/assets/coustomer services.png",
+      imageUrl: CustomerService,
     },
     {
       title: "Fashion",
       description:
         "Acts as a virtual stylist, recommends personalized fashion choices, revolutionizes shopping.",
-      imageUrl: "src/assets/fashion.png",
+      imageUrl: Fashion,
     },
     {
       title: "Real Estate",
       description:
         "Offers virtual property tours, answers queries, provides detailed information, improves efficiency.",
-      imageUrl: "src/assets/real estate.png",
+      imageUrl: RealEstate,
     },
     {
       title: "Automotive",
       description:
         "Aids drivers with navigation, vehicle info, maintenance reminders, enhances driving experience.",
-      imageUrl: "src/assets/automotive.png",
+      imageUrl: Automotive,
     },
     {
       title: "Retail",
       description:
         "Offers personalized shopping recommendations, helps navigate products, provides engaging experience.",
-      imageUrl: "src/assets/retail.png",
+      imageUrl: Retail,
     },
   ];
 

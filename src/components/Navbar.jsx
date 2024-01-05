@@ -8,6 +8,7 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
+import logo from '/logo.svg';
 
 function Component() {
   // Custom CSS
@@ -30,7 +31,7 @@ function Component() {
       <Navbar className="navbar-custom">
         <NavbarBrand href="#">
           <img
-            src="src/assets/logo.jpg"
+            src={logo}
             className="mr-3 h-9 sm:h-12 rounded-full"
             alt="ChumsAI logo"
           />

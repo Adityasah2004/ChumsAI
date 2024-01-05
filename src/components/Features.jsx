@@ -1,4 +1,11 @@
 import { Carousel } from "flowbite-react";
+import Conversational from '../assets/Conversational Intelligence.jpg';
+import Visual from '../assets/Visual Intelligence.webp';
+import Personalization from '../assets/Personalization.png';
+import Channel from '../assets/channel.png';
+import Platform from '../assets/Platform.png';
+import Integrations from '../assets/Integrations.png';
+import Industries from '../assets/Industries.png';
 
 function Features() {
   return (
@@ -12,7 +19,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Conversational}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -38,7 +45,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Visual}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -64,7 +71,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Personalization}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -90,7 +97,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Channel}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -116,7 +123,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Platform}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -141,7 +148,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Integrations}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{
@@ -167,7 +174,7 @@ function Features() {
             <div className="flex items-center w-full p-16">
               <div className="flex-shrink-0 mr-8">
                 <img
-                  src="src\assets\img.jpg"
+                  src={Industries}
                   alt="Feature Image"
                   className="w-24 h-24 object-cover rounded-full"
                   style={{

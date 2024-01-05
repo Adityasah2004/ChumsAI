@@ -2,6 +2,7 @@ import React from "react";
 import Industry from "../components/Industry";
 import DropText1 from "../components/Dropdown1";
 import DropText2 from "../components/DropDown2";
+import imageName from '../assets/why.webp';
 
 const WhyUs = () => {
   return (
@@ -10,7 +11,7 @@ const WhyUs = () => {
       <div className="flex flex-col md:flex-row md:justify-center md:items-center md:m-16">
         <div className="md:w-1/2">
           <img
-            src="src/assets/why.webp"
+            src={imageName}
             alt="Why Page Image"
             className="w-full h-auto"
           />

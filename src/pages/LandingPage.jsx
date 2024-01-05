@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Button } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { FaDiscord } from "react-icons/fa";
+import Landing from '../assets/landing.png';
 import "../styles/LandingPage.css";
 
 const LandingPage = () => {
@@ -97,7 +98,11 @@ const LandingPage = () => {
         </div>
 
         <div className="lg:w-1/2 order-1 lg:order-2">
-          <iframe src="" frameBorder="0" width="100%" height="500"></iframe>
+        <img
+            src={Landing}
+            alt="Landing Page Image"
+            className="w-full h-auto"
+          />
         </div>
       </div>
     </div>
