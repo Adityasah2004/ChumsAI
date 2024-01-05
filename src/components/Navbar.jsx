@@ -50,13 +50,13 @@ function Component() {
           <NavbarToggle />
         </div>
         <NavbarCollapse>
-          <NavbarLink href="#" active>
+          <NavbarLink href="#" >
             Home
           </NavbarLink>
-          <NavbarLink href="#">About</NavbarLink>
-          <NavbarLink href="#">Why us</NavbarLink>
-          <NavbarLink href="#">Blogs</NavbarLink>
-          <NavbarLink href="#">Contact</NavbarLink>
+          <NavbarLink href="/About">About</NavbarLink>
+          <NavbarLink href="/WhyUs">Why us</NavbarLink>
+          <NavbarLink href="/Blogs">Blogs</NavbarLink>
+          <NavbarLink href="/Contact">Contact</NavbarLink>
         </NavbarCollapse>
       </Navbar>
     </>
