@@ -3,6 +3,7 @@ import Services from "../components/ServicesCard";
 import Features from "../components/Features";
 import { Button } from "flowbite-react";
 import { HiExternalLink } from "react-icons/hi";
+import imageName from '../assets/About.png';
 
 const AboutPage = () => {
   return (
@@ -10,7 +11,7 @@ const AboutPage = () => {
       <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 m-6 md:m-16">
         <div className=" md:w-1/2">
           <img
-            src="src/assets/About.png"
+            src={imageName}
             alt="About Page Image"
             className="w-full h-auto"
           />
