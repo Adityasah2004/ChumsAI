@@ -75,7 +75,7 @@ const LandingPage = () => {
               YOUR OWN PERSONALIZED AI HUMANOID 3D COMPANION
             </h1>
             <p className="text-lg lg:text-xl text-gray-600">
-              Build & Discover your AI Friend and Work companion to
+              Build & Discover your AI Friend and Work companion 
             </p>
             <div className="mt-8">
               <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
