@@ -5,6 +5,7 @@ import { FaDiscord } from "react-icons/fa";
 import Landing from '../assets/landing.png';
 import "../styles/LandingPage.css";
 
+
 const LandingPage = () => {
   const circle1Ref = useRef(null);
   const circle2Ref = useRef(null);
@@ -74,20 +75,21 @@ const LandingPage = () => {
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">
               YOUR OWN PERSONALIZED AI HUMANOID 3D COMPANION
             </h1>
-            <p className="text-lg lg:text-xl text-gray-600">
+            <p className="text-lg lg:text-xl text-gray-400">
               Build & Discover your AI Friend and Work companion 
             </p>
             <div className="mt-8">
-              <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
+              <hr className="border-t-2 border-gradient-to-r from-blue-900 to-purple-100 mb-4" />
               <div className="flex flex-col lg:flex-row lg:gap-4">
-                <Button gradientDuoTone="purpleToBlue">
+                <Button  gradientDuoTone="purpleToBlue">
                   Create Your Companion
                   <HiOutlineArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button
                   outline
                   gradientDuoTone="purpleToBlue"
-                  className="mt-4 lg:mt-0"
+                  className="dark*:#0c0c0c mt-4 lg:mt-0"
+                  style={{ backgroundColor: 'black', color: 'white' }}
                 >
                   Discord
                   <FaDiscord className="text-purple-500 text-2xl ml-2" />

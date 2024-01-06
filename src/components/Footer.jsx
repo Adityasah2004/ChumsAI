@@ -10,11 +10,11 @@ import {
   FooterTitle,
 } from "flowbite-react";
 import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-import logo from '/logo.svg';
+import logo from '../assets/logoDark.png';
 
 function Down() {
   return (
-    <Footer container={false}>
+    <Footer className="bg-#0c0c0c text-white dark:text-white" container={false}>
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
@@ -42,7 +42,7 @@ function Down() {
                 <FooterLink href="#">LinkedIn</FooterLink>
               </FooterLinkGroup>
             </div>
-            <div>
+            <div className="mr-2">
               <FooterTitle title="Legal" />
               <FooterLinkGroup col>
                 <FooterLink href="#">Privacy Policy</FooterLink>

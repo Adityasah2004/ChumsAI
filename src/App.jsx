@@ -7,7 +7,6 @@ import FAQ from './components/FAQ'
 import Down from './components/Footer'
 import './App.css'
 
-
 function App() {
 
   return (

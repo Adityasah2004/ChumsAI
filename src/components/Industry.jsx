@@ -11,17 +11,17 @@ import Retail from '../assets/retail.png';
 function Industry() {
   const generateCardContent = (title, description, imageUrl) => (
     <div className="text-left max-w-lg mx-auto p-4 md:p-0">
-      <div className="flex rounded-lg overflow-hidden">
-        <div className="p-6 w-1/2">
-          <h5 className="text-xl font-bold mb-2">{title}</h5>
-          <p>{description}</p>
-        </div>
+      <div className="flex flex-col rounded-lg overflow-hidden md:flex-row">
         <img
           src={imageUrl}
           alt={title}
-          className="w-1/2 object-contain object-center"
-          style={{ width: "250px", height: "150px" }}
+          className="w-full md:w-1/2 object-contain object-center mb-4 md:mb-0"
+          style={{ height: "150px" }}
         />
+        <div className="mt-4 w-full md:w-1/2 md:pl-4">
+          <h5 className="text-white text-xl font-bold mb-2">{title}</h5>
+          <p className="text-gray-400 dark:text-gray-400">{description}</p>
+        </div>
       </div>
     </div>
   );

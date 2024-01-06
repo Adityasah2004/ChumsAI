@@ -8,19 +8,20 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
-import logo from '/logo.svg';
+import logo from '../assets/logoDark.png';
 
 function Component() {
   // Custom CSS
   const navbarCustomStyles = `
     .navbar-custom {
       position: fixed; 
+      color: #ffffff;
       top: 0;
       left: 0;
       width: 100%;
       height: 60px; 
-      background-color: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(4px); 
+      background-color: rgba(50, 50, 50, 0.75);
+      backdrop-filter: blur(6px); 
       z-index: 50;
     }
   `;
@@ -41,7 +42,7 @@ function Component() {
         </NavbarBrand>
         <div className="flex md:order-2">
           <Button
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-2 mb-2"
             gradientDuoTone="purpleToBlue"
           >
             SIGN UP
@@ -49,14 +50,14 @@ function Component() {
           </Button>
           <NavbarToggle />
         </div>
-        <NavbarCollapse>
-          <NavbarLink href="#" >
+        <NavbarCollapse >
+          <NavbarLink href="#" className="text-white">
             Home
           </NavbarLink>
-          <NavbarLink href="/About">About</NavbarLink>
-          <NavbarLink href="/WhyUs">Why us</NavbarLink>
-          <NavbarLink href="/Blogs">Blogs</NavbarLink>
-          <NavbarLink href="/Contact">Contact</NavbarLink>
+          <NavbarLink href="/About" className="text-white">About</NavbarLink>
+          <NavbarLink href="/WhyUs" className="text-white">Why us</NavbarLink>
+          <NavbarLink href="/Blogs" className="text-white">Blogs</NavbarLink>
+          <NavbarLink href="/Contact" className="text-white">Contact</NavbarLink>
         </NavbarCollapse>
       </Navbar>
     </>

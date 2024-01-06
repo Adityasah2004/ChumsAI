@@ -28,7 +28,7 @@ const MediumPosts = () => {
   const truncateDescription = (text, maxLength, link) => {
     if (text.length > maxLength) {
       const truncatedText = text.substr(0, maxLength - 1);
-      return `${truncatedText}... <a href="${link}" target="_blank" rel="noopener noreferrer" style="color: blue;">Read More</a>`;
+      return `${truncatedText}... <a href="${link}" target="_blank" rel="noopener noreferrer" style="color: lightblue;">Read More</a>`;
     }
     return text;
   };
@@ -79,15 +79,15 @@ const MediumPosts = () => {
           return (
             <Card
               key={post.guid}
-              className="max-w-md"
+              className="max-w-md bg-#0c0c0c dark:bg-black"
               imgAlt={post.title}
               imgSrc={thumbnailUrl}
             >
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 className="text-2xl font-bold tracking-tight text-white dark:text-white">
                 {post.title}
               </h5>
               <p
-                className="font-normal text-gray-700 dark:text-gray-400"
+                className="font-normal text-gray-400 dark:text-gray-400"
                 dangerouslySetInnerHTML={{
                   __html: truncateDescription(
                     removeHtmlTags(post.description),
@@ -97,7 +97,7 @@ const MediumPosts = () => {
                 }}
               ></p>
 
-              <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
+              <hr className="border-t-2 border-gradient-to-r from-blue-900 to-purple-100 mb-4" />
               <div className="flex flex-wrap gap-2 mt-2">
                 {post.categories.map((category, index) => (
                   <Badge key={index} color={assignTagColor(category)}>

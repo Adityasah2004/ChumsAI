@@ -1,6 +1,5 @@
-import { Dropdown } from "flowbite-react";
 import React, { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 const DropText2 = () => {
   const [dropdown1, setDropdown1] = useState(false);
@@ -21,7 +20,7 @@ const DropText2 = () => {
       <h1 className="text-3xl font-bold mb-4">
         MAXIMIZE REVENUE POTENTIAL with CHUMS AI
       </h1>
-      <p className="text-lg text-gray-600 mb-6">
+      <p className="text-lg text-gray-400 mb-6">
         State of the art artificial intelligence to create experiences at scale
       </p>
 
@@ -34,7 +33,7 @@ const DropText2 = () => {
             Empathetic AI Platform
           </h2>
           {dropdown1 && (
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-400 mb-6">
               The Empathetic AI Platform uses advanced artificial intelligence
               to understand and respond to human emotions, fostering deeper
               connections. By integrating emotional intelligence, it creates
@@ -42,12 +41,21 @@ const DropText2 = () => {
               with a human-like approach.
             </p>
           )}
-          <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
+          <hr className="border-t-2 border-gradient-to-r from-blue-900 to-purple-100 mb-4" />
         </div>
-        <AiOutlinePlus
-          className="text-2xl cursor-pointer"
-          onClick={() => toggleDropdown("dropdown1")}
-        />
+        {dropdown1 ? (
+          <AiOutlineMinus
+            className="text-2xl cursor-pointer"
+            onClick={() => toggleDropdown("dropdown1")}
+            style={{ color: "red" }} 
+          />
+        ) : (
+          <AiOutlinePlus
+            className="text-2xl cursor-pointer"
+            onClick={() => toggleDropdown("dropdown1")}
+            style={{ color: "red" }} 
+          />
+        )}
       </div>
 
       <div className="flex justify-between items-center">
@@ -59,19 +67,28 @@ const DropText2 = () => {
             Generative AI powered Virtual Avatars
           </h2>
           {dropdown2 && (
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-400 mb-6">
               Virtual avatar technology with AI brain that revolutionizes
               human-computer interactions, combining lifelike avatars with
               intelligent AI. Enhanced conversations, personalization, and
               adaptive recommendations create an engaging user experience.
             </p>
           )}
-          <hr className="border-t-2 border-gradient-to-r from-blue-500 to-purple-500 mb-4" />
+          <hr className="border-t-2 border-gradient-to-r from-blue-900 to-purple-100 mb-4" />
         </div>
-        <AiOutlinePlus
-          className="text-2xl cursor-pointer"
-          onClick={() => toggleDropdown("dropdown2")}
-        />
+        {dropdown2 ? (
+          <AiOutlineMinus
+            className="text-2xl cursor-pointer"
+            onClick={() => toggleDropdown("dropdown2")}
+            style={{ color: "red" }} 
+          />
+        ) : (
+          <AiOutlinePlus
+            className="text-2xl cursor-pointer"
+            onClick={() => toggleDropdown("dropdown2")}
+            style={{ color: "red" }} 
+          />
+        )}
       </div>
     </div>
   );
