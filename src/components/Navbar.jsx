@@ -17,7 +17,7 @@ function Component() {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/signup');
+    window.open('/signup', '_blank');
   };
   // Custom CSS
   const navbarCustomStyles = `

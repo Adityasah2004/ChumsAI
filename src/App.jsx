@@ -16,13 +16,14 @@ function App() {
       <div>
         <Head />
         <Routes>
-          <Route path="/Home" element={<LandingPage />} />
+          <Route path="/Home" element />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/whyus" element={<WhyUs />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/signup" element={<SignUpForm />} />
           {/* Add more routes for other sections if needed */}
         </Routes>
+        <LandingPage/>
         <AboutPage/>
       <WhyUs/>
       <Blogs/>
