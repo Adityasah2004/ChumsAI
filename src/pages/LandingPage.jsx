@@ -87,9 +87,9 @@ const LandingPage = () => {
                 </Button>
                 <Button
                   outline
+                  className="bg-black dark:bg-black mt-4 lg:mt-0"
                   gradientDuoTone="purpleToBlue"
-                  className="dark*:#0c0c0c mt-4 lg:mt-0"
-                  style={{ backgroundColor: 'black', color: 'white' }}
+                  
                 >
                   Discord
                   <FaDiscord className="text-purple-500 text-2xl ml-2" />

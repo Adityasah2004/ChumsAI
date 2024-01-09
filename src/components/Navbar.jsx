@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Button,
   Navbar,
@@ -10,7 +12,13 @@ import {
 import { HiOutlineArrowRight } from "react-icons/hi";
 import logo from '../assets/logoDark.png';
 
+
 function Component() {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/signup');
+  };
   // Custom CSS
   const navbarCustomStyles = `
     .navbar-custom {
@@ -44,20 +52,29 @@ function Component() {
           <Button
             className="flex flex-wrap gap-2 mb-2"
             gradientDuoTone="purpleToBlue"
+            onClick={handleButtonClick}
           >
-            SIGN UP
+            LOGIN
             <HiOutlineArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <NavbarToggle />
         </div>
-        <NavbarCollapse >
-          <NavbarLink href="#" className="text-white">
+        <NavbarCollapse>
+          <NavLink to="/Home" className="text-white" activeClassName="active">
             Home
-          </NavbarLink>
-          <NavbarLink href="/About" className="text-white">About</NavbarLink>
-          <NavbarLink href="/WhyUs" className="text-white">Why us</NavbarLink>
-          <NavbarLink href="/Blogs" className="text-white">Blogs</NavbarLink>
-          <NavbarLink href="/Contact" className="text-white">Contact</NavbarLink>
+          </NavLink>
+          <NavLink to="/About" className="text-white" activeClassName="active">
+            About
+          </NavLink>
+          <NavLink to="/WhyUs" className="text-white" activeClassName="active">
+            Why us
+          </NavLink>
+          <NavLink to="/Blogs" className="text-white" activeClassName="active">
+            Blogs
+          </NavLink>
+          <NavLink to="/Contact" className="text-white" activeClassName="active">
+            Contact
+          </NavLink>
         </NavbarCollapse>
       </Navbar>
     </>
