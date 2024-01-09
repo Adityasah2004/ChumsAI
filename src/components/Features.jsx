@@ -187,7 +187,7 @@ function Features() {
                 <h5 className="text-2xl font-bold tracking-tight dark:text-white mb-2">
                   Tailored Kiosk Systems for Industries
                 </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400 text-left">
+                <p className="font-normal text-gray-400 dark:text-gray-400 text-left">
                   Revolutionize your industry with our customized kiosk systems.
                   Whether you're in the hospitality, restaurant, showroom, or
                   any other business, our innovative solutions enhance customer
