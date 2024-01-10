@@ -1,12 +1,12 @@
 import { Card } from "flowbite-react";
-import Education from '../assets/education.png';
-import Healthcare from '../assets/healtcare.png';
-import Entertainment from '../assets/entertainment.png';
-import CustomerService from '../assets/coustomer services.png';
-import Fashion from '../assets/fashion.png';
-import RealEstate from '../assets/real estate.png';
-import Automotive from '../assets/automotive.png';
-import Retail from '../assets/retail.png';
+import Education from "../assets/education.png";
+import Healthcare from "../assets/healtcare.png";
+import Entertainment from "../assets/entertainment.png";
+import CustomerService from "../assets/coustomer services.png";
+import Fashion from "../assets/fashion.png";
+import RealEstate from "../assets/real estate.png";
+import Automotive from "../assets/automotive.png";
+import Retail from "../assets/retail.png";
 
 function Industry() {
   const generateCardContent = (title, description, imageUrl) => (

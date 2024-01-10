@@ -9,7 +9,7 @@ import Industries from '../assets/Industries.png';
 
 function Features() {
   return (
-    <div className="py-8 text-center">
+    <div className="py-8 text-center overflow-hidden">
       <h2 className="text-3xl font-bold mb-6">OUR FEATURES</h2>
       <div className="h-auto sm:h-32 xl:h-40 2xl:h-48">
         <Carousel
