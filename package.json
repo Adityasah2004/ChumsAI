@@ -12,7 +12,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
     "axios": "^1.6.4",
-    "circular-json": "^0.5.9",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "mdb-react-ui-kit": "^7.1.0",
@@ -25,6 +24,8 @@
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.55.0",
