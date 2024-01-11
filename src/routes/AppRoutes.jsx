@@ -1,6 +1,5 @@
 // AppRouter.jsx
-import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
 import Head from "../components/Navbar";
 import LandingPage from "../pages/LandingPage";
 import AboutPage from "../pages/About";
@@ -9,35 +8,23 @@ import Blogs from "../pages/Blogs";
 import FAQ from "../components/FAQ";
 import Down from "../components/Footer";
 import Dashboard from "../pages/Dashboard";
+import { Switch, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const AppRouter = () => {
-  const navigate = useNavigate();
-  const [isDashboard, setIsDashboard] = useState(false);
-
-  useEffect(() => {
-    // Check if the current route is the dashboard
-    if (navigate && navigate()) {
-      setIsDashboard(navigate().location.pathname === "/dashboard");
-
-      // If not, navigate to the home page
-      if (!isDashboard) {
-        navigate("/");
-      }
-    }
-  }, [navigate, isDashboard]);
-
+  const location = useLocation();
   return (
     <div className="w-full h-full">
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/whyus" element={<WhyUs />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-      {!isDashboard && <Head />}
-      {!isDashboard && <FAQ />}
-      {!isDashboard && <Down />}
+      {location.pathname === "/dashboard" ? null : <Head />}
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/whyus" component={WhyUs} />
+        <Route exact path="/blogs" component={Blogs} />
+        <Route exact path="/dashboard" component={Dashboard} />
+      </Switch>
+      {location.pathname === "/dashboard" ? null : <FAQ />}
+      {location.pathname === "/dashboard" ? null : <Down />}
     </div>
   );
 };
