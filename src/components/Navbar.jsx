@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import CircularJSON from 'circular-json';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Button,
   Modal,
@@ -10,58 +9,123 @@ import {
   NavbarToggle,
   TextInput,
   Label,
-  Checkbox
+  Checkbox,
 } from "flowbite-react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
-import logo from '../assets/logoDark.png';
+import logo from "../assets/logoDark.png";
 
 function Head() {
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [mode, setMode] = useState("login");
   const navigate = useNavigate();
 
   const onCloseModal = () => {
     setOpenModal(false);
-    setEmail('');
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
+    setConfirmPassword("");
+    setMode("login");
   };
-  const str = CircularJSON.stringify(obj);
+
+  const handleModeChange = (newMode) => {
+    // Clear form fields when switching modes
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
+    setConfirmPassword("");
+    setMode(newMode);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = {
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      password,
+
+      // Do not send confirmPassword to the server
+    };
+
+    if (mode === "signup" && password !== confirmPassword) {
+      alert("Password and Confirm Password do not match.");
+      return;
+    }
+
+    // Log the request payload for debugging
+    console.log("Request Payload:", formData);
+
     try {
-      const formData = {
-        email,
-        password,
-      };
-      const response = await fetch('/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData), // Sending email and password to the backend
-      });
+      const response = await fetch(
+        "http://localhost:8000/user/" +
+          (mode === "login" ? "login" : "sign-up"),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
-        // Successful login
-        navigate('/dashboard');
-      } else {
-        // Failed login - handle different scenarios
+        // Successful login/signup
+        console.log("Login/Signup complete");
+        window.open("/Dashboard", "_blank");
+      } else if (response.status === 422) {
+        // Unprocessable Entity - Validation errors
         const responseData = await response.json();
-        if (responseData.error === 'invalid_credentials') {
-          // Incorrect credentials
-          alert('Incorrect email or password');
-        } else if (responseData.error === 'user_not_found') {
-          // User not found
-          alert('User not found');
+
+        // Assuming your server returns validation errors in a specific format
+        if (responseData.errors) {
+          // Display validation errors to the user
+          // Update this part to handle the errors based on your UI structure
+          // For example, you can set error states or display error messages
+          console.log("Validation errors:", responseData.errors);
+          // Assuming you have a state to handle errors, update the state
+          // setErrorState(responseData.errors);
         } else {
-          // Other errors
-          alert('Login failed. Please try again.');
+          // Unexpected format of validation errors
+          console.error(
+            "Unexpected format of validation errors:",
+            responseData
+          );
+          alert("Sign-up failed. Please try again.");
+        }
+      } else {
+        // Other errors
+        try {
+          const responseData = await response.json();
+
+          if (responseData.error === "invalid_credentials") {
+            // Incorrect credentials
+            alert("Incorrect email or password");
+          } else if (responseData.error === "user_not_found") {
+            // User not found
+            alert("User not found");
+          } else {
+            // Other errors
+            alert("Login/Signup failed. Please try again.");
+          }
+        } catch (error) {
+          // Handle non-JSON response (e.g., unexpected server error)
+          console.error("Error parsing JSON:", error);
+          alert("Login/Signup failed. Please try again.");
         }
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Handle network errors or exceptions
-      alert('An error occurred. Please try again later.');
+      alert("An error occurred. Please try again later.");
     }
   };
 
@@ -84,7 +148,7 @@ function Head() {
     <>
       <style>{navbarCustomStyles}</style>
       <Navbar className="navbar-custom">
-      <NavbarBrand href="#">
+        <NavbarBrand href="#">
           <img
             src={logo}
             className="mr-3 h-9 sm:h-12 rounded-full"
@@ -95,32 +159,39 @@ function Head() {
           </span>
         </NavbarBrand>
         <div className="flex md:order-2">
-          <Button gradientDuoTone="purpleToBlue" onClick={() => setOpenModal(true)}>
+          <Button
+            gradientDuoTone="purpleToBlue"
+            onClick={() => setOpenModal(true)}
+          >
             LOGIN <HiOutlineArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <NavbarToggle />
         </div>
         <NavbarCollapse>
-          <NavLink to="/Home" className="text-white" activeclassname="active">
+          <NavLink to="/" className="text-white" activeclassname="active">
             Home
           </NavLink>
-          <NavLink to="/About" className="text-white" activeclassname="active">
+          <NavLink to="/about" className="text-white" activeclassname="active">
             About
           </NavLink>
-          <NavLink to="/WhyUs" className="text-white" activeclassname="active">
+          <NavLink to="/whyus" className="text-white" activeclassname="active">
             Why us
           </NavLink>
-          <NavLink to="/Blogs" className="text-white" activeclassname="active">
+          <NavLink to="/blogs" className="text-white" activeclassname="active">
             Blogs
           </NavLink>
-          <NavLink to="/Contact" className="text-white" activeclassname="active">
+          <NavLink
+            to="/Contact"
+            className="text-white"
+            activeclassname="active"
+          >
             Contact
           </NavLink>
         </NavbarCollapse>
       </Navbar>
-      
+
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>
-      <div className="flex justify-start m-2">
+        <div className="flex justify-start m-2">
           <HiOutlineArrowLeft
             className="text-gray-500 hover:text-gray-700 cursor-pointer"
             size={24}
@@ -129,7 +200,9 @@ function Head() {
         </div>
         <Modal.Body>
           <div className="space-y-6">
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Log In</h3>
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+              {mode === "login" ? "Log In" : "Sign Up"}
+            </h3>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="email" value="Your email" />
@@ -146,25 +219,97 @@ function Head() {
               <div className="mb-2 block">
                 <Label htmlFor="password" value="Your password" />
               </div>
-              <TextInput id="password" type="password" required />
+              <TextInput
+                id="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
             </div>
+            {mode === "signup" && (
+              <>
+                <div className="flex justify-between">
+                  <div className="w-1/2 pr-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="firstName" value="First Name" />
+                    </div>
+                    <TextInput
+                      id="firstName"
+                      placeholder="John"
+                      value={firstName}
+                      onChange={(event) => setFirstName(event.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="w-1/2 pl-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="lastName" value="Last Name" />
+                    </div>
+                    <TextInput
+                      id="lastName"
+                      placeholder="Doe"
+                      value={lastName}
+                      onChange={(event) => setLastName(event.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="confirmPassword" value="Confirm Password" />
+                  </div>
+                  <TextInput
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    required
+                  />
+                </div>
+              </>
+            )}
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Checkbox id="remember" />
                 <Label htmlFor="remember">Remember me</Label>
               </div>
-              <a href="#" className="text-sm text-cyan-700 hover:underline dark:text-cyan-500">
+              <a
+                href="#"
+                className="text-sm text-cyan-700 hover:underline dark:text-cyan-500"
+              >
                 Lost Password?
               </a>
             </div>
             <div className="w-full text-center">
-              <Button onClick={handleSubmit}>Log in</Button>
+              <Button onClick={handleSubmit}>
+                {mode === "login" ? "Log in" : "Sign up"}
+              </Button>
             </div>
             <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
-              Not registered?&nbsp;
-              <a href="#" className="text-cyan-700 hover:underline dark:text-cyan-500">
-                Create account
-              </a>
+              {mode === "login" ? (
+                <span>
+                  Not registered?&nbsp;
+                  <a
+                    href="#"
+                    className="text-cyan-700 hover:underline dark:text-cyan-500"
+                    onClick={() => handleModeChange("signup")}
+                  >
+                    Create account
+                  </a>
+                </span>
+              ) : (
+                <span>
+                  Already have an account?&nbsp;
+                  <a
+                    href="#"
+                    className="text-cyan-700 hover:underline dark:text-cyan-500"
+                    onClick={() => handleModeChange("login")}
+                  >
+                    Log in
+                  </a>
+                </span>
+              )}
             </div>
           </div>
         </Modal.Body>

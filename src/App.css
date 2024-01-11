@@ -12,28 +12,3 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #ffffff; 
 }
-
-.card-with-hover {
-  transition: background-position 0.5s ease;
-  background-size: 400% 400%;
-}
-
-.card-with-hover:hover {
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-/* Media query for mobile view */
-@media (max-width: 640px) {
-  .h-auto {
-    width: 500px;
-    height: 300px; /* Adjust the height as needed */
-  }
-}
