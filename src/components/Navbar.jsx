@@ -13,6 +13,7 @@ import {
   Checkbox,
 } from "flowbite-react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import CompanionList from "./CompanionCard";
 import logo from "../assets/logoDark.png";
 
 function Head() {
@@ -23,6 +24,7 @@ function Head() {
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mode, setMode] = useState("login");
+  const [userId, setUserId] = useState(null);
   const history = useHistory();
 
   const onCloseModal = () => {
@@ -46,7 +48,7 @@ function Head() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     // history.push("/dashboard");
     const formData = {
       email,
@@ -78,9 +80,11 @@ function Head() {
       );
 
       if (response.ok) {
-        // Successful login/signup
+        const responseData = await response.json();
+        setUserId(responseData.user_id);
         console.log("Login/Signup complete");
-        history.push("/dashboard" , "_blank");
+        console.log("User ID:", responseData.user_id);
+        history.push("/dashboard");
       } else if (response.status === 422) {
         // Unprocessable Entity - Validation errors
         const responseData = await response.json();
@@ -127,6 +131,11 @@ function Head() {
       // Handle network errors or exceptions
       alert("An error occurred. Please try again later.");
     }
+  };
+
+  const handleSubmitAndCloseModal = () => {
+    handleSubmit();
+    onCloseModal();
   };
 
   // Custom CSS
@@ -280,9 +289,10 @@ function Head() {
               </a>
             </div>
             <div className="w-full text-center">
-              <Button onClick={handleSubmit}>
+              <Button onClick={handleSubmitAndCloseModal}>
                 {mode === "login" ? "Log in" : "Sign up"}
               </Button>
+              {userId && <CompanionList userId={userId} />}
             </div>
             <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
               {mode === "login" ? (

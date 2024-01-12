@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CompanionCard = ({ data }) => {
   const { name, description, instructions, seed, user_id, src } = data;
@@ -15,4 +16,30 @@ const CompanionCard = ({ data }) => {
   );
 };
 
-export default CompanionCard;
+const CompanionList = ({ userId }) => {
+  const [companionData, setCompanionData] = useState([]);
+
+  useEffect(() => {
+    const fetchCompanionData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/companion/getAllCharacters/${userId}`);
+        setCompanionData(response.data);
+      } catch (error) {
+        console.error('Error fetching companion data:', error);
+      }
+    };
+
+    fetchCompanionData();
+  }, [userId]);
+
+  return (
+    <div>
+      <h1>Your Companions</h1>
+      {companionData.map((companion) => (
+        <CompanionCard key={companion.id} data={companion} />
+      ))}
+    </div>
+  );
+};
+
+export default CompanionList;

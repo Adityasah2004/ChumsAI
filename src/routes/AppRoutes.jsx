@@ -23,11 +23,11 @@ const AppRouter = () => {
         <Route exact path="/blogs" component={Blogs} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
-      {location.pathname === "/dashboard" ? null : <AboutPage />}
-      {location.pathname === "/dashboard" ? null : <WhyUs />}
-      {location.pathname === "/dashboard" ? null : <Blogs />}
-      {location.pathname === "/dashboard" ? null : <FAQ />}
-      {location.pathname === "/dashboard" ? null : <Down />}
+      {(location.pathname === "/dashboard" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <AboutPage />}
+      {(location.pathname === "/dashboard" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <WhyUs />}
+      {(location.pathname === "/dashboard" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Blogs />}
+      {(location.pathname === "/dashboard" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <FAQ />}
+      {(location.pathname === "/dashboard" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Down />}
     </div>
   );
 };
