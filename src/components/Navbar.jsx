@@ -47,87 +47,86 @@ function Head() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    history.push("/dashboard");
-    // const formData = {
-    //   email,
-    //   first_name: firstName,
-    //   last_name: lastName,
-    //   password,
+    // history.push("/dashboard");
+    const formData = {
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      password,
+      // Do not send confirmPassword to the server
+    };
 
-    //   // Do not send confirmPassword to the server
-    // };
+    if (mode === "signup" && password !== confirmPassword) {
+      alert("Password and Confirm Password do not match.");
+      return;
+    }
 
-    // if (mode === "signup" && password !== confirmPassword) {
-    //   alert("Password and Confirm Password do not match.");
-    //   return;
-    // }
+    // Log the request payload for debugging
+    console.log("Request Payload:", formData);
 
-    // // Log the request payload for debugging
-    // console.log("Request Payload:", formData);
+    try {
+      const response = await fetch(
+        "http://localhost:8000/user/" +
+          (mode === "login" ? "login" : "sign-up"),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-    // try {
-    //   const response = await fetch(
-    //     "http://localhost:8000/user/" +
-    //       (mode === "login" ? "login" : "sign-up"),
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(formData),
-    //     }
-    //   );
+      if (response.ok) {
+        // Successful login/signup
+        console.log("Login/Signup complete");
+        history.push("/dashboard" , "_blank");
+      } else if (response.status === 422) {
+        // Unprocessable Entity - Validation errors
+        const responseData = await response.json();
 
-    //   if (response.ok) {
-    //     // Successful login/signup
-    //     console.log("Login/Signup complete");
-    //     window.open("/Dashboard", "_blank");
-    //   } else if (response.status === 422) {
-    //     // Unprocessable Entity - Validation errors
-    //     const responseData = await response.json();
+        // Assuming your server returns validation errors in a specific format
+        if (responseData.errors) {
+          // Display validation errors to the user
+          // Update this part to handle the errors based on your UI structure
+          // For example, you can set error states or display error messages
+          console.log("Validation errors:", responseData.errors);
+          // Assuming you have a state to handle errors, update the state
+          // setErrorState(responseData.errors);
+        } else {
+          // Unexpected format of validation errors
+          console.error(
+            "Unexpected format of validation errors:",
+            responseData
+          );
+          alert("Sign-up failed. Please try again.");
+        }
+      } else {
+        // Other errors
+        try {
+          const responseData = await response.json();
 
-    //     // Assuming your server returns validation errors in a specific format
-    //     if (responseData.errors) {
-    //       // Display validation errors to the user
-    //       // Update this part to handle the errors based on your UI structure
-    //       // For example, you can set error states or display error messages
-    //       console.log("Validation errors:", responseData.errors);
-    //       // Assuming you have a state to handle errors, update the state
-    //       // setErrorState(responseData.errors);
-    //     } else {
-    //       // Unexpected format of validation errors
-    //       console.error(
-    //         "Unexpected format of validation errors:",
-    //         responseData
-    //       );
-    //       alert("Sign-up failed. Please try again.");
-    //     }
-    //   } else {
-    //     // Other errors
-    //     try {
-    //       const responseData = await response.json();
-
-    //       if (responseData.error === "invalid_credentials") {
-    //         // Incorrect credentials
-    //         alert("Incorrect email or password");
-    //       } else if (responseData.error === "user_not_found") {
-    //         // User not found
-    //         alert("User not found");
-    //       } else {
-    //         // Other errors
-    //         alert("Login/Signup failed. Please try again.");
-    //       }
-    //     } catch (error) {
-    //       // Handle non-JSON response (e.g., unexpected server error)
-    //       console.error("Error parsing JSON:", error);
-    //       alert("Login/Signup failed. Please try again.");
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   // Handle network errors or exceptions
-    //   alert("An error occurred. Please try again later.");
-    // }
+          if (responseData.error === "invalid_credentials") {
+            // Incorrect credentials
+            alert("Incorrect email or password");
+          } else if (responseData.error === "user_not_found") {
+            // User not found
+            alert("User not found");
+          } else {
+            // Other errors
+            alert("Login/Signup failed. Please try again.");
+          }
+        } catch (error) {
+          // Handle non-JSON response (e.g., unexpected server error)
+          console.error("Error parsing JSON:", error);
+          alert("Login/Signup failed. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle network errors or exceptions
+      alert("An error occurred. Please try again later.");
+    }
   };
 
   // Custom CSS

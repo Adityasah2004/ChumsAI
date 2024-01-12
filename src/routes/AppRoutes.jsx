@@ -23,6 +23,9 @@ const AppRouter = () => {
         <Route exact path="/blogs" component={Blogs} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
+      {location.pathname === "/dashboard" ? null : <AboutPage />}
+      {location.pathname === "/dashboard" ? null : <WhyUs />}
+      {location.pathname === "/dashboard" ? null : <Blogs />}
       {location.pathname === "/dashboard" ? null : <FAQ />}
       {location.pathname === "/dashboard" ? null : <Down />}
     </div>
