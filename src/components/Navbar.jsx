@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import localStorageUtils from "../Hooks/localStorageUtils";
 import {
   Button,
   Modal,
@@ -16,7 +17,7 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import CompanionList from "./CompanionCard";
 import logo from "../assets/logoDark.png";
 
-function Head() {
+const Head = () => {
   const [openModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,15 +56,12 @@ function Head() {
       first_name: firstName,
       last_name: lastName,
       password,
-      // Do not send confirmPassword to the server
     };
 
     if (mode === "signup" && password !== confirmPassword) {
       alert("Password and Confirm Password do not match.");
       return;
     }
-
-    // Log the request payload for debugging
     console.log("Request Payload:", formData);
 
     try {
@@ -79,11 +77,21 @@ function Head() {
         }
       );
 
+      // Log the entire response
+      console.log("Response:", response);
+
       if (response.ok) {
         const responseData = await response.json();
-        setUserId(responseData.user_id);
+        const accessToken = responseData.access_token;
+        const userId = responseData.User_ID;
+
+        localStorageUtils.setUserId(userId);
+        localStorageUtils.setAccessToken(accessToken);
+
+        console.log("User ID:", localStorage.getItem("userId"));
+        console.log("Access Token:", localStorage.getItem("accessToken"));
+
         console.log("Login/Signup complete");
-        console.log("User ID:", responseData.user_id);
         history.push("/dashboard");
       } else if (response.status === 422) {
         // Unprocessable Entity - Validation errors
@@ -91,12 +99,7 @@ function Head() {
 
         // Assuming your server returns validation errors in a specific format
         if (responseData.errors) {
-          // Display validation errors to the user
-          // Update this part to handle the errors based on your UI structure
-          // For example, you can set error states or display error messages
           console.log("Validation errors:", responseData.errors);
-          // Assuming you have a state to handle errors, update the state
-          // setErrorState(responseData.errors);
         } else {
           // Unexpected format of validation errors
           console.error(
@@ -324,6 +327,6 @@ function Head() {
       </Modal>
     </>
   );
-}
+};
 
 export default Head;

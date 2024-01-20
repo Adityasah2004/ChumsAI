@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import {
   HiAdjustments,
-  HiChartPie,
   HiHome,
-  HiInbox,
   HiLogout,
   HiPlus,
   HiViewBoards,
 } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import logo from "../assets/logoDark.png";
 
-function Side() {
+function Side({ openModal }) {
+  console.log("openModal prop:", openModal);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen((prevIsSidebarOpen) => !prevIsSidebarOpen);
   };
-
   return (
     <>
-      <nav className="fixed left-0 top-0 z-50 w-full bg-black border-b border-gray-700 dark:bg-black dark:border-gray-700">
+      <nav className="fixed left-0 top-0 z-40 w-full bg-black border-b border-gray-700 dark:bg-black dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -88,7 +87,7 @@ function Side() {
 
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40  h-screen pt-20 transition-transform ${
+        className={`fixed top-0 left-0 z-30  h-screen pt-20 transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } bg-black border-r border-gray-700 sm:translate-x-0 dark:bg-black dark:border-gray-700`}
         aria-label="Sidebar"
@@ -105,13 +104,13 @@ function Side() {
               </a>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/companion-creation"
                 className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group"
               >
                 <HiPlus className="w-5 h-5 text-gray-200 transition duration-75 dark:text-gray-400 group-hover:text-gray-200 dark:group-hover:text-gray-900" />
                 <span className="ms-3">Create Companion</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a
@@ -140,13 +139,13 @@ function Side() {
               </a>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/settings"
                 className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group"
               >
                 <HiAdjustments className="w-5 h-5 text-gray-200 transition duration-75 dark:text-gray-400 group-hover:text-gray-200 dark:group-hover:text-gray-900" />
-                <span className="ms-3">Settings</span>
-              </a>
+                <span className="ms-3">Setting</span>
+              </Link>
             </li>
           </ul>
         </div>
