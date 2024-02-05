@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiSend } from 'react-icons/fi';
-import { setMessages, addMessage } from '../actions/messages';
+import { setReceivedMessages, addSentMessage } from '../actions/messages';
 import localStorageUtils from '../Hooks/localStorageUtils';
 
 const Chat = () => {
   const [newMessage, setNewMessage] = useState('');
   const userId = localStorageUtils.getUserId();
   const accessToken = localStorageUtils.getAccessToken();
+  
+  const receivedMessages = useSelector((state) => state.messages.messages.receivedMessages);
+const sentMessages = useSelector((state) => state.messages.messages.sentMessages);
 
-  const messages = useSelector((state) => state.messages.messages);
   const dispatch = useDispatch();
 
   // Fetch messages from the backend and dispatch to Redux store
 useEffect(() => {
-  const fetchMessages = async () => {
+  const fetchReceivedMessages = async () => {
     try {
       const apiUrl = "http://localhost:8000/message/Chat";
       const bearerToken = accessToken;
@@ -39,8 +41,8 @@ useEffect(() => {
 
       // Check if data is an array before updating the state
       if (Array.isArray(data)) {
-        // Dispatch the messages to the Redux store
-        dispatch(setMessages(data));
+        // Dispatch the received messages to the Redux store
+        dispatch(setReceivedMessages(data));
       } else {
         console.error("Received non-array data from the backend:", data);
       }
@@ -49,9 +51,8 @@ useEffect(() => {
     }
   };
 
-  fetchMessages();
+  fetchReceivedMessages();
 }, [accessToken, dispatch]);
-
 
   // Send message to the backend and dispatch to Redux store
 const handleSendMessage = async () => {
@@ -64,7 +65,7 @@ const handleSendMessage = async () => {
       content: newMessage,
       createdAt: "string",
       updatedAt: "string",
-      companionId: "65ae5f44121d54346d37ec1c",
+      companionId: "65bcf34a618d69838b7ac6d3",
       userId: userId,
     };
 
@@ -92,43 +93,52 @@ const handleSendMessage = async () => {
     console.log("Response Data Structure:", JSON.stringify(data, null, 2));
 
     // Dispatch the new message to the Redux store
-    dispatch(addMessage(data));
-    setNewMessage("");
-  } catch (error) {
-    console.error("Error sending message:", error);
-  }
-};
+    dispatch(addSentMessage(data));
+      setNewMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
-console.log(messages);
+console.log(receivedMessages);
+console.log(sentMessages);
 
-  return (
-    <div className="flex-1 flex flex-col justify-between bg-gray-100 rounded-lg overflow-hidden">
-      <div className="border p-4 h-4/5 overflow-y-auto rounded-t-lg">
-        {messages.map((msg, index) => (
-          <div key={index} className="mb-4 text-black">
-            <p className="text-black mb-1">Content: {msg}</p>
-          </div>
-        ))}
-      </div>
+return (
+  <div className="flex-1 flex flex-col justify-between bg-gray-100 rounded-lg overflow-hidden">
+    <div className="border p-4 h-4/5 overflow-y-auto rounded-t-lg">
+      {/* Render received messages */}
+      {receivedMessages.map((msg, index) => (
+        <div key={index} className="mb-4 text-black">
+          <p className="text-black mb-1">Received Content: {msg}</p>
+        </div>
+      ))}
 
-      <div className="flex items-center p-4 rounded-b-lg">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          className="flex-1 mr-4 p-2 border rounded-l-lg"
-          placeholder="Type your message..."
-        />
-
-        <button
-          className="text-white bg-blue-500 p-2 rounded-r-lg"
-          onClick={handleSendMessage}
-        >
-          <FiSend size={20} />
-        </button>
-      </div>
+      {/* Render sent messages */}
+      {sentMessages.map((msg, index) => (
+        <div key={index} className="mb-4 text-black">
+          <p className="text-black mb-1">Sent Content: {msg}</p>
+        </div>
+      ))}
     </div>
-  );
+
+    <div className="flex items-center p-4 rounded-b-lg">
+      <input
+        type="text"
+        value={newMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        className="flex-1 mr-4 p-2 border rounded-l-lg"
+        placeholder="Type your message..."
+      />
+
+      <button
+        className="text-white bg-blue-500 p-2 rounded-r-lg"
+        onClick={handleSendMessage}
+      >
+        <FiSend size={20} />
+      </button>
+    </div>
+  </div>
+);
 };
 
 export default Chat;
