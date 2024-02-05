@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setMessages, addMessage } from '../actions/messages';
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Message from '../components/Message';
-import '../styles/Chat.css';
+import "../styles/Chat.css"
 import Spline from "@splinetool/react-spline";
 
 const Chat = () => {
@@ -20,7 +20,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   console.log(currentTime);
   // Fetch messages from the backend and dispatch to Redux store
-  useEffect(() => {
+  useEffect(() => { 
     const fetchMessages = async () => {
       try {
         const apiUrl = "http://localhost:8000/message/Chat";
