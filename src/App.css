@@ -1,7 +1,7 @@
 #root {
-  /* max-width: 1440px; */
+  max-width: 1440px;
   margin: 0 auto;
-  /* padding: 2rem; */
+  padding: 2rem;
   text-align: center;
 }
 
@@ -11,12 +11,4 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: #ffffff; 
-}
-
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
 }
