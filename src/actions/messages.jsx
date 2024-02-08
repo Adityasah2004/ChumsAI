@@ -1,10 +1,10 @@
-export const setMessages = (messages) => ({
-    type: 'SET_MESSAGES',
-    payload: messages,
-  });
-  
-  export const addMessage = (message) => ({
-    type: 'ADD_MESSAGE',
-    payload: message,
-  });
-  
+// Actions
+export const setReceivedMessages = (messages) => ({
+  type: 'SET_RECEIVED_MESSAGES',
+  payload: messages,
+});
+
+export const addSentMessage = (message) => ({
+  type: 'ADD_SENT_MESSAGE',
+  payload: message,
+});
