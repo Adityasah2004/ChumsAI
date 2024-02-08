@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Side from './Sidebar';
+import '../styles/CompanionCard.css'
 
 const CompanionCard = ({ data, onCardClick }) => {
     const { id, name, user_id, src } = data;
@@ -83,13 +84,22 @@ const CompanionList = () => {
     }, [userId, accessToken]);
 
     return (
-        <div className="container mx-auto ml-40 mt-8 p-2">
-            <Side openModal="" />
-            <h1 className="w-full text-center mt-4 text-2xl font-bold mb-4">Companions</h1>
-            <div className="grid grid-cols-3 gap-2">
-                {companionData.map((companion) => (
-                    <CompanionCard key={companion.id} data={companion} onCardClick={handleCardClick} />
-                ))}
+        <div className="dashboard-div w-full h-screen">
+            <Side />
+            <div className='companion-card-div w-full bg-black'>
+                <div className='menu-icon'>
+                    <span className="material-symbols-outlined text-white p-2 cursor-pointer">
+                        menu
+                    </span>
+                </div>
+                <h1 className='flex justify-center p-2 heading'>
+                    Companions
+                </h1>
+                <div>
+                    {companionData.map((companion) => (
+                        <CompanionCard key={companion.id} data={companion} onCardClick={handleCardClick} />
+                    ))}
+                </div>
             </div>
         </div>
     );

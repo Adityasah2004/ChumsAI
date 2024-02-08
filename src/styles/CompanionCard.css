@@ -1,0 +1,36 @@
+.dashboard-div{
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100vh;
+}
+
+.heading{
+    font-size: clamp(2rem, 2.5vw, 3rem);
+    color: #fff;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.companion-card-div{
+    border-radius: 0.75rem;
+}
+
+.menu-icon{
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .dashboard-div{
+        gap: 1rem;
+        padding:0;
+    }
+    .companion-card-div .menu-icon{
+        display: flex;
+        padding: 1rem;
+    }
+    .companion-card-div{
+        border-radius: 0;
+    }
+}
