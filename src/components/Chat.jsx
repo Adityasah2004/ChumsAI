@@ -24,6 +24,9 @@ const Chat = () => {
     // Local state to store the input options
     const [intOpt, setInpOpt] = useState(false);
 
+    // settings state
+    const [settings, setSettings] = useState(false);
+
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
 
@@ -164,6 +167,10 @@ const Chat = () => {
         setNewMessage(newMessage + emojiObject.emoji);
     }
 
+    const handleSettings = () => {
+        setSettings(!settings);
+    }
+
     return (
         <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
             {/* <Avatar/> */}
@@ -177,16 +184,28 @@ const Chat = () => {
 
             <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />
             {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="" />}
-            <div className={voiceCall || videoCall ? "hidden" : "chat-div"}>
+            <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}>
                 <menu className='flex text-white px-4 justify-between'>
                     <span>
                         Ai Friend
                     </span>
-                    <button>
+                    <button onClick={handleSettings}>
                         <span className="material-symbols-outlined">
                             settings
                         </span>
                     </button>
+                    {settings &&
+                        <div className='settings absolute bg-white bg-opacity-90 p-2 text-black z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
+                            <button>
+                                <p className='flex items-center gap-1'>
+                                    <span className="material-symbols-outlined">
+                                        settings
+                                    </span>
+                                    Settings
+                                </p>
+                            </button>
+                        </div>
+                    }
                 </menu>
                 <div className="p-4 overflow-y-auto h-full flex flex-col gap-2">
                     {messages.map((msg, index) => (
@@ -195,10 +214,12 @@ const Chat = () => {
                         </div>
                     ))}
                     <Message time={currentTime} />
+                    <Message time={currentTime} />
+                    <Message time={currentTime} />
                 </div>
                 { showEmoji && 
                     <div className='emoji-tag' >
-                        <EmojiPicker searchDisabled="true" style={{backgroundColor:"rgba(0,0,0,0.5)"}} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} emojiStyle='apple' searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
+                        <EmojiPicker  style={{backgroundColor:"rgba(0,0,0,0.6)"}} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} emojiStyle='apple' searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
                     </div>
                 }
                 <div className="flex p-4 justify-between gap-1">

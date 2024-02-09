@@ -17,9 +17,9 @@
     transition: 0.8s ease-in-out;
 }
 
-a{
+/* a{
     width: max-content;
-}
+} */
 
 .dash-nav{
     display: flex;
@@ -28,6 +28,12 @@ a{
     padding: 1rem;
     text-decoration: none;
     transition: 0.8s ease-in-out;
+}
+
+.dash-nav a{
+    width:inherit;
+    white-space: nowrap;
+    padding: 0.5rem;
 }
 
 

@@ -37,6 +37,7 @@ const CompanionCard = ({ data, onCardClick }) => {
 
 const CompanionList = () => {
     const [companionData, setCompanionData] = useState([]);
+    const [menuOpen, setMenuOpen] = useState(false);
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
 
@@ -83,18 +84,81 @@ const CompanionList = () => {
         fetchCompanionData();
     }, [userId, accessToken]);
 
+    const handleDashboardMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
         <div className="dashboard-div w-full h-screen">
             <Side />
             <div className='companion-card-div w-full bg-black'>
-                <div className='menu-icon'>
-                    <span className="material-symbols-outlined text-white p-2 cursor-pointer">
-                        menu
-                    </span>
+                {
+                    menuOpen ? (
+                        <div className='mobile-menu-div p-4 fixed bg-black rounded-lg ml-2 top-24 h-max'>
+                            <ul className="space-y-2 font-medium">
+                                <li>
+                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                        <span className="material-symbols-outlined">
+                                            home
+                                        </span>
+                                        <span className="ms-3">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <Link to="/companion-creation" className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                        <span className="material-symbols-outlined">
+                                            add_circle
+                                        </span>
+                                        <span className="ms-3">Create Companion</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                        <span className="material-symbols-outlined">
+                                            description
+                                        </span>
+                                        <span className="ms-3">Documentations</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                        <span className="material-symbols-outlined">
+                                            logout
+                                        </span>
+                                        <p className="ms-3 inline-block">Log Out</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <Link to="/settings" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                        <span className="material-symbols-outlined">
+                                            settings
+                                        </span>
+                                        <span className="ms-3">Setting</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : null
+                }
+                <div className='flex justify-between px-4 items-center'>
+                    <div className="skip-header"></div>
+                    {
+                        menuOpen ?
+                            <span onClick={handleDashboardMenu} className="menu-icon material-symbols-outlined text-white cursor-pointer">
+                                close
+                            </span>
+                            :
+                            <span onClick={handleDashboardMenu} className="menu-icon material-symbols-outlined text-white cursor-pointer">
+                                menu
+                            </span>
+
+                    }
+                    <h1 className=' heading'>
+                        Companions
+                    </h1>
+                    <div className='profile-div flex text-white'>
+                    </div>
                 </div>
-                <h1 className='flex justify-center p-2 heading'>
-                    Companions
-                </h1>
                 <div>
                     {companionData.map((companion) => (
                         <CompanionCard key={companion.id} data={companion} onCardClick={handleCardClick} />

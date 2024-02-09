@@ -77,13 +77,13 @@ aside img{
     height: 80vh;
     width: 100%;
     /* position: fixed; */
-    transition: all 5s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .max-scrn-voice-call{
     filter: blur(5px);
     position: absolute;
-    transition: all 5s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .backg{
