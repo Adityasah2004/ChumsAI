@@ -3,7 +3,7 @@
 
 import { Link } from "react-router-dom";
 import logo from "../assets/logoDark.png";
-import '../styles/sidebar.css';
+import '../styles/Sidebar.css';
 
 function Side({ openModal }) {
     console.log("openModal prop:", openModal);
