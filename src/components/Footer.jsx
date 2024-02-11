@@ -1,69 +1,69 @@
 import React from "react";
 import {
-  Footer,
-  FooterBrand,
-  FooterCopyright,
-  FooterDivider,
-  FooterIcon,
-  FooterLink,
-  FooterLinkGroup,
-  FooterTitle,
+    Footer,
+    FooterBrand,
+    FooterCopyright,
+    FooterDivider,
+    FooterIcon,
+    FooterLink,
+    FooterLinkGroup,
+    FooterTitle,
 } from "flowbite-react";
 import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import logo from '../assets/logoDark.png';
 
 function Down() {
-  return (
-    <Footer className="bg-#0c0c0c text-white dark:text-white" container={false}>
-      <div className="w-full">
-        <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div>
-            <FooterBrand
-              href="#"
-              src={logo}
-              alt="ChumsAI Logo"
-              name="ChumsAI"
-            />
-          </div>
-          <div className="text-left grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
-            <div>
-              <FooterTitle title="About" />
-              <FooterLinkGroup col>
-                <FooterLink href="#">Home</FooterLink>
-                <FooterLink href="#">Services</FooterLink>
-                <FooterLink href="#">Contact</FooterLink>
-              </FooterLinkGroup>
+    return (
+        <footer className="bg-#0c0c0c text-white dark:text-white w-full" container={false}>
+            <div className="">
+                <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+                    <div>
+                        <FooterBrand
+                            href="#"
+                            src={logo}
+                            alt="ChumsAI Logo"
+                            name="ChumsAI"
+                        />
+                    </div>
+                    <div className="text-left grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
+                        <div>
+                            <FooterTitle title="About" />
+                            <FooterLinkGroup col>
+                                <FooterLink href="#">Home</FooterLink>
+                                <FooterLink href="#">Services</FooterLink>
+                                <FooterLink href="#">Contact</FooterLink>
+                            </FooterLinkGroup>
+                        </div>
+                        <div>
+                            <FooterTitle title="Follow us" />
+                            <FooterLinkGroup col>
+                                <FooterLink href="#">Twitter</FooterLink>
+                                <FooterLink href="#">Facebook</FooterLink>
+                                <FooterLink href="#">LinkedIn</FooterLink>
+                            </FooterLinkGroup>
+                        </div>
+                        <div className="mr-2">
+                            <FooterTitle title="Legal" />
+                            <FooterLinkGroup col>
+                                <FooterLink href="#">Privacy Policy</FooterLink>
+                                <FooterLink href="#">Terms &amp; Conditions</FooterLink>
+                            </FooterLinkGroup>
+                        </div>
+                    </div>
+                </div>
+                <FooterDivider />
+                <div className="m-2 w-full sm:flex sm:items-center sm:justify-between">
+                    <FooterCopyright href="#" by="ChumsAI™" year={2023} />
+                    <div className="mt-4 m-4 flex space-x-6 sm:mt-0 sm:justify-center">
+                        <FooterIcon href="#" icon={FaDiscord} />
+                        <FooterIcon href="#" icon={FaFacebook} />
+                        <FooterIcon href="#" icon={FaTwitter} />
+                        <FooterIcon href="#" icon={FaLinkedin} />
+                    </div>
+                </div>
             </div>
-            <div>
-              <FooterTitle title="Follow us" />
-              <FooterLinkGroup col>
-                <FooterLink href="#">Twitter</FooterLink>
-                <FooterLink href="#">Facebook</FooterLink>
-                <FooterLink href="#">LinkedIn</FooterLink>
-              </FooterLinkGroup>
-            </div>
-            <div className="mr-2">
-              <FooterTitle title="Legal" />
-              <FooterLinkGroup col>
-                <FooterLink href="#">Privacy Policy</FooterLink>
-                <FooterLink href="#">Terms &amp; Conditions</FooterLink>
-              </FooterLinkGroup>
-            </div>
-          </div>
-        </div>
-        <FooterDivider />
-        <div className="m-2 w-full sm:flex sm:items-center sm:justify-between">
-          <FooterCopyright href="#" by="ChumsAI™" year={2023} />
-          <div className="mt-4 m-4 flex space-x-6 sm:mt-0 sm:justify-center">
-            <FooterIcon href="#" icon={FaDiscord} />
-            <FooterIcon href="#" icon={FaFacebook} />
-            <FooterIcon href="#" icon={FaTwitter} />
-            <FooterIcon href="#" icon={FaLinkedin} />
-          </div>
-        </div>
-      </div>
-    </Footer>
-  );
+        </footer>
+    );
 }
 
 export default Down;

@@ -1,0 +1,139 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;position: fixed;
+    top: 1rem;
+    left: 0;
+    right: 0;
+}
+
+.nav-element-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 200px;
+    padding: 0.5rem 1rem;
+    
+    margin: 0 auto;
+    color: white;
+}
+
+.brand-logo{
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    border-radius: 100%;
+}
+
+.logo-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    white-space: nowrap;
+    gap: 0.5rem;
+}
+
+.nav-elem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+    width: 40%;
+}
+
+.nav-menu-icon{
+    display: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.login-btn{
+    padding: 0.5rem 1rem;
+    border-radius: 200px;
+    background: linear-gradient(90deg, #f1356d, rgb(17, 164, 255));
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.5s ease-in-out;
+}
+
+.login-btn span{
+    transition: all 0.5s ease-in-out;
+}
+
+.login-btn:hover span{
+    transform: translateX(0.5rem);
+}
+
+.login-btn:hover{
+    background: linear-gradient(130deg, #f1356d, rgb(17, 164, 255));
+    /* transform: scale(1.1); */
+}
+
+.nav-links-phone{
+    display: none;
+}
+
+@media screen and (max-width: 900px){
+    /* .nav-links{
+        display: none;
+    } */
+    .nav-links-phone{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        /* align-items: ; */
+        gap: 1.5rem;
+        /* width: 30%; */
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 1rem;
+        top: 4.5rem;
+        right: 1rem;
+        z-index: 1;
+        transition: all 0.5s ease-in-out;
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .navbar{
+        padding: 0;
+        top: 0;
+    }
+    .nav-element-div{
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border-radius: 0;
+        top: 0;
+    }
+    .nav-elem{
+        display: none;
+    }
+    .nav-links{
+        display: none;
+    }
+    .nav-menu-icon{
+        display: flex;
+    }
+}

@@ -85,7 +85,7 @@ const Chat = () => {
                 content: newMessage,
                 createdAt: "string",
                 updatedAt: "string",
-                companionId: "65ae5f44121d54346d37ec1c",
+                companionId: "65bcf34a618d69838b7ac6d3",
                 userId: userId,
             };
 

@@ -91,10 +91,10 @@ const CompanionList = () => {
     return (
         <div className="dashboard-div w-full h-screen">
             <Side />
-            <div className='companion-card-div w-full bg-black'>
+            <div className='companion-card-div w-full bg-black bg-opacity-90'>
                 {
                     menuOpen ? (
-                        <div className='mobile-menu-div p-4 fixed bg-black rounded-lg ml-2 top-24 h-max'>
+                        <div className='mobile-menu-div p-4 fixed bg-black bg-opacity-95 rounded-lg ml-2 top-24 h-max'>
                             <ul className="space-y-2 font-medium">
                                 <li>
                                     <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
