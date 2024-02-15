@@ -79,19 +79,21 @@ const Chat = () => {
         try {
             const apiUrl = "http://localhost:8000/message/Chat";
             const bearerToken = accessToken;
-
+    
             const requestBody = {
                 role: "string",
                 content: newMessage,
                 createdAt: "string",
+                Transcription_language_code: "zh",
+                translation_language_code: "zh-CN",
                 updatedAt: "string",
                 companionId: "65bcf34a618d69838b7ac6d3",
                 userId: userId,
             };
-
+    
             console.log("Sending message to the backend:", requestBody);
             console.log("Request Body Structure:", JSON.stringify(requestBody, null, 2));
-
+    
             const requestOptions = {
                 method: "POST",
                 headers: {
@@ -100,27 +102,34 @@ const Chat = () => {
                 },
                 body: JSON.stringify(requestBody),
             };
-
+    
             const response = await fetch(apiUrl, requestOptions);
-
+    
             if (!response.ok) {
                 throw new Error(`Failed to send message. Status: ${response.status}`);
             }
-
+    
             const data = await response.json();
             // get current time
             setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
             console.log("Response Data Structure:", JSON.stringify(data, null, 2));
-
+    
             // Dispatch the new message to the Redux store
             dispatch(addMessage(data));
-            setNewMessage("");
+            // Clear the new message input
+            setNewMessage("", () => {
+                // Clear the input placeholder for the chat
+                const input = document.querySelector('.chat-input');
+                if (input) {
+                    input.setAttribute('placeholder', '');
+                }
+            });
         } catch (error) {
             console.error("Error sending message:", error);
         }
     };
-
+    
     console.log(messages);
 
     const handleInpOpt = () => {

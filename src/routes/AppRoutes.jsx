@@ -14,12 +14,13 @@ import CompanionCreation from "../components/CompanionCreation";
 import Settings from "../components/settings";
 import Chat from "../components/Chat";
 import Side from "../components/Sidebar";
+import VoiceCall from "../components/VoiceCall";
 
 const AppRouter = () => {
   const location = useLocation();
   return (
     <div className="w-full h-full">
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings" || location.pathname === "/companion-creation") ? null : <Head />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation") ? null : <Head />}
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/about" component={AboutPage} />
@@ -30,15 +31,16 @@ const AppRouter = () => {
         <Route exact path="/companion-creation" component={CompanionCreation}/>
         <Route exact path="/settings" component={Settings}/>
         <Route exact path="/chat" component={Chat} />
+        <Route exact path="/VoiceCall" component={VoiceCall} />
       </Switch>
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about"              || location.pathname === "/whyus" || location.pathname === "/"      || location.pathname === "/blogs" ) ? null : <Chat />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/companion-creation" || location.pathname === "/about"              || location.pathname === "/whyus" || location.pathname === "/"      || location.pathname === "/blogs" ) ? null : <Chat />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/about"              || location.pathname === "/whyus"              || location.pathname === "/"      || location.pathname === "/blogs" ) ? null : <Dashboard />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings"           || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <AboutPage />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings"           || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <WhyUs />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings"           || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Blogs />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings"           || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <FAQ />}
-      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings"           || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Down />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/"|| location.pathname === "/blogs" ) ? null : <VoiceCall />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/"|| location.pathname === "/blogs" ) ? null : <Chat />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/about"    || location.pathname === "/whyus"              || location.pathname === "/"      || location.pathname === "/blogs" ) ? null : <Dashboard />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <AboutPage />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <WhyUs />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Blogs />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <FAQ />}
+      {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/VoiceCall" || location.pathname === "/settings" || location.pathname === "/companion-creation" || location.pathname === "/about" || location.pathname === "/whyus" || location.pathname === "/blogs") ? null : <Down />}
     </div>
   );
 };
