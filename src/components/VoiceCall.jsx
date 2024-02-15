@@ -20,6 +20,7 @@ function VoiceCall() {
   const startRecording = () => {
     if (mediaRecorder) {
       mediaRecorder.start();
+      sendAudioChunks();
     }
   };
 
