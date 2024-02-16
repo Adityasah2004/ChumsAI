@@ -1,9 +1,13 @@
-import React from "react";
+import { Helmet } from "react-helmet";
 import MediumPosts from "../components/MediumPosts";
 
 const Blogs = () => {
   return (
     <div className="container mx-auto mt-8">
+      <Helmet>
+        <title>Blogs | Chums AI</title>
+        <meta name="description" content="Blogs" />
+      </Helmet>
       <h1 className="text-3xl font-bold mb-4">Blogs</h1>
       <div className="flex justify-between mt-2 mb-4">
         <h4 className="text-left text-3xl font-bold">Most Recent Post</h4>

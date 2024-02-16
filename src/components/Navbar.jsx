@@ -136,6 +136,13 @@ const Head = () => {
         }
     };
 
+    // if clicked anywhere outside the modal, close it
+    window.onclick = function (event) {
+        if (event.target === document.getElementsByClassName("nav-links-phone")) {
+            setNavbarOpen(false);
+        }
+    };
+
     const handleSubmitAndCloseModal = () => {
         handleSubmit();
         onCloseModal();

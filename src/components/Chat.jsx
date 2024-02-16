@@ -6,6 +6,8 @@ import Message from '../components/Message';
 import '../styles/Chat.css';
 import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
+import { Avatar1 } from '../components/Avatar';
+import { Link } from 'react-router-dom';
 
 const Chat = () => {
     // call states
@@ -26,6 +28,9 @@ const Chat = () => {
 
     // settings state
     const [settings, setSettings] = useState(false);
+
+    // background change state
+    const [background, setBackground] = useState(0);
 
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
@@ -130,11 +135,17 @@ const Chat = () => {
     const handleVoiceCall = () => {
         setVoiceCall(true);
         setVideoCall(false);
+        setInpOpt(false);
+        setSettings(false);
+        setShowEmoji(false);
     }
 
     const handleVideoCall = () => {
         setVideoCall(true);
         setVoiceCall(false);
+        setInpOpt(false);
+        setSettings(false);
+        setShowEmoji(false);
     }
 
     const handleEndVoiceCall = () => {
@@ -171,58 +182,89 @@ const Chat = () => {
         setSettings(!settings);
     }
 
+    const handleBackgroundChange = () => {
+        if (background === 0) {
+            setBackground(1);
+        } else if (background === 1) {
+            setBackground(2);
+        } else if (background === 2) {
+            setBackground(3);
+        } else {    
+            setBackground(0);
+        }
+    }
+
     return (
         <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
-            {/* <Avatar/> */}
+            <div className={`body flex i h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
+                <Avatar1  />
+            </div>
             {/* <aside className=''> */}
             {/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */}
-            <iframe className={`body flex basis-1/2 self-center justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`} src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0'></iframe>
+            {/* <iframe className={`body flex basis-1/2 self-center justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`} src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0'></iframe> */}
             {/* </aside> */}
             {/* <iframe src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0' width='150%' height='100%'>
             </iframe> */}
             {/* <div className="sketchfab-embed-wrapper absolute h-full w-full"> <iframe className='h-full w-full' title="Vatican royaume d'or" frameBorder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autostart; xr-spatial-tracking" src="https://sketchfab.com/models/8434d5d906ac4b84ad403e1b66f84668/embed?autostart=1&camera=0&ui_stop=0&ui_controls=0"> </iframe></div> */}
+            {/* <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" /> */}
+            {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
+            {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
+            {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
+            {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />}
 
-            <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />
-            {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="" />}
+            {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />}
             <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}>
-                <menu className='flex text-white px-4 justify-between'>
-                    <span>
-                        Ai Friend
-                    </span>
-                    <button onClick={handleSettings}>
+                <menu className='flex text-white pl-4 pt-1 justify-between items-center'>
+                    <div className='flex items-center gap-4'>
+                        <Link to="/dashboard" className='cursor-pointer flex' title='Back to Dashboard'>
+                            <span className="material-symbols-outlined" >
+                                arrow_back
+                            </span>
+                        </Link>
+                        <span className='font-semibold text-xl'>
+                            AI Friend
+                        </span>
+                    </div>
+                    <button className='flex' title='Settings' onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : {rotate: "0deg", transition: "all 0.4s ease-in-out"}}>
                         <span className="material-symbols-outlined">
                             settings
                         </span>
                     </button>
                     {settings &&
-                        <div className='settings absolute bg-white bg-opacity-90 p-2 text-black z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
-                            <button>
-                                <p className='flex items-center gap-1'>
+                        <div className='settings absolute bg-black bg-opacity-75 p-4 text-white z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
+                            <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all'>
+                                <p className='flex items-center gap-2'>
                                     <span className="material-symbols-outlined">
                                         settings
                                     </span>
                                     Settings
                                 </p>
                             </button>
+                            <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all' onClick={handleBackgroundChange}>
+                                <p className='flex items-center gap-2'>
+                                    <span className="material-symbols-outlined">
+                                        change_circle
+                                    </span>
+                                    Change background
+                                </p>
+                            </button>
                         </div>
                     }
                 </menu>
-                <div className="p-4 overflow-y-auto h-full flex flex-col gap-2">
+                <div className="p-4 overflow-y-auto h-full flex flex-col gap-2 justify-end">
                     {messages.map((msg, index) => (
                         <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-white h-auto">
                             <p className="text-black mb-1">Content: {msg}</p>
                         </div>
                     ))}
                     <Message time={currentTime} />
-                    <Message time={currentTime} />
-                    <Message time={currentTime} />
                 </div>
                 { showEmoji && 
                     <div className='emoji-tag' >
-                        <EmojiPicker  style={{backgroundColor:"rgba(0,0,0,0.6)"}} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} emojiStyle='apple' searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
+                        <EmojiPicker  style={{backgroundColor:"rgba(0,0,0,0.6)"}} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
                     </div>
                 }
-                <div className="flex p-4 justify-between gap-1">
+                <div className="flex py-4 justify-between gap-1">
                     <div className='bg-white rounded-full flex items-center justify-center flex-1 px-4 py-3 gap-2'>
                         <span className="material-symbols-outlined">
                             chat_bubble
@@ -233,20 +275,21 @@ const Chat = () => {
                             onChange={(e) => setNewMessage(e.target.value)}
                             className="flex flex-1 p-3 h-4 rounded-full border-none border-transparent focus:ring-0 bg-transparent text-black placeholder-gray-400 focus:outline-none"
                             placeholder="Type your message..."
+                            title='Type your message'
                         />
                         
                         <div className='input-options'>
-                            <button className='flex' onClick={handleEmoji}>
+                            <button className='flex' onClick={handleEmoji} title='Emoji'>
                                 <span className="material-symbols-outlined">
                                     mood
                                 </span>
                             </button>
-                            <button className='flex' onClick={handleVoiceCall}>
+                            <button className='flex' onClick={handleVoiceCall} title='Voice Call'>
                                 <span className="material-symbols-outlined">
                                     call
                                 </span>
                             </button>
-                            <button className='flex' onClick={handleVideoCall}>
+                            <button className='flex' onClick={handleVideoCall} title='Video Call'>
                                 <span className="material-symbols-outlined">
                                     videocam
                                 </span>
@@ -259,7 +302,7 @@ const Chat = () => {
                         </button>
                     </div>
                     {intOpt &&
-                        <div className='inp-opts'>
+                        <div className='inp-opts z-50'>
                             <button className='flex' onClick={handleVoiceCall}>
                                 <span className="material-symbols-outlined">
                                     call
@@ -271,8 +314,8 @@ const Chat = () => {
                                 </span>
                             </button>
                         </div>}
-                        <button className='' onClick={handleSendMessage}>
-                            <span className="material-symbols-outlined bg-blue-600 rounded-full flex items-center justify-center p-3 text-white hover:bg-opacity-95">
+                    <button className='' onClick={handleSendMessage} title='Send'>
+                            <span className="material-symbols-outlined bg-blue-600 rounded-full flex items-center justify-center p-3 text-white hover:bg-opacity-90">
                                 send
                             </span>
                         </button>
@@ -281,7 +324,7 @@ const Chat = () => {
             </div>
             {
                 voiceCall &&
-                <div className="flex justify-between z-10  p-3 gap-5 rounded-full absolute bottom-10">
+                <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
                     <button className="flex flex-col items-center bg-red-700 pb-1 text-white rounded-full w-40 justify-center" onClick={handleEndVoiceCall}>
                         <span className="material-symbols-outlined">
                             call_end
@@ -292,7 +335,7 @@ const Chat = () => {
             }
             {
                 videoCall &&
-                <div className="flex justify-between z-10  p-3 gap-5 rounded-full absolute bottom-10">
+                <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
                     <button className="flex flex-col items-center bg-red-700 pb-1 text-white rounded-full w-40 justify-center" onClick={handleEndVideoCall}>
                         <span className="material-symbols-outlined">
                             call_end
