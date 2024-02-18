@@ -1,7 +1,5 @@
 import { FaDiscord } from "react-icons/fa";
-import Landing from '../assets/landing.png';
 import "../styles/LandingPage.css";
-import imageName from '../assets/About.png';
 import { Helmet } from "react-helmet";
 import LandingAvatar from "../components/LandingAvatar";
 
@@ -10,70 +8,41 @@ const LandingPage = () => {
 
     return (
         <>
-            <div className="">
-                <Helmet>
-                    <title>Chums AI</title>
-                    <meta name="description" content="Chums AI" />
-                </Helmet>
+            <Helmet>
+                <title>Chums AI</title>
+                <meta name="description" content="Chums AI" />
+            </Helmet>
 
-                <div className=" hero-section flex flex-col lg:flex-row justify-center items-center  h-screen bg-transparent overflow-hidden">
-                    <div className="lg:w-1/2 order-2 lg:order-1">
-                        <div className="text-center lg:text-left lg:p-10">
-                            <h1 className="hero-heading">
-                                Your own personalized AI humanoid 3D Campanion
-                            </h1>
-                            <p className="text-lg lg:text-xl text-gray-400">
-                                Build & Discover your AI Friend and Work companion
-                            </p>
-                            {/* <div className="flex flex-col gap-2"> */}
-                            <div className="hr-div">
-                                <hr className="hz-line" />
-                            </div>
-                            <div className="hero-btns-div flex gap-4">
-                                <button className="create-btn flex justify-center items-center cursor-pointer py-3 px-4 whitespace-nowrap rounded-xl gap-2 text-white">
-                                    Get Started
-                                    <span className="material-symbols-outlined">
-                                        arrow_forward
-                                    </span>
-                                </button>
-                                <buttton
-                                    className="discord-btn flex justify-center items-center cursor-pointer py-3 px-4 whitespace-nowrap rounded-xl gap-2 border">
-                                    Discord
-                                    <FaDiscord className="disc-icon text-white text-2xl ml-2" />
-                                </buttton>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hero-img-div h-screen">
-                        <LandingAvatar className="" />
-                    </div>
-                </div>
-
-                <div className="flex flex-col mt-9 md:flex-row justify-center items-center md:space-x-8 m-6 md:m-16">
-                    <img
-                        src={imageName}
-                        alt="About Page Image"
-                        className="phone-mockup"
-                    />
-
-                    <div className="text-div flex flex-col gap-2">
-                        <h2 className="mb-4">
-                            Making user interaction more Human like and Empathetic!
-                        </h2>
-                        <p className=" text-gray-400 mb-4">
-                            At CHUMSAI, we bring you a cutting-edge platform that combines
-                            various advanced technologies to create a truly personalized and
-                            immersive customer experience.
-                        </p>
+            <div className="hero-section">
+                <div className="left-div">
+                    <h1 className="hero-heading">
+                        Your own personalized <br /> AI humanoid - <span>3D Companion</span>
+                    </h1>
+                    <p className="">
+                        Build & Discover your AI Friend and Work companion
+                    </p>
+                    <div className="hero-btns-div">
                         <buttton
-                            className="discord-btn flex justify-center items-center cursor-pointer py-3 px-4 whitespace-nowrap rounded-xl gap-2 border">
-                            Learn more
-                            <span className="material-symbols-outlined">
-                                open_in_new
-                            </span>
+                            className="discord-btn whitespace-nowrap">
+                            Discord
+                            <FaDiscord className="disc-icon text-white text-2xl ml-2" />
                         </buttton>
+                        <button className="create-btn whitespace-nowrap">
+                            Get Started
+                            <span className="material-symbols-outlined">
+                                arrow_forward
+                            </span>
+                        </button>
                     </div>
                 </div>
+                <div className="hero-img-div">
+                    <LandingAvatar/>
+                </div>
+            </div>
+            <div className="video-div">
+                <img className="video-div-img1" src="./v1.svg" alt="" />
+                <video src="https://www.apple.com/105/media/us/mac/family/2023/1b2bbf5c-ddc5-44a1-9dfb-7a51c49143fa/anim/welcome/xlarge_2x.mp4" autoPlay loop loading="lazy"/>
+                <img className="video-div-img2" src="./v1.svg" alt="" />
             </div>
         </>
     );

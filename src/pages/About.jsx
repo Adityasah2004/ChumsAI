@@ -8,12 +8,12 @@ import { Helmet } from "react-helmet";
 
 const AboutPage = () => {
     return (
-        <div className="flex flex-col mt-5 gap-10">
+        <div className="">
             <Helmet>
                 <title>About Us | Chums AI</title>
                 <meta name="description" content="About Chums AI" />
             </Helmet>
-            <Services />
+            {/* <Services /> */}
             <Features />
         </div>
     );

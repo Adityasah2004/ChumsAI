@@ -4,7 +4,7 @@
     align-items: center;
     padding: 0.5rem 1rem;
     position: fixed;
-    top: 1rem;
+    top: 0.5rem;
     left: 0;
     right: 0;
     z-index: 1;
@@ -67,7 +67,7 @@
 .login-btn{
     padding: 0.5rem 1rem;
     border-radius: 200px;
-    background: linear-gradient(90deg, #f1356d, rgb(17, 164, 255));
+    background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 97.5%);
     color: white;
     border: none;
     cursor: pointer;
@@ -84,7 +84,7 @@
 }
 
 .login-btn:hover{
-    background: linear-gradient(130deg, #f1356d, rgb(17, 164, 255));
+    background: linear-gradient(360deg, #AC20CF 0%, #00B7A1 97.5%);
     /* transform: scale(1.1); */
 }
 
