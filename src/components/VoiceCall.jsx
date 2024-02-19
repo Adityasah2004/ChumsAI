@@ -18,10 +18,17 @@ function VoiceCall() {
   }, []);
 
   const startRecording = () => {
-    if (mediaRecorder) {
-      mediaRecorder.start();
-      sendAudioChunks();
-    }
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then((stream) => {
+        if (mediaRecorder) {
+          mediaRecorder.start();
+          sendAudioChunks();
+        }
+      })
+      .catch((error) => {
+        console.error('Error accessing microphone:', error);
+        alert('Error accessing microphone. Please make sure a microphone is connected and enabled.');
+      });
   };
 
   const stopRecording = () => {
@@ -42,7 +49,7 @@ function VoiceCall() {
 
   const sendAudioChunks = () => {
     // Combine recorded chunks into a single Blob
-    const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+    const audioBlob = new Blob(recordedChunks, { type: 'audio/mp3' });
   
     // Construct FormData object
     const formData = new FormData();

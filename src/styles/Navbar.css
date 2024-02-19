@@ -2,10 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem 1rem;position: fixed;
-    top: 1rem;
+    padding: 0.5rem 1rem;
+    position: fixed;
+    top: 0.5rem;
     left: 0;
     right: 0;
+    z-index: 1;
 }
 
 .nav-element-div{
@@ -18,7 +20,6 @@
     backdrop-filter: blur(10px);
     border-radius: 200px;
     padding: 0.5rem 1rem;
-    
     margin: 0 auto;
     color: white;
 }
@@ -66,7 +67,7 @@
 .login-btn{
     padding: 0.5rem 1rem;
     border-radius: 200px;
-    background: linear-gradient(90deg, #f1356d, rgb(17, 164, 255));
+    background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 97.5%);
     color: white;
     border: none;
     cursor: pointer;
@@ -83,7 +84,7 @@
 }
 
 .login-btn:hover{
-    background: linear-gradient(130deg, #f1356d, rgb(17, 164, 255));
+    background: linear-gradient(360deg, #AC20CF 0%, #00B7A1 97.5%);
     /* transform: scale(1.1); */
 }
 
@@ -103,8 +104,7 @@
         /* align-items: ; */
         gap: 1.5rem;
         /* width: 30%; */
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
+        background-color: rgb(0, 0, 0,0.8);
         border-radius: 20px;
         padding: 1rem;
         top: 4.5rem;

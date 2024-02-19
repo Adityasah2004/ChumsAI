@@ -1,12 +1,16 @@
-import React from 'react';
-import CompanionList from '../components/CompanionCard';  
+import { Helmet } from 'react-helmet';
+import CompanionList from '../components/CompanionCard';
 
 const Dashboard = () => {
-  return (
-    <div className="flex">
-        <CompanionList /> 
-      </div>
-  );
+    return (
+        <div className="flex">
+            <Helmet>
+                <title>Dashboard | Chums AI</title>
+                <meta name="description" content="Dashboard" />
+            </Helmet>
+            <CompanionList />
+        </div>
+    );
 };
 
 export default Dashboard;

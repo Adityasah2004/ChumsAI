@@ -48,8 +48,8 @@ const Head = () => {
         setMode(newMode);
     };
 
-    const handleSubmit = async () => {
-        // e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         // history.push("/dashboard");
         const formData = {
             email,
@@ -133,6 +133,13 @@ const Head = () => {
             console.error("Error:", error);
             // Handle network errors or exceptions
             alert("An error occurred. Please try again later.");
+        }
+    };
+
+    // if clicked anywhere outside the modal, close it
+    window.onclick = function (event) {
+        if (event.target === document.getElementsByClassName("nav-links-phone")) {
+            setNavbarOpen(false);
         }
     };
 
