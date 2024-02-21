@@ -281,7 +281,7 @@ const Head = () => {
                             {mode === "login" ? "Log In" : "Sign Up"}
                         </h3>
                         <div>
-                            <div className="mb-2 block">
+                            <div className="mb-1 block">
                                 <Label htmlFor="email" value="Your email" />
                             </div>
                             <TextInput
@@ -293,7 +293,7 @@ const Head = () => {
                             />
                         </div>
                         <div>
-                            <div className="mb-2 block">
+                            <div className="mb-1 block">
                                 <Label htmlFor="password" value="Your password" />
                             </div>
                             <TextInput
@@ -308,7 +308,7 @@ const Head = () => {
                             <>
                                 <div className="flex justify-between">
                                     <div className="w-1/2 pr-2">
-                                        <div className="mb-2 block">
+                                        <div className="mb-1 block">
                                             <Label htmlFor="firstName" value="First Name" />
                                         </div>
                                         <TextInput
@@ -320,7 +320,7 @@ const Head = () => {
                                         />
                                     </div>
                                     <div className="w-1/2 pl-2">
-                                        <div className="mb-2 block">
+                                        <div className="mb-1 block">
                                             <Label htmlFor="lastName" value="Last Name" />
                                         </div>
                                         <TextInput
@@ -333,7 +333,7 @@ const Head = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="mb-2 block">
+                                    <div className="mb-1 block">
                                         <Label htmlFor="confirmPassword" value="Confirm Password" />
                                     </div>
                                     <TextInput
@@ -343,6 +343,12 @@ const Head = () => {
                                         onChange={(event) => setConfirmPassword(event.target.value)}
                                         required
                                     />
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <Checkbox id="tnc" required />
+                                        <Label htmlFor="tnc">
+                                            <Link to="/terms" className="text-cyan-700 hover:underline">Terms & conditions</Link>
+                                        </Label>
+                                    </div>
                                 </div>
                             </>
                         )}

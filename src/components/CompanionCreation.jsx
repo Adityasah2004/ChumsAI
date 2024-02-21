@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, FileInput, Label } from "flowbite-react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -303,6 +303,14 @@ function CompanionCreation({ onClose }) {
                                     ))}
                                 </select>
                             </div>
+                            <label className="flex justify-center items-center gap-4">
+                                <input
+                                    type="checkbox"
+                                    className=""
+                                    required
+                                />
+                                <Link to="/terms" className="text-sky-800 hover:underline">I agree to the terms and conditions</Link>
+                            </label>
                             <div className="flex justify-end">
                                 <button
                                     type="submit"

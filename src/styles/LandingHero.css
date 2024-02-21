@@ -20,7 +20,7 @@
 
 .left-div p{
     font-size: clamp(1.2rem, 4vw, 1.5rem);
-    color: #ffffff;
+    /* color: #ffffff; */
     font-weight: 400;
     text-align: left;
 }

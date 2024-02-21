@@ -12,7 +12,10 @@ import { Link } from 'react-router-dom';
 const Chat = () => {
     // call states
     const [voiceCall, setVoiceCall] = useState(false);
-    const [videoCall, setVideoCall] = useState(false);
+
+
+    // camera state
+    const [camera, setCamera] = useState(false);
 
     // emoji states
     const [showEmoji, setShowEmoji] = useState(false);
@@ -36,7 +39,7 @@ const Chat = () => {
     const accessToken = localStorageUtils.getAccessToken();
 
     const messages = useSelector((state) => state.messages.messages);
-    
+
     const dispatch = useDispatch();
 
     // Fetch messages from the backend and dispatch to Redux store
@@ -140,21 +143,129 @@ const Chat = () => {
         setShowEmoji(false);
     }
 
+    const [videoCall, setVideoCall] = useState(false);
+
     const handleVideoCall = () => {
         setVideoCall(true);
         setVoiceCall(false);
         setInpOpt(false);
         setSettings(false);
         setShowEmoji(false);
+
+        if (camera === true) {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+                .then((stream) => {
+                    const video = document.getElementById('user-video');
+                    if (video) {
+                        video.srcObject = stream;
+                        video.onloadedmetadata = () => {
+                            video.play();
+                        };
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error accessing the camera:', err);
+                    if (err.name === "NotAllowedError") {
+                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+                    }
+                });
+        } else {
+            // only audio call
+            navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+                .then((stream) => {
+                    const video = document.getElementById('user-video');
+                    if (video) {
+                        video.srcObject = stream;
+                        video.onloadedmetadata = () => {
+                            video.play();
+                        };
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error accessing the camera:', err);
+                    if (err.name === "NotAllowedError") {
+                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+                    }
+                });
+        }
     }
 
-    const handleEndVoiceCall = () => {
-        setVoiceCall(false);
+    const handleCamera = () => {
+
+        // if camera is false, stop the video stream
+        if (camera === true) {
+            setCamera(false);
+            const video = document.getElementById('user-video');
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+            video.srcObject = null;
+
+            // audio on if video is off
+            navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+                .then((stream) => {
+                    const video = document.getElementById('user-video');
+                    if (video) {
+                        video.srcObject = stream;
+                        video.onloadedmetadata = () => {
+                            video.play();
+                        };
+                    }
+                })
+        } else {
+            setCamera(true);
+            // ask for permission to use the camera and if granted, start the video call
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+            .then((stream) => {
+                const video = document.getElementById('user-video');
+                if (video) {
+                    video.srcObject = stream;
+                    video.onloadedmetadata = () => {
+                        video.play();
+                    };
+                }
+            })
+            .catch((err) => {
+                console.error('Error accessing the camera:', err);
+                if (err.name === "NotAllowedError") {
+                    alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+                }
+            });
+        }
     }
 
     const handleEndVideoCall = () => {
         setVideoCall(false);
+
+        // stop the video stream
+        const video = document.getElementById('user-video');
+        const stream = video.srcObject;
+        const tracks = stream.getTracks();
+
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+        setCamera(false);
+
+        // // audio off if video call is ended
+        // navigator.mediaDevices.getUserMedia({ video: false, audio: false })
+        //     .then((stream) => {
+        //         const video = document.getElementById('user-video');
+        //         if (video) {
+        //             video.srcObject = stream;
+        //             video.onloadedmetadata = () => {
+        //                 video.play();
+        //             };
+        //         }
+        //     })
     }
+
+    const handleEndVoiceCall = () => {
+        setVoiceCall(false);
+        setCamera(false);
+        setVideoCall(false);
+    }
+
+
 
     const handleEmoji = () => {
         setShowEmoji(!showEmoji);
@@ -163,10 +274,10 @@ const Chat = () => {
     let modelClassesVoiceCall = "";
     let modelClassesVideoCall = "";
 
-    if(voiceCall){
+    if (voiceCall) {
         modelClassesVoiceCall = "sm-voice-cen max-scrn-voice-call";
         modelClassesVideoCall = "";
-    } else if (videoCall){
+    } else if (videoCall) {
         modelClassesVoiceCall = "";
         modelClassesVideoCall = "sm-video-cen max-scrn-video-call";
     } else {
@@ -189,15 +300,15 @@ const Chat = () => {
             setBackground(2);
         } else if (background === 2) {
             setBackground(3);
-        } else {    
+        } else {
             setBackground(0);
         }
     }
 
     return (
         <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
-            <div className={`body flex i h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
-                <Avatar1  />
+            <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
+                <Avatar1 />
             </div>
             {/* <aside className=''> */}
             {/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */}
@@ -225,7 +336,7 @@ const Chat = () => {
                             AI Friend
                         </span>
                     </div>
-                    <button className='flex' title='Settings' onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : {rotate: "0deg", transition: "all 0.4s ease-in-out"}}>
+                    <button className='flex' title='Settings' onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
                         <span className="material-symbols-outlined">
                             settings
                         </span>
@@ -259,12 +370,12 @@ const Chat = () => {
                     ))}
                     <Message time={currentTime} />
                 </div>
-                { showEmoji && 
+                {showEmoji &&
                     <div className='emoji-tag' >
-                        <EmojiPicker  style={{backgroundColor:"rgba(0,0,0,0.6)"}} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
+                        <EmojiPicker style={{ backgroundColor: "rgba(0,0,0,0.6)" }} theme='dark' onEmojiClick={(emoji) => handleEmojiInput(emoji)} searchPlaceholder="Search the emojis here" suggestedEmojisMode="recent" />
                     </div>
                 }
-                <div className="flex py-4 justify-between gap-1">
+                <div className="flex py-4 justify-between gap-1 relative">
                     <div className='bg-white rounded-full flex items-center justify-center flex-1 px-4 py-3 gap-2'>
                         <span className="material-symbols-outlined">
                             chat_bubble
@@ -277,7 +388,7 @@ const Chat = () => {
                             placeholder="Type your message..."
                             title='Type your message'
                         />
-                        
+
                         <div className='input-options'>
                             <button className='flex' onClick={handleEmoji} title='Emoji'>
                                 <span className="material-symbols-outlined">
@@ -291,7 +402,7 @@ const Chat = () => {
                             </button>
                             <button className='flex' onClick={handleVideoCall} title='Video Call'>
                                 <span className="material-symbols-outlined">
-                                    videocam
+                                    video_call
                                 </span>
                             </button>
                         </div>
@@ -301,8 +412,9 @@ const Chat = () => {
                             </span>
                         </button>
                     </div>
-                    {intOpt &&
-                        <div className='inp-opts z-50'>
+                    {
+                        intOpt &&
+                        <div className='inp-opts'>
                             <button className='flex' onClick={handleVoiceCall}>
                                 <span className="material-symbols-outlined">
                                     call
@@ -310,17 +422,18 @@ const Chat = () => {
                             </button>
                             <button className='flex' onClick={handleVideoCall}>
                                 <span className="material-symbols-outlined">
-                                    videocam
+                                    video_call
                                 </span>
                             </button>
-                        </div>}
+                        </div>
+                    }
                     <button className='' onClick={handleSendMessage} title='Send'>
-                            <span className="material-symbols-outlined bg-blue-600 rounded-full flex items-center justify-center p-3 text-white hover:bg-opacity-90">
-                                send
-                            </span>
-                        </button>
+                        <span className="material-symbols-outlined bg-blue-600 rounded-full flex items-center justify-center p-3 text-white hover:bg-opacity-90">
+                            send
+                        </span>
+                    </button>
                 </div>
-                
+
             </div>
             {
                 voiceCall &&
@@ -336,12 +449,29 @@ const Chat = () => {
             {
                 videoCall &&
                 <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
-                    <button className="flex flex-col items-center bg-red-700 pb-1 text-white rounded-full w-40 justify-center" onClick={handleEndVideoCall}>
+                    <button className="flex flex-col items-center bg-red-700 p-1 text-white rounded-full w-40 justify-center" onClick={handleEndVideoCall}>
                         <span className="material-symbols-outlined">
                             call_end
                         </span>
                         End Call
                     </button>
+                    <button className='flex flex-col items-center bg-sky-700 p-1 text-white rounded-full w-40 justify-center' onClick={handleCamera}>
+                        <span className="material-symbols-outlined">
+                            {camera ? "videocam_off" : "videocam"}
+                        </span>
+                        Camera {camera ? "Off" : "On"}
+                    </button>
+                </div>
+            }
+
+            <video id='user-video' className={videoCall && camera ? "absolute bottom-0 right-5" : "hidden"} autoPlay playsInline></video>
+
+            {
+                videoCall && camera === false &&
+                <div id='user-prof'>
+                    <span className="material-symbols-outlined text-white z-50">
+                        person
+                    </span>
                 </div>
             }
         </div>

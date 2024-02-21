@@ -9,6 +9,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     transition: all 1s ease-in-out;
+    position: relative;
     /* padding-right: 2rem; */
 }
 
@@ -60,13 +61,13 @@ aside img{
     display: none;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 0.6rem;
-    right: 20%;
-    top: 80vh;
+    padding: 0.8rem 1rem;
+    right: 2rem;
+    top: -3rem;
     border-radius: 50px;
     gap: 1rem;
     color: white;
-    z-index: 2;
+    z-index: 100;
 }
 
 .inp-opts button{
@@ -102,6 +103,35 @@ aside img{
     z-index: 20;
     right: 2%;
     transition: all 1s ease-in-out;
+}
+
+video#user-video{
+    position: absolute;
+    bottom: 8rem;
+    right: 1rem;
+    z-index: 50;
+    transition: all 1s ease-in-out;
+    border-radius: 20px;
+    overflow: hidden;
+    width: clamp(200px, 4vw, 250px);
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+
+div#user-prof{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 8rem;
+    right: 1rem;
+    z-index: 50;
+    transition: all 1s ease-in-out;
+    border-radius: 20px;
+    width: clamp(200px, 4vw, 250px);
+    height: clamp(150px, 4vw, 250px);
+    background-color: rgba(0, 0, 0,0.8);
 }
 
 @media screen and (max-width: 970px){
