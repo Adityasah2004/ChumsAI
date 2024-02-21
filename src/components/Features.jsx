@@ -6,7 +6,7 @@ function Features() {
             <p className='features-heading'>
                 <span>New Generation</span> features of <span>AI</span>
             </p>
-            <div className='features-grid px-4 text-white'>
+            <div className='features-grid text-white'>
                 <div className='feature-card1'>
                     <div className='feature-card-content'>
                         <h3 className="feature-card-heading">AI-Powered</h3>

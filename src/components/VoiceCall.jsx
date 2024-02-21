@@ -99,13 +99,8 @@ function VoiceCall() {
   }, []);
 
   return (
-    <div>
-      <div className="header">
-        <h2>Voice Call</h2>
-      </div>
-      <button onClick={startRecording}>Start Recording</button>
-      <button onClick={stopRecording}>Stop Recording</button>
-    </div>
+    <>
+    </>
   );
 }
 

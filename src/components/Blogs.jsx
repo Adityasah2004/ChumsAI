@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import '../styles/Blogs.css';
@@ -27,10 +26,6 @@ const Blogs = () => {
     }, []);
     return (
         <section className="blogs-section">
-            <Helmet>
-                <title>Blogs | Chums AI</title>
-                <meta name="description" content="Blogs" />
-            </Helmet>
             <div>
                 <p className="blogs-heading">Article and Blogs</p>
                 <div className="flex justify-center items-center">
@@ -55,36 +50,6 @@ const Blogs = () => {
                         }
 
                         return (
-                            // <Card
-                            //     key={post.guid}
-                            //     className="max-w-md bg-#0c0c0c dark:bg-black border-none"
-                            //     imgAlt={post.title}
-                            //     imgSrc={thumbnailUrl}
-                            // >
-                            //     <h5 className="text-lg text-white dark:text-white">
-                            //         {post.title}
-                            //     </h5>
-                            //     {/* <p
-                            //     className="font-normal text-gray-400 dark:text-gray-400"
-                            //     dangerouslySetInnerHTML={{
-                            //         __html: truncateDescription(
-                            //             removeHtmlTags(post.description),
-                            //             150,
-                            //             post.link
-                            //         ),
-                            //     }}
-                            // ></p> */}
-                            //     {/* <div className="flex flex-wrap gap-2 mt-2">
-                            //     {post.categories.map((category, index) => (
-                            //         <Badge key={index} color={assignTagColor(category)}>
-                            //             {category}
-                            //         </Badge>
-                            //     ))}
-                            // </div> */}
-                            //     {/* <p className="text-sm text-right text-gray-500">
-                            //     By {post.author}
-                            // </p> */}
-                            // {/* </Card> */}
                             <div key={post.guid} className="article-card">
                                 <a href={post.link} className="flex flex-col items-center">
                                     <img src={thumbnailUrl} alt={post.title} />
@@ -93,7 +58,7 @@ const Blogs = () => {
                             </div>
                         );
                     })
-                    
+
                 ) : (
                     <p>No Medium posts found.</p>
                 )}

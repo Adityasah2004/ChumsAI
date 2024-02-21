@@ -17,13 +17,14 @@ function Message(props) {
                 <span>AI Friend</span>
             </div>
             <div className="flex flex-col relative">
-                <p className="text-black items-center p-2 pl-3 rounded-r-xl rounded-bl-xl bg-white bg-opacity-80 h-auto w-auto gap-1 flex relative overflow-hidden text-left" onMouseEnter={() => setMessageMenu(true)} onMouseLeave={() => setMessageMenu(false)}>
+                <p className="text-black items-center p-2 pl-3 rounded-r-xl rounded-bl-xl bg-white bg-opacity-80 h-auto w-auto gap-1 flex relative overflow-hidden text-left chat-p" onMouseEnter={() => setMessageMenu(true)} onMouseLeave={() => setMessageMenu(false)}>
                     Hello Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat eaque et reprehenderit quidem veritatis sequi perspiciatis temporibus laudantium architecto id maxime consectetur, corporis rerum sunt enim voluptas dignissimos, incidunt voluptatem.
                     {messageMenu &&
                         <span className="message-opt-icon material-symbols-outlined self-center cursor-pointer absolute top-0 right-0 text-white" onClick={handleOptions}>
                             more_vert
                         </span>
                     }
+                    
                 </p>
                 <span className="flex justify-end">{props.time}</span>
                 {

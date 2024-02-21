@@ -1,5 +1,5 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
+import { Link } from "react-router-dom"
 
 const NotFound = () => {
     return (
@@ -8,10 +8,15 @@ const NotFound = () => {
                 <title>404: Not Found</title>
                 <meta name="description" content="404: Not Found" />
             </Helmet>
-            <h1>404: Not Found</h1>
+            <h1>
+                Oops! Page not found. The page you are looking for does not exist. &nbsp;
+                <Link to="/" className="text-blue-500">
+                    Go back to the homepage
+                </Link>
+            </h1>
+            
         </div>
-    );
-};
+    )
+}
 
-export default NotFound;
-
+export default NotFound
