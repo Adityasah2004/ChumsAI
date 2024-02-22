@@ -76,7 +76,7 @@
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #221554 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #221554 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -105,7 +105,7 @@
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #384311 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #384311 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -134,7 +134,7 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #543713 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #543713 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -163,7 +163,7 @@
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
-    background-image: linear-gradient(0deg, #72A1CB 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #72A1CB 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -192,7 +192,7 @@
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, #2E2E2E 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #2E2E2E 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -221,7 +221,7 @@
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, #587729 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #587729 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
