@@ -48,7 +48,7 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-    background-image: linear-gradient(0deg, #311f41 0%, rgba(195, 91, 147, 0) 70%), url('./f2.jpg');
+    background-image: linear-gradient(0deg, #311f41 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
