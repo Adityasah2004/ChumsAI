@@ -4,6 +4,9 @@ import logo from '../assets/logoDark.png';
 import '../styles/Footer.css';
 import { Link } from "react-router-dom";
 
+const handleClick = async () => {
+    history.push("/privacy");
+    };
 
 function Down() {
     return (
@@ -48,9 +51,7 @@ function Down() {
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">Legal</h6>
                     <div className="flex flex-col items-start gap-1">
-                    <Link  target='_blank' to="/privacy" className="text-gray-500 hover:underline" activeclassname="active">
-                            Privacy Policy
-                        </Link>
+                        <a  onClick={handleClick} href="/privacy" target='_blank' className="text-gray-500 hover:underline">Privacy Policy</a>
                         <a href="/terms" target='_blank' className="text-gray-500 hover:underline">Terms & Conditions</a>
                     </div>
                 </div>
