@@ -27,12 +27,12 @@ const LandingHero = () => {
                     </div>
                 </div>
                 <div className="hero-img-div">
-                    {/* <LandingAvatar/> */}
+                    <LandingAvatar/>
                 </div>
             </div>
             <div className="video-div">
                 <img className="video-div-img1" src="./v1.svg" alt="" />
-                {/* <video src="https://www.apple.com/105/media/us/mac/family/2023/1b2bbf5c-ddc5-44a1-9dfb-7a51c49143fa/anim/welcome/xlarge_2x.mp4" autoPlay loop loading="lazy"/> */}
+                <video src="https://www.apple.com/105/media/us/mac/family/2023/1b2bbf5c-ddc5-44a1-9dfb-7a51c49143fa/anim/welcome/xlarge_2x.mp4" autoPlay loop loading="lazy"/>
                 <img className="video-div-img2" src="./v1.svg" alt="" />
             </div>
         </div>
