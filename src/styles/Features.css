@@ -15,9 +15,11 @@
 .features-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 4vw, 2rem);
+    gap: clamp(1.5rem, 4vw, 2.5rem);
     margin-top: 2rem;
     width: 90%;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .feature-card-content{
@@ -34,6 +36,8 @@
 .feature-card-content p{
     font-size: clamp(1rem, 4vw, 1.6rem);
     font-weight: 300;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 :hover:is(.feature-card1, .feature-card2, .feature-card3, .feature-card4, .feature-card5, .feature-card6, .feature-card7){

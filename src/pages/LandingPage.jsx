@@ -2,7 +2,7 @@
 import { Helmet } from "react-helmet";
 import LandingHero from "../components/LandingHero";
 import Features from "../components/Features";
-import Industry from "../components/Industry";
+// import Industry from "../components/Industry";
 import Potential from "../components/Potential";
 import Navbar from "../components/Navbar";
 import Blogs from "../components/Blogs";
@@ -20,7 +20,7 @@ const LandingPage = () => {
             <Navbar/>
             <LandingHero/>
             <Features/>
-            <Industry/>
+            {/* <Industry/> */}
             <Potential/>
             <Blogs/>
             <FAQ/>

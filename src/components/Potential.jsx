@@ -25,7 +25,7 @@ const Potential = () => {
                     {
                         potentialContents.map((content, index) => {
                             return (
-                                <div key={index} className="item flex text-white items-center">
+                                <div key={index} className="item flex text-white items-center" data-aos="fade-right">
                                     <img src="./v1.svg" alt="list bullet" className='bullet'/>
                                     <li className=''>
                                         {content.item}

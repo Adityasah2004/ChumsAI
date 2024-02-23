@@ -3,10 +3,10 @@
     justify-content: space-between;
     align-items: center;
     z-index: -1;
-    background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0) 70%), url('../assets/bg.png');
+    background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     padding: 0 4rem;
 }
 
@@ -29,19 +29,29 @@
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 500;
     text-align: left;
+    letter-spacing: 2px;
 }
 
-.hero-heading span{
+.left-div p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 1rem; */
+}
+
+.left-div p big{
     background: linear-gradient(90deg, #FF2DF7 0%, #00F0FF 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
 }
 
 .hero-btns-div {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     gap: 1rem;
 }
@@ -55,7 +65,7 @@
     transition: all 1s ease-in-out;
     width: 100%;
     max-width: 250px;
-    border-radius: 10px;
+    border-radius: 50px;
     gap: 1rem;
     font-size: clamp(0.5rem, 4vw, 1rem);
     cursor: pointer;
@@ -71,16 +81,15 @@
 }
 
 .create-btn {
-    background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 100%);
-    outline: 1px solid #ffffff00;
+    /* background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 100%); */
+    outline: 1px solid #ffffff;
 }
 
 .create-btn:hover {
     /* border: 1px solid #ffffff; */
-    outline: 1px solid #ffffff;
-    background: transparent;
+    
     /* glow */
-    /* box-shadow: 0 0 10px #00B7A1, 0 0 20px #00B7A1, 0 0 40px #00B7A1, 0 0 80px #00B7A1; */
+    box-shadow: 0 0 400px #00B7A1 inset;
 }
 
 .create-btn span {
@@ -105,7 +114,11 @@
     /* max-width: 80vh; */
     /* height: 100%; */
     height: 100vh;
-    width: 50%;
+    /* width: 50%; */
+}
+
+.hero-p-video{
+    font-size: clamp(2rem, 4vw, 4rem);
 }
 
 .video-div{
@@ -140,7 +153,23 @@
 .video-div-img2{
     width: 100%;
     max-width: 100px;
+    animation: rotate 6s ease infinite;
 }
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    /* 50% { */
+        /* transform: rotate(360deg); */
+    /* } */
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 /* .phone-mockup {
     width: 100%;
@@ -177,44 +206,56 @@
     font-size: clamp(1rem, 4vw, 1rem);
 } */
 
+@media screen and (max-width: 900px){
+    .video-div-img2 {
+            position: absolute;
+            right: -8rem;
+            top: 0rem;
+            z-index: -1;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            display: none;
+        }
+}
+
 @media screen and (max-width: 768px) {
     .hero-section{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 4rem 0 0 0;
-        background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.1) 100%), url('./bg.png');
+        padding:  0;
+        background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.1) 100%), url('../assets/hero-bg.jpg');
+        background-position: center;
     }
     .hero-btns-div {
-        flex-direction: column-reverse;
+        /* flex-direction: column-reverse; */
+        justify-content: center;
         gap: 1rem;
     }
     .hero-img-div{
-        height: 50vh;
+        height: 10vh;
     }
     .hero-heading {
         text-align: center;
+        font-weight: 400;
     }
     .hero-section .left-div {
         align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
     }
     .hero-section .left-div p {
         text-align: center;
+    }
+    .left-div p  {
+        flex-direction: column;
     }
     .video-div-img1{
         left: -4rem;
         bottom: -4rem;
         max-width: 200px;
-    }
-    .video-div-img2 {
-        position: absolute;
-        right: -8rem;
-        top: 0rem;
-        z-index: -1;
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        display: none;
     }
     .text-div {
         text-align: center;

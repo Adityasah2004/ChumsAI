@@ -12,13 +12,19 @@
   "dependencies": {
     "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
+    "@emailjs/browser": "^4.1.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@minchat/react-chat-ui": "^0.15.1",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "@react-three/drei": "^9.97.6",
     "@react-three/fiber": "^8.15.16",
     "@reduxjs/toolkit": "^2.1.0",
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^1.0.51",
+    "aos": "^2.3.4",
     "axios": "^1.6.4",
     "emoji-picker-react": "^4.7.14",
     "flowbite": "^2.2.1",
@@ -39,7 +45,8 @@
     "react-router-dom": "^5.3.4",
     "redux": "^5.0.1",
     "socket.io-client": "^4.7.4",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "three": "^0.161.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
