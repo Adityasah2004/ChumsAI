@@ -184,7 +184,7 @@ const Head = () => {
                             Chums AI
                         </span>
                     </Link>
-                    <div className="nav-links">
+                    {/* <div className="nav-links">
                         <Link to="/" className="text-white whitespace-nowrap" activeclassname="active">
                             Home
                         </Link>
@@ -200,7 +200,7 @@ const Head = () => {
                         <Link to="/Contact" className="text-white whitespace-nowrap" activeclassname="active">
                             Contact
                         </Link>
-                    </div>
+                    </div> */}
                     <div className="nav-elem">
                         <button
                             // gradientDuoTone="purpleToBlue"
@@ -227,7 +227,7 @@ const Head = () => {
                     {
                         navbarOpen && (
                             <div className="nav-links-phone">
-                                <Link to="/" className="text-white whitespace-nowrap" activeclassname="active">
+                                {/* <Link to="/" className="text-white whitespace-nowrap" activeclassname="active">
                                     Home
                                 </Link>
                                 <Link to="/about" className="text-white whitespace-nowrap" activeclassname="active">
@@ -241,14 +241,28 @@ const Head = () => {
                                 </Link>
                                 <Link to="/Contact" className="text-white whitespace-nowrap" activeclassname="active">
                                     Contact
-                                </Link>
+                                </Link> */}
+                                <button
+                                    // gradientDuoTone="purpleToBlue"
+                                    onClick={() => (setOpenModal(true), handleModeChange("signup"))}
+                                    // className="flex justify-between items-center gap-2 rounded-full"
+                                    className=" text-white flex justify-center gap-2"
+                                >
+                                    Sign Up
+                                    {/* <span className="material-symbols-outlined">
+                                        logout
+                                    </span> */}
+                                </button>
                                 <button
                                     // gradientDuoTone="purpleToBlue"
                                     onClick={() => setOpenModal(true)}
                                     // className="flex justify-between items-center gap-2 rounded-full"
-                                    className=" text-white"
+                                    className=" text-white flex justify-center gap-2"
                                 >
                                     Login
+                                    {/* <span className="material-symbols-outlined">
+                                        logout
+                                    </span> */}
                                     {/* <span className="material-symbols-outlined">
                                         logout
                                     </span> */}

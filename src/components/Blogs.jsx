@@ -50,7 +50,7 @@ const Blogs = () => {
                         }
 
                         return (
-                            <div key={post.guid} className="article-card">
+                            <div key={post.guid} className="article-card" data-aos="fade-left">
                                 <a href={post.link} className="flex flex-col items-center">
                                     <img src={thumbnailUrl} alt={post.title} />
                                     <p>{post.title}</p>

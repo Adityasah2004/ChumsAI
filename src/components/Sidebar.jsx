@@ -41,6 +41,22 @@ function Side({ openModal }) {
                             <span className="ms-3">Documentations</span>
                         </a>
                     </li>
+                    <li>
+                        <Link to="/companion-creation" className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group w-max">
+                            <span className="material-symbols-outlined">
+                                api
+                            </span>
+                            <span className="ms-3">API key</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group w-max">
+                            <span className="material-symbols-outlined">
+                                help
+                            </span>
+                            <span className="ms-3">FAQ</span>
+                        </a>
+                    </li>
                 </ul>
                 <ul className="space-y-2 font-medium">
                     <li>

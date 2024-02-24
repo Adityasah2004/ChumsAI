@@ -13,10 +13,11 @@ import TermsConditions from "../pages/TermsConditions";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import { Switch, Route } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
-// import CompanionCreation from "../components/CompanionCreation";
-// import Settings from "../components/settings";
+import CompanionCreation from "../components/CompanionCreation";
+import Settings from "../components/settings";
 import Chat from "../components/Chat";
 // import Side from "../components/Sidebar";
+import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
 import { Helmet } from "react-helmet";
 
@@ -36,9 +37,10 @@ const AppRouter = () => {
                 <Route exact path="/blogs" component={BlogsPage} />
                 {/* <Route exact path="/sidebar" component={Side} /> */}
                 <Route exact path="/dashboard" component={Dashboard} />
-                {/* <Route exact path="/companion-creation" component={CompanionCreation} /> */}
-                {/* <Route exact path="/settings" component={Settings} /> */}
+                <Route exact path="/companion-creation" component={CompanionCreation} />
+                <Route exact path="/settings" component={Settings} />
                 <Route exact path="/chat" component={Chat} />
+                <Route exact path="/contact" component={Contact} />
                 <Route exact path="/documentation" component={Documentation} />
                 <Route exact path="/terms" component={TermsConditions} />
                 <Route exact path="/privacy" component={PrivacyPolicy} />
