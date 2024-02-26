@@ -17,12 +17,11 @@ const Chat = () => {
     const [camera, setCamera] = useState(false);
     const [showEmoji, setShowEmoji] = useState(false);
     const [newMessage, setNewMessage] = useState('');
+   // const [aimessage ,setaimessage] = usestate('');
     // const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
     const [intOpt, setInpOpt] = useState(false);
     const [settings, setSettings] = useState(false);
     const [background, setBackground] = useState(0);
-
-
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
 
@@ -30,7 +29,6 @@ const Chat = () => {
     const aiMessages = useSelector(state => state.messages.aiMessages);
 
     // Fetch messages from the backend and dispatch to Redux store
-    useEffect(() => {
         const fetchMessages = async () => {
             try {
                 const apiUrl = `http://localhost:8000/message/Chat`;
@@ -51,7 +49,7 @@ const Chat = () => {
                 }
 
                 const data = await response.json();
-
+                console.log("this is me respponse",response);
                 console.log("Fetched messages from the backend:", data);
 
                 // Check if data is an array before updating the state
@@ -66,15 +64,9 @@ const Chat = () => {
                 console.error("Error fetching messages:", error);
             }
         };
+    
 
-        // Fetch messages on component mount
-        // useEffect(() => {
-        //     fetchMessages();
-        // }, []);
-        fetchMessages();
-    }, [accessToken, dispatch]);
-
-    console.log(aiMessages);
+    console.log("this is ai messagea", aiMessages);
 
     // Send message to the backend and dispatch to Redux store
     const handleSendMessage = async (e) => {
@@ -86,13 +78,13 @@ const Chat = () => {
             const bearerToken = accessToken;
 
             const requestBody = {
-                Transcription_language_code: "hi-IN",
+                Transcription_language_code: "en-US",
                 role: "string",
                 content: newMessage,
                 createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
                 updatedAt: "string",
                 companionId: "65bcf34a618d69838b7ac6d3",
-                translation_language_code: "hi",
+                translation_language_code: "en",
                 userId: userId,
             };
 
@@ -121,16 +113,17 @@ const Chat = () => {
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
             console.log("Response Data Structure:", JSON.stringify(data, null ,2));
-
+            
             // Dispatch the new message to the Redux store
             dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
         } catch (error) {
             console.error("Error sending message:", error);
         }
+        fetchMessages();
     };
 
-    console.log(userMessages);
+    console.log("this is users message" ,userMessages);
 
     const handleInpOpt = () => {
         setInpOpt(!intOpt);
