@@ -6,7 +6,7 @@ import logo from "../assets/logoDark.png";
 import '../styles/Sidebar.css';
 
 function Side({ openModal }) {
-    console.log("openModal prop:", openModal);
+    console.log("openModal prop:" + openModal);
     return (
         <aside className="logo-sidebar rounded-xl" aria-label="Sidebar">
             <a href="/" className="flex items-center gap-2 pl-3 h-20">
@@ -68,7 +68,7 @@ function Side({ openModal }) {
                         </a>
                     </li>
                     <li>
-                        <Link to="/settings" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group w-max">
+                        <Link to={`/settings`} className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">
                                 settings
                             </span>

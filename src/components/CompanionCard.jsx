@@ -8,10 +8,10 @@ import DashboardCreateCard from './DashboardCreateCard';
 
 const CompanionCard = ({ data, onCardClick }) => {
     const { id, name, user_id, src } = data;
-
+    // console.log(data);
     const handleCardClick = () => {
         // Store companion ID in local storage
-        localStorageUtils.setCompanionId(id);
+        // localStorageUtils.setCompanionId(id);
 
         // Call the parent component's callback if provided
         if (onCardClick) {
@@ -19,10 +19,13 @@ const CompanionCard = ({ data, onCardClick }) => {
         }
     };
 
+    // get companion id from local storage
+    // const companionId = localStorageUtils.getCompanionId();
+    // console.log(companionId);
     return (
-        <Link to="/chat" className="flex items-center text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
-            <div className="w-64 h-80 mx-4 my-4 border border-gray-600 bg-black shadow-md rounded-lg p-4 transition-transform transform hover:scale-105" onClick={handleCardClick}>
-                <img
+        <Link to={`/chat`} className="comp-card flex flex-col border border-black h-auto p-2 rounded-xl" onClick={handleCardClick}>
+            {/* <div className="w-64 h-80 mx-4 my-4 border border-gray-600 bg-black shadow-md rounded-lg p-4 transition-transform transform hover:scale-105" > */}
+                {/* <img
                     src={src}
                     alt="AI Companion Image"
                     className="w-full h-2/3 object-cover rounded-md mb-4"
@@ -30,8 +33,13 @@ const CompanionCard = ({ data, onCardClick }) => {
                 <div>
                     <h2 className="text-white text-xl font-semibold mb-2">{name}</h2>
                     <p className="text-left text-gray-600 text-xs mt-2 mb-2">User ID: {user_id}</p>
-                </div>
+                </div> */}
+            {/* </div> */}
+            <div className='flex items-center justify-center'>
+                <img className="comp-card-img" src={src} alt="AI Companion Image" />
             </div>
+            <h2 className="text-white text-xl mb-2">{name}</h2>
+            <p className="text-gray-500 text-xs mt-2 mb-2">{user_id}</p>
         </Link>
     );
 };
@@ -42,7 +50,7 @@ const CompanionList = () => {
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
 
-    const handleCardClick = (companionId) => {
+    const handleCardClick = () => {
         // Handle card click if needed
         // You can perform additional actions here if necessary
     };
@@ -130,7 +138,7 @@ const CompanionList = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link to="/settings" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                    <Link to={`/settings`} className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             settings
                                         </span>

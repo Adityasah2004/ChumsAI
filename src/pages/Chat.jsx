@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMessages, addMessage } from '../actions/messages';
+import { addUserMessage, addAIMessage } from '../redux/action';
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Message from '../components/Message';
 import '../styles/Chat.css';
@@ -10,43 +10,30 @@ import { Avatar1 } from '../components/Avatar';
 import { Link } from 'react-router-dom';
 
 const Chat = () => {
-    // call states
+
+    const dispatch = useDispatch();
+
     const [voiceCall, setVoiceCall] = useState(false);
-
-
-    // camera state
     const [camera, setCamera] = useState(false);
-
-    // emoji states
     const [showEmoji, setShowEmoji] = useState(false);
-
-    // Local state to store the new message
     const [newMessage, setNewMessage] = useState('');
-
-    // Local state to store the current time
-    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
-
-    // Local state to store the input options
+    // const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
     const [intOpt, setInpOpt] = useState(false);
-
-    // settings state
     const [settings, setSettings] = useState(false);
-
-    // background change state
     const [background, setBackground] = useState(0);
+
 
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
 
-    const messages = useSelector((state) => state.messages.messages);
-
-    const dispatch = useDispatch();
+    const userMessages = useSelector(state => state.messages.userMessages);
+    const aiMessages = useSelector(state => state.messages.aiMessages);
 
     // Fetch messages from the backend and dispatch to Redux store
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const apiUrl = "http://localhost:8000/message/Chat";
+                const apiUrl = `http://localhost:8000/message/Chat`;
                 const bearerToken = accessToken;
 
                 const requestOptions = {
@@ -70,7 +57,8 @@ const Chat = () => {
                 // Check if data is an array before updating the state
                 if (Array.isArray(data)) {
                     // Dispatch the messages to the Redux store
-                    dispatch(setMessages(data));
+                    dispatch(addAIMessage(data));
+
                 } else {
                     console.error("Received non-array data from the backend:", data);
                 }
@@ -79,20 +67,29 @@ const Chat = () => {
             }
         };
 
+        // Fetch messages on component mount
+        // useEffect(() => {
+        //     fetchMessages();
+        // }, []);
         fetchMessages();
     }, [accessToken, dispatch]);
 
+    console.log(aiMessages);
+
     // Send message to the backend and dispatch to Redux store
-    const handleSendMessage = async () => {
+    const handleSendMessage = async (e) => {
+        e.preventDefault();
+        // dispatch(userMessages(newMessage));
+        document.getElementsByName('input-chat')[0].value = "";
         try {
-            const apiUrl = "http://localhost:8000/message/Chat";
+            const apiUrl = `http://localhost:8000/message/Chat`;
             const bearerToken = accessToken;
 
             const requestBody = {
                 Transcription_language_code: "hi-IN",
                 role: "string",
                 content: newMessage,
-                createdAt: "string",
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
                 updatedAt: "string",
                 companionId: "65bcf34a618d69838b7ac6d3",
                 translation_language_code: "hi",
@@ -112,26 +109,28 @@ const Chat = () => {
             };
 
             const response = await fetch(apiUrl, requestOptions);
+            console.log(response)
 
             if (!response.ok) {
                 throw new Error(`Failed to send message. Status: ${response.status}`);
             }
 
             const data = await response.json();
+            const createdAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" });
             // get current time
-            setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
+            // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
-            console.log("Response Data Structure:", JSON.stringify(data, null, 2));
+            console.log("Response Data Structure:", JSON.stringify(data, null ,2));
 
             // Dispatch the new message to the Redux store
-            dispatch(addMessage(data));
+            dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
         } catch (error) {
             console.error("Error sending message:", error);
         }
     };
 
-    console.log(messages);
+    console.log(userMessages);
 
     const handleInpOpt = () => {
         setInpOpt(!intOpt);
@@ -218,21 +217,21 @@ const Chat = () => {
             setCamera(true);
             // ask for permission to use the camera and if granted, start the video call
             navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
-            .then((stream) => {
-                const video = document.getElementById('user-video');
-                if (video) {
-                    video.srcObject = stream;
-                    video.onloadedmetadata = () => {
-                        video.play();
-                    };
-                }
-            })
-            .catch((err) => {
-                console.error('Error accessing the camera:', err);
-                if (err.name === "NotAllowedError") {
-                    alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-                }
-            });
+                .then((stream) => {
+                    const video = document.getElementById('user-video');
+                    if (video) {
+                        video.srcObject = stream;
+                        video.onloadedmetadata = () => {
+                            video.play();
+                        };
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error accessing the camera:', err);
+                    if (err.name === "NotAllowedError") {
+                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+                    }
+                });
         }
     }
 
@@ -248,17 +247,17 @@ const Chat = () => {
         video.srcObject = null;
         setCamera(false);
 
-        // // audio off if video call is ended
-        // navigator.mediaDevices.getUserMedia({ video: false, audio: false })
-        //     .then((stream) => {
-        //         const video = document.getElementById('user-video');
-        //         if (video) {
-        //             video.srcObject = stream;
-        //             video.onloadedmetadata = () => {
-        //                 video.play();
-        //             };
-        //         }
-        //     })
+        // audio off if video call is ended
+        navigator.mediaDevices.getUserMedia({ video: false, audio: false })
+            .then((stream) => {
+                const video = document.getElementById('user-video');
+                if (video) {
+                    video.srcObject = stream;
+                    video.onloadedmetadata = () => {
+                        video.play();
+                    };
+                }
+            })
     }
 
     const handleEndVoiceCall = () => {
@@ -266,8 +265,6 @@ const Chat = () => {
         setCamera(false);
         setVideoCall(false);
     }
-
-
 
     const handleEmoji = () => {
         setShowEmoji(!showEmoji);
@@ -310,7 +307,9 @@ const Chat = () => {
     return (
         <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
             <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
-                <Avatar1 />
+                <Avatar1
+                // companionId={companionId} 
+                />
             </div>
             {/* <aside className=''> */}
             {/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */}
@@ -364,13 +363,23 @@ const Chat = () => {
                         </div>
                     }
                 </menu>
-                <div className="p-4 overflow-y-auto h-full flex flex-col gap-2 justify-end">
-                    {messages.map((msg, index) => (
-                        <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-white h-auto">
-                            <p className="text-black mb-1">Content: {msg}</p>
+                <div className="chat-msg-area p-4 h-full flex flex-col gap-2 justify-end">
+                    {/* {messages.map((msg, index) => (
+                        <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-gray-300 h-auto">
+                            <p className="text-black mb-1">AI: {msg}</p>
                         </div>
+                        
+                    ))} */}
+                    {aiMessages.map((msg, index) => (
+                        // <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-white h-auto">
+                        //     <p className="text-black mb-1">Content: {msg}</p>
+                        // </div>
+                        // console.log(msg[0]),
+                        <Message message={msg[0]} key={index} name={msg[1] === 'ai' && "AI Avatar"} cName={`${msg[1] === 'ai' && 'ai-message'}`} />
                     ))}
-                    <Message time={currentTime} />
+                    {userMessages.map((msg, index) => (
+                        <Message time={msg[2]} message={msg[0]} key={index} name={msg[1] === 'user' && "User"} cName={`${msg[1] === 'user' && 'user-message'}`} />
+                    ))}
                 </div>
                 {showEmoji &&
                     <div className='emoji-tag' >
@@ -382,14 +391,26 @@ const Chat = () => {
                         <span className="material-symbols-outlined">
                             chat_bubble
                         </span>
-                        <input
+                        {/* <input
                             type="text"
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             className="flex flex-1 p-3 h-4 rounded-full border-none border-transparent focus:ring-0 bg-transparent text-black placeholder-gray-400 focus:outline-none"
                             placeholder="Type your message..."
                             title='Type your message'
-                        />
+                            name='input-chat'
+                        /> */}
+                        <form className="flex flex-1" onSubmit={handleSendMessage}>
+                            <input
+                                type="text"
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                className="flex flex-1 p-3 h-4 rounded-full border-none border-transparent focus:ring-0 bg-transparent text-black placeholder-gray-400 focus:outline-none"
+                                placeholder="Type your message..."
+                                title='Type your message'
+                                name='input-chat'
+                            />
+                        </form>
 
                         <div className='input-options'>
                             <button className='flex' onClick={handleEmoji} title='Emoji'>
