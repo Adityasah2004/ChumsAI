@@ -37,7 +37,7 @@ function Down() {
                     <div className="flex flex-col items-start gap-1">
                         <a href="/" className="text-gray-500 hover:underline">Home</a>
                         {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}                     
-                         <Link to="/contact" className="text-cyan-700 hover:underline">Contact</Link> 
+                         <Link to="/contact" className="text-gray-500 hover:underline">Contact</Link> 
                                         
 {/*                         <a href="/contact" className="text-gray-500 hover:underline">Contact us</a> */}
                     </div>
@@ -54,13 +54,13 @@ function Down() {
                     <h6 className="text-left">Legal</h6>
                     <div className="flex flex-col items-start gap-1">
                         <a  onClick={handleClick} href="/privacy" target='_blank' className="text-gray-500 hover:underline">Privacy Policy</a>
-                        <a href="/terms" target='_blank' className="text-gray-500 hover:underline">Terms & Conditions</a>
+                        <Link to="/terms" target='_blank' className="text-gray-500 hover:underline">Terms & Conditions</Link>
                     </div>
                 </div>
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">For Developer</h6>
                     <div className="flex flex-col items-start gap-1">
-                        <a href="#" className="text-gray-500 hover:underline">Documentation</a>
+                        <Link to="#" className="text-gray-500 hover:underline">Documentation</Link>
                         <a href="#" className="text-gray-500 hover:underline">API</a>
                     </div>
                 </div>
