@@ -5,18 +5,14 @@ import '../styles/Footer.css';
 import { Link } from "react-router-dom";
 import React, { useLayoutEffect } from 'react';
 
-function ScrollToTopOnLink() {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    return null; // This component doesn't render anything visible
-}
 const handleClick = async () => {
     history.push("/privacy");
     };
 
 function Down() {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <footer className="flex flex-col py-5 items-center">
             <div className="footer-div1 text-white w-full">
@@ -44,7 +40,7 @@ function Down() {
                     <h6 className="text-left">Quick Links</h6>
                     <div className="flex flex-col items-start gap-1">
                         <a href="/" className="text-gray-500 hover:underline">Home</a>
-                        <ScrollToTopOnLink /> 
+                
                         {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}                     
                          <Link to="/contact" className="text-gray-500 hover:underline">Contact</Link> 
                                         
@@ -62,7 +58,7 @@ function Down() {
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">Legal</h6>
                     <div className="flex flex-col items-start gap-1">
-                        <ScrollToTopOnLink /> 
+                        
                         <Link to="/privacy" className="text-gray-500 hover:underline">Privacy Policy</Link>
                         <Link to="/terms" className="text-gray-500 hover:underline">Terms & Conditions</Link>
                     </div>
