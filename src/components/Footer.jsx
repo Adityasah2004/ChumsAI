@@ -53,7 +53,7 @@ function Down() {
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">Legal</h6>
                     <div className="flex flex-col items-start gap-1">
-                        <a  onClick={handleClick} href="/privacy" target='_blank' className="text-gray-500 hover:underline">Privacy Policy</a>
+                        <Link to="/privacy" className="text-gray-500 hover:underline">Privacy Policy</Link>
                         <Link to="/terms" className="text-gray-500 hover:underline">Terms & Conditions</Link>
                     </div>
                 </div>
