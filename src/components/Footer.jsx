@@ -36,8 +36,10 @@ function Down() {
                     <h6 className="text-left">Quick Links</h6>
                     <div className="flex flex-col items-start gap-1">
                         <a href="/" className="text-gray-500 hover:underline">Home</a>
-                        {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}
-                        <a href="/contact" className="text-gray-500 hover:underline">Contact us</a>
+                        {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}                     
+                         <Link to="/contact" className="text-cyan-700 hover:underline">Contact</Link> 
+                                        
+{/*                         <a href="/contact" className="text-gray-500 hover:underline">Contact us</a> */}
                     </div>
                 </div>
                 {/* <div className="flex flex-col gap-3">
