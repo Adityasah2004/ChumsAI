@@ -3,16 +3,9 @@
 import logo from '../assets/logoDark.png';
 import '../styles/Footer.css';
 import { Link } from "react-router-dom";
-import React, { useLayoutEffect } from 'react';
-
-const handleClick = async () => {
-    history.push("/privacy");
-    };
 
 function Down() {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    
     return (
         <footer className="flex flex-col py-5 items-center">
             <div className="footer-div1 text-white w-full">
