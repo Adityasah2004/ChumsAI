@@ -116,8 +116,8 @@ const Chat = () => {
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
             console.log("Response Data Structure:", JSON.stringify(data, null ,2));
-            dispatch(addAIMessage(data.response));
             dispatch(addUserMessage(data.user));
+            dispatch(addAIMessage(data.response));
             // Dispatch the new message to the Redux store
             // dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
