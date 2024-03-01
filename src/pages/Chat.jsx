@@ -28,6 +28,8 @@ const Chat = () => {
     const userMessages = useSelector(state => state.messages.userMessages);
     const aiMessages = useSelector(state => state.messages.aiMessages);
 
+    const [messages, setMessages] = useState([]);
+
     // Fetch messages from the backend and dispatch to Redux store
         const fetchMessages = async () => {
             try {
@@ -55,7 +57,8 @@ const Chat = () => {
                 // Check if data is an array before updating the state
                 if (Array.isArray(data)) {
                     // Dispatch the messages to the Redux store
-                    dispatch(addAIMessage(data));
+                    // dispatch(addAIMessage(data.response));
+                    // dispatch(addUserMessage(data.user));
 
                 } else {
                     console.error("Received non-array data from the backend:", data);
@@ -113,9 +116,10 @@ const Chat = () => {
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
             console.log("Response Data Structure:", JSON.stringify(data, null ,2));
-            
+            dispatch(addAIMessage(data.response));
+            dispatch(addUserMessage(data.user));
             // Dispatch the new message to the Redux store
-            dispatch(addUserMessage(requestBody.content));
+            // dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
         } catch (error) {
             console.error("Error sending message:", error);
@@ -124,6 +128,23 @@ const Chat = () => {
     };
 
     console.log("this is users message" ,userMessages);
+
+    useEffect(() => {
+        // Combine userMessages and aiMessages into a single array
+        const combinedMessages = [];
+        for (let i = 0; i < Math.max(userMessages.length, aiMessages.length); i++) {
+            if (userMessages[i]) {
+                combinedMessages.push({ message: userMessages[i], sender: 'user' });
+            }
+            if (aiMessages[i]) {
+                combinedMessages.push({ message: aiMessages[i], sender: 'ai' });
+            }
+        }
+        setMessages(combinedMessages);
+        const chatMsgArea = document.querySelector('.chat-msg-area');
+        chatMsgArea.scrollTop = chatMsgArea.scrollHeight;
+        // console.log("this is combined message",combinedMessages);
+    }, [userMessages, aiMessages]);
 
     const handleInpOpt = () => {
         setInpOpt(!intOpt);
@@ -356,22 +377,21 @@ const Chat = () => {
                         </div>
                     }
                 </menu>
-                <div className="chat-msg-area p-4 h-full flex flex-col gap-2 justify-end">
-                    {/* {messages.map((msg, index) => (
-                        <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-gray-300 h-auto">
-                            <p className="text-black mb-1">AI: {msg}</p>
-                        </div>
-                        
-                    ))} */}
-                    {aiMessages.map((msg, index) => (
-                        // <div key={index} className="mb-4 text-black rounded-r-md rounded-bl-md bg-white h-auto">
-                        //     <p className="text-black mb-1">Content: {msg}</p>
-                        // </div>
-                        // console.log(msg[0]),
-                        <Message message={msg[0]} key={index} name={msg[1] === 'ai' && "AI Avatar"} cName={`${msg[1] === 'ai' && 'ai-message'}`} />
-                    ))}
-                    {userMessages.map((msg, index) => (
+                <div className="chat-msg-area p-4 h-full flex flex-col gap-2 justify-end overflow-y-auto">
+                    {/* {userMessages.map((msg, index) => (
                         <Message time={msg[2]} message={msg[0]} key={index} name={msg[1] === 'user' && "User"} cName={`${msg[1] === 'user' && 'user-message'}`} />
+                    ))}
+                    {aiMessages.map((msg, index) => (
+                        <Message message={msg[0]} key={index} name={msg[1] === 'ai' && "AI Avatar"} cName={`${msg[1] === 'ai' && 'ai-message'}`} />
+                    ))} */}
+                    {messages.map((msg, index) => (
+                        <Message
+                            time={msg.time} // Ensure you have a time property in your message objects
+                            message={msg.message[0]}
+                            key={index}
+                            name={msg.sender === 'user' ? 'User' : 'AI Avatar'}
+                            cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+                        />
                     ))}
                 </div>
                 {showEmoji &&
@@ -384,15 +404,6 @@ const Chat = () => {
                         <span className="material-symbols-outlined">
                             chat_bubble
                         </span>
-                        {/* <input
-                            type="text"
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            className="flex flex-1 p-3 h-4 rounded-full border-none border-transparent focus:ring-0 bg-transparent text-black placeholder-gray-400 focus:outline-none"
-                            placeholder="Type your message..."
-                            title='Type your message'
-                            name='input-chat'
-                        /> */}
                         <form className="flex flex-1" onSubmit={handleSendMessage}>
                             <input
                                 type="text"

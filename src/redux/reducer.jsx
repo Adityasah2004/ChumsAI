@@ -16,7 +16,7 @@ const messageReducer = (state = initialState, action) => {
         case ADD_AI_MESSAGE:
             return {
                 ...state,
-                aiMessages: [action.payload]
+                aiMessages: [...state.aiMessages, action.payload]
             };
         default:
             return state;
