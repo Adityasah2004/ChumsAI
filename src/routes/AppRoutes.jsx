@@ -2,9 +2,9 @@
 // import React from "react";
 // import Head from "../components/Navbar";
 import LandingPage from "../pages/LandingPage";
-import AboutPage from "../pages/About";
-import WhyUs from "../pages/WhyUs";
-import BlogsPage from "../pages/BlogsPage";
+// import AboutPage from "../pages/About";
+// import WhyUs from "../pages/WhyUs";
+// import BlogsPage from "../pages/BlogsPage";
 // import FAQ from "../components/FAQ";
 // import Down from "../components/Footer";
 import Dashboard from "../pages/Dashboard";
@@ -15,7 +15,7 @@ import { Switch, Route } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
 import CompanionCreation from "../components/CompanionCreation";
 import Settings from "../components/settings";
-import Chat from "../components/Chat";
+import Chat from "../pages/Chat";
 // import Side from "../components/Sidebar";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
@@ -23,6 +23,9 @@ import { Helmet } from "react-helmet";
 
 const AppRouter = () => {
     // const location = useLocation();
+
+
+
     return (
         <div className="w-full h-full">
             {/* {(location.pathname === "/dashboard" || location.pathname === "/chat" || location.pathname === "/settings" || location.pathname === "/companion-creation") ||  location.pathname === "*" ? null : <Head />} */}
@@ -32,11 +35,11 @@ const AppRouter = () => {
             </Helmet>
             <Switch>
                 <Route exact path="/" component={LandingPage} />
-                <Route exact path="/about" component={AboutPage} />
+                {/* <Route exact path="/about" component={AboutPage} />
                 <Route exact path="/whyus" component={WhyUs} />
-                <Route exact path="/blogs" component={BlogsPage} />
+                <Route exact path="/blogs" component={BlogsPage} /> */}
                 {/* <Route exact path="/sidebar" component={Side} /> */}
-                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/dashboard/:id" component={Dashboard} />
                 <Route exact path="/companion-creation" component={CompanionCreation} />
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/chat" component={Chat} />
