@@ -6,8 +6,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import useSpeechRecognition from "../Hooks/useSpeechRecognitionHook";
 
+
 var audio = new Audio();
-const Avatar = () => {
+const Avatar = (/*{companionId}*/) => {
     const corresponding = {
         A: "viseme_PP",
         B: "viseme_kk",
@@ -26,7 +27,8 @@ const Avatar = () => {
         isListening,
         hasRecognitionSupport
     } = useSpeechRecognition()
-    const avatar = useGLTF("Avatar.glb");
+    // const avatar = useGLTF(`/${companion_id}.glb`);
+    const avatar = useGLTF(`/Avatar.glb`);
     const [index, setIndex] = useState(0);
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"
@@ -214,14 +216,14 @@ const Avatar = () => {
         </group>
     )
 }
-export const Avatar1 = () => {
+export const Avatar1 = (props) => {
     return (
 
         <Canvas dpr={[0, 2]}>
             <ambientLight />
             <pointLight position={[1, 1, 1]} />
             <OrbitControls />
-            <Avatar />
+            <Avatar companionId={props.companion_id}/>
         </Canvas>
 
     )

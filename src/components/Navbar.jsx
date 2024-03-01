@@ -92,7 +92,7 @@ const Head = () => {
                 console.log("Access Token:", localStorage.getItem("accessToken"));
 
                 console.log("Login/Signup complete");
-                history.push("/dashboard");
+                history.push(`/dashboard/${userId}`);
             } else if (response.status === 422) {
                 // Unprocessable Entity - Validation errors
                 const responseData = await response.json();
@@ -169,10 +169,6 @@ const Head = () => {
 
     return (
         <>
-            {/* <style>{navbarCustomStyles}</style> */}
-            {/* <NavbarCollapse> */}
-                
-                {/* </NavbarCollapse> */}
             <nav className="navbar">
                 <div className="nav-element-div flex">
                     <Link to="/" className="logo-div">
@@ -203,9 +199,7 @@ const Head = () => {
                     </div> */}
                     <div className="nav-elem">
                         <button
-                            // gradientDuoTone="purpleToBlue"
                             onClick={() => setOpenModal(true)}
-                            // className="flex justify-between items-center gap-2 rounded-full"
                         className="login-btn rounded-full flex justify-between items-center gap-2  px-4 py-2 bg-purple-800 text-white"
                         >
                             Login
@@ -242,30 +236,17 @@ const Head = () => {
                                 <Link to="/Contact" className="text-white whitespace-nowrap" activeclassname="active">
                                     Contact
                                 </Link> */}
-                                <button
-                                    // gradientDuoTone="purpleToBlue"
+                                {/* <button
                                     onClick={() => (setOpenModal(true), handleModeChange("signup"))}
-                                    // className="flex justify-between items-center gap-2 rounded-full"
                                     className=" text-white flex justify-center gap-2"
                                 >
                                     Sign Up
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
-                                </button>
+                                </button> */}
                                 <button
-                                    // gradientDuoTone="purpleToBlue"
                                     onClick={() => setOpenModal(true)}
-                                    // className="flex justify-between items-center gap-2 rounded-full"
                                     className=" text-white flex justify-center gap-2"
                                 >
                                     Login
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
                                 </button>
                             </div>
                         )
@@ -275,11 +256,6 @@ const Head = () => {
 
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <div className="flex justify-start m-2">
-                    {/* <HiOutlineArrowLeft
-                        className="text-gray-500 hover:text-gray-700 cursor-pointer"
-                        size={24}
-                        onClick={onCloseModal}
-                    /> */}
                     <button
                         className="cursor-pointer px-2"
                         onClick={onCloseModal}
