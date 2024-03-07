@@ -29,7 +29,7 @@ function Message(props) {
                 {
                     messageOptions ? (
                         <div className={`mess-opt-div flex flex-col gap-1 p-2 rounded-md ${props.name === "ai"? "bg-black text-white":"bg-white text-black"} absolute top-8 right-0`}>
-                            <button className={`flex gap-2 ${props.name === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`}>
+                            <button className={`delete-${props.key} flex gap-2 ${props.name === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`} onClick={() => props.deleteMessage(props.key)}>
                                 <span className="material-symbols-outlined self-center flex">
                                     delete
                                 </span>

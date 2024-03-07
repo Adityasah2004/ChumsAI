@@ -8,6 +8,7 @@ import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 import { Link } from 'react-router-dom';
+import { startRecording, stopRecording } from '../components/VoiceCall';
 
 const Chat = () => {
 
@@ -31,45 +32,45 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
 
     // Fetch messages from the backend and dispatch to Redux store
-        const fetchMessages = async () => {
-            try {
-                const apiUrl = `http://localhost:8000/message/Chat`;
-                const bearerToken = accessToken;
+    //     const fetchMessages = async () => {
+    //         try {
+    //             const apiUrl = `http://localhost:8000/message/Chat`;
+    //             const bearerToken = accessToken;
 
-                const requestOptions = {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${bearerToken}`,
-                    },
-                };
+    //             const requestOptions = {
+    //                 method: "GET",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     Authorization: `Bearer ${bearerToken}`,
+    //                 },
+    //             };
 
-                const response = await fetch(apiUrl, requestOptions);
+    //             const response = await fetch(apiUrl, requestOptions);
 
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch messages. Status: ${response.status}`);
-                }
+    //             if (!response.ok) {
+    //                 throw new Error(`Failed to fetch messages. Status: ${response.status}`);
+    //             }
 
-                const data = await response.json();
-                console.log("this is me respponse",response);
-                console.log("Fetched messages from the backend:", data);
+    //             const data = await response.json();
+    //             console.log("this is me respponse",response);
+    //             console.log("Fetched messages from the backend:", data);
 
-                // Check if data is an array before updating the state
-                if (Array.isArray(data)) {
-                    // Dispatch the messages to the Redux store
-                    // dispatch(addAIMessage(data.response));
-                    // dispatch(addUserMessage(data.user));
+    //             // Check if data is an array before updating the state
+    //             if (Array.isArray(data)) {
+    //                 // Dispatch the messages to the Redux store
+    //                 // dispatch(addAIMessage(data.response));
+    //                 // dispatch(addUserMessage(data.user));
 
-                } else {
-                    console.error("Received non-array data from the backend:", data);
-                }
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
-        };
+    //             } else {
+    //                 console.error("Received non-array data from the backend:", data);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error fetching messages:", error);
+    //         }
+    //     };
     
 
-    console.log("this is ai messagea", aiMessages);
+    // console.log("this is ai messagea", aiMessages);
 
     // Send message to the backend and dispatch to Redux store
     const handleSendMessage = async (e) => {
@@ -116,15 +117,15 @@ const Chat = () => {
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
             console.log("Response Data Structure:", JSON.stringify(data, null ,2));
-            dispatch(addAIMessage(data.response));
             dispatch(addUserMessage(data.user));
+            dispatch(addAIMessage(data.response));
             // Dispatch the new message to the Redux store
             // dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
         } catch (error) {
             console.error("Error sending message:", error);
         }
-        fetchMessages();
+        // fetchMessages();
     };
 
     console.log("this is users message" ,userMessages);
@@ -151,6 +152,7 @@ const Chat = () => {
     }
 
     const handleVoiceCall = () => {
+        startRecording();
         setVoiceCall(true);
         setVideoCall(false);
         setInpOpt(false);
@@ -275,6 +277,7 @@ const Chat = () => {
     }
 
     const handleEndVoiceCall = () => {
+        stopRecording();
         setVoiceCall(false);
         setCamera(false);
         setVideoCall(false);
@@ -391,6 +394,7 @@ const Chat = () => {
                             key={index}
                             name={msg.sender === 'user' ? 'User' : 'AI Avatar'}
                             cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+                            
                         />
                     ))}
                 </div>
