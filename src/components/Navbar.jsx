@@ -200,23 +200,23 @@ const Head = () => {
                     <div className="nav-elem">
                         <button
                             onClick={() => setOpenModal(true)}
-                        className="login-btn rounded-full flex justify-between items-center gap-2  px-4 py-2 bg-purple-800 text-white"
+                            className="login-btn rounded-full flex justify-between items-center gap-2  px-4 py-2 bg-purple-800 text-white"
                         >
                             Login
                             <span className="material-symbols-outlined">
                                 logout
                             </span>
                         </button>
-                        
+
                     </div>
                     {
-                        navbarOpen ? 
-                        <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
-                            close
-                        </span>  :
-                        <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
-                            menu
-                        </span>                  
+                        navbarOpen ?
+                            <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
+                                close
+                            </span> :
+                            <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
+                                menu
+                            </span>
                     }
                     {
                         navbarOpen && (

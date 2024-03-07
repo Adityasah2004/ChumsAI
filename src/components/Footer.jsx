@@ -2,7 +2,7 @@
 // import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import logo from '../assets/logoDark.png';
 import '../styles/Footer.css';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const handleClick = async () => {
     history.push("/privacy");

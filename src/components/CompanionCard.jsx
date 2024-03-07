@@ -25,7 +25,7 @@ const CompanionCard = ({ data, onCardClick }) => {
     return (
         <Link to={`/chat`} className="comp-card flex flex-col border border-black h-auto p-2 rounded-xl" onClick={handleCardClick}>
             {/* <div className="w-64 h-80 mx-4 my-4 border border-gray-600 bg-black shadow-md rounded-lg p-4 transition-transform transform hover:scale-105" > */}
-                {/* <img
+            {/* <img
                     src={src}
                     alt="AI Companion Image"
                     className="w-full h-2/3 object-cover rounded-md mb-4"
@@ -150,7 +150,7 @@ const CompanionList = () => {
                     ) : null
                 }
                 <div className='dashboard-nav flex items-center'>
-                    
+
                     {
                         menuOpen ?
                             <span onClick={handleDashboardMenu} className="menu-icon material-symbols-outlined text-white cursor-pointer">
@@ -170,7 +170,7 @@ const CompanionList = () => {
                     </div> */}
                 </div>
                 <div className="dashboard-cards-div">
-                    <DashboardCreateCard/>
+                    <DashboardCreateCard />
                     {companionData.map((companion) => (
                         <CompanionCard key={companion.id} data={companion} onCardClick={handleCardClick} />
                     ))}
