@@ -89,7 +89,7 @@
     /* border: 1px solid #ffffff; */
     
     /* glow */
-    box-shadow: 0 0 400px #00B7A1 inset;
+    background:  #00B7A1 ;
 }
 
 .create-btn span {
@@ -119,6 +119,7 @@
 
 .hero-p-video{
     font-size: clamp(2rem, 4vw, 4rem);
+    margin: 4rem auto;
 }
 
 .video-div{
@@ -129,25 +130,36 @@
     align-items: flex-start;
     /* border-radius: 10px; */
     /* overflow: hidden; */
-    padding:  2rem;
+    /* padding:  2rem; */
     position: relative;
 }
 
 .video-div video {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 40px;
 }
 
 .video-div-img1{
     position: absolute;
-    left: -8rem;
-    bottom: -8rem;
-    /* z-index: -1; */
+    left: -10rem;
+    bottom: -2rem;
+    z-index: 10;
     width: 100%;
     max-width: 300px;
     height: auto;
+    animation: rotate 6s ease infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
 }
 
 .video-div-img2{
@@ -206,15 +218,24 @@
     font-size: clamp(1rem, 4vw, 1rem);
 } */
 
+.hero-down-div{
+    background-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 50%), linear-gradient(0deg,
+        #000 0%,
+        rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg-2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @media screen and (max-width: 900px){
-    .video-div-img2 {
-            position: absolute;
+    .video-div-img2, .video-div-img1 {
+            /* position: absolute;
             right: -8rem;
             top: 0rem;
             z-index: -1;
             width: 100%;
             max-width: 300px;
-            height: auto;
+            height: auto; */
             display: none;
         }
 }
@@ -234,7 +255,7 @@
         gap: 1rem;
     }
     .hero-img-div{
-        height: 10vh;
+        height: 50vh;
     }
     .hero-heading {
         text-align: center;
@@ -252,11 +273,15 @@
     .left-div p  {
         flex-direction: column;
     }
-    .video-div-img1{
+    .video-div video{
+        width: 100%;
+        height: 100%;
+    }
+    /* .video-div-img1{
         left: -4rem;
         bottom: -4rem;
         max-width: 200px;
-    }
+    } */
     .text-div {
         text-align: center;
         align-items: center;

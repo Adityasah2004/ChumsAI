@@ -9,8 +9,7 @@ import '../styles/FAQ.css';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
+))(() => ({
     '&:not(:last-child)': {
         borderBottom: 0,
     },
@@ -49,7 +48,7 @@ export default function FAQ() {
     };
 
     return (
-        <div className='faq-section'>
+        <div className='faq-section my-10'>
             <p className='faq-heading'>FAQs</p>
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" className="text-white">

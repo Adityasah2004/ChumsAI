@@ -394,7 +394,7 @@ function CompanionCreation({ onClose }) {
 
                 <div className="flex w-full md:w-4/5 gap-8 px-4 flex-col items-center md:justify-between md:flex-row">
                     <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                        <label htmlFor="age" className="text-white">Enter your age <span className="text-sky-500" title="required field">*</span></label>
+                        <label htmlFor="age" className="text-white">Age <span className="text-sky-500" title="required field">*</span></label>
                         <input
                             id="age"
                             type="number"
@@ -406,7 +406,7 @@ function CompanionCreation({ onClose }) {
                         />
                     </div>
                     <div className="mb-4  w-full flex flex-col items-start gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                        <label htmlFor="attier" className="text-white">Enter your attier <span className="text-sky-500" title="required field">*</span></label>
+                        <label htmlFor="attier" className="text-white">Attier preference <span className="text-sky-500" title="required field">*</span></label>
                         <input
                             id="attier"
                             type="text"

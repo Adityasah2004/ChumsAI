@@ -87,7 +87,7 @@ export default function Contact() {
                         </span>
                     </div>
                     <div className='contact-form'>
-                        <h3>Contact form</h3>
+                        {/* <h3>Contact form</h3> */}
                         <form className='form' ref={refForm} onSubmit={sendEmail}>
                             <div>
                                 <input type="text" placeholder="Name" name='from_name' required />
