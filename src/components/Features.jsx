@@ -2,11 +2,11 @@ import '../styles/Features.css'
 
 function Features() {
     return (
-        <section className='flex flex-col justify-center items-center my-5 py-10 gap-10'>
+        <section className='flex flex-col justify-center items-center my-5 py-10 gap-10' id='features'>
             <p className='features-heading'>
                 <span>New Generation</span> features of <span>AI</span>
             </p>
-            <div className='features-grid text-white'>
+            <div className='features-grid'>
                 <div className='feature-card1' data-aos="zoom-in">
                     <div className='feature-card-content'>
                         <h3 className="feature-card-heading">AI-Powered</h3>

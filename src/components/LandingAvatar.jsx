@@ -68,7 +68,7 @@ const Avatar = () => {
     
     return (
         <group>
-            <primitive object={avatar.scene} scale={scale} position-y={-3.5} />
+            <primitive object={avatar.scene} scale={scale} position-y={-3.5} rotation-y={0.5} />
         </group>
     )
 }
@@ -78,7 +78,7 @@ const LandingAvatar = () => {
         <Canvas dpr={[0, 2]}>
             <ambientLight />
             <pointLight position={[1, 1, 1]} />
-            <OrbitControls />
+            {/* <OrbitControls enableZoom={false} /> */}
             <Avatar />
         </Canvas>
     )

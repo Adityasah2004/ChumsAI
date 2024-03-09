@@ -1,7 +1,7 @@
 .dashboard-div{
     display: flex;
     gap: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -13,11 +13,11 @@
 }
 
 .heading{
-    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     color: #fff;
     text-align: center;
     margin: 15px 0;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .skip-header{
@@ -26,7 +26,7 @@
 
 .companion-card-div{
     border-radius: 0.75rem;
-    background-color: #303030;
+    background-color: #191c24;
 }
 
 .comp-card{
@@ -37,7 +37,7 @@
 
 .comp-card-img {
     width: auto;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
     border-radius: 0.75rem;
@@ -64,7 +64,10 @@
 .dashboard-cards-div{
     display: grid;
     align-items: center;
+    justify-items: center;
     grid-template-columns: repeat(4, 1fr);
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, auto)); */
+    /* grid wrap */
     gap: 1rem;
     padding: 0 4rem;
 }
@@ -72,6 +75,13 @@
 .dashboard-cards-div::-webkit-scrollbar{
     /* display: none; */
     background-color: #303030;
+}
+
+@media screen and (max-width: 900px){
+    .dashboard-cards-div{
+        grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+        padding: 0 1rem;
+    }
 }
 
 @media screen and (max-width: 768px){
@@ -94,6 +104,15 @@
     .companion-card-div{
         border-radius: 0;
     }
+    .comp-card{
+        /* width: 100%; */
+        /* height: 500; */
+        box-shadow: none;
+    }
+    .dashboard-cards-div {
+        grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+        padding: 0 1rem;
+    }
     .mobile-menu-div{
         display: flex;
         flex-direction: column;
@@ -102,15 +121,13 @@
         text-decoration: none;
         transition: 0.8s ease-in-out;
     }
-    .dashboard-cards-div{
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 1rem;
-    }
 }
 
 @media screen and (max-width: 668px){
     .dashboard-cards-div{
         justify-items: center;
-        grid-template-columns: repeat(1, 1fr);
+        /* grid-template-columns: repeat(1, 1fr); */
+        /* grid-template-columns: repeat(auto-fit, minmax(200px, auto)); */
     }
+    
 }
