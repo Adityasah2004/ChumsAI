@@ -18,7 +18,7 @@ const potentialContents = [
 
 const Potential = () => {
     return (
-        <section className='flex flex-col items-center py-10'>
+        <section className='flex flex-col items-center py-10 h-screen'>
             <p className='potential-heading'>Potential Growth</p>
             <div className='potential-div'>
                 <ul className='flex flex-col gap-3 w-auto'>

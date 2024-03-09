@@ -13,7 +13,7 @@ import TermsConditions from "../pages/TermsConditions";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import { Switch, Route } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
-import CompanionCreation from "../components/CompanionCreation";
+import CompanionCreation from "../pages/CompanionCreation";
 import Settings from "../components/settings";
 import Chat from "../pages/Chat";
 // import Side from "../components/Sidebar";

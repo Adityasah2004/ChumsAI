@@ -74,6 +74,10 @@ const Chat = () => {
 
     // Send message to the backend and dispatch to Redux store
     const handleSendMessage = async (e) => {
+        // check if the value of newMessage is empty
+        if (newMessage.trim() === "") {
+            return;
+        }
         e.preventDefault();
         // dispatch(userMessages(newMessage));
         document.getElementsByName('input-chat')[0].value = "";
@@ -112,7 +116,7 @@ const Chat = () => {
             }
 
             const data = await response.json();
-            const createdAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" });
+            // const createdAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" });
             // get current time
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
