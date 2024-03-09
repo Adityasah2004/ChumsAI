@@ -8,7 +8,7 @@ import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 import { Link } from 'react-router-dom';
-import { startRecording, stopRecording } from '../components/VoiceCall';
+// import { startRecording, stopRecording } from '../components/VoiceCall';
 
 const Chat = () => {
 
