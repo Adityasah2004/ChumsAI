@@ -25,14 +25,14 @@ function Side({ openModal }) {
                             <span className="ms-3">Home</span>
                         </a>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link to="/companion-creation" className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">
                                 add_circle
                             </span>
                             <span className="ms-3">Create Companion</span>
                         </Link>
-                    </li> */}
+                    </li>
                     <li>
                         <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">

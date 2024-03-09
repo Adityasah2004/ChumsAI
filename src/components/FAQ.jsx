@@ -48,47 +48,50 @@ export default function FAQ() {
     };
 
     return (
-        <div className='faq-section my-10'>
+        <div className='faq-section my-10 flex flex-col lg:items-center text-center'>
             <p className='faq-heading'>FAQs</p>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" className="text-white">
-                    <Typography className='text-white text-left' >What makes out AI platform unique?</Typography>
+            {/* <div className='flex flex-col items-center'> */}
+            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} className="lg:w-1/2 text-center">
+                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" className="text-white text-center">
+                    <Typography className='text-white text-center' >What makes out AI platform unique?</Typography>
                 </AccordionSummary>
                 <AccordionDetails >
                     <Typography className='text-left'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
+                        Our AI platform stands out due to its advanced features, personalized interactions, and seamless integration capabilities.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} className="lg:w-1/2">
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                     <Typography className='text-white text-left' >How can I integrate the AI platform with my existing systems?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography className='text-left'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
+                        Integration is straightforward with our provided APIs and documentation. Our support team is also available to assist you.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+            <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} className="lg:w-1/2">
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
                     <Typography className='text-white text-left' >Can the AI platform be customized for specific industry needs?</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography className='text-left'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                        sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
+                        Yes, our AI platform is highly customizable, and we work closely with clients to tailor solutions to their specific industry requirements.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} className="lg:w-1/2">
+                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                    <Typography className='text-white text-left' >What kind of support is available after implementation?</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography className='text-left'>
+                        We provide ongoing support, including regular updates, troubleshooting, and assistance to ensure optimal performance post-implementation.
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+            {/* </div> */}
         </div>
     );
 }

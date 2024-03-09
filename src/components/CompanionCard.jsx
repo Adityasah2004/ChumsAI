@@ -23,7 +23,7 @@ const CompanionCard = ({ data, onCardClick }) => {
     // const companionId = localStorageUtils.getCompanionId();
     // console.log(companionId);
     return (
-        <Link to={`/chat`} className="comp-card flex flex-col border h-auto p-2 rounded-xl" onClick={handleCardClick}>
+        <Link to={`/chat`} className="comp-card flex flex-col border h-full p-2 rounded-xl" onClick={handleCardClick}>
             {/* <div className="w-64 h-80 mx-4 my-4 border border-gray-600 bg-black shadow-md rounded-lg p-4 transition-transform transform hover:scale-105" > */}
             {/* <img
                     src={src}
