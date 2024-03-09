@@ -25,7 +25,7 @@ const Blogs = () => {
         fetchMediumPosts();
     }, []);
     return (
-        <section className="blogs-section">
+        <section className="blogs-section my-5">
             <div>
                 <p className="blogs-heading">Article and Blogs</p>
                 <div className="flex justify-center items-center">

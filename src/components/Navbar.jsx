@@ -16,6 +16,13 @@ import logo from "../assets/logoDark.png";
 
 const Head = () => {
 
+    // const scrollToFeatures = () => {
+    //     const featuresElement = document.getElementById("features");
+    //     if (featuresElement) {
+    //         featuresElement.scrollIntoView({ behavior: "smooth" });
+    //     }
+    // };
+
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     const [openModal, setOpenModal] = useState(false);
@@ -92,7 +99,7 @@ const Head = () => {
                 console.log("Access Token:", localStorage.getItem("accessToken"));
 
                 console.log("Login/Signup complete");
-                history.push("/dashboard");
+                history.push(`/dashboard/${userId}`);
             } else if (response.status === 422) {
                 // Unprocessable Entity - Validation errors
                 const responseData = await response.json();
@@ -169,10 +176,6 @@ const Head = () => {
 
     return (
         <>
-            {/* <style>{navbarCustomStyles}</style> */}
-            {/* <NavbarCollapse> */}
-                
-                {/* </NavbarCollapse> */}
             <nav className="navbar">
                 <div className="nav-element-div flex">
                     <Link to="/" className="logo-div">
@@ -184,88 +187,72 @@ const Head = () => {
                             Chums AI
                         </span>
                     </Link>
-                    {/* <div className="nav-links">
-                        <Link to="/" className="text-white whitespace-nowrap" activeclassname="active">
+                    <div className="nav-links">
+                        <Link to="/" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
                             Home
                         </Link>
-                        <Link to="/about" className="text-white whitespace-nowrap" activeclassname="active">
-                            About
+                        {/* <Link to="/about" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                            API
+                        </Link> */}
+                        {/* <Link to="/#features" onClick={scrollToFeatures} className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                            Features
+                        </Link> */}
+                        <Link to="/blogs" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                            Documentation
                         </Link>
-                        <Link to="/whyus" className="text-white whitespace-nowrap" activeclassname="active">
-                            Why us
+                        <Link to="/Contact" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                            Contact us
                         </Link>
-                        <Link to="/blogs" className="text-white whitespace-nowrap" activeclassname="active">
-                            Blogs
-                        </Link>
-                        <Link to="/Contact" className="text-white whitespace-nowrap" activeclassname="active">
-                            Contact
-                        </Link>
-                    </div> */}
+                    </div>
                     <div className="nav-elem">
                         <button
-                            // gradientDuoTone="purpleToBlue"
                             onClick={() => setOpenModal(true)}
-                            // className="flex justify-between items-center gap-2 rounded-full"
-                        className="login-btn rounded-full flex justify-between items-center gap-2  px-4 py-2 bg-purple-800 text-white"
+                            className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 bg-purple-800 text-white"
                         >
                             Login
-                            <span className="material-symbols-outlined">
+                            {/* <span className="material-symbols-outlined">
                                 logout
-                            </span>
+                            </span> */}
                         </button>
-                        
                     </div>
                     {
-                        navbarOpen ? 
-                        <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
-                            close
-                        </span>  :
-                        <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
-                            menu
-                        </span>                  
+                        navbarOpen ?
+                            <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
+                                close
+                            </span> :
+                            <span className="material-symbols-outlined nav-menu-icon" onClick={handleNavbarOpen}>
+                                menu
+                            </span>
                     }
                     {
                         navbarOpen && (
                             <div className="nav-links-phone">
-                                {/* <Link to="/" className="text-white whitespace-nowrap" activeclassname="active">
+                                <Link to="/" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
                                     Home
                                 </Link>
-                                <Link to="/about" className="text-white whitespace-nowrap" activeclassname="active">
-                                    About
+                                <Link to="/about" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                    Documentation
                                 </Link>
-                                <Link to="/whyus" className="text-white whitespace-nowrap" activeclassname="active">
-                                    Why us
+                                <Link to="/contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                    Contact us
                                 </Link>
-                                <Link to="/blogs" className="text-white whitespace-nowrap" activeclassname="active">
+                                {/* <Link to="/blogs" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
                                     Blogs
                                 </Link>
-                                <Link to="/Contact" className="text-white whitespace-nowrap" activeclassname="active">
+                                <Link to="/Contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
                                     Contact
                                 </Link> */}
-                                <button
-                                    // gradientDuoTone="purpleToBlue"
+                                {/* <button
                                     onClick={() => (setOpenModal(true), handleModeChange("signup"))}
-                                    // className="flex justify-between items-center gap-2 rounded-full"
                                     className=" text-white flex justify-center gap-2"
                                 >
                                     Sign Up
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
-                                </button>
+                                </button> */}
                                 <button
-                                    // gradientDuoTone="purpleToBlue"
                                     onClick={() => setOpenModal(true)}
-                                    // className="flex justify-between items-center gap-2 rounded-full"
-                                    className=" text-white flex justify-center gap-2"
+                                    className=" text-white flex justify-center gap-2  hover:bg-white px-3 py-2 rounded-full hover:text-black"
                                 >
                                     Login
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
-                                    {/* <span className="material-symbols-outlined">
-                                        logout
-                                    </span> */}
                                 </button>
                             </div>
                         )
@@ -275,13 +262,8 @@ const Head = () => {
 
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <div className="flex justify-start m-2">
-                    {/* <HiOutlineArrowLeft
-                        className="text-gray-500 hover:text-gray-700 cursor-pointer"
-                        size={24}
-                        onClick={onCloseModal}
-                    /> */}
                     <button
-                        className="cursor-pointer px-2"
+                        className="cursor-pointer 3"
                         onClick={onCloseModal}
                     >
                         <span className="material-symbols-outlined">

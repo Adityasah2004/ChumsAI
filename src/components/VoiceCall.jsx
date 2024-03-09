@@ -1,107 +1,106 @@
-import React, { useState, useEffect } from 'react';
-import MediaRecorder from 'react-media-recorder';
-import io from 'socket.io-client';
-import localStorageUtils from '../Hooks/localStorageUtils';
+// import React, { useState, useEffect } from 'react';
+// import Peer from 'simple-peer';
+// import localStorageUtils from '../Hooks/localStorageUtils';
 
-function VoiceCall() {
-  const [mediaRecorder, setMediaRecorder] = useState(null);
-  const [recordedChunks, setRecordedChunks] = useState([]);
+// export function startRecording(mediaRecorder) {
+//   navigator.mediaDevices.getUserMedia({ audio: true })
+//     .then((stream) => {
+//       if (mediaRecorder) {
+//         mediaRecorder.start();
+//         sendAudioChunks(mediaRecorder);
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error accessing microphone:', error);
+//       alert('Error accessing microphone. Please make sure a microphone is connected and enabled.');
+//     });
+// }
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then((stream) => {
-        const recorder = new MediaRecorder(stream);
-        recorder.ondataavailable = (event) => setRecordedChunks([...recordedChunks, event.data]);
-        setMediaRecorder(recorder);
-      })
-      .catch((error) => console.error('Error accessing microphone:', error));
-  }, []);
+// export function stopRecording(mediaRecorder) {
+//   if (mediaRecorder) {
+//     mediaRecorder.stop();
+//   }
+// }
 
-  const startRecording = () => {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then((stream) => {
-        if (mediaRecorder) {
-          mediaRecorder.start();
-          sendAudioChunks();
-        }
-      })
-      .catch((error) => {
-        console.error('Error accessing microphone:', error);
-        alert('Error accessing microphone. Please make sure a microphone is connected and enabled.');
-      });
-  };
+// function VoiceCall() {
+//   const [peer, setPeer] = useState(null);
+//   const [isConnected, setIsConnected] = useState(false);
 
-  const stopRecording = () => {
-    if (mediaRecorder) {
-      mediaRecorder.stop();
-    }
-  };
+//   useEffect(() => {
+//     const initializePeer = async () => {
+//       try {
+//         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        
+//         const newPeer = new Peer({
+//           initiator: true,
+//           trickle: false,
+//           stream
+//         });
 
-  // Construct WebSocket connection options with access token
-  const accessToken = localStorageUtils.getAccessToken(); // Assuming you have a function to get access token
-  const socketOptions = {
-    query: {
-      token: accessToken
-    }
-  };
+//         newPeer.on('signal', signalData => {
+//           // Send signaling data to backend for transmission to the AI companion
+//           sendSignalData(signalData);
+//         });
 
-  const socket = io('http://localhost:8000/message/VoiceCall', socketOptions);
+//         newPeer.on('connect', () => {
+//           console.log('Peer connected');
+//           setIsConnected(true);
+//         });
 
-  const sendAudioChunks = () => {
-    // Combine recorded chunks into a single Blob
-    const audioBlob = new Blob(recordedChunks, { type: 'audio/mp3' });
-  
-    // Construct FormData object
-    const formData = new FormData();
-    formData.append('file', audioBlob);
-    formData.append('Transcription_language_code', 'ja-JP');
-    formData.append('companionId', '65bcf34a618d69838b7ac6d3');
-    formData.append('translation_language_code', 'ja');
-  
-    // Send FormData to server through WebSocket or any other suitable method
-    fetch('http://localhost:8000/message/VoiceCall', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Handle response data if needed
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('There was a problem with the request:', error);
-    });
-  
-    // Clear recorded chunks for next recording
-    setRecordedChunks([]);
-  };
-  
+//         newPeer.on('stream', stream => {
+//           console.log('Received remote stream');
+//           // You can handle the remote audio stream here, e.g., play it through an <audio> element
+//         });
 
-  useEffect(() => {
-    const audioContext = new AudioContext();
+//         setPeer(newPeer);
+//       } catch (error) {
+//         console.error('Error accessing microphone:', error);
+//         alert('Error accessing microphone. Please make sure a microphone is connected and enabled.');
+//       }
+//     };
 
-    socket.on('voice-response', (audioData) => {
-      const audioBuffer = audioContext.decodeAudioData(audioData);
-      const audioSource = audioContext.createBufferSource();
-      audioSource.buffer = audioBuffer;
-      audioSource.connect(audioContext.destination);
-      audioSource.start();
-    });
+//     initializePeer();
 
-    return () => {
-      audioContext.close();
-    };
-  }, []);
+//     // Clean up function
+//     return () => {
+//       if (peer) {
+//         peer.destroy();
+//       }
+//     };
+//   }, []); // Empty dependency array to ensure useEffect runs only once
 
-  return (
-    <>
-    </>
-  );
-}
+//   const sendSignalData = async (signalData) => {
+//     // Send signaling data to backend
+//     const accessToken = localStorageUtils.getAccessToken();
 
-export default VoiceCall;
+//     try {
+//       const response = await fetch('http://localhost:8000/message/VoiceCall/offer', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${accessToken}`
+//         },
+//         body: JSON.stringify({
+//           signalData,
+//           companionId: '65bcf34a618d69838b7ac6d3' // Adjust companion ID
+//         })
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+
+//       // Handle response if needed
+//     } catch (error) {
+//       console.error('There was a problem with the request:', error);
+//     }
+//   };
+
+//   return (
+//     <>
+      
+//     </>
+//   );
+// }
+
+// export default VoiceCall;

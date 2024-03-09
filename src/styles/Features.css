@@ -18,8 +18,8 @@
     gap: clamp(1.5rem, 4vw, 2.5rem);
     margin-top: 2rem;
     width: 90%;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
 }
 
 .feature-card-content{
@@ -29,19 +29,20 @@
 }
 
 .feature-card-heading{
-    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     color: #fff;
 }
 
 .feature-card-content p{
-    font-size: clamp(1rem, 4vw, 1.6rem);
+    font-size: clamp(1rem, 4vw, 1.5rem);
     font-weight: 300;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    color: rgb(200, 200, 200);
 }
 
 :hover:is(.feature-card1, .feature-card2, .feature-card3, .feature-card4, .feature-card5, .feature-card6, .feature-card7){
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 .feature-card1{
@@ -52,20 +53,20 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-    background-image: linear-gradient(0deg, #311f41 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(49, 31, 65, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 400px;
+    height: 350px;
     animation: filter 8s ease-in-out infinite;
 }
 
 @keyframes filter{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px rgba(116, 73, 153, 0.5));
+        filter: drop-shadow(0px 4px 25px rgba(116, 73, 153, 0.5));
     }
     50%{
         filter: drop-shadow(0px 0px 0px #744999);
@@ -80,7 +81,7 @@
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #221554 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(34, 21, 84, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -94,7 +95,7 @@
 
 @keyframes filter2{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px #221554);
+        filter: drop-shadow(0px 4px 25px #221554);
     }
     50%{
         filter: drop-shadow(0px 0px 0px #221554);
@@ -109,7 +110,7 @@
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #384311 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(56, 67, 17, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -123,7 +124,7 @@
 
 @keyframes filter3{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px #384311);
+        filter: drop-shadow(0px 4px 25px #384311);
     }
     50%{
         filter: drop-shadow(0px 0px 0px #384311);
@@ -138,7 +139,7 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, #543713 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(84, 55, 19, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -152,7 +153,7 @@
 
 @keyframes filter4{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px #543713);
+        filter: drop-shadow(0px 4px 25px #543713);
     }
     50%{
         filter: drop-shadow(0px 0px 0px #543713);
@@ -167,21 +168,21 @@
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
-    background-image: linear-gradient(0deg, #72A1CB 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(114, 161, 203, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 400px;
+    height: 350px;
     animation: filter5 8s ease-in-out infinite;
     animation-delay: 16s;
 }
 
 @keyframes filter5{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px #72A1CB);
+        filter: drop-shadow(0px 4px 25px #72A1CB);
     }
     50%{
         filter: drop-shadow(0px 0px 0px #72A1CB);
@@ -196,21 +197,21 @@
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, #2E2E2E 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(46, 46, 46, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 400px;
+    height: 350px;
     animation: filter6 8s ease-in-out infinite;
     animation-delay: 20s;
 }
 
 @keyframes filter6{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px #2E2E2E);
+        filter: drop-shadow(0px 4px 25px #2E2E2E);
     }
     50%{
         filter: drop-shadow(0px 0px 0px #2E2E2E);
@@ -225,29 +226,39 @@
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, #587729 0%, rgba(195, 91, 147, 0) 70%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(88, 119, 41, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 400px;
+    height: 350px;
     animation: filter7 8s ease-in-out infinite;
     animation-delay: 24s;
 }
 
 @keyframes filter7{
     0%, 100%{
-        filter: drop-shadow(0px 4px 50px rgba(88, 119, 41, 0.5));
+        filter: drop-shadow(0px 4px 25px rgba(88, 119, 41, 0.5));
     }
     50%{
         filter: drop-shadow(0px 0px 0px #587729);
     }
 }
+
+@media screen and (max-width: 1024px){
+    .features-grid{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
 @media screen and (max-width: 768px){
     .features-grid{
         grid-template-columns: repeat(1, 1fr);
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
     .feature-card1{
