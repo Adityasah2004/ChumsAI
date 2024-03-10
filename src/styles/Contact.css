@@ -176,8 +176,10 @@
 }
 
 @media screen and (max-width: 1030px){
+
     .contact-sec .contact .contact-info {
         justify-content: space-around;
+
     }
 }
 
@@ -206,6 +208,7 @@
         width: 100%;
     }
 } */
+
 
 @media screen and (max-width:515px){
     #contact .contact{
