@@ -90,6 +90,8 @@
     
     /* glow */
     background:  #00B7A1 ;
+    box-shadow: 0 0 10px #00B7A1, 0 0 20px #00B7A1, 0 0 30px #00B7A1;
+    outline: 1px solid #00B7A1; 
 }
 
 .create-btn span {
@@ -149,10 +151,10 @@
     width: 100%;
     max-width: 300px;
     height: auto;
-    animation: rotate 6s ease infinite;
+    animation: rotate1 6s ease infinite;
 }
 
-@keyframes rotate {
+@keyframes rotate1 {
     0% {
         transform: rotate(0deg);
     }
@@ -219,9 +221,11 @@
 } */
 
 .hero-down-div{
-    background-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 50%), linear-gradient(0deg,
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 40%), linear-gradient(0deg,
         #000 0%,
-        rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg-2.svg');
+        rgba(0, 0, 0, 0) 40%), url('../assets/hero-bg-2.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
