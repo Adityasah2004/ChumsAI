@@ -98,9 +98,9 @@ export default function Contact() {
                                     <textarea placeholder="Message" cols="10" rows="4" name='message' className='rounded-lg bg-black text-white' required></textarea>
                                 </div>
                                 <button type="submit">
-                                    <span className="material-symbols-outlined">
+                                    {/*<span className="material-symbols-outlined">
                                         send
-                                    </span>
+                                    </span>*/}
                                     Send
                                 </button>
                             </form>
