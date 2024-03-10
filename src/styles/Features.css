@@ -23,9 +23,11 @@
 }
 
 .feature-card-content{
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .feature-card-heading{
@@ -34,7 +36,7 @@
 }
 
 .feature-card-content p{
-    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-size: clamp(1rem, 4vw, 1.25rem);
     font-weight: 300;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -53,7 +55,7 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-    background-image: linear-gradient(0deg, rgba(49, 31, 65, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(49, 31, 65, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/ai-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -81,7 +83,7 @@
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, rgba(34, 21, 84, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(34, 21, 84, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/3D-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -110,7 +112,7 @@
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, rgba(56, 67, 17, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(56, 67, 17, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/time-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -139,7 +141,7 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-image: linear-gradient(0deg, rgba(84, 55, 19, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(84, 55, 19, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/voice-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -168,7 +170,7 @@
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
-    background-image: linear-gradient(0deg, rgba(114, 161, 203, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(114, 161, 203, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/int-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -197,7 +199,7 @@
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, rgba(46, 46, 46, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(46, 46, 46, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/video-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -226,7 +228,7 @@
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
-    background-image: linear-gradient(0deg, rgba(88, 119, 41, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/f2.jpg');
+    background-image: linear-gradient(0deg, rgba(88, 119, 41, 0.5) 0%, rgba(195, 91, 147, 0) 50%), url('../assets/lang-img-feat.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -264,7 +266,7 @@
     .feature-card1{
         grid-column-start: 1;
         grid-column-end: 2;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card2{
@@ -272,7 +274,7 @@
         grid-column-end: 2;
         grid-row-start: 2;
         grid-row-end: 3;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card3{
@@ -280,7 +282,7 @@
         grid-column-end: 2;
         grid-row-start: 3;
         grid-row-end: 4;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card4{
@@ -288,7 +290,7 @@
         grid-column-end: 2;
         grid-row-start: 4;
         grid-row-end: 5;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card5{
@@ -296,7 +298,7 @@
         grid-column-end: 2;
         grid-row-start: 5;
         grid-row-end: 6;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card6{
@@ -304,7 +306,7 @@
         grid-column-end: 2;
         grid-row-start: 6;
         grid-row-end: 7;
-        height: 250px;
+        height: 300px;
     }
 
     .feature-card7{
@@ -312,6 +314,6 @@
         grid-column-end: 2;
         grid-row-start: 7;
         grid-row-end: 8;
-        height: 250px;
+        height: 300px;
     }
 }

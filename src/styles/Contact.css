@@ -176,8 +176,10 @@
 }
 
 @media screen and (max-width: 1030px){
-    .contact-sec .contact .contact-info{
-        justify-content : space-around;
+
+    .contact-sec .contact .contact-info {
+        justify-content: space-around;
+
     }
 }
 
@@ -188,12 +190,14 @@
     .contact-sec .contact {
         width: 95%;
     }
+    
     #contact input[type="text"],
     #contact input[type="email"],
     #contact textarea {
         width: 100%;
     }
 }
+
 /* 
 @media screen and (max-width: 768px){
     .contact-sec {
@@ -204,8 +208,10 @@
         width: 100%;
     }
 } */
-@media screen and (max-width: 515px){
+
+
+@media screen and (max-width:515px){
     #contact .contact{
-        margin-top: 10rem; 
+        margin-top: 10rem;
     }
 }
