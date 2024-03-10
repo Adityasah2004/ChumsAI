@@ -29,8 +29,8 @@
 .contact .contact-info {
     display: flex;
     /* align-items: left; */
-    justify-content: space-around;
-    padding: 1rem 2rem;
+    justify-content: space-between;
+    padding: 1rem 0;
     gap: 2rem;
     width: 100%;
     flex-wrap: wrap;
@@ -51,7 +51,7 @@
 }
 
 .contact-info span p {
-    font-size: clamp(0.8rem, 4vw, 1.5rem);
+    font-size: clamp(0.8rem, 4vw, 1rem);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -59,7 +59,7 @@
 }
 
 .contact-info span p span {
-    font-size: clamp(0.8rem, 4vw, 1.5rem);
+    font-size: clamp(0.8rem, 4vw, 1rem);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -102,7 +102,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 2rem;
     background: #fff;
     border: 1px solid #fff;
     border-radius: 50px;
@@ -111,6 +111,7 @@
     cursor: pointer;
     margin: 0 auto;
     transition: all 0.5s ease-in-out;
+    width: clamp(100px, 20vw, 200px);
 }
 
 #contact button[type="submit"]:hover {
@@ -174,6 +175,12 @@
     color: white;
 }
 
+@media screen and (max-width: 1030px){
+    .contact-sec .contact .contact-info {
+        justify-content: space-around;
+    }
+}
+
 @media screen and (max-width: 900px){
     .contact-sec {
         padding: 0 0.5rem;
@@ -181,12 +188,14 @@
     .contact-sec .contact {
         width: 95%;
     }
+    
     #contact input[type="text"],
     #contact input[type="email"],
     #contact textarea {
         width: 100%;
     }
 }
+
 /* 
 @media screen and (max-width: 768px){
     .contact-sec {
@@ -197,3 +206,9 @@
         width: 100%;
     }
 } */
+
+@media screen and (max-width:515px){
+    #contact .contact{
+        margin-top: 10rem;
+    }
+}

@@ -78,7 +78,7 @@ const LandingAvatar = () => {
         <Canvas dpr={[0, 2]}>
             <ambientLight />
             <pointLight position={[1, 1, 1]} />
-            {/* <OrbitControls enableZoom={false} /> */}
+            <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} enableZoom={false} />
             <Avatar />
         </Canvas>
     )
