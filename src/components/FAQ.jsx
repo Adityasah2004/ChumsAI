@@ -53,7 +53,7 @@ export default function FAQ() {
             {/* <div className='flex flex-col items-center'> */}
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} className="lg:w-1/2 text-center">
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" className="text-white text-center">
-                    <Typography className='text-white text-center' >What makes out AI platform unique?</Typography>
+                    <Typography className='text-white text-center' >What makes our AI platform unique?</Typography>
                 </AccordionSummary>
                 <AccordionDetails >
                     <Typography className='text-left'>

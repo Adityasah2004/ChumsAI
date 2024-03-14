@@ -28,11 +28,11 @@ const Avatar = (/*{companionId}*/) => {
         hasRecognitionSupport
     } = useSpeechRecognition()
     // const avatar = useGLTF(`/${companion_id}.glb`);
-    const avatar = useGLTF(`/Avatar.glb`);
+    const avatar = useGLTF(`/Avatar3.glb`);
     const [index, setIndex] = useState(0);
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"
-    avatar.animations[1].name = "Talking"
+    // avatar.animations[1].name = "Talking"
     const { actions, names } = useAnimations(avatar.animations, avatar.scene);
     // const jsonFile = useLoader(THREE.FileLoader, `/audio.json`);
     var [lipsync, setlipsync] = useState({})
@@ -150,16 +150,16 @@ const Avatar = (/*{companionId}*/) => {
 
         const currentAudioTime = audio.currentTime;
         Object.values(corresponding).forEach((value) => {
-            avatar.nodes.Wolf3D_Head.morphTargetInfluences[avatar.nodes.Wolf3D_Head.morphTargetDictionary[value]] = 0;
-            avatar.nodes.Wolf3D_Teeth.morphTargetInfluences[avatar.nodes.Wolf3D_Teeth.morphTargetDictionary[value]] = 0;
+            // avatar.nodes.Wolf3D_Head.morphTargetInfluences[avatar.nodes.Wolf3D_Head.morphTargetDictionary[value]] = 0;
+            // avatar.nodes.Wolf3D_Teeth.morphTargetInfluences[avatar.nodes.Wolf3D_Teeth.morphTargetDictionary[value]] = 0;
         })
 
         if (lipsync.mouthCues) {
             for (let i = 0; i <= lipsync.mouthCues.length; i++) {
                 const mouthCue = lipsync.mouthCues[i];
                 if (currentAudioTime >= mouthCue?.start && currentAudioTime <= mouthCue?.end) {
-                    avatar.nodes.Wolf3D_Head.morphTargetInfluences[avatar.nodes.Wolf3D_Head.morphTargetDictionary[corresponding[mouthCue.value]]] = 1;
-                    avatar.nodes.Wolf3D_Teeth.morphTargetInfluences[avatar.nodes.Wolf3D_Teeth.morphTargetDictionary[corresponding[mouthCue.value]]] = 1;
+                    // avatar.nodes.Wolf3D_Head.morphTargetInfluences[avatar.nodes.Wolf3D_Head.morphTargetDictionary[corresponding[mouthCue.value]]] = 1;
+                    // avatar.nodes.Wolf3D_Teeth.morphTargetInfluences[avatar.nodes.Wolf3D_Teeth.morphTargetDictionary[corresponding[mouthCue.value]]] = 1;
                     break;
                 }
             }
@@ -185,7 +185,7 @@ const Avatar = (/*{companionId}*/) => {
 
     async function apicall(text) {
         try {
-            
+
 
         } catch (error) {
             console.error('Error:', error);
@@ -197,7 +197,7 @@ const Avatar = (/*{companionId}*/) => {
     }
     return (
         <group>
-            <primitive object={avatar.scene} scale={3.2} position-y={-3.5} />
+            <primitive object={avatar.scene} scale={3.2} position-y={-3.5} rotation-y={0.5} />
             <Html position={[-1.2, 3, 0]}>
                 <div>
                     {hasRecognitionSupport ? (
@@ -222,8 +222,8 @@ export const Avatar1 = (props) => {
         <Canvas dpr={[0, 2]}>
             <ambientLight />
             <pointLight position={[1, 1, 1]} />
-            <OrbitControls />
-            <Avatar companionId={props.companion_id}/>
+            <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} enableZoom={false} />
+            <Avatar companionId={props.companion_id} />
         </Canvas>
 
     )

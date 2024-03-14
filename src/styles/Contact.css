@@ -6,11 +6,14 @@
     padding: 0 5rem;
     width: 100%;
     height: 100vh;
-    background-image: url("../assets/contact-bg-img.svg");
+    /* background-image: url("../assets/contact-bg-img.svg");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat; */
+    background-image: url("../assets/login-half-img.svg");
+    background-size: cover;
     background-repeat: no-repeat;
-    
+    background-position: center;
 }
 
 .contact-sec .contact {

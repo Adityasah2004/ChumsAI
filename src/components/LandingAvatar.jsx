@@ -33,7 +33,7 @@ const useScreenSize = () => {
 
 const Avatar = () => {
     const screenSizes = useScreenSize();
-    const avatar = useGLTF("lp-model.glb");
+    const avatar = useGLTF("Avatar3.glb");
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"
     const { actions, names } = useAnimations(avatar.animations, avatar.scene);

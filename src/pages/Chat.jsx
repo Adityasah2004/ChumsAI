@@ -8,23 +8,32 @@ import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 import { Link } from 'react-router-dom';
-import { startRecording, stopRecording } from '../components/VoiceCall';
+// import { startRecording, stopRecording } from '../components/VoiceCall';
 
 const Chat = () => {
 
-    const dispatch = useDispatch();
+    // const companionDestructuredData = (companionDetails) => {
+    //     const { name, front_src } = companionDetails;
+    //     // const userId = localStorageUtils.getUserId();
+    //     console.log("this is companion details", name, front_src);
+    // }
 
-    const [voiceCall, setVoiceCall] = useState(false);
-    const [camera, setCamera] = useState(false);
+    const dispatch = useDispatch();
+    const [companionDetails, setCompanionDetails] = useState(null);
+    const [userDetails, setUserDetails] = useState(null);
+    // const [voiceCall, setVoiceCall] = useState(false);
+    // const [camera, setCamera] = useState(false);
     const [showEmoji, setShowEmoji] = useState(false);
     const [newMessage, setNewMessage] = useState('');
-   // const [aimessage ,setaimessage] = usestate('');
+    const [comingSoon, setComingSoon] = useState(false);
+    // const [aimessage ,setaimessage] = usestate('');
     // const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
     const [intOpt, setInpOpt] = useState(false);
     const [settings, setSettings] = useState(false);
     const [background, setBackground] = useState(0);
     const userId = localStorageUtils.getUserId();
     const accessToken = localStorageUtils.getAccessToken();
+    const companionId = localStorageUtils.getCompanionId();
 
     const userMessages = useSelector(state => state.messages.userMessages);
     const aiMessages = useSelector(state => state.messages.aiMessages);
@@ -32,53 +41,97 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
 
     // Fetch messages from the backend and dispatch to Redux store
-    //     const fetchMessages = async () => {
-    //         try {
-    //             const apiUrl = `http://localhost:8000/message/Chat`;
-    //             const bearerToken = accessToken;
+    // Define a global variable to store the fetched data
+    // let companionDetails = null;
+    console.log("this is user id before fetchcompaniondetails", userId);
+    const fetchCompanionDetails = async () => {
+        // e.preventDefault();
+        try {
+            const apiUrl = `http://localhost:8000/companion/${companionId}`;
+            const bearerToken = accessToken;
 
-    //             const requestOptions = {
-    //                 method: "GET",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${bearerToken}`,
-    //                 },
-    //             };
+            const requestOptions = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                }
+            };
 
-    //             const response = await fetch(apiUrl, requestOptions);
+            const response = await fetch(apiUrl, requestOptions);
 
-    //             if (!response.ok) {
-    //                 throw new Error(`Failed to fetch messages. Status: ${response.status}`);
-    //             }
+            if (!response.ok) {
+                throw new Error(`Failed to fetch details. Status: ${response.status}`);
+            }
 
-    //             const data = await response.json();
-    //             console.log("this is me respponse",response);
-    //             console.log("Fetched messages from the backend:", data);
+            const data = await response.json();
+            console.log("Fetched details from the backend:", data);
 
-    //             // Check if data is an array before updating the state
-    //             if (Array.isArray(data)) {
-    //                 // Dispatch the messages to the Redux store
-    //                 // dispatch(addAIMessage(data.response));
-    //                 // dispatch(addUserMessage(data.user));
+            // Store the fetched data in the global variable
+            setCompanionDetails(data);
+            // companionDestructuredData(companionDetails);
+            // Handle data according to your application's logic
+        } catch (error) {
+            console.error("Error fetching details:", error);
+        }
+    };
 
-    //             } else {
-    //                 console.error("Received non-array data from the backend:", data);
-    //             }
-    //         } catch (error) {
-    //             console.error("Error fetching messages:", error);
-    //         }
-    //     };
-    
+    // Now you can access companionDetails globally
+
+
 
     // console.log("this is ai messagea", aiMessages);
+    console.log("this is user id before fetchuserdetails", userId);
+    const fetchUserDetails = async () => {
+        console.log("this is user id", userId);
+        try {
+            const apiUrl = `http://localhost:8000/user/${userId}`;
+            const bearerToken = accessToken;
+            console.log("this is bearer token", bearerToken);
+            const requestOptions = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                }
+            };
+
+            const response = await fetch(apiUrl, requestOptions);
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch user details. Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setUserDetails(data.data);
+            console.log("Fetched user details from the backend:", data);
+            // console.log("this is state first_name from userDetails state", data.data.first_name);
+
+            // Handle data according to your application's logic
+        } catch (error) {
+            console.error("Error fetching user details:", error);
+        }
+    };
+
+    // Example usage
+    // const userId = "your_user_id_here";
+
+    // on load call function to get companion details
+    useEffect(() => {
+        fetchCompanionDetails();
+        fetchUserDetails();
+        // companionDestructuredData(companionDetails);
+    }, []);
+
 
     // Send message to the backend and dispatch to Redux store
     const handleSendMessage = async (e) => {
         // check if the value of newMessage is empty
+        e.preventDefault();
         if (newMessage.trim() === "") {
             return;
         }
-        e.preventDefault();
+
         // dispatch(userMessages(newMessage));
         document.getElementsByName('input-chat')[0].value = "";
         try {
@@ -91,9 +144,10 @@ const Chat = () => {
                 content: newMessage,
                 createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
                 updatedAt: "string",
-                companionId: "65bcf34a618d69838b7ac6d3",
+                companionId: companionId,
                 translation_language_code: "en",
                 userId: userId,
+                user_timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
             };
 
             console.log("Sending message to the backend:", requestBody);
@@ -120,9 +174,9 @@ const Chat = () => {
             // get current time
             // setCurrentTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
             console.log("Received response from the backend:", data);
-            console.log("Response Data Structure:", JSON.stringify(data, null ,2));
-            dispatch(addUserMessage(data.user));
-            dispatch(addAIMessage(data.response));
+            console.log("Response Data Structure:", JSON.stringify(data, null, 2));
+            dispatch(addUserMessage(data.user, data.user_timestamp));
+            dispatch(addAIMessage(data.response, data.response_timestamp));
             // Dispatch the new message to the Redux store
             // dispatch(addUserMessage(requestBody.content));
             setNewMessage("");
@@ -132,7 +186,7 @@ const Chat = () => {
         // fetchMessages();
     };
 
-    console.log("this is users message" ,userMessages);
+    console.log("this is users message", userMessages);
 
     useEffect(() => {
         // Combine userMessages and aiMessages into a single array
@@ -146,8 +200,8 @@ const Chat = () => {
             }
         }
         setMessages(combinedMessages);
-        const chatMsgArea = document.querySelector('.chat-msg-area');
-        chatMsgArea.scrollTop = chatMsgArea.scrollHeight;
+        // const chatMsgArea = document.querySelector('.chat-msg-area');
+        // chatMsgArea.scrollTop = chatMsgArea.scrollHeight;
         // console.log("this is combined message",combinedMessages);
     }, [userMessages, aiMessages]);
 
@@ -156,136 +210,138 @@ const Chat = () => {
     }
 
     const handleVoiceCall = () => {
-        startRecording();
-        setVoiceCall(true);
-        setVideoCall(false);
+        // startRecording();
+        // setVoiceCall(true);
+        // setVideoCall(false);
         setInpOpt(false);
         setSettings(false);
         setShowEmoji(false);
+        setComingSoon(!comingSoon);
     }
 
-    const [videoCall, setVideoCall] = useState(false);
+    // const [videoCall, setVideoCall] = useState(false);
 
     const handleVideoCall = () => {
-        setVideoCall(true);
-        setVoiceCall(false);
+        //     setVideoCall(true);
+        //     setVoiceCall(false);
         setInpOpt(false);
         setSettings(false);
         setShowEmoji(false);
 
-        if (camera === true) {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
-                .then((stream) => {
-                    const video = document.getElementById('user-video');
-                    if (video) {
-                        video.srcObject = stream;
-                        video.onloadedmetadata = () => {
-                            video.play();
-                        };
-                    }
-                })
-                .catch((err) => {
-                    console.error('Error accessing the camera:', err);
-                    if (err.name === "NotAllowedError") {
-                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-                    }
-                });
-        } else {
-            // only audio call
-            navigator.mediaDevices.getUserMedia({ video: false, audio: true })
-                .then((stream) => {
-                    const video = document.getElementById('user-video');
-                    if (video) {
-                        video.srcObject = stream;
-                        video.onloadedmetadata = () => {
-                            video.play();
-                        };
-                    }
-                })
-                .catch((err) => {
-                    console.error('Error accessing the camera:', err);
-                    if (err.name === "NotAllowedError") {
-                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-                    }
-                });
-        }
+        //     if (camera === true) {
+        //         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+        //             .then((stream) => {
+        //                 const video = document.getElementById('user-video');
+        //                 if (video) {
+        //                     video.srcObject = stream;
+        //                     video.onloadedmetadata = () => {
+        //                         video.play();
+        //                     };
+        //                 }
+        //             })
+        //             .catch((err) => {
+        //                 console.error('Error accessing the camera:', err);
+        //                 if (err.name === "NotAllowedError") {
+        //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+        //                 }
+        //             });
+        //     } else {
+        //         // only audio call
+        //         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+        //             .then((stream) => {
+        //                 const video = document.getElementById('user-video');
+        //                 if (video) {
+        //                     video.srcObject = stream;
+        //                     video.onloadedmetadata = () => {
+        //                         video.play();
+        //                     };
+        //                 }
+        //             })
+        //             .catch((err) => {
+        //                 console.error('Error accessing the camera:', err);
+        //                 if (err.name === "NotAllowedError") {
+        //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+        //                 }
+        //             });
+        //     }
+        setComingSoon(!comingSoon);
     }
 
-    const handleCamera = () => {
+    // const handleCamera = () => {
 
-        // if camera is false, stop the video stream
-        if (camera === true) {
-            setCamera(false);
-            const video = document.getElementById('user-video');
-            const stream = video.srcObject;
-            const tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-            video.srcObject = null;
+    //     // if camera is false, stop the video stream
+    //     if (camera === true) {
+    //         setCamera(false);
+    //         const video = document.getElementById('user-video');
+    //         const stream = video.srcObject;
+    //         const tracks = stream.getTracks();
+    //         tracks.forEach(track => track.stop());
+    //         video.srcObject = null;
 
-            // audio on if video is off
-            navigator.mediaDevices.getUserMedia({ video: false, audio: true })
-                .then((stream) => {
-                    const video = document.getElementById('user-video');
-                    if (video) {
-                        video.srcObject = stream;
-                        video.onloadedmetadata = () => {
-                            video.play();
-                        };
-                    }
-                })
-        } else {
-            setCamera(true);
-            // ask for permission to use the camera and if granted, start the video call
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
-                .then((stream) => {
-                    const video = document.getElementById('user-video');
-                    if (video) {
-                        video.srcObject = stream;
-                        video.onloadedmetadata = () => {
-                            video.play();
-                        };
-                    }
-                })
-                .catch((err) => {
-                    console.error('Error accessing the camera:', err);
-                    if (err.name === "NotAllowedError") {
-                        alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-                    }
-                });
-        }
-    }
+    //         // audio on if video is off
+    //         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+    //             .then((stream) => {
+    //                 const video = document.getElementById('user-video');
+    //                 if (video) {
+    //                     video.srcObject = stream;
+    //                     video.onloadedmetadata = () => {
+    //                         video.play();
+    //                     };
+    //                 }
+    //             })
+    //     } else {
+    //         setCamera(true);
+    //         // ask for permission to use the camera and if granted, start the video call
+    //         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+    //             .then((stream) => {
+    //                 const video = document.getElementById('user-video');
+    //                 if (video) {
+    //                     video.srcObject = stream;
+    //                     video.onloadedmetadata = () => {
+    //                         video.play();
+    //                     };
+    //                 }
+    //             })
+    //             .catch((err) => {
+    //                 console.error('Error accessing the camera:', err);
+    //                 if (err.name === "NotAllowedError") {
+    //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+    //                 }
+    //             });
+    //     }
+    // }
 
-    const handleEndVideoCall = () => {
-        setVideoCall(false);
+    // const handleEndVideoCall = () => {
+    //     setVideoCall(false);
 
-        // stop the video stream
-        const video = document.getElementById('user-video');
-        const stream = video.srcObject;
-        const tracks = stream.getTracks();
+    //     // stop the video stream
+    //     const video = document.getElementById('user-video');
+    //     const stream = video.srcObject;
+    //     const tracks = stream.getTracks();
 
-        tracks.forEach(track => track.stop());
-        video.srcObject = null;
-        setCamera(false);
+    //     tracks.forEach(track => track.stop());
+    //     video.srcObject = null;
+    //     setCamera(false);
 
-        // audio off if video call is ended
-        navigator.mediaDevices.getUserMedia({ video: false, audio: false })
-            .then((stream) => {
-                const video = document.getElementById('user-video');
-                if (video) {
-                    video.srcObject = stream;
-                    video.onloadedmetadata = () => {
-                        video.play();
-                    };
-                }
-            })
-    }
+    //     // audio off if video call is ended
+    //     navigator.mediaDevices.getUserMedia({ video: false, audio: false })
+    //         .then((stream) => {
+    //             const video = document.getElementById('user-video');
+    //             if (video) {
+    //                 video.srcObject = stream;
+    //                 video.onloadedmetadata = () => {
+    //                     video.play();
+    //                 };
+    //             }
+    //         })
+    // }
 
-    const handleEndVoiceCall = () => {
-        stopRecording();
-        setVoiceCall(false);
-        setCamera(false);
-        setVideoCall(false);
-    }
+    // const handleEndVoiceCall = () => {
+    //     stopRecording();
+    //     setVoiceCall(false);
+    //     setCamera(false);
+    //     setVideoCall(false);
+    // }
 
     const handleEmoji = () => {
         setShowEmoji(!showEmoji);
@@ -294,15 +350,21 @@ const Chat = () => {
     let modelClassesVoiceCall = "";
     let modelClassesVideoCall = "";
 
-    if (voiceCall) {
-        modelClassesVoiceCall = "sm-voice-cen max-scrn-voice-call";
-        modelClassesVideoCall = "";
-    } else if (videoCall) {
-        modelClassesVoiceCall = "";
-        modelClassesVideoCall = "sm-video-cen max-scrn-video-call";
-    } else {
-        modelClassesVoiceCall = "";
-        modelClassesVideoCall = "";
+    // if (voiceCall) {
+    //     modelClassesVoiceCall = "sm-voice-cen max-scrn-voice-call";
+    //     modelClassesVideoCall = "";
+    // } else if (videoCall) {
+    //     modelClassesVoiceCall = "";
+    //     modelClassesVideoCall = "sm-video-cen max-scrn-video-call";
+    // } else {
+    //     modelClassesVoiceCall = "";
+    //     modelClassesVideoCall = "";
+    // }
+
+    if (comingSoon) {
+        setTimeout(() => {
+            setComingSoon(false);
+        }, 10000);
     }
 
     const handleEmojiInput = (emojiObject) => {
@@ -326,7 +388,8 @@ const Chat = () => {
     }
 
     return (
-        <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
+        // <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
+        <div className="chat-main-body">
             <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
                 <Avatar1
                 // companionId={companionId} 
@@ -345,17 +408,18 @@ const Chat = () => {
             {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
             {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />}
 
-            {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />}
-            <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}>
+            {/* {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />} */}
+            {/* <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}> */}
+            <div className="chat-div relative">
                 <menu className='flex text-white pl-4 pt-1 justify-between items-center'>
                     <div className='flex items-center gap-4'>
-                        <Link to="/dashboard" className='cursor-pointer flex' title='Back to Dashboard'>
+                        <Link to={`/dashboard/${userId}`} className='cursor-pointer flex' title='Back to Dashboard'>
                             <span className="material-symbols-outlined" >
                                 arrow_back
                             </span>
                         </Link>
                         <span className='font-semibold text-xl'>
-                            AI Friend
+                            {companionDetails && companionDetails.name}
                         </span>
                     </div>
                     <button className='flex' title='Settings' onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
@@ -393,12 +457,12 @@ const Chat = () => {
                     ))} */}
                     {messages.map((msg, index) => (
                         <Message
-                            time={msg.time} // Ensure you have a time property in your message objects
+                            time={msg.message[1]} // Ensure you have a time property in your message objects
                             message={msg.message[0]}
                             key={index}
-                            name={msg.sender === 'user' ? 'User' : 'AI Avatar'}
+                            name={msg.sender === 'user' ? `${userDetails.first_name}  ${userDetails.last_name}` : companionDetails.name}
                             cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
-                            
+                            img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : companionDetails.front_src}
                         />
                     ))}
                 </div>
@@ -468,9 +532,19 @@ const Chat = () => {
                         </span>
                     </button>
                 </div>
-
+                {
+                    comingSoon &&
+                    <div className="coming-soon bg-black bg-opacity-75 text-white p-4 rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <p className='text-2xl font-semibold'>
+                            Coming Soon
+                        </p>
+                        <p>
+                            This feature is under development and will be available soon.
+                        </p>
+                    </div>
+                }
             </div>
-            {
+            {/* {
                 voiceCall &&
                 <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
                     <button className="flex flex-col items-center bg-red-700 pb-1 text-white rounded-full w-40 justify-center" onClick={handleEndVoiceCall}>
@@ -480,8 +554,8 @@ const Chat = () => {
                         End Call
                     </button>
                 </div>
-            }
-            {
+            } */}
+            {/* {
                 videoCall &&
                 <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
                     <button className="flex flex-col items-center bg-red-700 p-1 text-white rounded-full w-40 justify-center" onClick={handleEndVideoCall}>
@@ -497,9 +571,9 @@ const Chat = () => {
                         Camera {camera ? "Off" : "On"}
                     </button>
                 </div>
-            }
+            } */}
 
-            <video id='user-video' className={videoCall && camera ? "absolute bottom-0 right-5" : "hidden"} autoPlay playsInline></video>
+            {/* <video id='user-video' className={videoCall && camera ? "absolute bottom-0 right-5" : "hidden"} autoPlay playsInline></video>
 
             {
                 videoCall && camera === false &&
@@ -508,7 +582,7 @@ const Chat = () => {
                         person
                     </span>
                 </div>
-            }
+            } */}
         </div>
     );
 };

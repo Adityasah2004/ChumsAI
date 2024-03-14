@@ -1,12 +1,8 @@
-// import { useState } from "react";
-// import { Dropdown } from "flowbite-react";
-
 import { Link } from "react-router-dom";
 import logo from "../assets/logoDark.png";
 import '../styles/Sidebar.css';
 
-function Side({ openModal }) {
-    console.log("openModal prop:" + openModal);
+function Side() {
     return (
         <aside className="logo-sidebar rounded-xl" aria-label="Sidebar">
             <a href="/" className="flex items-center gap-2 pl-3 h-20">

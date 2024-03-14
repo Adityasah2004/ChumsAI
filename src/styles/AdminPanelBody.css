@@ -1,0 +1,102 @@
+.admin-panel-body-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:#191c24;
+    gap: 2rem;
+}
+
+.admin-panel-body-div h1{
+    color: #ffffff;
+    font-size: clamp(1.5rem, 4vw, 4rem);
+    display: flex;
+    padding: 1rem 0;
+    flex-basis: 100%;
+    justify-content: center;
+}
+
+.admin-panel-body-div form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #191c24;
+    border-radius: 25px;
+    /* width: 100%; */
+}
+
+.admin-panel-body-div input[type="file"]{
+    display: none;
+}
+
+.admin-panel-body-div label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    /* background: rgba(63, 81, 181, 0.5); */
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.8s ease-in-out;
+    height: 250px;
+    width: 100%;
+    max-width: 500px;
+    outline: dashed 2px #5167e3;
+}
+
+.admin-panel-body-div label:hover{
+    background: rgba(63, 81, 181, 0.5);
+    transition: 0.8s ease-in-out;
+}
+
+.admin-panel-body-div button[type="submit"]{
+    padding: 1rem;
+    background: #5167e3;
+    color: white;
+    border: 1px solid #5167e3;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.8s ease-in-out;
+    /* width: 100%; */
+    width: clamp(150px, 4vw, 400px);
+}
+
+.admin-panel-body-div button[type="reset"]{
+    padding: 1rem;
+    /* background: #5167e3; */
+    border: 1px solid #5167e3;
+    color: white;
+    /* border: none; */
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.8s ease-in-out;
+    width: clamp(150px, 4vw, 400px); 
+}
+
+.admin-panel-body-div button[type="submit"]:hover{
+    background: transparent;
+    transition: 0.8s ease-in-out;
+}
+
+.admin-panel-body-div button[type="reset"]:hover{
+    background: #5167e3;
+    transition: 0.8s ease-in-out;
+}
+
+.admin-icon-nav{
+    display: none;
+}
+
+@media screen and (max-width: 768px){
+    .admin-icon-nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #191c24;
+    }
+}

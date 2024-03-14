@@ -17,9 +17,19 @@ const localStorageUtils = {
     return localStorage.getItem("userId");
   },
 
+  setCompanionId: (companion_id) => {
+    localStorage.setItem("companion_id", companion_id);
+  },
+
+  getCompanionId: () => {
+    return localStorage.getItem("companion_id");
+  },
+
+
   clearLocalStorage: () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userId");
+    localStorage.removeItem("companion_id");
   },
 };
 

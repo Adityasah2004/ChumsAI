@@ -41,9 +41,9 @@ export default function Contact() {
                 console.log(error);
                 setSnackbarSeverity('error');
                 setSnackbarOpen(true);
+                document.getElementsByName('from_name')[0].value = '';
                 document.getElementsByName('from_email')[0].value = '';
-                document.getElementsByName('from_email')[0].value = '';
-                // document.getElementsByName('message')[0].value = '';
+                document.getElementsByName('message')[0].value = '';
             });
     };
 
@@ -98,9 +98,6 @@ export default function Contact() {
                                     <textarea placeholder="Message" cols="10" rows="4" name='message' className='rounded-lg bg-black text-white' required></textarea>
                                 </div>
                                 <button type="submit">
-                                    {/* <span className="material-symbols-outlined">
-                                        send
-                                    </span> */}
                                     Send
                                 </button>
                             </form>

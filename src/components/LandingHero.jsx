@@ -46,15 +46,15 @@ const LandingHero = () => {
 
                 </div>
             </div>
-            <p className="hero-p-video p-4 capitalize font-medium text-white">Build & Discover your AI companion</p>
-            <div className="video-div" >
+            {/* <p className="hero-p-video p-4 capitalize font-medium text-white">Build & Discover your AI companion</p> */}
+            {/* <div className="video-div" > */}
                 {/* <img className="video-div-img1" src="./v1.svg" alt="" /> */}
                 {/* <video src={heroVideo} autoPlay loop playsInline muted data-aos="fade-up" /> */}
-                <video src="https://www.apple.com/105/media/us/mac/family/2023/1b2bbf5c-ddc5-44a1-9dfb-7a51c49143fa/anim/welcome/xlarge_2x.mp4" autoPlay loop playsInline muted data-aos="fade-up"></video>
+                {/* <video src="https://www.apple.com/105/media/us/mac/family/2023/1b2bbf5c-ddc5-44a1-9dfb-7a51c49143fa/anim/welcome/xlarge_2x.mp4" autoPlay loop playsInline muted data-aos="fade-up"></video> */}
                 {/* <img className="video-div-img2 absolute right-0" src="./v1.svg" alt="" /> */}
-            </div>
-            <div className="hero-down-div text-white font-bold text-5xl flex flex-col-reverse md:flex-row items-center h-screen gap-5 md:gap-72 my-40">
-                <div className=" hero-img-div">
+            {/* </div> */}
+            <div className="hero-down-div text-white font-bold text-5xl flex flex-col-reverse md:flex-row items-center h-screen gap-5 md:gap-70 my-40">
+                <div className="w-1/2 hero-img-div">
                     <LandingAvatar />
                 </div>
                 <div className="flex flex-col md:items-start gap-4 md:gap-8">
