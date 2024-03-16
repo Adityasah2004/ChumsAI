@@ -44,7 +44,7 @@
 }
 
 :hover:is(.feature-card1, .feature-card2, .feature-card3, .feature-card4, .feature-card5, .feature-card6, .feature-card7){
-    transform: scale(1.05) !important;
+    transform: scale(1.05);
 }
 
 .feature-card1{

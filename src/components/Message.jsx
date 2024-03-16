@@ -19,11 +19,11 @@ function Message(props) {
             <div className="flex flex-col relative">
                 <p className="message-p text-black items-center p-2 pl-3 rounded-r-xl rounded-bl-xl bg-white bg-opacity-80 h-auto gap-1 flex relative overflow-hidden text-left chat-p" onMouseEnter={() => setMessageMenu(true)} onMouseLeave={() => setMessageMenu(false)}>
                     {props.message}
-                    {/* {messageMenu &&
+                    {messageMenu &&
                         <span className="message-opt-icon material-symbols-outlined self-center cursor-pointer absolute top-0 right-0 text-white" onClick={handleOptions}>
                             more_vert
                         </span>
-                    } */}
+                    }
                 </p>
                 <span className="flex justify-end text-white">{props.time}</span>
                 {

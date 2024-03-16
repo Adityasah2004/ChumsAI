@@ -8,6 +8,7 @@ import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 import { Link } from 'react-router-dom';
+import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 // import { startRecording, stopRecording } from '../components/VoiceCall';
 
 const Chat = () => {
@@ -391,9 +392,18 @@ const Chat = () => {
         // <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
         <div className="chat-main-body">
             <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
-                <Avatar1
-                // companionId={companionId} 
-                />
+                <RenderOnViewportEntry 
+                    // className="avatar-div"
+                    threshold={0.25}
+                    className="w-full h-full"
+                    // onEnter={() => {
+                    //     console.log("Avatar is visible");
+                    // }}
+                >
+                    <Avatar1
+                    // companionId={companionId} 
+                    />
+                </RenderOnViewportEntry>
             </div>
             {/* <aside className=''> */}
             {/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */}
@@ -403,10 +413,16 @@ const Chat = () => {
             </iframe> */}
             {/* <div className="sketchfab-embed-wrapper absolute h-full w-full"> <iframe className='h-full w-full' title="Vatican royaume d'or" frameBorder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autostart; xr-spatial-tracking" src="https://sketchfab.com/models/8434d5d906ac4b84ad403e1b66f84668/embed?autostart=1&camera=0&ui_stop=0&ui_controls=0"> </iframe></div> */}
             {/* <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" /> */}
-            {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
-            {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
-            {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
-            {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />}
+            <RenderOnViewportEntry
+                threshold={0.25}
+                className="w-full h-full backg"
+            >
+                
+                {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
+                {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
+                {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
+                {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />}
+            </RenderOnViewportEntry>
 
             {/* {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />} */}
             {/* <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}> */}
@@ -448,23 +464,19 @@ const Chat = () => {
                         </div>
                     }
                 </menu>
-                <div className="chat-msg-area p-4 h-full flex flex-col gap-2 justify-end overflow-y-auto">
-                    {/* {userMessages.map((msg, index) => (
-                        <Message time={msg[2]} message={msg[0]} key={index} name={msg[1] === 'user' && "User"} cName={`${msg[1] === 'user' && 'user-message'}`} />
-                    ))}
-                    {aiMessages.map((msg, index) => (
-                        <Message message={msg[0]} key={index} name={msg[1] === 'ai' && "AI Avatar"} cName={`${msg[1] === 'ai' && 'ai-message'}`} />
-                    ))} */}
-                    {messages.map((msg, index) => (
-                        <Message
-                            time={msg.message[1]} // Ensure you have a time property in your message objects
-                            message={msg.message[0]}
-                            key={index}
-                            name={msg.sender === 'user' ? `${userDetails.first_name}  ${userDetails.last_name}` : companionDetails.name}
-                            cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
-                            img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : companionDetails.front_src}
-                        />
-                    ))}
+                <div className="chat-msg-area p-4 pr-0 h-full flex flex-col gap-2 justify-end overflow-hidden">
+                    <div className='overflow-y-auto flex flex-col pr-1 gap-2'>
+                        {messages.map((msg, index) => (
+                            <Message
+                                time={msg.message[1]} // Ensure you have a time property in your message objects
+                                message={msg.message[0]}
+                                key={index}
+                                name={msg.sender === 'user' ? `${userDetails.first_name}  ${userDetails.last_name}` : companionDetails.name}
+                                cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
+                                img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : companionDetails.front_src}
+                            />
+                        ))}
+                    </div>
                 </div>
                 {showEmoji &&
                     <div className='emoji-tag' >

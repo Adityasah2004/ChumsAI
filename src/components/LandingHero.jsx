@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, lazy } from "react";
 import "../styles/LandingHero.css";
-import LandingAvatar from "../components/LandingAvatar";
 // import heroVideo from "../assets/heroVideo.mp4";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from "react-router-dom";
+import RenderOnViewportEntry from "./RenderOnViewportEntry";
+// import { Suspense } from "react";
+import Loader from "./Loader";
+// import LandingAvatar from "../components/LandingAvatar";
+const LandingAvatar = lazy(() => import('../components/LandingAvatar'));
 
 const LandingHero = () => {
     let userId = localStorage.getItem('userId');
@@ -55,7 +59,17 @@ const LandingHero = () => {
             {/* </div> */}
             <div className="hero-down-div text-white font-bold text-5xl flex flex-col-reverse md:flex-row items-center h-screen gap-5 md:gap-70 my-40">
                 <div className="w-1/2 hero-img-div">
-                    <LandingAvatar />
+                    <RenderOnViewportEntry
+                        threshold={0.25}
+                        // rootMargin='0px'
+                        // root={null}
+                        className="w-full h-full"
+                    >
+                        {/* <Suspense fallback={<div>Loading...</div>}> */}
+                            <LandingAvatar />
+                            {/* <Loader/> */}
+                        {/* </Suspense> */}
+                    </RenderOnViewportEntry>
                 </div>
                 <div className="flex flex-col md:items-start gap-4 md:gap-8">
                     <span data-aos='fade-left'>Remember.</span>
