@@ -1,14 +1,12 @@
-.admin-panel-div{
+.admin-panel-div {
     display: flex;
     gap: 1rem;
     padding: 1rem;
-    /* width: 100%;
-    height: 100vh; */
-    overflow: hidden;
+    overflow: hidden
 }
 
-@media screen and (max-width: 768px) {
-    .admin-panel-div{
-        padding: 0;
+@media screen and (max-width:768px) {
+    .admin-panel-div {
+        padding: 0
     }
 }

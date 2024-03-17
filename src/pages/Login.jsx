@@ -9,7 +9,7 @@ import localStorageUtils from "../Hooks/localStorageUtils";
 //     Label,
 //     Checkbox,
 // } from "flowbite-react";
-import CompanionList from "../components/CompanionCard";
+// import CompanionList from "../components/CompanionCard";
 import '../styles/Login.css';
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     // const [lastName, setLastName] = useState("");
     // const [confirmPassword, setConfirmPassword] = useState("");
     // const [mode, setMode] = useState("login");
-    const [userId, setUserId] = useState(null);
+    // const [userId, setUserId] = useState(null);
     const history = useHistory();
 
     // const onCloseModal = () => {

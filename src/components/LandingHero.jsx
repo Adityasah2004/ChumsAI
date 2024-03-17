@@ -5,8 +5,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from "react-router-dom";
 import RenderOnViewportEntry from "./RenderOnViewportEntry";
-// import { Suspense } from "react";
-import Loader from "./Loader";
+import { Suspense } from "react";
+// import Loader from "./Loader";
 // import LandingAvatar from "../components/LandingAvatar";
 const LandingAvatar = lazy(() => import('../components/LandingAvatar'));
 
@@ -21,10 +21,10 @@ const LandingHero = () => {
         <div>
             <div className="hero-section">
                 <div className="left-div">
-                    <h1 className="hero-heading" data-aos="fade-up">
+                    <h1 className="hero-heading">
                         Feel the <big className=" text-teal-400">Connection</big>. <br /> Feel <big className="text-teal-400">Chums</big>.
                     </h1>
-                    <p className=" text-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <p className=" text-gray-100" >
                         Your own personalized AI humanoid &nbsp;
                         <big>3D Companion</big>
                         {/* Build & Discover your AI Friend and Work companion */}
@@ -65,10 +65,10 @@ const LandingHero = () => {
                         // root={null}
                         className="w-full h-full"
                     >
-                        {/* <Suspense fallback={<div>Loading...</div>}> */}
+                        <Suspense fallback={<div className="loading w-full h-full flex items-center justify-center">Loading...</div>}>
                             <LandingAvatar />
                             {/* <Loader/> */}
-                        {/* </Suspense> */}
+                        </Suspense>
                     </RenderOnViewportEntry>
                 </div>
                 <div className="flex flex-col md:items-start gap-4 md:gap-8">

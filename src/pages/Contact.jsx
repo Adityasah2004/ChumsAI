@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, lazy, Suspense } from 'react';
 import emailjs from '@emailjs/browser';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
+const Navbar = lazy(() => import('../components/Navbar'));
 import '../styles/Contact.css';
 
 const Alert = React.forwardRef(function Alert(props, ref) {

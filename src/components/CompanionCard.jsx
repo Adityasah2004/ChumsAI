@@ -6,8 +6,10 @@ import Side from './Sidebar';
 import '../styles/CompanionCard.css'
 import DashboardCreateCard from './DashboardCreateCard';
 
-const CompanionCard = ({ data }) => {
-    const { name, user_id, front_src, companion_id, message_count, category } = data;
+const userId = localStorageUtils.getUserId();
+
+const CompanionCard = ({ data, key }) => {
+    const { name, front_src, companion_id, message_count, category } = data;
     // const userId = localStorageUtils.getUserId();
     console.log(data);
     const handleCardClick = () => {
@@ -21,14 +23,14 @@ const CompanionCard = ({ data }) => {
         // }
     };
     return (
-        <Link to={`/chat/${user_id}/${companion_id}`} className="comp-card flex flex-col border h-full p-2 rounded-xl" onClick={handleCardClick}>
+        <Link key={key} to={`/chat/${userId}/${companion_id}`} className="comp-card flex flex-col border h-full p-2 rounded-xl" onClick={handleCardClick}>
             <div className='flex items-center justify-center'>
                 <img className="comp-card-img" src={front_src} alt="AI Companion Image" />
             </div>
             <h2 className="text-white text-xl font-medium">{name}</h2>
             <p className='text-white font-thin'>{category}</p>
             <div className='flex justify-between'>
-                <span className="text-gray-500 text-xs mt-2 mb-2">{user_id}</span>
+                <span className="text-gray-500 text-xs mt-2 mb-2">{userId}</span>
                 <div className='flex items-center gap-1 text-white' title='Message count'>
                     <span className="material-symbols-outlined ">
                         chat
@@ -43,7 +45,7 @@ const CompanionCard = ({ data }) => {
 const CompanionList = () => {
     const [companionData, setCompanionData] = useState([]);
     const [menuOpen, setMenuOpen] = useState(false);
-    const userId = localStorageUtils.getUserId();
+
     const accessToken = localStorageUtils.getAccessToken();
 
     // const handleCardClick = () => {
@@ -183,7 +185,7 @@ const CompanionList = () => {
                 <div className="dashboard-cards-div">
                     <DashboardCreateCard />
                     {companionData.map((companion) => (
-                        <CompanionCard key={companion.id} data={companion} 
+                        <CompanionCard key={companion.id} data={companion}
                         // onCardClick={handleCardClick} 
                         />
                     ))}

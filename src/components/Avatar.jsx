@@ -3,12 +3,16 @@ import { Html, useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useLoader } from "@react-three/fiber"
 import { OrbitControls, useAnimations, useFBX } from "@react-three/drei/core"
 import { useEffect, useMemo, useRef, useState } from "react";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from "three";
 import useSpeechRecognition from "../Hooks/useSpeechRecognitionHook";
+import { Suspense } from 'react'
 
 
 var audio = new Audio();
 const Avatar = (/*{companionId}*/) => {
+    // useLoader.preload(GLTFLoader, '/Avatar3.glb');
+
     const corresponding = {
         A: "viseme_PP",
         B: "viseme_kk",
@@ -20,6 +24,7 @@ const Avatar = (/*{companionId}*/) => {
         H: "viseme_TH",
         X: "viseme_PP",
     };
+
     var {
         text,
         startListening,
@@ -28,7 +33,8 @@ const Avatar = (/*{companionId}*/) => {
         hasRecognitionSupport
     } = useSpeechRecognition()
     // const avatar = useGLTF(`/${companion_id}.glb`);
-    const avatar = useGLTF(`/Avatar3.glb`);
+    // const avatar = useGLTF(`/Avatar3.glb`);
+    const avatar = useLoader(GLTFLoader, `/Avatar3.glb`);
     const [index, setIndex] = useState(0);
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"
@@ -218,13 +224,11 @@ const Avatar = (/*{companionId}*/) => {
 }
 export const Avatar1 = (props) => {
     return (
-
         <Canvas dpr={[0, 2]}>
             <ambientLight />
             <pointLight position={[1, 1, 1]} />
             <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} enableZoom={false} />
             <Avatar companionId={props.companion_id} />
         </Canvas>
-
     )
 };

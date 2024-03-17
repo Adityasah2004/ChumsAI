@@ -82,16 +82,16 @@ const Settings = () => {
                     <h1 className="text-2xl font-bold">User Profile</h1>
                 </div>
                 <div>
-                    <img src={userProfile.photo} alt="User Photo" className="mb-4 rounded-full" />
+                    {/* <img src={userProfile.photo} alt="User Photo" className="mb-4 rounded-full" /> */}
                     <p className="text-xl font-semibold">{userProfile.displayName}</p>
                     <p className="text-gray-400">Total AI Companions Created: {userProfile.totalCompanions}</p>
                     <div>
                         <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md mr-2">
                             Edit Profile
                         </button>
-                        <button onClick={handleDeleteCompanions} className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md mr-2">
+                        {/* <button onClick={handleDeleteCompanions} className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md mr-2">
                             Delete Companions
-                        </button>
+                        </button> */}
                         <button onClick={handleLogout} className="mt-4 bg-gray-500 text-white px-4 py-2 rounded-md">
                             Log Out
                         </button>

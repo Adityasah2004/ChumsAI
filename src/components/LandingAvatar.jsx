@@ -1,6 +1,7 @@
 import { useGLTF } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, useAnimations} from "@react-three/drei/core"
+import { GLTFLoader } from "three-stdlib"
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 
@@ -29,11 +30,12 @@ const useScreenSize = () => {
     return screenSize;
 };
 
-
+const loader = new GLTFLoader();
 
 const Avatar = () => {
     const screenSizes = useScreenSize();
-    const avatar = useGLTF("Avatar3.glb");
+    // const avatar = useGLTF("Avatar3.glb");
+    const avatar = useGLTF("Avatar3.glb", loader);
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"
     const { actions, names } = useAnimations(avatar.animations, avatar.scene);

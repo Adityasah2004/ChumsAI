@@ -9,7 +9,7 @@ function Message(props) {
     };
 
     return (
-        <div className={`${props.cName} w-fit`}>
+        <div className={`${props.cName} w-fit`} onMouseLeave={() => setMessageOptions(false)}>
             <div className="flex items-center justify-start gap-2">
                 <div className="rounded-full w-5 h-5 left-0 bg-lime-500">
                     <img src={props.img} alt="avatar" className="rounded-full w-5 h-5" />

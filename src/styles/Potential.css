@@ -1,62 +1,63 @@
-.potential-heading{
+.bullet,
+.ellipse,
+.potential-img-div {
+    width: 100%;
+    height: auto
+}
+
+.potential-heading {
     font-size: clamp(2rem, 4vw, 4rem);
     color: #fff;
     text-align: center;
-    margin: 2rem 0;
+    margin: 2rem 0
 }
 
-.potential-div{
+.potential-div {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 4rem;
     width: 100%;
-    padding: 2rem;
+    padding: 2rem
 }
 
-.potential-img-div{
+.potential-img-div {
+    max-width: 400px;
+    position: relative
+}
+
+.potential-img-div .avatars-img {
     width: 100%;
     max-width: 400px;
     height: auto;
-    position: relative;
+    border-radius: 10px
 }
 
-.potential-img-div .avatars-img{
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 10px;
-}
-
-.ellipse{
+.ellipse {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    max-width: 500px;
-    height: auto;
+    max-width: 500px
 }
 
-.bullet{
-    width: 100%;
-    max-width: 35px;
-    height: auto;
+.bullet {
+    max-width: 35px
 }
 
-.item{
+.item {
     display: flex;
-    gap: 0.5rem;
-    white-space: nowrap;
+    gap: .5rem;
+    white-space: nowrap
 }
 
-.item li{
+.item li {
     list-style: none;
-    font-size: clamp(0.8rem, 4vw, 1.5rem);
-    font-weight: 300;
+    font-size: clamp(.8rem, 4vw, 1.5rem);
+    font-weight: 300
 }
 
-@media screen and (max-width: 768px){
-    .potential-div{
-        flex-direction: column;
+@media screen and (max-width:768px) {
+    .potential-div {
+        flex-direction: column
     }
 }

@@ -1,39 +1,36 @@
-.faq-section{
+.faq-section {
     padding-left: 8rem;
-    padding-right: 8rem;
+    padding-right: 8rem
 }
 
-.faq-heading{
+.faq-heading {
     font-size: clamp(2rem, 4vw, 3rem);
-    /* font-weight: 00; */
     margin-bottom: 2rem;
     text-align: center;
-    color: white;
+    color: #fff
 }
 
-.MuiCollapse-wrapper{
-    background-color: #000000;
-    color: white;
+.MuiCollapse-wrapper {
+    background-color: #000;
+    color: #fff
 }
 
-.MuiSvgIcon-root{
-    color: white;
+.MuiSvgIcon-root {
+    color: #fff
 }
 
-.MuiButtonBase-root{
-    color: white;
-    border: none;
+.MuiButtonBase-root {
+    color: #fff;
+    border: none
 }
 
-.css-1fderfv-MuiPaper-root-MuiAccordion-root{
-    border: none;
+.css-1fderfv-MuiPaper-root-MuiAccordion-root {
+    border: none
 }
 
-@media screen and (max-width: 425px)
-{
-    .faq-section{
+@media screen and (max-width:425px) {
+    .faq-section {
         padding-left: 2rem;
-        padding-right: 2rem;
+        padding-right: 2rem
     }
-    
 }

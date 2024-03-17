@@ -42,6 +42,8 @@ const Signup = () => {
             first_name: firstName,
             last_name: lastName,
             password,
+            verification_code: "",
+            verified: 1
         };
 
         if (password !== confirmPassword) {
@@ -77,7 +79,8 @@ const Signup = () => {
                 console.log("Access Token:", localStorage.getItem("accessToken"));
 
                 console.log("Signup complete");
-                history.push("/verify-email");
+                // history.push("/verify-email");
+                history.push("/login");
             } else if (response.status === 422) {
                 // Unprocessable Entity - Validation errors
                 const responseData = await response.json();

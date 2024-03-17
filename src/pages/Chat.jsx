@@ -7,17 +7,18 @@ import '../styles/Chat.css';
 import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
+// const {Avatar1} = lazy(() => import('../components/Avatar'));
 import { Link } from 'react-router-dom';
 import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 // import { startRecording, stopRecording } from '../components/VoiceCall';
 
-const Chat = () => {
 
-    // const companionDestructuredData = (companionDetails) => {
-    //     const { name, front_src } = companionDetails;
-    //     // const userId = localStorageUtils.getUserId();
-    //     console.log("this is companion details", name, front_src);
-    // }
+const Chat = () => {
+    const userId = localStorageUtils.getUserId();
+    const accessToken = localStorageUtils.getAccessToken();
+    const companionId = localStorageUtils.getCompanionId();
+
+
 
     const dispatch = useDispatch();
     const [companionDetails, setCompanionDetails] = useState(null);
@@ -28,13 +29,9 @@ const Chat = () => {
     const [newMessage, setNewMessage] = useState('');
     const [comingSoon, setComingSoon] = useState(false);
     // const [aimessage ,setaimessage] = usestate('');
-    // const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }));
     const [intOpt, setInpOpt] = useState(false);
     const [settings, setSettings] = useState(false);
     const [background, setBackground] = useState(0);
-    const userId = localStorageUtils.getUserId();
-    const accessToken = localStorageUtils.getAccessToken();
-    const companionId = localStorageUtils.getCompanionId();
 
     const userMessages = useSelector(state => state.messages.userMessages);
     const aiMessages = useSelector(state => state.messages.aiMessages);
@@ -50,7 +47,6 @@ const Chat = () => {
         try {
             const apiUrl = `http://localhost:8000/companion/${companionId}`;
             const bearerToken = accessToken;
-
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -58,16 +54,12 @@ const Chat = () => {
                     Authorization: `Bearer ${bearerToken}`,
                 }
             };
-
             const response = await fetch(apiUrl, requestOptions);
-
             if (!response.ok) {
                 throw new Error(`Failed to fetch details. Status: ${response.status}`);
             }
-
             const data = await response.json();
             console.log("Fetched details from the backend:", data);
-
             // Store the fetched data in the global variable
             setCompanionDetails(data);
             // companionDestructuredData(companionDetails);
@@ -77,7 +69,43 @@ const Chat = () => {
         }
     };
 
-    // Now you can access companionDetails globally
+    // const GetAllCharacterMessagesComponent = async (userId, companionId) => {
+    // const [messages, setMessages] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
+
+    // useEffect(() => {
+    const fetchMessages = async () => {
+        console.log("this is user id in fetchmessages", userId);
+        try {
+            const response = await fetch(`http://localhost:8000/message/get_all_character_messages?user_id=${userId}&character_id=${companionId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch messages');
+            }
+
+            const data = await response.json();
+            data.forEach(message => {
+                if (message.user) {
+                    // Dispatch action for user message
+                    dispatch(addUserMessage(message.user, message.user_timestamp));
+                }
+                if (message.response) {
+                    // Dispatch action for AI message
+                    dispatch(addAIMessage(message.response, message.response_timestamp));
+                }
+            });
+
+            console.log("Fetched messages from the database:", data);
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
+    };
 
 
 
@@ -121,7 +149,13 @@ const Chat = () => {
     useEffect(() => {
         fetchCompanionDetails();
         fetchUserDetails();
+        // fetchMessages(userId, companionId);
+        // GetAllCharacterMessagesComponent();
         // companionDestructuredData(companionDetails);
+    }, []);
+
+    useEffect(() => {
+        fetchMessages();
     }, []);
 
 
@@ -392,13 +426,13 @@ const Chat = () => {
         // <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
         <div className="chat-main-body">
             <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
-                <RenderOnViewportEntry 
+                <RenderOnViewportEntry
                     // className="avatar-div"
                     threshold={0.25}
                     className="w-full h-full"
-                    // onEnter={() => {
-                    //     console.log("Avatar is visible");
-                    // }}
+                // onEnter={() => {
+                //     console.log("Avatar is visible");
+                // }}
                 >
                     <Avatar1
                     // companionId={companionId} 
@@ -417,7 +451,7 @@ const Chat = () => {
                 threshold={0.25}
                 className="w-full h-full backg"
             >
-                
+
                 {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
                 {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
                 {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
@@ -598,5 +632,6 @@ const Chat = () => {
         </div>
     );
 };
+// }
 
 export default Chat;

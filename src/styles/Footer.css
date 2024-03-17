@@ -1,146 +1,145 @@
-.footer-div1{
+.subscribe-div h6,
+.subscribe-div p {
+    font-weight: 400;
+    text-align: left
+}
+
+.footer-div1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem
 }
 
-.footer-div2{
+.footer-div2 {
     display: flex;
     justify-content: space-around;
     padding: 1rem 2rem;
     color: #fdfdfd;
     gap: 2rem;
-    width: 100%;
+    width: 100%
 }
 
-.footer-logo-div{
+.footer-logo-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     font-size: clamp(1rem, 4vw, 1.5rem);
-    white-space: nowrap;
+    white-space: nowrap
 }
 
-.footer-logo{
+.footer-logo {
     width: 100px;
     height: 100px;
-    display: block;
+    display: block
 }
 
-.subscribe-div h6{
-    text-align: center;
+.subscribe-div h6 {
     font-size: clamp(1.5rem, 4vw, 2rem);
-    margin-top: 20px;
-    font-weight: 400;
-    text-align: left;
+    margin-top: 20px
 }
 
-.subscribe-div p{
-    font-weight: 400;
-    text-align: left;
-    font-size: clamp(0.8rem, 4vw, 1rem);
+.subscribe-div button,
+.subscribe-div p,
+.year-line {
+    font-size: clamp(.8rem, 4vw, 1rem)
 }
 
-.subscribe-div input{
+.subscribe-div input {
     width: 100%;
-    padding: 0.5rem;
-    /* margin: 1rem 0; */
+    padding: .5rem;
     border-radius: 5px;
     border: none;
-    outline: none;
-    background-color: transparent;
+    outline: 0;
+    background-color: transparent
 }
 
-.sub-input:focus-visible{
-    outline: none;
-    border: none;
+.sub-input:focus-visible {
+    outline: 0;
+    border: none
 }
 
-.subscribe-input-div{
-    border: 2px solid #00B7A1;
+.subscribe-input-div {
+    border: 2px solid #00b7a1;
     border-radius: 50px;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    padding: .5rem .5rem .5rem 1rem;
     width: 100%;
-    display: flex;
+    display: flex
 }
 
-.subscribe-div button{
+.subscribe-div button {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50px;
-    padding: 0.8rem 1.5rem;       
+    padding: .8rem 1.5rem;
     width: 200px;
-    border: 2px solid #00B7A1;
-    outline: none;
-    background-color: #00B7A1;
+    border: 2px solid #00b7a1;
+    outline: 0;
+    background-color: #00b7a1;
     color: #fdfdfd;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    font-size: clamp(0.8rem, 4vw, 1rem);
+    transition: .3s ease-in-out
 }
 
-.subscribe-div button:hover{
+.subscribe-div button:hover {
     background-color: transparent;
-    color: #00B7A1;
+    color: #00b7a1
 }
 
-.footer-img{
+.footer-img {
     position: absolute;
     left: -8rem;
     top: -8rem;
     z-index: -1;
-    opacity: 0.8;
+    opacity: .8
 }
 
-.year-line{
-    font-size: clamp(0.8rem, 4vw, 1rem);
-}
-
-@media screen and (max-width: 768px){
-    .footer-div1{
-        flex-direction: column;
+@media screen and (max-width:768px) {
+    .footer-div1 {
+        flex-direction: column
     }
-    .footer-logo{
+
+    .footer-logo {
         width: 50px;
-        height: 50px;
+        height: 50px
     }
-    .subscribe-div h6{
-        text-align: center;
+
+    .subscribe-div h6,
+    .subscribe-div p {
+        text-align: center
     }
-    .subscribe-div p{
-        text-align: center;
+
+    .footer-img {
+        display: none
     }
-    .footer-img{
-        display: none;
-    }
-    .footer-div2{
-        flex-wrap: wrap;
+
+    .footer-div2 {
+        flex-wrap: wrap
     }
 }
 
-@media screen and (max-width: 468px){
+@media screen and (max-width:468px) {
     .footer-div2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 1rem
     }
-    .footer-last-div{
+
+    .footer-last-div {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column-reverse;
-    
+        flex-direction: column-reverse
     }
 }
 
-@media screen and (max-width: 375px){
+@media screen and (max-width:375px) {
     .footer-div2 {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1rem
     }
 }

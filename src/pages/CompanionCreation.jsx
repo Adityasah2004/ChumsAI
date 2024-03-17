@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Modal, FileInput, Label } from "flowbite-react";
+import { FileInput, Label } from "flowbite-react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import localStorageUtils from "../Hooks/localStorageUtils";

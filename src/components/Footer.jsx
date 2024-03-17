@@ -1,6 +1,6 @@
 
 // import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-import logo from '../assets/logoDark.png';
+import logo from '../assets/logoDark.webp';
 import '../styles/Footer.css';
 // import { Link } from "react-router-dom";
 
