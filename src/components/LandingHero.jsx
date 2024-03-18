@@ -35,7 +35,7 @@ const LandingHero = () => {
                             Discord
                             <FaDiscord className="disc-icon text-white text-2xl ml-2" />
                         </buttton> */}
-                        <Link to={`/dashboard/${userId}`} className="create-btn whitespace-nowrap">
+                        <Link to={userId ? `/dashboard/${userId}` : "/login"} className="create-btn whitespace-nowrap">
                             Get Started
                             <span className="material-symbols-outlined">
                                 arrow_forward
@@ -67,7 +67,6 @@ const LandingHero = () => {
                     >
                         <Suspense fallback={<div className="loading w-full h-full flex items-center justify-center">Loading...</div>}>
                             <LandingAvatar />
-                            {/* <Loader/> */}
                         </Suspense>
                     </RenderOnViewportEntry>
                 </div>

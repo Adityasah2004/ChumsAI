@@ -12,8 +12,12 @@
 
 .login-btn,
 .nav-menu-icon {
-    color: #fff;
+    
     cursor: pointer
+}
+
+.nav-menu-icon{
+    color: #fff;
 }
 
 .login-btn,

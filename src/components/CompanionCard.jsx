@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Side from './Sidebar';
 import '../styles/CompanionCard.css'
@@ -43,6 +43,9 @@ const CompanionCard = ({ data, key }) => {
 };
 
 const CompanionList = () => {
+
+    const history = useHistory();
+
     const [companionData, setCompanionData] = useState([]);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -52,6 +55,15 @@ const CompanionList = () => {
     //     // Handle card click if needed
     //     // You can perform additional actions here if necessary
     // };
+
+    const handleLogout = () => {
+
+        // Implement logout logic
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+        // Redirect to the logout page or perform other logout actions
+    };
 
     useEffect(() => {
         if (!userId || !accessToken) {
@@ -112,7 +124,7 @@ const CompanionList = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link to="/companion-creation" className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                    <Link to={`/companion-creation/${userId}`} className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             add_circle
                                         </span>
@@ -144,7 +156,7 @@ const CompanionList = () => {
                                     </a>
                                 </li> */}
                                 <li>
-                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap" onClick={handleLogout}>
                                         <span className="material-symbols-outlined">
                                             logout
                                         </span>

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import {lazy, Suspense} from 'react';
+import { lazy, Suspense } from 'react';
 // import CompanionList from '../components/CompanionCard';
 const CompanionList = lazy(() => import('../components/CompanionCard'));
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
                 <meta name="description" content="Dashboard" />
             </Helmet>
             <Suspense fallback={<div>Loading...</div>}>
-            <CompanionList />
+                <CompanionList />
             </Suspense>
         </div>
     );

@@ -2,9 +2,12 @@ import Navbar from "../components/Navbar";
 
 const Documentation = () => {
     return (
-        <div>
+        <div className="h-screen flex justify-center items-center">
             <Navbar />
-            Documentation
+            {/* coming soon */}
+            <div className="text-white">
+                This page will be publicly available soon.
+            </div>
         </div>
     )
 }

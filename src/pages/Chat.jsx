@@ -163,6 +163,9 @@ const Chat = () => {
     const handleSendMessage = async (e) => {
         // check if the value of newMessage is empty
         e.preventDefault();
+        setInpOpt(false);
+        setSettings(false);
+        setShowEmoji(false);
         if (newMessage.trim() === "") {
             return;
         }
@@ -478,15 +481,15 @@ const Chat = () => {
                         </span>
                     </button>
                     {settings &&
-                        <div className='settings absolute bg-black bg-opacity-75 p-4 text-white z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
-                            <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all'>
+                        <div className='settings absolute bg-black bg-opacity-95 p-4 text-white z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
+                            {/* <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all'>
                                 <p className='flex items-center gap-2'>
                                     <span className="material-symbols-outlined">
                                         settings
                                     </span>
                                     Settings
                                 </p>
-                            </button>
+                            </button> */}
                             <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all' onClick={handleBackgroundChange}>
                                 <p className='flex items-center gap-2'>
                                     <span className="material-symbols-outlined">
@@ -498,9 +501,10 @@ const Chat = () => {
                         </div>
                     }
                 </menu>
-                <div className="chat-msg-area p-4 pr-0 h-full flex flex-col gap-2 justify-end overflow-hidden">
-                    <div className='overflow-y-auto flex flex-col pr-1 gap-2'>
+                <div className="chat-msg-area pr-0 h-full flex flex-col gap-2 justify-end overflow-hidden">
+                    <div className='overflow-y-auto flex flex-col pr-1 gap-2 scroll-pb-px'>
                         {messages.map((msg, index) => (
+                            // console.log("this is msg", msg),
                             <Message
                                 time={msg.message[1]} // Ensure you have a time property in your message objects
                                 message={msg.message[0]}
@@ -508,6 +512,7 @@ const Chat = () => {
                                 name={msg.sender === 'user' ? `${userDetails.first_name}  ${userDetails.last_name}` : companionDetails.name}
                                 cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
                                 img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : companionDetails.front_src}
+                                sender={msg.sender === 'user' ? 'user' : 'ai'}
                             />
                         ))}
                     </div>

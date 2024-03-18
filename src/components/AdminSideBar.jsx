@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-import logo from "../assets/logoDark.png";
+import logo from "../assets/logoDark.webp";
 import '../styles/AdminSideBar.css';
 
 function AdminSideBar() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FileInput, Label } from "flowbite-react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import localStorageUtils from "../Hooks/localStorageUtils";
 import frontProfile from "../assets/frontProfile.png";
 import leftProfile from "../assets/leftProfile.png";
@@ -27,6 +27,7 @@ const userId = localStorageUtils.getUserId();
 const bearerToken = localStorageUtils.getAccessToken();
 
 function CompanionCreation() {
+    const history = useHistory();
 
     const [frontImage, setFrontImage] = useState(null);
     const [leftSideImage, setLeftSideImage] = useState(null);
@@ -56,7 +57,6 @@ function CompanionCreation() {
             }
 
             const responseData = await response.json();
-
             console.log('Public IDs:', responseData);
         } catch (error) {
             console.error('Error uploading images:', error);
@@ -212,6 +212,7 @@ function CompanionCreation() {
             if (response.ok) {
                 const responseData = await response.json();
                 console.log("Response from backend:", responseData);
+                history.push(`/dashboard/${userId}`);
                 // onClose();
             } else {
                 const responseData = await response.json();

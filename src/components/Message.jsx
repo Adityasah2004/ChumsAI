@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PropTypes from 'prop-types';
 import '../styles/Message.css'
 
 function Message(props) {
@@ -26,10 +27,11 @@ function Message(props) {
                     }
                 </p>
                 <span className="flex justify-end text-white">{props.time}</span>
+                
                 {
-                    messageOptions ? (
-                        <div className={`mess-opt-div flex flex-col gap-1 p-2 rounded-md ${props.name === "ai" ? "bg-black text-white" : "bg-white text-black"} absolute top-8 right-0`}>
-                            <button className={`delete-${props.key} flex gap-2 ${props.name === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`} onClick={() => props.deleteMessage(props.key)}>
+                    messageOptions && (
+                        <div className={`mess-opt-div flex flex-col gap-1 p-2 rounded-md ${props.sender === "ai" ? "bg-black text-white" : "bg-white text-black"} absolute top-8 right-0`}>
+                            <button className={`flex gap-2 ${props.sender === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`} >
                                 <span className="material-symbols-outlined self-center flex">
                                     delete
                                 </span>
@@ -42,12 +44,21 @@ function Message(props) {
                                 <p>Edit</p>
                             </button>
                         </div>
-                    ) : null
+                    )
                 }
 
             </div>
         </div>
     )
 }
+Message.propTypes = {
+    // key: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    cName: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    sender: PropTypes.string.isRequired,
+};
 
 export default Message

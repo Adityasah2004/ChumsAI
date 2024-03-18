@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import '../styles/Navbar.css';
 import logo from "../assets/logoDark.webp";
+import localStorageUtils from '../Hooks/localStorageUtils';
 
-const Head = () => {
+const Navbar = () => {
 
+    const history = useHistory();
+    const userId = localStorageUtils.getUserId();
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     window.onclick = function (event) {
@@ -15,6 +18,15 @@ const Head = () => {
 
     const handleNavbarOpen = () => {
         setNavbarOpen(!navbarOpen);
+    };
+
+    const handleLogout = () => {
+
+        // Implement logout logic
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+        // Redirect to the logout page or perform other logout actions
     };
 
     return (
@@ -31,33 +43,51 @@ const Head = () => {
                         </span>
                     </Link>
                     <div className="nav-links">
-                        <Link to="/" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        <Link to="/" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Home
                         </Link>
-                        <Link to="/blogs" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        {
+                            userId && (
+                                <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                    Dashboard
+                                </Link>
+                            )
+                        }
+                        <Link to="/documentation" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Documentation
                         </Link>
-                        <Link to="/Contact" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        <Link to="/Contact" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Contact us
                         </Link>
                     </div>
                     <div className="nav-elem">
-                        <Link
-                            // onClick={() => setOpenModal(true)}
-                            to = "/login"
-                            className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 text-white hover:text-black hover:bg-white"
-                        >
-                            Login
-                        </Link>
-                    {/* </div>
+                        {
+                            userId ? (
+                                <>
+                                    <Link to={`/settings/${userId}`} className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                        Profile
+                                    </Link>
+                                    <button className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black"  onClick={handleLogout}>
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to="/signup"
+                                        className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 text-white hover:text-black hover:bg-white"
+                                        >
+                                        Sign Up
+                                    </Link>
+                                </>
+                            )
+                        }
+                        {/* </div>
                     <div className="nav-elem"> */}
-                        <Link
-                            // onClick={() => setOpenModal(true)}
-                            to="/signup"
-                            className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 text-white hover:text-black hover:bg-white"
-                        >
-                            Sign Up
-                        </Link>
+
                     </div>
                     {
                         navbarOpen ?
@@ -71,21 +101,39 @@ const Head = () => {
                     {
                         navbarOpen && (
                             <div className="nav-links-phone">
-                                <Link to="/" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Home
                                 </Link>
-                                <Link to="/about" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/documentation" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Documentation
                                 </Link>
-                                <Link to="/contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Contact us
                                 </Link>
-                                <Link to="/login" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                                    Login
-                                </Link>
-                                <Link to="/signup" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                                    Sign Up
-                                </Link>
+                                {
+                                    userId ? (
+                                        <>
+                                        <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                            Dashboard
+                                        </Link>
+                                        <Link to={`/settings/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                            Profile
+                                        </Link>
+                                        <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
+                                            Logout
+                                        </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                                <Link to="/login" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                    Login
+                                                </Link>
+                                                <Link to="/signup" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                    Sign Up
+                                                </Link>
+                                        </>
+                                    )
+                                }
                                 {/* <button
                                     onClick={() => setOpenModal(true)}
                                     className=" text-white flex justify-center gap-2  hover:bg-white px-3 py-2 rounded-full hover:text-black"
@@ -236,4 +284,4 @@ const Head = () => {
     );
 };
 
-export default Head;
+export default Navbar;

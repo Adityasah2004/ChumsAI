@@ -1,8 +1,23 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/logoDark.png";
+import { Link, useHistory } from "react-router-dom";
+import logo from "../assets/logoDark.webp";
 import '../styles/Sidebar.css';
+import localStorageUtils from "../Hooks/localStorageUtils";
+
+const userId = localStorageUtils.getUserId();
 
 function Side() {
+
+    const history = useHistory();
+
+    const handleLogout = () => {
+
+        // Implement logout logic
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+        // Redirect to the logout page or perform other logout actions
+    };
+
     return (
         <aside className="logo-sidebar rounded-xl" aria-label="Sidebar">
             <a href="/" className="flex items-center gap-2 pl-3 h-20">
@@ -22,7 +37,7 @@ function Side() {
                         </a>
                     </li>
                     <li>
-                        <Link to="/companion-creation" className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
+                        <Link to={`/companion-creation/${userId}`} className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">
                                 add_circle
                             </span>
@@ -30,7 +45,7 @@ function Side() {
                         </Link>
                     </li>
                     <li>
-                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
+                        <a href="/documentation" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">
                                 description
                             </span>
@@ -64,7 +79,7 @@ function Side() {
                 </ul>
                 <ul className="space-y-2 font-medium">
                     <li>
-                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
+                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max" onClick={handleLogout}>
                             <span className="material-symbols-outlined">
                                 logout
                             </span>
@@ -72,7 +87,7 @@ function Side() {
                         </a>
                     </li>
                     <li>
-                        <Link to={`/settings`} className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
+                        <Link to={`/settings/${userId}`} className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
                             <span className="material-symbols-outlined">
                                 settings
                             </span>

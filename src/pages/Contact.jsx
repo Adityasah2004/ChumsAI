@@ -55,7 +55,7 @@ export default function Contact() {
                 <div className='contact'>
                     <h2>Contact</h2>
                     <div className='flex flex-col items-center'>
-                        <div className='contact-info'>
+                        {/* <div className='contact-info'>
                             <span>
                                 <p>
                                     <span className="material-symbols-outlined">
@@ -89,7 +89,7 @@ export default function Contact() {
                                     +91 91367 42031
                                 </div>
                             </span>
-                        </div>
+                        </div> */}
                         <div className='contact-form w-full'>
                             {/* <h3>Contact form</h3> */}
                             <form className='form w-full' ref={refForm} onSubmit={sendEmail}>

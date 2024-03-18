@@ -40,53 +40,25 @@ const AppRouter = () => {
                 <title>Chums AI</title>
                 <meta name="description" content="Chums AI" />
             </Helmet>
-            <Switch>
-                <React.Suspense fallback={<div>Loading...</div>}>
+            <React.Suspense fallback={<div>Loading...</div>}>
+                <Switch>
                     <Route exact path="/" component={LandingPage} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/signup" component={Signup} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/verify-email" component={SendVerification} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/verification-code" component={VerificationCode} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/login" component={Login} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/admin" component={AdminPanel} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/dashboard/:id" component={Dashboard} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
-                    <Route exact path="/companion-creation" component={CompanionCreation} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
+                    <Route exact path="/companion-creation/:id" component={CompanionCreation} />
                     <Route exact path="/settings/:id" component={Settings} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/chat/:id/:companion" component={Chat} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/contact" component={Contact} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/documentation" component={Documentation} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/terms" component={TermsConditions} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route exact path="/privacy" component={PrivacyPolicy} />
-                </React.Suspense>
-                <React.Suspense fallback={<div>Loading...</div>}>
                     <Route path="*" component={NotFound} />
-                </React.Suspense>
-            </Switch>
+                </Switch>
+            </React.Suspense>
         </div>
     );
 };

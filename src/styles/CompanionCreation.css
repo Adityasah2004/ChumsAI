@@ -63,7 +63,6 @@ input[type=number] {
 
 .img-drop-area {
     min-width: 200px;
-    width: 100%;
     font-size: clamp(1rem, 2vw, 1.5rem);
     flex: auto
 }
