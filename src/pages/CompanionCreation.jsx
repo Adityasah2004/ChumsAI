@@ -552,7 +552,9 @@ function CompanionCreation() {
                         type="checkbox"
                         required
                     />
-                    <Link to="/terms" className="text-sky-500 hover:underline">I agree to the terms and conditions</Link>
+                    <p className="text-white">
+                        I agree to the<Link to="/terms" className="text-sky-500 hover:underline"> terms and conditions</Link>
+                    </p>
                 </label>
                 <div className="flex justify-end">
                     <button

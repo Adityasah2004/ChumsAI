@@ -35,6 +35,7 @@ const Avatar = (/*{companionId}*/) => {
     // const avatar = useGLTF(`/${companion_id}.glb`);
     // const avatar = useGLTF(`/Avatar3.glb`);
     const avatar = useLoader(GLTFLoader, `/Avatar3.glb`);
+    // const avatar = useLoader(GLTFLoader, `https://storage.googleapis.com/glb_buckets/RocheAvatarv5.glb`);
     const [index, setIndex] = useState(0);
     const [animation, setanimation] = useState("Idle");
     avatar.animations[0].name = "Idle"

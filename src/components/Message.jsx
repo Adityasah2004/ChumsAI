@@ -31,18 +31,18 @@ function Message(props) {
                 {
                     messageOptions && (
                         <div className={`mess-opt-div flex flex-col gap-1 p-2 rounded-md ${props.sender === "ai" ? "bg-black text-white" : "bg-white text-black"} absolute top-8 right-0`}>
-                            <button className={`flex gap-2 ${props.sender === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`} >
+                            <button className={`flex gap-2 ${props.sender === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`} onClick={props.onDelete}>
                                 <span className="material-symbols-outlined self-center flex">
                                     delete
                                 </span>
                                 <p>Delete</p>
                             </button>
-                            <button className={`flex gap-2 ${props.name === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`}>
+                            {/* <button className={`flex gap-2 ${props.name === "ai" ? "hover:bg-white hover:text-black" : "hover:bg-black hover:text-white"} p-1 rounded-md`}>
                                 <span className="material-symbols-outlined self-center flex">
                                     edit
                                 </span>
                                 <p>Edit</p>
-                            </button>
+                            </button> */}
                         </div>
                     )
                 }
@@ -52,13 +52,14 @@ function Message(props) {
     )
 }
 Message.propTypes = {
-    // key: PropTypes.number,
+    key: PropTypes.number,
     name: PropTypes.string.isRequired,
     cName: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     sender: PropTypes.string.isRequired,
+    onDelete: PropTypes.func
 };
 
 export default Message

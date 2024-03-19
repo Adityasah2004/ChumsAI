@@ -81,7 +81,7 @@
     background-color: #00b7a1;
     color: #fdfdfd;
     cursor: pointer;
-    transition: .3s ease-in-out
+    transition: .5s ease-in-out
 }
 
 .subscribe-div button:hover {
