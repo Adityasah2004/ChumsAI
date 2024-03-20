@@ -1,0 +1,45 @@
+.admin-nav,
+.admin-sidebar {
+    display: flex;
+    gap: 1rem;
+    transition: .8s ease-in-out
+}
+
+.admin-nav,
+.admin-sidebar,
+.admin-sidebar:hover {
+    transition: .8s ease-in-out
+}
+
+.admin-sidebar {
+    width: 60px;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: column;
+    background: #191c24;
+    overflow: hidden
+}
+
+.admin-sidebar:hover {
+    width: 300px
+}
+
+.admin-nav {
+    height: -webkit-fill-available;
+    padding: 1rem;
+    text-decoration: none
+}
+
+.admin-nav a {
+    width: inherit;
+    white-space: nowrap;
+    padding: .5rem
+}
+
+@media screen and (max-width:768px) {
+    .admin-sidebar {
+        display: none
+    }
+}

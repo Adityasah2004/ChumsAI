@@ -1,32 +1,23 @@
-.features-div1{
+.features-div1,
+.features-div2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 2rem 0;
-    gap: 1rem;
+    gap: 1rem
 }
 
-.features-div1 h1{
+.features-div1 h1 {
     font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: 500;
+    font-weight: 500
 }
 
-.features-div1 p{
-    font-size: clamp(0.5rem, 4vw, 1rem);
-    /* text-align: left; */
+.features-div1 p,
+.features-div2 p {
+    font-size: clamp(.5rem, 4vw, 1rem)
 }
 
-.features-div2{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-    gap: 1rem;
-}
-
-.features-div2 p{
-    font-size: clamp(0.5rem, 4vw, 1rem);
-    text-align: left;
+.features-div2 p {
+    text-align: left
 }

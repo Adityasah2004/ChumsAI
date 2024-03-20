@@ -1,9 +1,12 @@
 import '../styles/DashboardCreateCard.css';
 import { Link } from 'react-router-dom';
+import localStorageUtils from '../Hooks/localStorageUtils';
+
+const userId = localStorageUtils.getUserId();
 
 const DashboardCreateCard = () => {
     return (
-        <Link to={`/companion-creation`} className="create-comp-card flex flex-col border border-dashed h-full p-2 rounded-xl gap-2 justify-center">
+        <Link to={`/companion-creation/${userId}`} className="create-comp-card flex flex-col border border-dashed h-full p-2 rounded-xl gap-2 justify-center">
             <div className='flex items-center justify-center relative'>
                 <span className="material-symbols-outlined text-gray-800" style={{fontSize: "200px"}}>
                     add_circle

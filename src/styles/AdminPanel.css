@@ -1,0 +1,12 @@
+.admin-panel-div {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: hidden
+}
+
+@media screen and (max-width:768px) {
+    .admin-panel-div {
+        padding: 0
+    }
+}

@@ -1,149 +1,135 @@
-.chat-main-body{
+.chat-div,
+.chat-main-body {
+    position: relative;
+    display: flex
+}
+
+div#user-prof,
+video#user-video {
+    bottom: 8rem;
+    right: 1rem;
+    z-index: 50;
+    border-radius: 20px;
+    width: clamp(200px, 4vw, 250px)
+}
+
+.chat-main-body {
     height: 100vh;
-    /* background: url('https://img.freepik.com/free-vector/retro-futuristic-landscape-universe-background_52683-18057.jpg'); */
-    display: flex;
     justify-content: space-around;
-    /* padding: 1rem 1rem 1rem 0; */
     align-items: center;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    transition: all 1s ease-in-out;
-    position: relative;
-    /* padding-right: 2rem; */
+    transition: 1s ease-in-out
 }
 
-.chat-main-body-voice-call{
-    flex-direction: column;
+.chat-main-body-voice-call {
+    flex-direction: column
 }
-/* 
-aside{
-    height: inherit;
-    overflow: visible;
-    z-index: 1;
-}
- 
-aside img{
-    max-width: 50%;
-} */
 
-.chat-div{
-    display: flex;
+.chat-div {
     flex-direction: column;
-    
     backdrop-filter: blur(5px);
     border-radius: 20px;
-    /* overflow: hidden; */
-    transition: all 0.5s;
-    /* flex: 1 1 50%; */
+    transition: .5s;
     justify-content: space-between;
-    /* overflow: hidden; */
-    /* flex-basis: 40%; */
     padding: 1rem;
     backdrop-filter: blur(3px);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, .1);
     height: 90vh;
     width: 50%;
-    position: relative;
-    margin-right: 1rem;
-    /* overflow-y: scroll; */
+    margin-right: 1rem
 }
 
-/* .chat-msg-area{
-    
-} */
+.inp-opts,
+div#user-prof {
+    background-color: rgba(0, 0, 0, .8)
+}
 
-.input-options{
+.backg,
+.inp-opts {
+    position: absolute
+}
+
+.input-options {
     display: flex;
     gap: 1rem
 }
 
-.input-opt-toggle-btn{
-    display: none;
+.inp-opts,
+.inp-opts button,
+.input-opt-toggle-btn {
+    display: none
 }
 
-.inp-opts{
-    display: none;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 0.8rem 1rem;
+.inp-opts {
+    padding: .8rem 1rem;
     right: 2rem;
     top: -3rem;
     border-radius: 50px;
     gap: 1rem;
-    color: white;
-    z-index: 100;
+    color: #fff;
+    z-index: 100
 }
 
-.inp-opts button{
-    display: none;
-}
-
-.body{
+.body {
     max-width: 50%;
-    /* overflow: visible; */
     z-index: 1;
     display: flex;
-    height: 80vh;
+    height: 100vh;
     width: 100%;
-    /* position: fixed; */
-    transition: all 1s ease-in-out;
+    transition: 1s ease-in-out
 }
 
-.max-scrn-voice-call{
+.max-scrn-voice-call {
     filter: blur(5px);
     position: absolute;
-    transition: all 1s ease-in-out;
+    transition: 1s ease-in-out
 }
 
-.backg{
-    /* height: 100vh; */
-    position: absolute;
-    transition: all 5s ease-in-out;
+.backg {
+    transition: 5s ease-in-out
 }
 
-.emoji-tag{
+.emoji-tag,
+div#user-prof,
+video#user-video {
     position: absolute;
+    transition: 1s ease-in-out
+}
+
+.emoji-tag {
     bottom: 15%;
     z-index: 20;
-    right: 2%;
-    transition: all 1s ease-in-out;
+    right: 2%
 }
 
-video#user-video{
-    position: absolute;
-    bottom: 8rem;
-    right: 1rem;
-    z-index: 50;
-    transition: all 1s ease-in-out;
-    border-radius: 20px;
+video#user-video {
     overflow: hidden;
-    width: clamp(200px, 4vw, 250px);
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg)
 }
 
-div#user-prof{
-    position: absolute;
+div#user-prof {
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 8rem;
-    right: 1rem;
-    z-index: 50;
-    transition: all 1s ease-in-out;
-    border-radius: 20px;
-    width: clamp(200px, 4vw, 250px);
-    height: clamp(150px, 4vw, 250px);
-    background-color: rgba(0, 0, 0,0.8);
+    height: clamp(150px, 4vw, 250px)
 }
 
-@media screen and (max-width: 970px){
-    .chat-main-body{
-        padding: 0;
+@media screen and (max-width:970px) {
+
+    .body,
+    input[type=text] {
+        width: 100%
     }
-    .chat-div{
+
+    .chat-main-body {
+        padding: 0
+    }
+
+    .chat-div {
         flex: 0 0 100%;
         backdrop-filter: blur(0px);
         flex-basis: 100%;
@@ -152,67 +138,42 @@ div#user-prof{
         border-radius: none;
         z-index: 2;
         height: 100vh;
-        margin: 0;
+        margin: 0
     }
-    input[type="text"]{
-        width: 100%;
-        
-    }
-    /* aside{
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-    } */
+
     .body {
         position: absolute;
         bottom: 0;
-        /* left: 0; */
-        width: 100%;
-        max-width: 100vw;
-        /* height: 100vh; */
+        max-width: 100vw
     }
-    .sm-voice-cen{
-        /* bottom: auto; */
+
+    .sm-voice-cen {
         filter: blur(5px);
-        transition: all 0.5s;
-        /* position: relative; */
+        transition: .5s
     }
-    .sm-video-cen{
-        filter: blur(0px);
-        /* position: relative; */
+
+    .sm-video-cen {
+        filter: blur(0px)
     }
 }
 
-@media screen and (max-width: 500px){
-    .chat-main-body{
-        padding: auto;
+@media screen and (max-width:500px) {
+    .chat-main-body {
+        padding: auto
     }
-    .chat-div{
-        padding: 0.5rem;
-        height: 100vh;
-    }
-    .input-options{
-        display: none;
-    }
-    .input-opt-toggle-btn{
-        display: flex;
-    }
-    .inp-opts{
-        display: flex;
-    }
-    .inp-opts button{
-        display: flex;
-    }
-    
-    /* aside{
-        z-index: 1;
-        justify-self: flex-end;
-        position: fixed;
-        bottom: 0;
 
-    } */
-    /* .body{
-        height: 40em;
-    } */
+    .chat-div {
+        padding: .5rem;
+        height: 100vh
+    }
+
+    .input-options {
+        display: none
+    }
+
+    .inp-opts,
+    .inp-opts button,
+    .input-opt-toggle-btn {
+        display: flex
+    }
 }

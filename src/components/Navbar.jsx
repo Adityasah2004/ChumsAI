@@ -1,178 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
-import localStorageUtils from "../Hooks/localStorageUtils";
-import {
-    Button,
-    Modal,
-    TextInput,
-    Label,
-    Checkbox,
-} from "flowbite-react";
+import { Link, useHistory } from "react-router-dom";
 import '../styles/Navbar.css';
-// import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
-import CompanionList from "./CompanionCard";
-import logo from "../assets/logoDark.png";
+import logo from "../assets/logoDark.webp";
+import localStorageUtils from '../Hooks/localStorageUtils';
 
-const Head = () => {
+const Navbar = () => {
 
-    // const scrollToFeatures = () => {
-    //     const featuresElement = document.getElementById("features");
-    //     if (featuresElement) {
-    //         featuresElement.scrollIntoView({ behavior: "smooth" });
-    //     }
-    // };
-
+    const history = useHistory();
+    const userId = localStorageUtils.getUserId();
     const [navbarOpen, setNavbarOpen] = useState(false);
 
-    const [openModal, setOpenModal] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [mode, setMode] = useState("login");
-    const [userId, setUserId] = useState(null);
-    const history = useHistory();
-
-    const onCloseModal = () => {
-        setOpenModal(false);
-        setEmail("");
-        setPassword("");
-        setFirstName("");
-        setLastName("");
-        setConfirmPassword("");
-        setMode("login");
-    };
-
-    const handleModeChange = (newMode) => {
-        // Clear form fields when switching modes
-        setEmail("");
-        setPassword("");
-        setFirstName("");
-        setLastName("");
-        setConfirmPassword("");
-        setMode(newMode);
-    };
-
-    const handleSubmit = async () => {
-        // e.preventDefault();
-        // history.push("/dashboard");
-        const formData = {
-            email,
-            first_name: firstName,
-            last_name: lastName,
-            password,
-        };
-
-        if (mode === "signup" && password !== confirmPassword) {
-            alert("Password and Confirm Password do not match.");
-            return;
-        }
-        console.log("Request Payload:", formData);
-
-        try {
-            const response = await fetch(
-                "http://localhost:8000/user/" +
-                (mode === "login" ? "login" : "sign-up"),
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formData),
-                }
-            );
-
-            // Log the entire response
-            console.log("Response:", response);
-
-            if (response.ok) {
-                const responseData = await response.json();
-                const accessToken = responseData.access_token;
-                const userId = responseData.User_ID;
-
-                localStorageUtils.setUserId(userId);
-                localStorageUtils.setAccessToken(accessToken);
-
-                console.log("User ID:", localStorage.getItem("userId"));
-                console.log("Access Token:", localStorage.getItem("accessToken"));
-
-                console.log("Login/Signup complete");
-                history.push(`/dashboard/${userId}`);
-            } else if (response.status === 422) {
-                // Unprocessable Entity - Validation errors
-                const responseData = await response.json();
-
-                // Assuming your server returns validation errors in a specific format
-                if (responseData.errors) {
-                    console.log("Validation errors:", responseData.errors);
-                } else {
-                    // Unexpected format of validation errors
-                    console.error(
-                        "Unexpected format of validation errors:",
-                        responseData
-                    );
-                    alert("Sign-up failed. Please try again.");
-                }
-            } else {
-                // Other errors
-                try {
-                    const responseData = await response.json();
-
-                    if (responseData.error === "invalid_credentials") {
-                        // Incorrect credentials
-                        alert("Incorrect email or password");
-                    } else if (responseData.error === "user_not_found") {
-                        // User not found
-                        alert("User not found");
-                    } else {
-                        // Other errors
-                        alert("Login/Signup failed. Please try again.");
-                    }
-                } catch (error) {
-                    // Handle non-JSON response (e.g., unexpected server error)
-                    console.error("Error parsing JSON:", error);
-                    alert("Login/Signup failed. Please try again.");
-                }
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            // Handle network errors or exceptions
-            alert("An error occurred. Please try again later.");
-        }
-    };
-
-    // if clicked anywhere outside the modal, close it
     window.onclick = function (event) {
         if (event.target === document.getElementsByClassName("nav-links-phone")) {
             setNavbarOpen(false);
         }
     };
 
-    const handleSubmitAndCloseModal = () => {
-        handleSubmit();
-        onCloseModal();
-    };
-
     const handleNavbarOpen = () => {
         setNavbarOpen(!navbarOpen);
     };
 
-    // Custom CSS
-    //     const navbarCustomStyles = `
-    //     .navbar-custom {
-    //       position: fixed; 
-    //       color: #ffffff;
-    //       top: 0;
-    //       left: 0;
-    //       width: 100%;
-    //       height: 60px; 
-    //       background-color: rgba(50, 50, 50, 0.75);
-    //       backdrop-filter: blur(6px); 
-    //       z-index: 50;
-    //     }
-    //   `;
+    const handleLogout = () => {
+
+        // Implement logout logic
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+        // Redirect to the logout page or perform other logout actions
+    };
 
     return (
         <>
@@ -188,32 +43,51 @@ const Head = () => {
                         </span>
                     </Link>
                     <div className="nav-links">
-                        <Link to="/" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        <Link to="/" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Home
                         </Link>
-                        {/* <Link to="/about" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                            API
-                        </Link> */}
-                        {/* <Link to="/#features" onClick={scrollToFeatures} className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                            Features
-                        </Link> */}
-                        <Link to="/blogs" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        {
+                            userId && (
+                                <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                    Dashboard
+                                </Link>
+                            )
+                        }
+                        <Link to="/documentation" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Documentation
                         </Link>
-                        <Link to="/Contact" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                        <Link to="/Contact" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Contact us
                         </Link>
                     </div>
                     <div className="nav-elem">
-                        <button
-                            onClick={() => setOpenModal(true)}
-                            className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 bg-purple-800 text-white"
-                        >
-                            Login
-                            {/* <span className="material-symbols-outlined">
-                                logout
-                            </span> */}
-                        </button>
+                        {
+                            userId ? (
+                                <>
+                                    <Link to={`/settings/${userId}`} className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                        Profile
+                                    </Link>
+                                    <button className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black"  onClick={handleLogout}>
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to="/signup"
+                                        className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 text-white hover:text-black hover:bg-white"
+                                        >
+                                        Sign Up
+                                    </Link>
+                                </>
+                            )
+                        }
+                        {/* </div>
+                    <div className="nav-elem"> */}
+
                     </div>
                     {
                         navbarOpen ?
@@ -227,43 +101,55 @@ const Head = () => {
                     {
                         navbarOpen && (
                             <div className="nav-links-phone">
-                                <Link to="/" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Home
                                 </Link>
-                                <Link to="/about" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/documentation" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Documentation
                                 </Link>
-                                <Link to="/contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
+                                <Link to="/contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                     Contact us
                                 </Link>
-                                {/* <Link to="/blogs" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                                    Blogs
-                                </Link>
-                                <Link to="/Contact" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" activeclassname="active">
-                                    Contact
-                                </Link> */}
+                                {
+                                    userId ? (
+                                        <>
+                                        <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                            Dashboard
+                                        </Link>
+                                        <Link to={`/settings/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                            Profile
+                                        </Link>
+                                        <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
+                                            Logout
+                                        </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                                <Link to="/login" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                    Login
+                                                </Link>
+                                                <Link to="/signup" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                    Sign Up
+                                                </Link>
+                                        </>
+                                    )
+                                }
                                 {/* <button
-                                    onClick={() => (setOpenModal(true), handleModeChange("signup"))}
-                                    className=" text-white flex justify-center gap-2"
-                                >
-                                    Sign Up
-                                </button> */}
-                                <button
                                     onClick={() => setOpenModal(true)}
                                     className=" text-white flex justify-center gap-2  hover:bg-white px-3 py-2 rounded-full hover:text-black"
                                 >
                                     Login
-                                </button>
+                                </button> */}
                             </div>
                         )
                     }
                 </div>
             </nav>
 
-            <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+            {/* <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <div className="flex justify-start m-2">
                     <button
-                        className="cursor-pointer 3"
+                        className="cursor-pointer"
                         onClick={onCloseModal}
                     >
                         <span className="material-symbols-outlined">
@@ -393,9 +279,9 @@ const Head = () => {
                         </div>
                     </div>
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
         </>
     );
 };
 
-export default Head;
+export default Navbar;

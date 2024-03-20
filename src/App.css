@@ -1,17 +1,11 @@
 #root {
-  /* max-width: 1440px; */
   margin: 0 auto;
-  /* padding: 2rem; */
   text-align: center;
-  /* overflow: hidden; */
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
 body {
-  background-color: #000;
-  /* background: linear-gradient(to bottom, #000000a0 0%, #00000080 100%), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover; */
-  /* background: black; */
-  /* z-index: -1; */
+  background-color: #000
 }
 
 h1,
@@ -20,33 +14,26 @@ h3,
 h4,
 h5,
 h6 {
-  color: #ffffff;
+  color: #fff
 }
 
 html {
-  scroll-behavior: smooth;
-
+  scroll-behavior: smooth
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
 }
 
-/* scroll bar */
-
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #00000000
 }
 
 ::-webkit-scrollbar-thumb {
-  background: white;
-  border-radius: 10px;
+  background: rgba(130, 130, 130, .5);
+  border-radius: 10px
 }

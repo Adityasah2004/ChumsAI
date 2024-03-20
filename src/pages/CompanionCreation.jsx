@@ -1,45 +1,115 @@
 import { useEffect, useState } from "react";
-import { Modal, FileInput, Label } from "flowbite-react";
+import { FileInput, Label } from "flowbite-react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import localStorageUtils from "../Hooks/localStorageUtils";
 import frontProfile from "../assets/frontProfile.png";
 import leftProfile from "../assets/leftProfile.png";
 import rightProfile from "../assets/rightProfile.png";
 import '../styles/CompanionCreation.css';
+// import localStorageUtils from '../Hooks/localStorageUtils';
+// import axios from 'axios';
 
 
-function SomeParentComponent() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
+// function SomeParentComponent() {
+//     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-}
+//     const handleCloseModal = () => {
+//         setIsModalOpen(false);
+//     };
+
+//     const handleOpenModal = () => {
+//         setIsModalOpen(true);
+//     };
+// }
 const userId = localStorageUtils.getUserId();
+const bearerToken = localStorageUtils.getAccessToken();
 
-function CompanionCreation({ onClose }) {
-    const [modalOpen, setModalOpen] = useState(false);
+function CompanionCreation() {
+    const history = useHistory();
+
+    const [frontImage, setFrontImage] = useState(null);
+    const [leftSideImage, setLeftSideImage] = useState(null);
+    const [rightSideImage, setRightSideImage] = useState(null);
+
+    const handleInput = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('frontImage', frontImage);
+            formData.append('leftSideImage', leftSideImage);
+            formData.append('rightSideImage', rightSideImage);
+
+            const apiURL = "http://localhost:8000/companion/upload_character_pics";
+
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                }
+            };
+
+            const response = await fetch(apiURL, requestOptions);
+
+            if (!response.ok) {
+                throw new Error(`Failed to upload images. Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Public IDs:', responseData);
+        } catch (error) {
+            console.error('Error uploading images:', error);
+        }
+    };
+
+
+    useEffect(() => {
+        if (frontImage && leftSideImage && rightSideImage) {
+            handleInput();
+        }
+    }, []);
+
+    function handleFrontImageChange(event) {
+        setFrontImage(event.target.files[0]);
+        console.log("Front Image:", event.target.files[0]);
+    }
+
+    const handleLeftSideImageChange = (event) => {
+        setLeftSideImage(event.target.files[0]);
+        console.log("Left Side Image:", event.target.files[0]);
+    };
+
+    const handleRightSideImageChange = (event) => {
+        setRightSideImage(event.target.files[0]);
+        console.log("Right Side Image:", event.target.files[0]);
+    };
+
+
+    // const [modalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState({
-        src: "",
-        public_id: "",
-        characterName: "",
-        description: "",
-        greetings: "",
-        user_id: userId,
-        private: 0,
+        Transcription_language_code: "",
+        avatar_attire: "",
         category: "",
-        voice: "",
-        enable_3d_avatar: false,
-        voice_processing: false,
-        visibility: "",
+        description: "",
+        enable_3d_avatar: true,
+        front_public_id: "",
+        front_src: "",
+        greetings: "",
         language: "",
-        age: "",
-        avatar_attire: ""
+        left_side_public_id: "",
+        left_side_src: "",
+        message: "",
+        message_count: 0,
+        name: "",
+        private: 1,
+        right_side_public_id: "",
+        right_side_src: "",
+        translation_language_code: "",
+        user_id: userId,
+        user_voice: "",
+        voice: "",
+        voice_processing: true
     });
 
     const handleInputChange = async (field, value) => {
@@ -142,7 +212,8 @@ function CompanionCreation({ onClose }) {
             if (response.ok) {
                 const responseData = await response.json();
                 console.log("Response from backend:", responseData);
-                onClose();
+                history.push(`/dashboard/${userId}`);
+                // onClose();
             } else {
                 const responseData = await response.json();
                 console.error("Error sending data to backend:", responseData);
@@ -176,11 +247,11 @@ function CompanionCreation({ onClose }) {
                         >
                             <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                 <div>
-                                    <p className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                    <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             upload
                                         </span>Upload Left Profile Image
-                                    </p>
+                                    </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
                                 {/* <div className="flex flex-col items-center"> */}
@@ -191,7 +262,7 @@ function CompanionCreation({ onClose }) {
                             {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file1"
-                                onChange={(files) => handleFileChange(files, 'avatarFile1')}
+                                onChange={(files) => handleLeftSideImageChange(files, 'avatarFile1')}
                                 className="hidden"
                                 required
                             />
@@ -202,11 +273,11 @@ function CompanionCreation({ onClose }) {
                         >
                             <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                 <div>
-                                    <p className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                    <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             upload
                                         </span>Upload Right Profile Image
-                                    </p>
+                                    </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
                                 {/* <div className="flex flex-col items-center"> */}
@@ -217,7 +288,7 @@ function CompanionCreation({ onClose }) {
                             {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file2"
-                                onChange={(files) => handleFileChange(files, 'avatarFile2')}
+                                onChange={(files) => handleRightSideImageChange(files, 'avatarFile2')}
                                 className="hidden"
                                 required
                             />
@@ -228,11 +299,11 @@ function CompanionCreation({ onClose }) {
                         >
                             <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                 <div>
-                                    <p className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                    <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             upload
                                         </span>Upload Front Profile Image
-                                    </p>
+                                    </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
                                 {/* <div className="flex flex-col items-center"> */}
@@ -243,7 +314,7 @@ function CompanionCreation({ onClose }) {
                             {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file3"
-                                onChange={(files) => handleFileChange(files, 'avatarFile3')}
+                                onChange={(files) => handleFrontImageChange(files, 'avatarFile3')}
                                 className="hidden"
                                 required
                             />
@@ -258,7 +329,7 @@ function CompanionCreation({ onClose }) {
                             id="character-name"
                             type="text"
                             placeholder="Character Name"
-                            value={formData.characterName.firstName}
+                            value={formData.characterName}
                             onChange={(e) => handleNameChange('firstName', e.target.value)}
                             className="border rounded-md p-2 w-full bg-black"
                             required
@@ -417,7 +488,7 @@ function CompanionCreation({ onClose }) {
                         />
                     </div>
                 </div>
-                
+
                 <div className="text-white flex md:justify-start px-4 justify-center w-full md:w-4/5">
                     <div className="flex flex-col gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                         <div className="mb-4 w-fit">
@@ -475,13 +546,15 @@ function CompanionCreation({ onClose }) {
                         </select>
                     </div>
                 </div> */}
-                
+
                 <label className="flex justify-center items-center gap-4">
                     <input
                         type="checkbox"
                         required
                     />
-                    <Link to="/terms" className="text-sky-500 hover:underline">I agree to the terms and conditions</Link>
+                    <p className="text-white">
+                        I agree to the<Link to="/terms" className="text-sky-500 hover:underline"> terms and conditions</Link>
+                    </p>
                 </label>
                 <div className="flex justify-end">
                     <button

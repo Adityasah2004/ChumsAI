@@ -1,140 +1,151 @@
-.navbar{
+.nav-element-div,
+.navbar {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    position: fixed;
-    top: 0.5rem;
-    left: 0;
-    right: 0;
-    z-index: 1;
+    padding: .5rem 1rem
 }
 
-.nav-element-div{
-    display: flex;
+.login-btn,
+.nav-element-div,
+.navbar {
+    padding: .5rem 1rem
+}
+
+.login-btn,
+.nav-menu-icon {
+    
+    cursor: pointer
+}
+
+.nav-menu-icon{
+    color: #fff;
+}
+
+.login-btn,
+.login-btn span {
+    transition: .5s ease-in-out
+}
+
+.navbar {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: .5rem;
+    left: 0;
+    right: 0;
+    z-index: 1
+}
+
+.nav-element-div {
     justify-content: space-between;
     align-items: center;
     width: 90%;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, .1);
     backdrop-filter: blur(10px);
     border-radius: 200px;
-    padding: 0.5rem 1rem;
     margin: 0 auto;
-    /* color: white; */
+    transition: .5s ease-in-out
 }
 
-.brand-logo{
+.logo-div,
+.nav-elem {
+    justify-content: center;
+    gap: .5rem;
+    display: flex
+}
+
+.brand-logo {
     width: 100%;
     max-width: 50px;
     height: auto;
     border-radius: 100%;
-    mix-blend-mode:multiply;
+    mix-blend-mode: multiply
 }
 
-.logo-div{
-    display: flex;
-    justify-content: center;
+.logo-div {
     align-items: center;
-    color: white;
+    color: #fff;
     font-size: clamp(1.5rem, 3vw, 2rem);
-    white-space: nowrap;
-    gap: 0.5rem;
+    white-space: nowrap
 }
 
-.nav-elem{
-    display: flex;
-    justify-content: center;
+.nav-elem {
     align-items: center;
-    gap: 0.5rem;
     text-decoration: none;
-    cursor: pointer;
+    cursor: pointer
 }
-.nav-links{
+
+.nav-links {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    width: 40%;
+    width: 40%
 }
 
-.nav-menu-icon{
+.nav-menu-icon {
     display: none;
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
+    font-size: 1.5rem
 }
 
-.login-btn{
-    padding: 0.5rem 1rem;
+.login-btn {
     border-radius: 200px;
-    background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 97.5%);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.5s ease-in-out;
+    /* background: linear-gradient(270deg, #00b7a1 0, #ac20cf 97.5%); */
+    border: 1px solid #fff;
+    font-size: 1rem
 }
 
-.login-btn span{
-    transition: all 0.5s ease-in-out;
+.login-btn:hover span {
+    transform: translateX(.5rem)
 }
 
-.login-btn:hover span{
-    transform: translateX(0.5rem);
+.login-btn:hover {
+    /* background: linear-gradient(360deg, #ac20cf 0, #00b7a1 97.5%) */
+    
 }
 
-.login-btn:hover{
-    background: linear-gradient(360deg, #AC20CF 0%, #00B7A1 97.5%);
-    /* transform: scale(1.1); */
+.nav-links-phone {
+    display: none
 }
 
-.nav-links-phone{
-    display: none;
-}
-
-@media screen and (max-width: 900px){
-    /* .nav-links{
-        display: none;
-    } */
-    .nav-links-phone{
+@media screen and (max-width:900px) {
+    .nav-links-phone {
         position: fixed;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        /* align-items: ; */
         gap: 1.5rem;
-        /* width: 30%; */
-        background-color: rgb(0, 0, 0,0.8);
+        background-color: #000;
         border-radius: 20px;
         padding: 1rem;
         top: 4.5rem;
         right: 1rem;
         z-index: 1;
-        transition: all 0.5s ease-in-out;
+        transition: .5s ease-in-out;
         width: 100%;
-        max-width: 200px;
+        max-width: 200px
     }
 }
 
-@media screen and (max-width: 768px){
-    .navbar{
+@media screen and (max-width:768px) {
+    .navbar {
         padding: 0;
-        top: 0;
+        top: 0
     }
-    .nav-element-div{
+
+    .nav-element-div {
         width: 100%;
-        padding: 0.5rem 1rem;
+        padding: .5rem 1rem;
         border-radius: 0;
-        top: 0;
+        top: 0
     }
-    .nav-elem{
-        display: none;
+
+    .nav-elem,
+    .nav-links {
+        display: none
     }
-    .nav-links{
-        display: none;
-    }
-    .nav-menu-icon{
-        display: flex;
+
+    .nav-menu-icon {
+        display: flex
     }
 }

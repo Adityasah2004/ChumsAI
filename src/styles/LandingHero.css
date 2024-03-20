@@ -1,13 +1,16 @@
+.hero-down-div,
+.hero-section {
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
 .hero-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: -1;
-    background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* background-position: center; */
-    padding: 0 4rem;
+    background-image: linear-gradient(0deg, #000 0, rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg.jpg');
+    padding: 0 4rem
 }
 
 .hero-section .left-div {
@@ -15,37 +18,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1rem
 }
 
 .left-div p {
     font-size: clamp(1.2rem, 4vw, 1.5rem);
-    /* color: #ffffff; */
     font-weight: 400;
     text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
 
 .hero-heading {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 500;
     text-align: left;
-    letter-spacing: 2px;
-}
-
-.left-div p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* gap: 1rem; */
+    letter-spacing: 2px
 }
 
 .left-div p big {
-    background: linear-gradient(90deg, #FF2DF7 0%, #00F0FF 100%);
+    background: linear-gradient(90deg, #ff2df7 0, #00f0ff 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 700;
+    font-weight: 700
 }
 
 .hero-btns-div {
@@ -53,7 +51,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    gap: 1rem;
+    gap: 1rem
 }
 
 .create-btn,
@@ -62,88 +60,75 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    color: white;
-    transition: all 1s ease-in-out;
+    color: #fff;
+    transition: 1s ease-in-out;
     width: 100%;
     max-width: 250px;
     border-radius: 50px;
     gap: 1rem;
-    font-size: clamp(0.5rem, 4vw, 1rem);
-    cursor: pointer;
+    font-size: clamp(.5rem, 4vw, 1rem);
+    cursor: pointer
 }
 
+.hero-img-div,
+.video-div {
+    height: 100vh;
+    justify-content: center;
+    display: flex
+}
+
+.create-btn,
 .discord-btn {
-    outline: 1px solid #ffffff;
+    outline: #ffffff solid 1px
 }
 
 .discord-btn:hover {
-    background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 100%);
-    outline: 1px solid #ffffff00;
-}
-
-.create-btn {
-    /* background: linear-gradient(270deg, #00B7A1 0%, #AC20CF 100%); */
-    outline: 1px solid #ffffff;
+    background: linear-gradient(270deg, #00b7a1 0, #ac20cf 100%);
+    outline: #ffffff00 solid 1px
 }
 
 .create-btn:hover {
-    /* border: 1px solid #ffffff; */
-
-    /* glow */
-    background: #00B7A1;
-    box-shadow: 0 0 10px #00B7A1, 0 0 20px #00B7A1, 0 0 30px #00B7A1;
-    outline: 1px solid #00B7A1;
+    background: #00b7a1;
+    box-shadow: 0 0 10px #00b7a1, 0 0 20px #00b7a1, 0 0 30px #00b7a1;
+    outline: #00B7A1 solid 1px
 }
 
 .create-btn span {
-    animation: slide 5s ease-in-out infinite;
+    animation: 5s ease-in-out infinite slide
 }
 
 @keyframes slide {
 
     0%,
     100% {
-        transform: translateX(0px);
+        transform: translateX(0)
     }
 
     50% {
-        transform: translateX(20px);
+        transform: translateX(20px)
     }
 }
 
 .hero-img-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* width: 100%; */
-    /* max-width: 80vh; */
-    /* height: 100%; */
-    height: 100vh;
-    /* width: 50%; */
+    align-items: center
 }
 
 .hero-p-video {
     font-size: clamp(2rem, 4vw, 4rem);
-    margin: 4rem auto;
+    margin: 4rem auto
 }
 
 .video-div {
-    height: 100vh;
     width: 100%;
-    display: flex;
-    justify-content: center;
     align-items: flex-start;
-    /* border-radius: 10px; */
-    /* overflow: hidden; */
-    /* padding:  2rem; */
-    position: relative;
+    position: relative
 }
 
 .video-div video {
     width: 80%;
     height: 80%;
     object-fit: cover;
-    border-radius: 40px;
+    border-radius: 40px
 }
 
 .video-div-img1 {
@@ -154,168 +139,111 @@
     width: 100%;
     max-width: 300px;
     height: auto;
-    animation: rotate1 6s ease infinite;
+    animation: 6s infinite rotate1
 }
 
 @keyframes rotate1 {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(0)
     }
 
     100% {
-        transform: rotate(-360deg);
+        transform: rotate(-360deg)
     }
 }
 
 .video-div-img2 {
     width: 100%;
     max-width: 100px;
-    animation: rotate 6s ease infinite;
+    animation: 6s infinite rotate
 }
 
 @keyframes rotate {
     0% {
-        transform: rotate(0deg);
-    }
-
-    /* 50% { */
-    /* transform: rotate(360deg); */
-    /* } */
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* .phone-mockup {
-    width: 100%;
-    max-width: 800px;
-    animation: float 6s ease-in-out infinite;
-    z-index: -1;
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(20px);
+        transform: rotate(0)
     }
 
     100% {
-        transform: translateY(0px);
+        transform: rotate(360deg)
     }
 }
-
-.text-div {
-    display: flex;
-    text-align: left;
-    align-items: flex-start;
-}
-
-.text-div h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-}
-
-.text-div p {
-    font-size: clamp(1rem, 4vw, 1rem);
-} */
 
 .hero-down-div {
     display: flex;
     justify-content: center;
-    background-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 40%), linear-gradient(0deg,
-            #000 0%,
-            rgba(0, 0, 0, 0) 40%), url('../assets/hero-bg-2.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0) 40%), linear-gradient(0deg, #000 0, rgba(0, 0, 0, 0) 40%), url('../assets/hero-bg-2.svg');
+    background-position: center
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width:900px) {
 
-    .video-div-img2,
-    .video-div-img1 {
-        /* position: absolute;
-            right: -8rem;
-            top: 0rem;
-            z-index: -1;
-            width: 100%;
-            max-width: 300px;
-            height: auto; */
-        display: none;
+    .video-div-img1,
+    .video-div-img2 {
+        display: none
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width:768px) {
+
+    .hero-heading,
+    .hero-section .left-div p,
+    .text-div {
+        text-align: center
+    }
+
     .hero-section {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 0;
-        background-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.1) 100%), url('../assets/hero-bg.jpg');
-        background-position: center;
+        background-image: linear-gradient(0deg, #000 0, rgba(0, 0, 0, .1) 100%), url('../assets/hero-bg.jpg');
+        background-position: center
     }
 
     .hero-btns-div {
-        /* flex-direction: column-reverse; */
         justify-content: center;
-        gap: 1rem;
+        gap: 1rem
     }
 
     .hero-img-div {
-        height: 50vh;
+        height: 50vh
     }
 
     .hero-heading {
-        text-align: center;
-        font-weight: 400;
+        font-weight: 400
     }
 
     .hero-section .left-div {
         align-items: center;
         justify-content: center;
         height: 100vh;
-        width: 100%;
-    }
-
-    .hero-section .left-div p {
-        text-align: center;
+        width: 100%
     }
 
     .left-div p {
-        flex-direction: column;
+        flex-direction: column
     }
 
     .video-div video {
         width: 100%;
-        height: 100%;
+        height: 100%
     }
 
-    /* .video-div-img1{
-        left: -4rem;
-        bottom: -4rem;
-        max-width: 200px;
-    } */
     .text-div {
-        text-align: center;
-        align-items: center;
+        align-items: center
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width:480px) {
     .video-div {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        height: 50vh;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        height: 50vh
     }
 
     .video-div-img1 {
         left: -2rem;
         bottom: -2rem;
-        max-width: 100px;
+        max-width: 100px
     }
-
 }

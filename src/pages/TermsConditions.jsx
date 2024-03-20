@@ -1,21 +1,9 @@
-// import { useEffect, useState } from 'react';
-// import ReactMarkdown from 'react-markdown';
 import '../styles/TermsConditions.css'
 
 const TermsConditions = () => {
-    // const [readmeContent, setReadmeContent] = useState('');
-
-    // useEffect(() => {
-    //     // Fetch README file content
-    //     fetch('./src/readme-files/Terms & conditions.md') // Assuming README.md is in the same directory
-    //         .then(response => response.text())
-    //         .then(text => setReadmeContent(text))
-    //         .catch(error => console.error('Error fetching README:', error));
-    // }, []);
 
     return (
         <div className='text-white p-4 text-left'>
-            {/* <ReactMarkdown>{readmeContent}</ReactMarkdown> */}
             <div className='features-div1'>
                 <h1><u>Terms and Conditions</u></h1>
                 <p>
