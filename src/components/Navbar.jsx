@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import '../styles/Navbar.css';
 import logo from "../assets/logoDark.webp";
@@ -9,6 +9,8 @@ const Navbar = () => {
     const history = useHistory();
     const userId = localStorageUtils.getUserId();
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
 
     window.onclick = function (event) {
         if (event.target === document.getElementsByClassName("nav-links-phone")) {
@@ -25,9 +27,46 @@ const Navbar = () => {
         // Implement logout logic
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
+        setIsAdmin(false);
         history.push('/');
         // Redirect to the logout page or perform other logout actions
     };
+
+    //  fetch user details from the server using the user id
+    const fetchUserDetails = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            // console.log('User details from navbar:', data.data);
+            setUserDetails(data.data);
+            console.log('User details from navbar user:', userDetails);
+            // return data;
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+            // return null;
+        }
+    }
+
+    useEffect(() => {
+        // if (userId) {
+        fetchUserDetails();
+        // }
+    },[]);
+
+    useEffect(() => {
+        // Check if user details contain admin email
+        if (userId && userDetails.email === "chumsai.tech@gmail.com") {
+            setIsAdmin(true);
+        }
+    }, [userDetails]);
 
     return (
         <>
@@ -53,6 +92,13 @@ const Navbar = () => {
                                 </Link>
                             )
                         }
+                        {
+                            isAdmin && (
+                                <Link to="/admin" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                    Admin Panel
+                                </Link>
+                            )
+                        }
                         <Link to="/documentation" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Documentation
                         </Link>
@@ -67,7 +113,7 @@ const Navbar = () => {
                                     <Link to={`/settings/${userId}`} className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                         Profile
                                     </Link>
-                                    <button className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black"  onClick={handleLogout}>
+                                    <button className="login-btn text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
                                         Logout
                                     </button>
                                 </>
@@ -79,7 +125,7 @@ const Navbar = () => {
                                     <Link
                                         to="/signup"
                                         className="login-btn rounded-full flex justify-between items-center gap-2  px-6 py-2 text-white hover:text-black hover:bg-white"
-                                        >
+                                    >
                                         Sign Up
                                     </Link>
                                 </>
@@ -113,24 +159,24 @@ const Navbar = () => {
                                 {
                                     userId ? (
                                         <>
-                                        <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                            Dashboard
-                                        </Link>
-                                        <Link to={`/settings/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                            Profile
-                                        </Link>
-                                        <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
-                                            Logout
-                                        </button>
+                                            <Link to={`/dashboard/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                Dashboard
+                                            </Link>
+                                            <Link to={`/settings/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                Profile
+                                            </Link>
+                                            <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
+                                                Logout
+                                            </button>
                                         </>
                                     ) : (
                                         <>
-                                                <Link to="/login" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                                    Login
-                                                </Link>
-                                                <Link to="/signup" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                                    Sign Up
-                                                </Link>
+                                            <Link to="/login" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                Login
+                                            </Link>
+                                            <Link to="/signup" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                Sign Up
+                                            </Link>
                                         </>
                                     )
                                 }

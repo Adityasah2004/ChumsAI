@@ -2,23 +2,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #191c24;
-    gap: 2rem
+    /* background: #191c24; */
+    /* gap: 2rem */
 }
 
 .admin-panel-body-div h1 {
     color: #fff;
-    font-size: clamp(1.5rem, 4vw, 4rem);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     display: flex;
     padding: 1rem 0;
     flex-basis: 100%;
     justify-content: center
 }
 
+.body-main-admin-div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    /* max-width: 1200px; */
+    padding: 1rem;
+    /* background: #191c24; */
+    border-radius: 25px;
+    height: -webkit-fill-available;
+}
+
 .admin-panel-body-div form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
     gap: 1rem;
     padding: 1rem;
     background: #191c24;
@@ -37,7 +52,7 @@
     gap: 1rem;
     padding: 1rem;
     color: #fff;
-    border-radius: 25px;
+    border-radius: 12px;
     cursor: pointer;
     transition: .8s ease-in-out;
     height: 250px;
@@ -82,6 +97,45 @@
     transition: .8s ease-in-out
 }
 
+.admin-comp-cards-div{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: #191c24;
+    border-radius: 25px;
+    width: 100%;
+    overflow: hidden;
+
+    /* height: 100% */
+}
+
+.admin-comp-cards-div .companion-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #272b38;
+    border-radius: 12px
+}
+
+.admin-comp-cards-div .companion-card .companion-card-img{
+    width: 100%;
+    height: 150px;
+    border-radius: 25px
+}
+
+.admin-comp-cards-div .companion-card .companion-card-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #3d4558;
+    border-radius: 25px
+}
+
 @media screen and (max-width:768px) {
     .admin-icon-nav {
         display: flex;
@@ -89,6 +143,6 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
-        background: #191c24
+        /* background: #191c24 */
     }
 }

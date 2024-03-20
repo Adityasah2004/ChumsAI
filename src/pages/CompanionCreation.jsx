@@ -7,68 +7,20 @@ import frontProfile from "../assets/frontProfile.png";
 import leftProfile from "../assets/leftProfile.png";
 import rightProfile from "../assets/rightProfile.png";
 import '../styles/CompanionCreation.css';
-// import localStorageUtils from '../Hooks/localStorageUtils';
-// import axios from 'axios';
+import Natasha from "../assets/default audio/voice_preview_Natasha - Valley girl.mp3";
+import Alex from "../assets/default audio/voice_preview_Alex - expressive narrator.mp3";
+import Priya from "../assets/default audio/voice_preview_Priya - affectionate and delicate.mp3";
+import Meera from "../assets/default audio/voice_preview_Meera - high quality, emotive.mp3";
+import Vikram from "../assets/default audio/voice_preview_Vikram.mp3";
+import Mark from "../assets/default audio/voice_preview_Mark - Young and Calm.mp3";
+import Markus from "../assets/default audio/voice_preview_Markus - Mature and Chill.mp3";
+import Sally from "../assets/default audio/voice_preview_Sally - very realistic, superb.mp3";
 
-
-
-// function SomeParentComponent() {
-//     const [isModalOpen, setIsModalOpen] = useState(false);
-
-//     const handleCloseModal = () => {
-//         setIsModalOpen(false);
-//     };
-
-//     const handleOpenModal = () => {
-//         setIsModalOpen(true);
-//     };
-// }
 const userId = localStorageUtils.getUserId();
 const bearerToken = localStorageUtils.getAccessToken();
 
 function CompanionCreation() {
     const history = useHistory();
-
-    const [frontImage, setFrontImage] = useState(null);
-    const [leftSideImage, setLeftSideImage] = useState(null);
-    const [rightSideImage, setRightSideImage] = useState(null);
-
-    const handleInput = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('frontImage', frontImage);
-            formData.append('leftSideImage', leftSideImage);
-            formData.append('rightSideImage', rightSideImage);
-
-            const apiURL = "http://localhost:8000/companion/upload_character_pics";
-
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${bearerToken}`,
-                }
-            };
-
-            const response = await fetch(apiURL, requestOptions);
-
-            if (!response.ok) {
-                throw new Error(`Failed to upload images. Status: ${response.status}`);
-            }
-
-            const responseData = await response.json();
-            console.log('Public IDs:', responseData);
-        } catch (error) {
-            console.error('Error uploading images:', error);
-        }
-    };
-
-
-    useEffect(() => {
-        if (frontImage && leftSideImage && rightSideImage) {
-            handleInput();
-        }
-    }, []);
 
     function handleFrontImageChange(event) {
         setFrontImage(event.target.files[0]);
@@ -85,8 +37,90 @@ function CompanionCreation() {
         console.log("Right Side Image:", event.target.files[0]);
     };
 
+    const [frontImage, setFrontImage] = useState(null);
+    const [leftSideImage, setLeftSideImage] = useState(null);
+    const [rightSideImage, setRightSideImage] = useState(null);
+    // const [frontUrl, setFrontUrl] = useState("");
+    // const [leftSideUrl, setLeftSideUrl] = useState("");
+    // const [rightSideUrl, setRightSideUrl] = useState("");
+    // const [frontPublicId, setFrontPublicId] = useState("");
+    // const [leftSidePublicId, setLeftSidePublicId] = useState("");
+    // const [rightSidePublicId, setRightSidePublicId] = useState("");
+    // let frontUrlN = "";
+    // let leftSideUrlN = "";
+    // let rightSideUrlN = "";
+    // let frontPublicIdN = "";
+    // let leftSidePublicIdN = "";
+    // let rightSidePublicIdN = "";
 
-    // const [modalOpen, setModalOpen] = useState(false);
+    const handleInput = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('front', frontImage);
+            formData.append('left_side', leftSideImage);
+            formData.append('right_side', rightSideImage);
+
+            const apiURL = "http://localhost:8000/companion/upload_character_pics";
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    // "Content-Type": "application/json",
+                    Authorization: `Bearer ${bearerToken}`,
+                },
+                body: formData
+            };
+
+            console.log("form data:", formData);
+            const response = await fetch(apiURL, requestOptions);
+            console.log("Response:", response);
+            if (!response.ok) {
+                throw new Error(`Failed to upload images. Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Public IDs:', responseData);
+
+            // console.log('Front Image URL:', responseData[0].url);
+            // setFrontUrl(responseData[0].url);
+            // setFrontPublicId(responseData[0].public_id);
+            // frontUrlN = frontUrl;
+            // frontPublicIdN = frontPublicId;
+
+            // console.log('Left Side Image URL:', responseData[1].url);
+            // setLeftSideUrl(responseData[1].url);
+            // setLeftSidePublicId(responseData[1].public_id);
+            // leftSideUrlN = leftSideUrl;
+            // leftSidePublicIdN = leftSidePublicId;
+
+            // console.log('Right Side Image URL:', responseData[2].url);
+            // setRightSideUrl(responseData[2].url);
+            // setRightSidePublicId(responseData[2].public_id);
+            // rightSideUrlN = rightSideUrl;
+            // rightSidePublicIdN = rightSidePublicId;
+
+            // Set the form data after getting the response
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                front_public_id: responseData[0].Public_id,
+                front_src: responseData[0].url,
+                left_side_public_id: responseData[1].Public_id,
+                left_side_src: responseData[1].url,
+                right_side_public_id: responseData[2].Public_id,
+                right_side_src: responseData[2].url,
+            }));
+        } catch (error) {
+            console.error('Error uploading images:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (frontImage && leftSideImage && rightSideImage) {
+            handleInput();
+        }
+    }, [frontImage, leftSideImage, rightSideImage]);
+
+
+    // console.log("before form data fronturl", frontUrl);
     const [formData, setFormData] = useState({
         Transcription_language_code: "",
         avatar_attire: "",
@@ -112,77 +146,13 @@ function CompanionCreation() {
         voice_processing: true
     });
 
-    const handleInputChange = async (field, value) => {
-        if (field === 'file') {
-            const formData = new FormData();
-            formData.append('file', value);
 
-            try {
-                const response = await fetch('http://localhost:8000/companion/upload_character_pic', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    // Log the fetched public URL to the console
-                    console.log('Fetched Public URL:', result.url);
-
-                    // Handle the result as needed, e.g., update state with the received data
-                    setFormData((prevFormData) => ({
-                        ...prevFormData,
-                        imageUrl: result.url, // assuming you want to store the URL in state
-                        publicId: result.Public_id,
-                    }));
-                } else {
-                    // Handle the error response
-                    console.error('Error uploading file:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error uploading file:', error.message);
-            }
-        } else {
-            // Handle other input fields if needed
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                [field]: value,
-            }));
-        }
-    };
-
-
-
-    const handleNameChange = (nameField, value) => {
+    const handleInputChange = (field, value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            characterName: {
-                ...prevFormData.characterName,
-                [nameField]: value,
-            },
+            [field]: value,
         }));
     };
-
-    const handleCheckboxChange = (field) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [field]: !prevFormData[field],
-        }));
-    };
-
-    const handleFileChange = (files, fileType) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [fileType]: files[0],
-        }));
-        console.log("File Type:", fileType);
-    };
-
-    // const handleSelectChange = (field, value) => {
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         [field]: value,
-    //     }));
-    // };
 
     const [accessToken, setAccessToken] = useState("");
 
@@ -190,6 +160,31 @@ function CompanionCreation() {
         const token = localStorageUtils.getAccessToken();
         setAccessToken(token);
     }, []);
+
+    const handleVoiceChange = (e) => {
+        const selectedVoice = e.target.value;
+        playAudio(selectedVoice); // Call playAudio function whenever a voice option is selected
+    };
+
+    const playAudio = (selectedVoice) => {
+        // Define audio sources based on selected option
+        const audioSources = {
+            "Natasha": Natasha,
+            "Alex": Alex,
+            "Priya": Priya,
+            "Meera": Meera,
+            "Vikram": Vikram,
+            "Mark": Mark,
+            "Markus": Markus,
+            "Sally": Sally
+        };
+        // Check if selected voice has an associated audio source
+        if (audioSources[selectedVoice]) {
+            const audio = new Audio(audioSources[selectedVoice]);
+            // play the new audio
+            audio.play();
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -221,15 +216,12 @@ function CompanionCreation() {
         } catch (error) {
             console.error("Error sending data to backend:", error.message);
         }
-    }; // Add closing parenthesis here
+    };
 
     const languagesList = ["Chinese", "Korean", "Dutch", "Turkish", "Swedish", "Indonesian", "Filipino", "Japanese", "Ukrainian", "Greek", "Czech", "Finnish", "Romanian", "Russian", "Danish", "Bulgarian", "Malay", "Slovak", "Croatian", "Classic Arabic", "Tamil", "English", "Polish", "German", "Spanish", "French", "Italian", "Hindi", "Portuguese"]
 
     return (
-        // <Modal show={true} size="xxl" onClose={onClose} popup>
-        // <Modal.Body>
         <div className="z-50 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 relative">
-            {/* <div className="p-2 flex flex-col gap-4 shadow-lg w-full overflow-y-auto"> */}
             <img src="../create-form-bg-img2.svg" alt="" width={400} className="absolute -z-10 -top-40 -right-40 opacity-25 lg:opacity-50" />
             <div className="flex justify-start w-full p-4 gap-4 items-center">
                 <Link to={`/dashboard/${userId}`} className="text-gray-200 hover:text-gray-300 cursor-pointer flex justify-center items-center">
@@ -254,12 +246,8 @@ function CompanionCreation() {
                                     </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
-                                {/* <div className="flex flex-col items-center"> */}
                                 <img src={leftProfile} alt="" width="100" className="rounded-xl" />
-                                {/* <span>Left profile image</span> */}
-                                {/* </div> */}
                             </p>
-                            {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file1"
                                 onChange={(files) => handleLeftSideImageChange(files, 'avatarFile1')}
@@ -280,12 +268,8 @@ function CompanionCreation() {
                                     </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
-                                {/* <div className="flex flex-col items-center"> */}
                                 <img src={rightProfile} alt="" width="100" className="rounded-xl" />
-                                {/* <span>Left profile image</span> */}
-                                {/* </div> */}
                             </p>
-                            {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file2"
                                 onChange={(files) => handleRightSideImageChange(files, 'avatarFile2')}
@@ -306,12 +290,8 @@ function CompanionCreation() {
                                     </div>
                                     <span className="text-xs font">Click to upload or drag and drop</span>
                                 </div>
-                                {/* <div className="flex flex-col items-center"> */}
                                 <img src={frontProfile} alt="" width="100" className="rounded-xl" />
-                                {/* <span>Left profile image</span> */}
-                                {/* </div> */}
                             </p>
-                            {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                             <FileInput
                                 id="avatar-file3"
                                 onChange={(files) => handleFrontImageChange(files, 'avatarFile3')}
@@ -330,7 +310,7 @@ function CompanionCreation() {
                             type="text"
                             placeholder="Character Name"
                             value={formData.characterName}
-                            onChange={(e) => handleNameChange('firstName', e.target.value)}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
                             className="border rounded-md p-2 w-full bg-black"
                             required
                         />
@@ -374,29 +354,11 @@ function CompanionCreation() {
                             type="text"
                             placeholder="Greeting"
                             value={formData.greetings}
-                            onChange={(e) => handleInputChange('greeting', e.target.value)}
+                            onChange={(e) => handleInputChange('greetings', e.target.value)}
                             className="border rounded-md p-2 w-full bg-black"
                         />
                     </div>
                 </div>
-                {/* <div className="mb-4">
-                    <input
-                        type="text"
-                        placeholder="Description"
-                        value={formData.description}
-                        onChange={(e) => handleInputChange('description', e.target.value)}
-                        className="border rounded-md p-2 w-full"
-                    />
-                </div>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        placeholder="Greeting"
-                        value={formData.greeting}
-                        onChange={(e) => handleInputChange('greeting', e.target.value)}
-                        className="border rounded-md p-2 w-full"
-                    />
-                </div> */}
                 <div className="w-full flex flex-col items-center md:justify-between md:w-4/5 md:flex-row text-white gap-8 px-4">
                     <div className="flex gap-4 flex-col items-start md:justify-between text-white" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                         <div className=" flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500x" }}>
@@ -404,7 +366,7 @@ function CompanionCreation() {
                             <input
                                 type="file"
                                 id="voice-file"
-                                onChange={(files) => handleFileChange(files, 'voiceFile')}
+                                onChange={(user_voice) => handleInputChange(user_voice, 'voiceFile')}
                                 className="border rounded-md w-full bg-black"
                             />
                         </div>
@@ -414,7 +376,7 @@ function CompanionCreation() {
                             <select
                                 id="category"
                                 value={formData.defaultVoice}
-                                onChange={(e) => handleInputChange('defaultVoice', e.target.value)}
+                                onChange={(e) => { handleInputChange('voice', e.target.value), handleVoiceChange(e) }}
                                 className="border rounded-md p-2 w-full bg-black text-gray-500"
                                 required
                             >
@@ -436,13 +398,13 @@ function CompanionCreation() {
                             <select
                                 id="visibility"
                                 value={formData.visibility}
-                                onChange={(e) => handleInputChange('visibility', e.target.value)}
+                                onChange={(e) => handleInputChange('private', e.target.value)}
                                 className="border rounded-md p-2 w-full bg-black text-gray-500"
-                                required
+                            // required
                             >
                                 <option value="" disabled selected>Select Visibility</option>
                                 <option value="public">Public</option>
-                                <option value="unlisted">Unlisted</option>
+                                {/* <option value="unlisted">Unlisted</option> */}
                                 <option value="private">Private</option>
                             </select>
                         </div>
@@ -464,7 +426,7 @@ function CompanionCreation() {
                 </div>
 
                 <div className="flex w-full md:w-4/5 gap-8 px-4 flex-col items-center md:justify-between md:flex-row">
-                    <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
+                    {/* <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                         <label htmlFor="age" className="text-white">Age <span className="text-sky-500" title="required field">*</span></label>
                         <input
                             id="age"
@@ -475,7 +437,7 @@ function CompanionCreation() {
                             className="border rounded-md p-2 w-full bg-black"
                             required
                         />
-                    </div>
+                    </div> */}
                     <div className="mb-4  w-full flex flex-col items-start gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                         <label htmlFor="attier" className="text-white">Attier preference <span className="text-sky-500" title="required field">*</span></label>
                         <input
@@ -496,7 +458,7 @@ function CompanionCreation() {
                                 <input
                                     type="checkbox"
                                     checked={formData.enable3DAvatar}
-                                    onChange={() => handleCheckboxChange('enable3DAvatar')}
+                                    onChange={() => handleInputChange('enable3dAvatar')}
                                     className="text-black mr-2"
                                 />
                                 Enable 3D Avatar
@@ -507,7 +469,7 @@ function CompanionCreation() {
                                 <input
                                     type="checkbox"
                                     checked={formData.enableVoiceInputProcessing}
-                                    onChange={() => handleCheckboxChange('enableVoiceInputProcessing')}
+                                    onChange={() => handleInputChange('enableVoiceInputProcessing')}
                                     className=" text-black mr-2"
                                 />
                                 Enable Voice Input Processing
@@ -515,37 +477,6 @@ function CompanionCreation() {
                         </div>
                     </div>
                 </div>
-                {/* <div className='flex flex-col gap-2 text-white'>
-                    <div className="flex flex-col">
-                        <Label htmlFor="voice-file" className="  text-left text-sm text-white">
-                            Voice File (MP3)
-                        </Label>
-                        <FileInput
-                            id="voice-file"
-                            onChange={(files) => handleFileChange(files, 'voiceFile')}
-                            className=""
-                        />
-                    </div>
-                        <span>or</span>
-                    <div className="mb-4">
-                        <select
-                            value={formData.defaultVoice}
-                            onChange={(e) => handleInputChange('defaultVoice', e.target.value)}
-                            className="border rounded-md p-2 w-full"
-                            required
-                        >
-                            <option value="" disabled selected>Select Default Voice</option>
-                            <option value="Natasha">Natasha - vally girl</option>
-                            <option value="Alex">Alex - expression narrator</option>
-                            <option value="Priya">Priya - affectionate and delicate</option>
-                            <option value="Meera">Meera - high quality, emotive</option>
-                            <option value="Vikram">Vikram</option>
-                            <option value="Mark">Mark - Young and Calm</option>
-                            <option value="Markus">Markus - Mature and Chill</option>
-                            <option value="Sally">Sally - very realistic, superb</option>
-                        </select>
-                    </div>
-                </div> */}
 
                 <label className="flex justify-center items-center gap-4">
                     <input
@@ -564,11 +495,8 @@ function CompanionCreation() {
                         Submit
                     </button>
                 </div>
-            </form>
-            {/* </div> */}
-        </div>
-        // </Modal.Body>
-        // </Modal>
+            </form >
+        </div >
     );
 }
 

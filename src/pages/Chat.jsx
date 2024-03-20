@@ -9,8 +9,12 @@ import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 // const {Avatar1} = lazy(() => import('../components/Avatar'));
 import { Link } from 'react-router-dom';
+
 import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 // import MyGLBViewer from '../components/TestAvatar';
+// import { startRecording, stopRecording } from '../components/VoiceCall';
+
+
 // import { startRecording, stopRecording } from '../components/VoiceCall';
 
 
@@ -147,7 +151,7 @@ const Chat = () => {
             if (!response.ok) {
                 throw new Error('Failed to delete message');
             }
-
+            alert('Message deleted successfully');
             // Dispatch the delete action to update Redux state
             dispatch(deleteMessage(messageId, sender));
         } catch (error) {
@@ -166,14 +170,14 @@ const Chat = () => {
         if (newMessage.trim() === "") {
             return;
         }
-        
+
         setNewMessage("");
         dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })));
         // setOnline(true);
         try {
             const apiUrl = `http://localhost:8000/message/Chat`;
-            const bearerToken = accessToken;
-            
+            // const bearerToken = accessToken;
+
             const requestBody = {
                 Transcription_language_code: "en-US",
                 role: "string",
@@ -192,7 +196,7 @@ const Chat = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${bearerToken}`,
+                    // Authorization: `Bearer ${bearerToken}`,
                 },
                 body: JSON.stringify(requestBody),
             };
@@ -200,17 +204,19 @@ const Chat = () => {
             setTyping(true);
             const response = await fetch(apiUrl, requestOptions);
             // console.log(response)
-            
+
             if (!response.ok) {
+                setTyping(false);
                 throw new Error(`Failed to send message. Status: ${response.status}`);
             }
-            
+
             const data = await response.json();
             console.log(data);
-            
+
             dispatch(addAIMessage(data.response, data.response_timestamp));
-            setTyping(false);            
+            setTyping(false);
         } catch (error) {
+            setTyping(false);
             console.error("Error sending message:", error);
         }
     };
@@ -226,11 +232,29 @@ const Chat = () => {
             }
         }
         setMessages(combinedMessages);
-        console.log("this is combined message",combinedMessages);
+        console.log("this is combined message", combinedMessages);
     }, [userMessages, aiMessages]);
 
-    const chatEndRef = useRef(null);
 
+    // useEffect(() => {
+    //     const combinedMessages = [];
+    //     let userIndex = 0;
+    //     let aiIndex = 0;
+
+    //     while (userIndex < userMessages.length || aiIndex < aiMessages.length) {
+    //         if (userMessages[userIndex]) {
+    //             combinedMessages.push({ message: userMessages[userIndex], sender: 'user' });
+    //             userIndex++;
+    //         }
+    //         if (aiMessages[aiIndex]) {
+    //             combinedMessages.push({ message: aiMessages[aiIndex], sender: 'ai' });
+    //             aiIndex++;
+    //         }
+    //     }
+    //     setMessages(combinedMessages);
+    // }, [userMessages, aiMessages]);
+
+    const chatEndRef = useRef(null);
     useEffect(() => {
         // Scroll to the bottom of the chat when messages change
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -252,32 +276,32 @@ const Chat = () => {
         setComingSoon(!comingSoon);
     }
 
-    
+
     const handleVideoCall = () => {
         //     setVideoCall(true);
         //     setVoiceCall(false);
         setInpOpt(false);
         setSettings(false);
         setShowEmoji(false);
-        
+
         setComingSoon(!comingSoon);
     }
 
-    
+
     const handleEmoji = () => {
         setShowEmoji(!showEmoji);
     }
-    
+
     let modelClassesVoiceCall = "";
     let modelClassesVideoCall = "";
-    
-    
+
+
     if (comingSoon) {
         setTimeout(() => {
             setComingSoon(false);
         }, 10000);
     }
-    
+
     const handleEmojiInput = (emojiObject) => {
         setNewMessage(newMessage + emojiObject.emoji);
     }
@@ -314,7 +338,7 @@ const Chat = () => {
             <RenderOnViewportEntry
                 threshold={0.25}
                 className="w-full h-full backg"
-                >
+            >
 
                 {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
                 {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
@@ -338,16 +362,16 @@ const Chat = () => {
                             </span>
                         </div>
                         {/* <button className='flex' title='Settings' > */}
-                            <span className="material-symbols-outlined flex items-center justify-center cursor-pointer" onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
-                                settings
-                            </span>
+                        <span className="material-symbols-outlined flex items-center justify-center cursor-pointer" onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
+                            settings
+                        </span>
                         {/* </button> */}
                     </div>
-                    
+
                     <span className={typing ? "text-blue-500 ml-10" : "text-emerald-500 ml-10"}>
                         {typing ? "Typing..." : online ? "Online" : "Offline"}
-                    </span> 
-                    
+                    </span>
+
                     {settings &&
                         <div className='settings absolute bg-black bg-opacity-95 p-4 text-white z-30 rounded-lg right-5 top-12 flex flex-col gap-2'>
                             {/* <button className='hover:bg-white hover:text-black rounded-lg p-2 transition-all'>
@@ -372,7 +396,7 @@ const Chat = () => {
                 <div className="chat-msg-area pr-0 h-full flex flex-col gap-2 justify-end overflow-hidden">
                     <div className='overflow-y-auto flex flex-col pr-1 gap-2 scroll-pb-px'>
                         {messages.map((msg) => (
-                            console.log("this is message",msg),
+                            // console.log("this is message", msg),
                             <Message
                                 time={msg.message[1]} // Ensure you have a time property in your message objects
                                 message={msg.message[0]}
@@ -473,146 +497,146 @@ export default Chat;
 
 // inside component
 
-        // const [videoCall, setVideoCall] = useState(false);
-        // const [voiceCall, setVoiceCall] = useState(false);
-        // const [camera, setCamera] = useState(false);
+// const [videoCall, setVideoCall] = useState(false);
+// const [voiceCall, setVoiceCall] = useState(false);
+// const [camera, setCamera] = useState(false);
 
-        // inside handleVideoCall
-        //     if (camera === true) {
-            //         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
-        //             .then((stream) => {
-        //                 const video = document.getElementById('user-video');
-        //                 if (video) {
-        //                     video.srcObject = stream;
-        //                     video.onloadedmetadata = () => {
-        //                         video.play();
-        //                     };
-        //                 }
-        //             })
-        //             .catch((err) => {
-        //                 console.error('Error accessing the camera:', err);
-        //                 if (err.name === "NotAllowedError") {
-        //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-        //                 }
-        //             });
-        //     } else {
-        //         // only audio call
-        //         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
-        //             .then((stream) => {
-            //                 const video = document.getElementById('user-video');
-            //                 if (video) {
-                //                     video.srcObject = stream;
-                //                     video.onloadedmetadata = () => {
-                    //                         video.play();
-                    //                     };
-                    //                 }
-                    //             })
-                    //             .catch((err) => {
-                        //                 console.error('Error accessing the camera:', err);
-                        //                 if (err.name === "NotAllowedError") {
-                            //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-                            //                 }
-                            //             });
-                            //     }
+// inside handleVideoCall
+//     if (camera === true) {
+//         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+//             .then((stream) => {
+//                 const video = document.getElementById('user-video');
+//                 if (video) {
+//                     video.srcObject = stream;
+//                     video.onloadedmetadata = () => {
+//                         video.play();
+//                     };
+//                 }
+//             })
+//             .catch((err) => {
+//                 console.error('Error accessing the camera:', err);
+//                 if (err.name === "NotAllowedError") {
+//                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+//                 }
+//             });
+//     } else {
+//         // only audio call
+//         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+//             .then((stream) => {
+//                 const video = document.getElementById('user-video');
+//                 if (video) {
+//                     video.srcObject = stream;
+//                     video.onloadedmetadata = () => {
+//                         video.play();
+//                     };
+//                 }
+//             })
+//             .catch((err) => {
+//                 console.error('Error accessing the camera:', err);
+//                 if (err.name === "NotAllowedError") {
+//                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+//                 }
+//             });
+//     }
 
-    // const handleCamera = () => {
-    
-    //     // if camera is false, stop the video stream
-    //     if (camera === true) {
-    //         setCamera(false);
-    //         const video = document.getElementById('user-video');
-    //         const stream = video.srcObject;
-    //         const tracks = stream.getTracks();
-    //         tracks.forEach(track => track.stop());
-    //         video.srcObject = null;
-    
-    //         // audio on if video is off
-    //         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
-    //             .then((stream) => {
-    //                 const video = document.getElementById('user-video');
-    //                 if (video) {
-    //                     video.srcObject = stream;
-    //                     video.onloadedmetadata = () => {
-    //                         video.play();
-    //                     };
-    //                 }
-    //             })
-    //     } else {
-    //         setCamera(true);
-    //         // ask for permission to use the camera and if granted, start the video call
-    //         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
-    //             .then((stream) => {
-    //                 const video = document.getElementById('user-video');
-    //                 if (video) {
-    //                     video.srcObject = stream;
-    //                     video.onloadedmetadata = () => {
-    //                         video.play();
-    //                     };
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 console.error('Error accessing the camera:', err);
-    //                 if (err.name === "NotAllowedError") {
-    //                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
-    //                 }
-    //             });
-    //     }
-    // }
-    
-    // const handleEndVideoCall = () => {
-    //     setVideoCall(false);
-    
-    //     // stop the video stream
-    //     const video = document.getElementById('user-video');
-    //     const stream = video.srcObject;
-    //     const tracks = stream.getTracks();
-    
-    //     tracks.forEach(track => track.stop());
-    //     video.srcObject = null;
-    //     setCamera(false);
-    
-    //     // audio off if video call is ended
-    //     navigator.mediaDevices.getUserMedia({ video: false, audio: false })
-    //         .then((stream) => {
-    //             const video = document.getElementById('user-video');
-    //             if (video) {
-    //                 video.srcObject = stream;
-    //                 video.onloadedmetadata = () => {
-    //                     video.play();
-    //                 };
-    //             }
-    //         })
-    // }
-            
-    // const handleEndVoiceCall = () => {
-    //     stopRecording();
-    //     setVoiceCall(false);
-    //     setCamera(false);
-    //     setVideoCall(false);
-    // }
-                            
-    // if (voiceCall) {
-    //     modelClassesVoiceCall = "sm-voice-cen max-scrn-voice-call";
-    //     modelClassesVideoCall = "";
-    // } else if (videoCall) {
-    //     modelClassesVoiceCall = "";
-    //     modelClassesVideoCall = "sm-video-cen max-scrn-video-call";
-    // } else {
-    //     modelClassesVoiceCall = "";
-    //     modelClassesVideoCall = "";
-    // }
+// const handleCamera = () => {
 
-    //  inside return   
-    {/* <aside className=''> */}
-    {/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */}
-    {/* <iframe className={`body flex basis-1/2 self-center justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`} src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0'></iframe> */}
-    {/* </aside> */}
-    {/* <iframe src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0' width='150%' height='100%'>
+//     // if camera is false, stop the video stream
+//     if (camera === true) {
+//         setCamera(false);
+//         const video = document.getElementById('user-video');
+//         const stream = video.srcObject;
+//         const tracks = stream.getTracks();
+//         tracks.forEach(track => track.stop());
+//         video.srcObject = null;
+
+//         // audio on if video is off
+//         navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+//             .then((stream) => {
+//                 const video = document.getElementById('user-video');
+//                 if (video) {
+//                     video.srcObject = stream;
+//                     video.onloadedmetadata = () => {
+//                         video.play();
+//                     };
+//                 }
+//             })
+//     } else {
+//         setCamera(true);
+//         // ask for permission to use the camera and if granted, start the video call
+//         navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true })
+//             .then((stream) => {
+//                 const video = document.getElementById('user-video');
+//                 if (video) {
+//                     video.srcObject = stream;
+//                     video.onloadedmetadata = () => {
+//                         video.play();
+//                     };
+//                 }
+//             })
+//             .catch((err) => {
+//                 console.error('Error accessing the camera:', err);
+//                 if (err.name === "NotAllowedError") {
+//                     alert("You have denied access to the camera. Please allow access to the camera to start the video call.");
+//                 }
+//             });
+//     }
+// }
+
+// const handleEndVideoCall = () => {
+//     setVideoCall(false);
+
+//     // stop the video stream
+//     const video = document.getElementById('user-video');
+//     const stream = video.srcObject;
+//     const tracks = stream.getTracks();
+
+//     tracks.forEach(track => track.stop());
+//     video.srcObject = null;
+//     setCamera(false);
+
+//     // audio off if video call is ended
+//     navigator.mediaDevices.getUserMedia({ video: false, audio: false })
+//         .then((stream) => {
+//             const video = document.getElementById('user-video');
+//             if (video) {
+//                 video.srcObject = stream;
+//                 video.onloadedmetadata = () => {
+//                     video.play();
+//                 };
+//             }
+//         })
+// }
+
+// const handleEndVoiceCall = () => {
+//     stopRecording();
+//     setVoiceCall(false);
+//     setCamera(false);
+//     setVideoCall(false);
+// }
+
+// if (voiceCall) {
+//     modelClassesVoiceCall = "sm-voice-cen max-scrn-voice-call";
+//     modelClassesVideoCall = "";
+// } else if (videoCall) {
+//     modelClassesVoiceCall = "";
+//     modelClassesVideoCall = "sm-video-cen max-scrn-video-call";
+// } else {
+//     modelClassesVoiceCall = "";
+//     modelClassesVideoCall = "";
+// }
+
+//  inside return   
+{/* <aside className=''> */ }
+{/* <img src="./src/assets/AI avatar placeholder.png" alt="avatar" className="h-auto w-full" /> */ }
+{/* <iframe className={`body flex basis-1/2 self-center justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`} src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0'></iframe> */ }
+{/* </aside> */ }
+{/* <iframe src='https://my.spline.design/untitled-c5b03b378e7ce3125486f2d1db14c585/' frameBorder='0' width='150%' height='100%'>
     </iframe> */}
-    {/* <div className="sketchfab-embed-wrapper absolute h-full w-full"> <iframe className='h-full w-full' title="Vatican royaume d'or" frameBorder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autostart; xr-spatial-tracking" src="https://sketchfab.com/models/8434d5d906ac4b84ad403e1b66f84668/embed?autostart=1&camera=0&ui_stop=0&ui_controls=0"> </iframe></div> */}
-    {/* <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" /> */}
+{/* <div className="sketchfab-embed-wrapper absolute h-full w-full"> <iframe className='h-full w-full' title="Vatican royaume d'or" frameBorder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autostart; xr-spatial-tracking" src="https://sketchfab.com/models/8434d5d906ac4b84ad403e1b66f84668/embed?autostart=1&camera=0&ui_stop=0&ui_controls=0"> </iframe></div> */ }
+{/* <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" /> */ }
 
-    {/* {
+{/* {
         voiceCall &&
         <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
             <button className="flex flex-col items-center bg-red-700 pb-1 text-white rounded-full w-40 justify-center" onClick={handleEndVoiceCall}>
@@ -623,7 +647,7 @@ export default Chat;
             </button>
         </div>
     } */}
-    {/* {
+{/* {
         videoCall &&
         <div className="flex justify-between z-20  p-3 gap-5 rounded-full absolute bottom-10">
             <button className="flex flex-col items-center bg-red-700 p-1 text-white rounded-full w-40 justify-center" onClick={handleEndVideoCall}>
@@ -641,7 +665,7 @@ export default Chat;
         </div>
     } */}
 
-    {/* <video id='user-video' className={videoCall && camera ? "absolute bottom-0 right-5" : "hidden"} autoPlay playsInline></video>
+{/* <video id='user-video' className={videoCall && camera ? "absolute bottom-0 right-5" : "hidden"} autoPlay playsInline></video>
 
     {
         videoCall && camera === false &&
@@ -651,3 +675,30 @@ export default Chat;
             </span>
             </div>
         } */}
+
+
+
+
+// const handleDeleteMessage = async (messageId, sender) => {
+//     try {
+//         // Make a DELETE request to your backend API
+//         const response = await fetch(`http://localhost:8000/message/${messageId}`, {
+//             method: 'DELETE',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 // Add any necessary authentication headers
+//             },
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Failed to delete message');
+//         }
+//         alert('Message deleted successfully');
+//         // Dispatch the delete action to update Redux state
+//         dispatch(deleteMessage(messageId, sender));
+//     } catch (error) {
+//         console.error('Error deleting message:', error);
+//     }
+// };
+
+
