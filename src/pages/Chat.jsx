@@ -130,12 +130,20 @@ const Chat = () => {
 
     useEffect(() => {
         fetchCompanionDetails();
-        fetchUserDetails();
+        
         fetchMessages();
         setTimeout(() => {
             setOnline(true);
         }, 5000);
     }, []);
+
+    useEffect(() => {
+        // const interval = setInterval(() => {
+        //     fetchMessages();
+        // }, 3000);
+        // return () => clearInterval(interval);
+        fetchUserDetails();
+    },[userId]);
 
     const handleDeleteMessage = async (messageId, sender) => {
         try {
@@ -368,7 +376,7 @@ const Chat = () => {
                         {/* </button> */}
                     </div>
 
-                    <span className={typing ? "text-blue-500 ml-10" : "text-emerald-500 ml-10"}>
+                    <span className={typing ? "text-blue-500 ml-10" : online ? "text-green-500 ml-10" : "text-red-500 ml-10"}>
                         {typing ? "Typing..." : online ? "Online" : "Offline"}
                     </span>
 

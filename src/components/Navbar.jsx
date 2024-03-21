@@ -165,6 +165,13 @@ const Navbar = () => {
                                             <Link to={`/settings/${userId}`} className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                                                 Profile
                                             </Link>
+                                            {
+                                                isAdmin && (
+                                                    <Link to="/admin" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                        Admin Panel
+                                                    </Link>
+                                                )
+                                            }
                                             <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
                                                 Logout
                                             </button>
