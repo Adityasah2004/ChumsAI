@@ -1,4 +1,6 @@
 .admin-panel-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 1rem;
     padding: 1rem;

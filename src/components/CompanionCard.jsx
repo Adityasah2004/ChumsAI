@@ -67,6 +67,44 @@ const CompanionList = () => {
         history.push('/');
     };
 
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
+    //  fetch user details from the server using the user id
+    const fetchUserDetails = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            // console.log('User details from navbar:', data.data);
+            setUserDetails(data.data);
+            console.log('User details from navbar user:', userDetails);
+            // return data;
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+            // return null;
+        }
+    }
+
+    useEffect(() => {
+        // if (userId) {
+        fetchUserDetails();
+        // }
+    }, []);
+
+    useEffect(() => {
+        // Check if user details contain admin email
+        if (userId && userDetails.email === "chumsai.tech@gmail.com") {
+            setIsAdmin(true);
+        }
+    }, [userDetails]);
+
     useEffect(() => {
         if (!userId || !accessToken) {
             console.error('User ID or Access Token is missing.');
@@ -125,6 +163,18 @@ const CompanionList = () => {
                                         <span className="ms-3">Home</span>
                                     </a>
                                 </li>
+                                {
+                                    isAdmin && (
+                                        <li>
+                                            <Link to="/admin" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                                <span className="material-symbols-outlined">
+                                                    admin_panel_settings
+                                                </span>
+                                                <span className="ms-3">Admin</span>
+                                            </Link>
+                                        </li>
+                                    )
+                                }
                                 <li>
                                     <Link to={`/companion-creation/${userId}`} className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
                                         <span className="material-symbols-outlined">

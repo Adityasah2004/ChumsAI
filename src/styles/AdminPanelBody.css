@@ -1,6 +1,13 @@
 .admin-panel-body-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     background: #16171d;
     /* width: 100%; */
@@ -10,14 +17,21 @@
 .admin-panel-body-div h1 {
     color: #fff;
     font-size: clamp(1.5rem, 4vw, 2.5rem);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 1rem 0;
+    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center
 }
 
 .body-main-admin-div {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 2rem 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     padding: 1rem;
@@ -27,20 +41,33 @@
 }
 
 .admin-panel-body-div form.glb-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-grid-column: 1;
     grid-column-start: 1;
+    -ms-grid-column-span: 1;
     grid-column-end: 2;
+    -ms-grid-row: 1;
     grid-row-start: 1;
+    -ms-grid-row-span: 1;
     grid-row-end: 2;
     gap: 1rem;
     padding: 1rem;
     background: #191c24;
     border-radius: 25px;
     height: 350px;
-    width: 100% 
+    width: 100%
 }
 
 .admin-icon-nav,
@@ -49,14 +76,22 @@
 }
 
 .admin-panel-body-div label.file-label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 1rem;
     /* padding: 1rem; */
     color: #fff;
     border-radius: 12px;
     cursor: pointer;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out;
     height: 200px;
     /* width: 100%;
@@ -67,6 +102,8 @@
 
 .admin-panel-body-div label:hover.file-label {
     background: rgba(63, 81, 181, .5);
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out
 }
 
@@ -77,6 +114,8 @@
     border: 1px solid #5167e3;
     border-radius: 50px;
     cursor: pointer;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out;
     width: clamp(150px, 4vw, 400px);
     font-size: clamp(0.5rem, 4vw, 0.8rem);
@@ -88,6 +127,8 @@
     color: #fff;
     border-radius: 50px;
     cursor: pointer;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out;
     width: clamp(150px, 4vw, 400px);
     font-size: clamp(0.5rem, 4vw, 0.8rem);
@@ -95,22 +136,39 @@
 
 .admin-panel-body-div button[type=submit]:hover {
     background: 0 0;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out
 }
 
 .admin-panel-body-div button[type=reset]:hover {
     background: #5167e3;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out
 }
 
 .admin-comp-cards-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-grid-column: 2;
     grid-column-start: 2;
+    -ms-grid-column-span: 1;
     grid-column-end: 3;
+    -ms-grid-row: 1;
     grid-row-start: 1;
+    -ms-grid-row-span: 1;
     grid-row-end: 2;
     gap: 1rem;
     padding: 1rem;
@@ -120,17 +178,28 @@
     height: 350px;
 }
 
-.admin-comp-cards-div .admin-com-card-inside-div{
+.admin-comp-cards-div .admin-com-card-inside-div {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 1rem 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
 }
 
 .admin-comp-cards-div .companion-card {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
@@ -140,9 +209,15 @@
     height: 280px;
 }
 
-.admin-comp-cards-div .companion-card .companion-card-img{
+.admin-comp-cards-div .companion-card .companion-card-img {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     width: 100%;
     height: 200px;
@@ -154,12 +229,20 @@
     width: 100%;
     /* aspect-ratio: 16/9; */
     height: 100%;
+    -o-object-fit: cover;
     object-fit: cover
 }
 
 .admin-comp-cards-div .companion-card .companion-card-details {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
@@ -168,9 +251,18 @@
 }
 
 .GCP-form-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
@@ -178,15 +270,26 @@
     border-radius: 25px;
     width: 100%;
     height: 350px;
+    -ms-grid-column: 1;
     grid-column-start: 1;
+    -ms-grid-column-span: 2;
     grid-column-end: 3;
+    -ms-grid-row: 2;
     grid-row-start: 2;
+    -ms-grid-row-span: 1;
     grid-row-end: 3
 }
 
 .GCP-form-div form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
@@ -204,64 +307,94 @@
 
 
 .GCP-form-div form label {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     width: clamp(150px, 50vw, 400px)
-
 }
 
-.admin-menu-div{
+.admin-menu-div {
     display: none;
 }
 
 @media screen and (max-width:1100px) {
-    
+
     .body-main-admin-div {
+        -ms-grid-columns: 1;
         grid-template-columns: 1;
     }
 
     .admin-panel-body-div form.glb-form {
+        -ms-grid-column: 1;
         grid-column-start: 1;
+        -ms-grid-column-span: 2;
         grid-column-end: 3;
+        -ms-grid-row: 1;
         grid-row-start: 1;
+        -ms-grid-row-span: 1;
         grid-row-end: 2;
     }
 
     .admin-comp-cards-div {
+        -ms-grid-column: 1;
         grid-column-start: 1;
+        -ms-grid-column-span: 2;
         grid-column-end: 3;
+        -ms-grid-row: 2;
         grid-row-start: 2;
+        -ms-grid-row-span: 1;
         grid-row-end: 3;
     }
 
     .GCP-form-div {
+        -ms-grid-column: 1;
         grid-column-start: 1;
+        -ms-grid-column-span: 2;
         grid-column-end: 3;
+        -ms-grid-row: 3;
         grid-row-start: 3;
+        -ms-grid-row-span: 1;
         grid-row-end: 4;
     }
 }
 
 
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
     .admin-icon-nav {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         gap: 1rem;
         padding: 1rem;
     }
-    .admin-menu-div{
+
+    .admin-menu-div {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
 }
 
-@media screen and (max-width: 580px){
-   .admin-comp-cards-div .admin-com-card-inside-div{
+@media screen and (max-width: 580px) {
+    .admin-comp-cards-div .admin-com-card-inside-div {
+        -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
     }
+
     .admin-panel-body-div label.file-label {
         width: clamp(100px, 50vw, 400px);
     }
