@@ -33,7 +33,7 @@
 
 .comp-card {
     width: 300px;
-    height: auto;
+    height: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .5)
 }
 
@@ -41,7 +41,7 @@
     width: auto;
     height: 100%;
     object-fit: cover;
-    border-radius: .75rem
+    border-radius: 0.5rem
 }
 
 .profile-div {
@@ -67,11 +67,26 @@
     background-color: #303030
 }
 
-@media screen and (max-width:900px) {
+/* @media screen and (max-width:900px) {
     .dashboard-cards-div {
         grid-template-columns: repeat(auto-fit, minmax(300px, auto));
         padding: 0 1rem
     }
+} */
+
+@media screen and (max-width:1440px){
+    .dashboard-cards-div {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 1rem
+    }
+}
+
+@media screen and (max-width:1060px) {
+    .dashboard-cards-div {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 1rem
+    }
+    
 }
 
 @media screen and (max-width:768px) {

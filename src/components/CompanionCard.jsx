@@ -8,34 +8,44 @@ import DashboardCreateCard from './DashboardCreateCard';
 
 const userId = localStorageUtils.getUserId();
 
-const CompanionCard = ({ data, key }) => {
-    const { name, front_src, companion_id, message_count, category } = data;
-    // const userId = localStorageUtils.getUserId();
+const CompanionCard = (props) => {
+    // const { name, front_src, companion_id, message_count, category, private } = data;
+    const { data } = props;
     console.log(data);
     const handleCardClick = () => {
-        // Store companion ID in local storage
-        localStorageUtils.setCompanionId(companion_id);
+        localStorageUtils.setCompanionId(data.companion_id);
         const companionId = localStorageUtils.getCompanionId();
         console.log('Companion ID:', companionId);
-        // Call the parent component's callback if provided
-        // if (onCardClick) {
-        //     onCardClick(companion_id);
-        // }
     };
     return (
-        <Link key={key} to={`/chat/${userId}/${companion_id}`} className="comp-card flex flex-col border h-full p-2 rounded-xl" onClick={handleCardClick}>
+        <Link key={props.key} to={`/chat/${userId}/${data.companion_id}`} className="comp-card flex flex-col bg-slate-700 h-full p-2 rounded-xl justify-start gap-5" onClick={handleCardClick}>
             <div className='flex items-center justify-center'>
-                <img className="comp-card-img" src={front_src} alt="AI Companion Image" />
+                <img className="comp-card-img" src={data.front_src} alt="AI Companion Image" />
             </div>
-            <h2 className="text-white text-xl font-medium">{name}</h2>
-            <p className='text-white font-thin'>{category}</p>
-            <div className='flex justify-between'>
+            <h2 className="text-white text-xl font-medium">{data.name}</h2>
                 <span className="text-gray-500 text-xs mt-2 mb-2">{userId}</span>
-                <div className='flex items-center gap-1 text-white' title='Message count'>
-                    <span className="material-symbols-outlined ">
-                        chat
-                    </span>
-                    {message_count}
+            <div className='flex justify-between'>
+                <p className='text-white font-thin text-sm'>{data.category}</p>
+                <div className='flex items-center gap-1 text-white font-light text-sm' title='Message count'>
+                    {
+                        data.private ? 
+                        (
+                            <div className='flex gap-2'>
+                                <span className="material-symbols-outlined text-sm">
+                                    lock
+                                </span>
+                                Private
+                            </div>
+                        ) : 
+                        (
+                            <div className='flex gap-2'>
+                                <span className="material-symbols-outlined text-sm">
+                                    public
+                                </span>
+                                Public
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </Link>
@@ -51,18 +61,10 @@ const CompanionList = () => {
 
     const accessToken = localStorageUtils.getAccessToken();
 
-    // const handleCardClick = () => {
-    //     // Handle card click if needed
-    //     // You can perform additional actions here if necessary
-    // };
-
     const handleLogout = () => {
-
-        // Implement logout logic
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
         history.push('/');
-        // Redirect to the logout page or perform other logout actions
     };
 
     useEffect(() => {
@@ -191,16 +193,14 @@ const CompanionList = () => {
                         Companions
                     </h1>
                     <div className="skip-header"></div>
-                    {/* <div className='profile-div flex text-white'>
-                    </div> */}
                 </div>
                 <div className="dashboard-cards-div">
                     <DashboardCreateCard />
-                    {companionData.map((companion) => (
-                        <CompanionCard key={companion.id} data={companion}
-                        // onCardClick={handleCardClick} 
-                        />
-                    ))}
+                    {
+                        companionData.map((companion) => {
+                            return <CompanionCard key={companion.id} data={companion} />;
+                        })
+                    }
                 </div>
             </div>
         </div>

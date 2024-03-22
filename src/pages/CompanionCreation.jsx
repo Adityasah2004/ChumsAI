@@ -22,18 +22,25 @@ const bearerToken = localStorageUtils.getAccessToken();
 function CompanionCreation() {
     const history = useHistory();
 
+    const [leftProfileFileName, setLeftProfileFileName] = useState('');
+    const [rightProfileFileName, setRightProfileFileName] = useState('');
+    const [frontProfileFileName, setFrontProfileFileName] = useState('');
+
     function handleFrontImageChange(event) {
         setFrontImage(event.target.files[0]);
+        setFrontProfileFileName(event.target.files[0].name);
         console.log("Front Image:", event.target.files[0]);
     }
 
     const handleLeftSideImageChange = (event) => {
         setLeftSideImage(event.target.files[0]);
+        setLeftProfileFileName(event.target.files[0].name);
         console.log("Left Side Image:", event.target.files[0]);
     };
 
     const handleRightSideImageChange = (event) => {
         setRightSideImage(event.target.files[0]);
+        setRightProfileFileName(event.target.files[0].name);
         console.log("Right Side Image:", event.target.files[0]);
     };
 
@@ -105,7 +112,7 @@ function CompanionCreation() {
         message: "",
         message_count: 0,
         name: "",
-        private: 1,
+        private: null,
         right_side_public_id: "",
         right_side_src: "",
         translation_language_code: "",
@@ -118,7 +125,6 @@ function CompanionCreation() {
 
     const handleInputChange = (field, value) => {
         if (field === "language") {
-            //  for language value set text and translation language code
             if (value === "English") {
                 setFormData((prevFormData) => ({
                     ...prevFormData,
@@ -305,23 +311,13 @@ function CompanionCreation() {
                 [field]: value,
             }));
         } 
-        // else if(field === "private"){
-        //     if(value === "public"){
-        //         setFormData((prevFormData) => ({
-        //             ...prevFormData,
-        //             private: 0,
-        //         }));
-        //     }else if(value === "private"){
-        //         setFormData((prevFormData) => ({
-        //             ...prevFormData,
-        //             private: 1,
-        //         }));
-        //     }
-        //     setFormData((prevFormData) => ({
-        //         ...prevFormData,
-        //         [field]: value,
-        //     }));
-        // }
+        else if (field === "private") {
+            const intValue = parseInt(value); // Convert value to integer
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                private: intValue,
+            }));
+        }
         else{
             setFormData((prevFormData) => ({
                 ...prevFormData,
@@ -411,6 +407,11 @@ function CompanionCreation() {
                                 className="img-drop-area dark:hover:bg-bray-800 flex h-64 w-fit px-8 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-black hover:bg-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                             >
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
+                                    {leftProfileFileName && (
+                                        <div className="message-div text-white font-thin">
+                                            <p>{leftProfileFileName}</p>
+                                        </div>
+                                    )}
                                     <div>
                                         <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                             <span className="material-symbols-outlined">
@@ -433,6 +434,11 @@ function CompanionCreation() {
                                 className="img-drop-area dark:hover:bg-bray-800 flex h-64 w-fit px-8 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-black hover:bg-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                             >
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
+                                    {rightProfileFileName && (
+                                        <div className="message-div text-white font-thin">
+                                            <p>{rightProfileFileName}</p>
+                                        </div>
+                                    )}
                                     <div>
                                         <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                             <span className="material-symbols-outlined">
@@ -455,6 +461,11 @@ function CompanionCreation() {
                                 className="img-drop-area dark:hover:bg-bray-800 flex h-64 w-fit px-8 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-black hover:bg-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                             >
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
+                                    {frontProfileFileName && (
+                                        <div className="message-div text-white font-thin">
+                                            <p>{frontProfileFileName}</p>
+                                        </div>
+                                    )}
                                     <div>
                                         <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                             <span className="material-symbols-outlined">
@@ -482,7 +493,7 @@ function CompanionCreation() {
                                 id="character-name"
                                 type="text"
                                 placeholder="Character Name"
-                                value={formData.characterName}
+                                value={formData.name}
                                 onChange={(e) => handleInputChange('name', e.target.value)}
                                 className="border rounded-md p-2 w-full bg-black"
                                 required
@@ -548,7 +559,7 @@ function CompanionCreation() {
                                 {/* <label htmlFor="category" className="text-white">Select Category</label> */}
                                 <select
                                     id="category"
-                                    value={formData.defaultVoice}
+                                    value={formData.voice}
                                     onChange={(e) => { handleInputChange('voice', e.target.value), handleVoiceChange(e) }}
                                     className="border rounded-md p-2 w-full bg-black text-gray-500"
                                     // required
@@ -570,15 +581,15 @@ function CompanionCreation() {
                                 <label htmlFor="visibility" className="text-white" >Visibility <span className="text-sky-500" title="required field">*</span></label>
                                 <select
                                     id="visibility"
-                                    value={formData.visibility}
+                                    value={formData.private}
                                     onChange={(e) => handleInputChange('private', e.target.value)}
                                     className="border rounded-md p-2 w-full bg-black text-gray-500"
                                 // required
                                 >
                                     <option value="" disabled selected>Select Visibility</option>
-                                    <option value="public">Public</option>
+                                    <option value={0}>Public</option>
                                     {/* <option value="unlisted">Unlisted</option> */}
-                                    <option value="private">Private</option>
+                                    <option value={1}>Private</option>
                                 </select>
                             </div>
                             <div className='flex flex-col gap-2 items-start' style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
@@ -630,7 +641,7 @@ function CompanionCreation() {
                                 <label className="flex items-center">
                                     <input
                                         type="checkbox"
-                                        checked={formData.enable3DAvatar}
+                                        checked={formData.enable3dAvatar}
                                         onChange={() => handleInputChange('enable3dAvatar')}
                                         className="text-black mr-2"
                                     />

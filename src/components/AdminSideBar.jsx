@@ -1,8 +1,16 @@
 // import { Link } from "react-router-dom";
 import logo from "../assets/logoDark.webp";
 import '../styles/AdminSideBar.css';
+import { useHistory } from 'react-router-dom';
 
 function AdminSideBar() {
+    const history = useHistory();
+
+    const handleLogout = () => {
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+    };
     return (
         <aside className="admin-sidebar rounded-xl" aria-label="Sidebar">
             <a href="/" className="flex items-center gap-2 pl-3 h-20">
@@ -54,7 +62,7 @@ function AdminSideBar() {
                         </a>
                     </li> */}
                     <li>
-                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">
+                        <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max" onClick={handleLogout}>
                             <span className="material-symbols-outlined">
                                 logout
                             </span>

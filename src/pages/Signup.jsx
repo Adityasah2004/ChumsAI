@@ -194,7 +194,7 @@ const Signup = () => {
                             required
                         />
                     </div>
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                         <div className="flex items-center gap-2">
                             <input type="checkbox" id="remember" />
                             <label htmlFor="remember">Remember me</label>
@@ -205,7 +205,7 @@ const Signup = () => {
                         >
                             Lost Password?
                         </a>
-                    </div>
+                    </div> */}
                     <div className="flex items-center gap-2 mt-2">
                         <input type="checkbox" id="tnc" />
                         <label htmlFor="tnc">
