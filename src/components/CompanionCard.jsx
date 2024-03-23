@@ -8,34 +8,44 @@ import DashboardCreateCard from './DashboardCreateCard';
 
 const userId = localStorageUtils.getUserId();
 
-const CompanionCard = ({ data, key }) => {
-    const { name, front_src, companion_id, message_count, category } = data;
-    // const userId = localStorageUtils.getUserId();
+const CompanionCard = (props) => {
+    // const { name, front_src, companion_id, message_count, category, private } = data;
+    const { data } = props;
     console.log(data);
     const handleCardClick = () => {
-        // Store companion ID in local storage
-        localStorageUtils.setCompanionId(companion_id);
+        localStorageUtils.setCompanionId(data.companion_id);
         const companionId = localStorageUtils.getCompanionId();
         console.log('Companion ID:', companionId);
-        // Call the parent component's callback if provided
-        // if (onCardClick) {
-        //     onCardClick(companion_id);
-        // }
     };
     return (
-        <Link key={key} to={`/chat/${userId}/${companion_id}`} className="comp-card flex flex-col border h-full p-2 rounded-xl" onClick={handleCardClick}>
+        <Link key={props.key} to={`/chat/${userId}/${data.companion_id}`} className="comp-card flex flex-col bg-slate-700 h-full p-2 rounded-xl justify-start gap-5" onClick={handleCardClick}>
             <div className='flex items-center justify-center'>
-                <img className="comp-card-img" src={front_src} alt="AI Companion Image" />
+                <img className="comp-card-img" src={data.front_src} alt="AI Companion Image" />
             </div>
-            <h2 className="text-white text-xl font-medium">{name}</h2>
-            <p className='text-white font-thin'>{category}</p>
-            <div className='flex justify-between'>
+            <h2 className="text-white text-xl font-medium">{data.name}</h2>
                 <span className="text-gray-500 text-xs mt-2 mb-2">{userId}</span>
-                <div className='flex items-center gap-1 text-white' title='Message count'>
-                    <span className="material-symbols-outlined ">
-                        chat
-                    </span>
-                    {message_count}
+            <div className='flex justify-between'>
+                <p className='text-white font-thin text-sm'>{data.category}</p>
+                <div className='flex items-center gap-1 text-white font-light text-sm' title='Message count'>
+                    {
+                        data.private ? 
+                        (
+                            <div className='flex gap-2'>
+                                <span className="material-symbols-outlined text-sm">
+                                    lock
+                                </span>
+                                Private
+                            </div>
+                        ) : 
+                        (
+                            <div className='flex gap-2'>
+                                <span className="material-symbols-outlined text-sm">
+                                    public
+                                </span>
+                                Public
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </Link>
@@ -51,19 +61,49 @@ const CompanionList = () => {
 
     const accessToken = localStorageUtils.getAccessToken();
 
-    // const handleCardClick = () => {
-    //     // Handle card click if needed
-    //     // You can perform additional actions here if necessary
-    // };
-
     const handleLogout = () => {
-
-        // Implement logout logic
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
         history.push('/');
-        // Redirect to the logout page or perform other logout actions
     };
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
+    //  fetch user details from the server using the user id
+    const fetchUserDetails = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            // console.log('User details from navbar:', data.data);
+            setUserDetails(data.data);
+            console.log('User details from navbar user:', userDetails);
+            // return data;
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+            // return null;
+        }
+    }
+
+    useEffect(() => {
+        // if (userId) {
+        fetchUserDetails();
+        // }
+    }, []);
+
+    useEffect(() => {
+        // Check if user details contain admin email
+        if (userId && userDetails.email === "chumsai.tech@gmail.com") {
+            setIsAdmin(true);
+        }
+    }, [userDetails]);
 
     useEffect(() => {
         if (!userId || !accessToken) {
@@ -123,6 +163,18 @@ const CompanionList = () => {
                                         <span className="ms-3">Home</span>
                                     </a>
                                 </li>
+                                {
+                                    isAdmin && (
+                                        <li>
+                                            <Link to="/admin" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                                <span className="material-symbols-outlined">
+                                                    admin_panel_settings
+                                                </span>
+                                                <span className="ms-3">Admin</span>
+                                            </Link>
+                                        </li>
+                                    )
+                                }
                                 <li>
                                     <Link to={`/companion-creation/${userId}`} className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
                                         <span className="material-symbols-outlined">
@@ -191,16 +243,14 @@ const CompanionList = () => {
                         Companions
                     </h1>
                     <div className="skip-header"></div>
-                    {/* <div className='profile-div flex text-white'>
-                    </div> */}
                 </div>
                 <div className="dashboard-cards-div">
                     <DashboardCreateCard />
-                    {companionData.map((companion) => (
-                        <CompanionCard key={companion.id} data={companion}
-                        // onCardClick={handleCardClick} 
-                        />
-                    ))}
+                    {
+                        companionData.map((companion) => {
+                            return <CompanionCard key={companion.id} data={companion} />;
+                        })
+                    }
                 </div>
             </div>
         </div>

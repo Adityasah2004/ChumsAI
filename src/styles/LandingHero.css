@@ -5,18 +5,35 @@
 }
 
 .hero-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     z-index: -1;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #000), color-stop(20%, rgba(0, 0, 0, 0))), url('../assets/hero-bg.jpg');
+    background-image: -o-linear-gradient(bottom, #000 0, rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg.jpg');
     background-image: linear-gradient(0deg, #000 0, rgba(0, 0, 0, 0) 20%), url('../assets/hero-bg.jpg');
     padding: 0 4rem
 }
 
 .hero-section .left-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     gap: 1rem
 }
@@ -25,8 +42,14 @@
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     font-weight: 400;
     text-align: left;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center
 }
 
@@ -38,6 +61,8 @@
 }
 
 .left-div p big {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #ff2df7), to(#00f0ff));
+    background: -o-linear-gradient(left, #ff2df7 0, #00f0ff 100%);
     background: linear-gradient(90deg, #ff2df7 0, #00f0ff 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -47,8 +72,14 @@
 }
 
 .hero-btns-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
     justify-content: flex-start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     width: 100%;
     gap: 1rem
@@ -56,11 +87,19 @@
 
 .create-btn,
 .discord-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     padding: 1rem;
     color: #fff;
+    -webkit-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
     width: 100%;
     max-width: 250px;
@@ -73,7 +112,11 @@
 .hero-img-div,
 .video-div {
     height: 100vh;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex
 }
 
@@ -83,33 +126,55 @@
 }
 
 .discord-btn:hover {
+    background: -webkit-gradient(linear, right top, left top, color-stop(0, #00b7a1), to(#ac20cf));
+    background: -o-linear-gradient(right, #00b7a1 0, #ac20cf 100%);
     background: linear-gradient(270deg, #00b7a1 0, #ac20cf 100%);
     outline: #ffffff00 solid 1px
 }
 
 .create-btn:hover {
     background: #00b7a1;
+    -webkit-box-shadow: 0 0 10px #00b7a1, 0 0 20px #00b7a1, 0 0 30px #00b7a1;
     box-shadow: 0 0 10px #00b7a1, 0 0 20px #00b7a1, 0 0 30px #00b7a1;
     outline: #00B7A1 solid 1px
 }
 
 .create-btn span {
+    -webkit-animation: 5s ease-in-out infinite slide;
     animation: 5s ease-in-out infinite slide
+}
+
+@-webkit-keyframes slide {
+
+    0%,
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0)
+    }
+
+    50% {
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px)
+    }
 }
 
 @keyframes slide {
 
     0%,
     100% {
+        -webkit-transform: translateX(0);
         transform: translateX(0)
     }
 
     50% {
+        -webkit-transform: translateX(20px);
         transform: translateX(20px)
     }
 }
 
 .hero-img-div {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center
 }
 
@@ -120,6 +185,8 @@
 
 .video-div {
     width: 100%;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     position: relative
 }
@@ -127,6 +194,7 @@
 .video-div video {
     width: 80%;
     height: 80%;
+    -o-object-fit: cover;
     object-fit: cover;
     border-radius: 40px
 }
@@ -139,15 +207,30 @@
     width: 100%;
     max-width: 300px;
     height: auto;
+    -webkit-animation: 6s infinite rotate1;
     animation: 6s infinite rotate1
 }
 
-@keyframes rotate1 {
+@-webkit-keyframes rotate1 {
     0% {
+        -webkit-transform: rotate(0);
         transform: rotate(0)
     }
 
     100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg)
+    }
+}
+
+@keyframes rotate1 {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
         transform: rotate(-360deg)
     }
 }
@@ -155,22 +238,43 @@
 .video-div-img2 {
     width: 100%;
     max-width: 100px;
+    -webkit-animation: 6s infinite rotate;
     animation: 6s infinite rotate
 }
 
-@keyframes rotate {
+@-webkit-keyframes rotate {
     0% {
+        -webkit-transform: rotate(0);
         transform: rotate(0)
     }
 
     100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
     }
 }
 
 .hero-down-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000), color-stop(40%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, left bottom, left top, color-stop(0, #000), color-stop(40%, rgba(0, 0, 0, 0))), url('../assets/hero-bg-2.svg');
+    background-image: -o-linear-gradient(top, #000 0, rgba(0, 0, 0, 0) 40%), -o-linear-gradient(bottom, #000 0, rgba(0, 0, 0, 0) 40%), url('../assets/hero-bg-2.svg');
     background-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0) 40%), linear-gradient(0deg, #000 0, rgba(0, 0, 0, 0) 40%), url('../assets/hero-bg-2.svg');
     background-position: center
 }
@@ -192,15 +296,26 @@
     }
 
     .hero-section {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         padding: 0;
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #000), to(rgba(0, 0, 0, .1))), url('../assets/hero-bg.jpg');
+        background-image: -o-linear-gradient(bottom, #000 0, rgba(0, 0, 0, .1) 100%), url('../assets/hero-bg.jpg');
         background-image: linear-gradient(0deg, #000 0, rgba(0, 0, 0, .1) 100%), url('../assets/hero-bg.jpg');
         background-position: center
     }
 
     .hero-btns-div {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
         gap: 1rem
     }
@@ -214,13 +329,20 @@
     }
 
     .hero-section .left-div {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
         height: 100vh;
         width: 100%
     }
 
     .left-div p {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column
     }
 
@@ -230,6 +352,8 @@
     }
 
     .text-div {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center
     }
 }

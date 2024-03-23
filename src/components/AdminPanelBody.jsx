@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import '../styles/AdminPanelBody.css'
 
 const AdminPanelBody = () => {
+    const history = useHistory();
 
     const [adminMenuOpen, setAdminMenuOpen] = useState(false);
     const [adminCompanions, setAdminCompanions] = useState([]);
@@ -42,6 +44,12 @@ const AdminPanelBody = () => {
 
     }
 
+    const handleLogout = () => {
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+    };
+
     // cancel button
     const handleReset = (e) => {
         e.preventDefault();
@@ -74,7 +82,7 @@ const AdminPanelBody = () => {
         <div className="admin-panel-body-div w-full md:rounded-xl ">
             <div className='flex w-full justify-center relative'>
                 {
-                    adminMenuOpen ? (
+                    adminMenuOpen && (
                         <div className='admin-menu-div p-4 fixed bg-black rounded-3xl ml-2 top-16 left-2 h-max z-50'>
                             <ul className="space-y-2 font-medium">
                                 <li>
@@ -86,16 +94,16 @@ const AdminPanelBody = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
+                                    <button onClick={handleLogout} className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group whitespace-nowrap">
                                         <span className="material-symbols-outlined">
                                             logout
                                         </span>
                                         <p className="ms-3 inline-block">Log Out</p>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
-                    ) : null
+                    )
                 }
                 <div className='admin-icon-nav'>
                     {
@@ -117,11 +125,11 @@ const AdminPanelBody = () => {
             <div className='body-main-admin-div'>
                 <form onSubmit={handleSubmitGlb} className='glb-form flex flex-col gap-5'>
                     {/* <p className='text-2xl text-white'>Upload GLB file </p> */}
-                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-2 items-center'>
                         <label htmlFor="file" className='file-label'>
                             <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                 <div className='flex flex-col'>
-                                    <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                    <div className="flex items-center gap-2 text-xl text-gray-500 dark:text-gray-400 whitespace-nowrap" style={{ fontSize: 'clamp(1rem, 2vw, 1.5rem)' }}>
                                         <span className="material-symbols-outlined">
                                             upload
                                         </span>Upload GLB file
@@ -135,7 +143,7 @@ const AdminPanelBody = () => {
                             </p>
                             <input type="file" id="file" />
                         </label>
-                        <div className='flex gap-5 justify-center items-center px-1'>
+                        <div className='flex gap-5 justify-between items-center px-1 flex-col sm:flex-row'>
                             <button type="submit">Upload</button>
                             <button type="reset" onClick={handleReset}>Cancel</button>
                         </div>
@@ -143,30 +151,34 @@ const AdminPanelBody = () => {
                 </form>
                 <div className='admin-comp-cards-div'>
                     {/* <p>Companions to Create</p> */}
-                    <div className='overflow-y-auto flex flex-col gap-4'>
+                    <div className={`overflow-y-auto ${adminCompanions.length > 0 ?"admin-com-card-inside-div" : "flex"}`}>
                         {
                             adminCompanions.length > 0 ?
-                                adminCompanions.map((companion, index) => {
+                                adminCompanions
+                                .filter((companion) => companion.Glb_link === "")
+                                .map((companion, index) => {
                                     return (
                                         <div className='companion-card' key={index}>
                                             <div className='companion-card-img'>
                                                 <img src={companion.front_src} alt={companion.name} />
                                             </div>
                                             <div className='companion-card-details'>
-                                                <p>{companion.name}</p>
-                                                <p>companion: {companion.companion_id}</p>
-                                                <p>user: {companion.user_id}</p>
+                                                <p className='text-sm md:text-xl'>{companion.name}</p>
+                                                <div className='flex flex-col items-start gap-1'>
+                                                    <p>Avatar ID: {companion.companion_id}</p>
+                                                    <p>User ID: {companion.user_id}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     )
                                 })
                                 :
-                                <p className='text-white'>No Companions to Create</p>
+                                <p className='text-white text-center'>No Companions to Create</p>
                         }
                     </div>
                 </div>
                 <div className='GCP-form-div'>
-                    <form onSubmit={handlesubmit} className='flex flex-col gap-5'>
+                    <form onSubmit={handlesubmit}>
                         <label htmlFor="GCP">
                             <p className='text-white'>Enter GCP public URL</p>
                             <input type="text" id="GCP" name='GCP' placeholder='Enter GCP public URL' />

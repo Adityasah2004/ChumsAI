@@ -1,4 +1,6 @@
 .dashboard-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 1rem;
     padding: 1rem;
@@ -8,7 +10,11 @@
 }
 
 .dashboard-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center
 }
 
@@ -33,15 +39,17 @@
 
 .comp-card {
     width: 300px;
-    height: auto;
+    height: 300px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     box-shadow: 0 0 10px rgba(0, 0, 0, .5)
 }
 
 .comp-card-img {
     width: auto;
-    height: 100%;
+    height: 130px;
+    -o-object-fit: cover;
     object-fit: cover;
-    border-radius: .75rem
+    border-radius: 0.5rem
 }
 
 .profile-div {
@@ -51,13 +59,18 @@
     height: 30px;
     border-radius: 50%;
     overflow: hidden;
+    background: -o-linear-gradient(315deg, #65cbf6, #9a51ff, #ff6e7f);
     background: linear-gradient(135deg, #65cbf6, #9a51ff, #ff6e7f)
 }
 
 .dashboard-cards-div {
+    display: -ms-grid;
     display: grid;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     justify-items: center;
+    -ms-grid-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     padding: 0 4rem
@@ -67,11 +80,28 @@
     background-color: #303030
 }
 
-@media screen and (max-width:900px) {
+/* @media screen and (max-width:900px) {
     .dashboard-cards-div {
         grid-template-columns: repeat(auto-fit, minmax(300px, auto));
         padding: 0 1rem
     }
+} */
+
+@media screen and (max-width:1440px) {
+    .dashboard-cards-div {
+        -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 1rem
+    }
+}
+
+@media screen and (max-width:1060px) {
+    .dashboard-cards-div {
+        -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 1rem
+    }
+
 }
 
 @media screen and (max-width:768px) {
@@ -81,15 +111,23 @@
     }
 
     .dashboard-nav {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
         justify-content: space-between
     }
 
     .skip-header {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 0px;
         flex: 0 1 0
     }
 
     .companion-card-div .menu-icon {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         padding: 1rem
     }
@@ -99,6 +137,7 @@
     }
 
     .comp-card {
+        -webkit-box-shadow: none;
         box-shadow: none
     }
 
@@ -108,11 +147,18 @@
     }
 
     .mobile-menu-div {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         gap: 1rem;
         padding: 1rem;
         text-decoration: none;
+        -webkit-transition: .8s ease-in-out;
+        -o-transition: .8s ease-in-out;
         transition: .8s ease-in-out
     }
 }

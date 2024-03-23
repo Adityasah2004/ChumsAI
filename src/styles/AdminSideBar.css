@@ -1,13 +1,19 @@
 .admin-nav,
 .admin-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 1rem;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out
 }
 
 .admin-nav,
 .admin-sidebar,
 .admin-sidebar:hover {
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
     transition: .8s ease-in-out
 }
 
@@ -17,8 +23,11 @@
     top: 0;
     bottom: 0;
     left: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
-    background: #191c24;
+    background: #16171d;
     overflow: hidden
 }
 

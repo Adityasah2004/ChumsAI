@@ -165,7 +165,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between">
                         <div className="flex items-center gap-2">
                             <input type="checkbox" id="remember" />
                             <label htmlFor="remember">Remember me</label>
@@ -176,10 +176,10 @@ const Login = () => {
                         >
                             Lost Password?
                         </a>
-                    </div>
+                    </div> */}
                     <button onClick={handleSubmit}>Login</button>
                     {/* {userId && <CompanionList userId={userId} />} */}
-                    <p>Don't have an account? <Link to="/signup" className="underline">Sign Up</Link></p>
+                    <p>Don't have an account? <Link to="/signup" className="text-cyan-500 hover:underline">Sign Up</Link></p>
                 {/* </form> */}
             </div>
             {/* <Modal show={openModal} size="md" onClose={onCloseModal} popup> */}
