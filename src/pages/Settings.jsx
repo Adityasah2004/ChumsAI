@@ -14,7 +14,7 @@ const Settings = () => {
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/user/${userId}`);
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`);
             const data = await response.json();
             console.log(data.data);
             setUserProfileDetails(data.data);
@@ -48,11 +48,14 @@ const Settings = () => {
             // password: form.password.value
         }
         console.log(data);
+        const bearerToken = localStorageUtils.getAccessToken();
+        console.log('Bearer Token at seetings editedsubmit:', bearerToken);
         try {
-            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`
                 },
                 body: JSON.stringify(data)
             });

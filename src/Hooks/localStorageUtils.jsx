@@ -24,7 +24,15 @@ const localStorageUtils = {
     getCompanionId: () => {
         return localStorage.getItem("companion_id");
     },
+    
+    setGlbLink: (Glb_link) => {
+        localStorage.setItem("Glb_link", Glb_link);
+    },
 
+    getGlbLink: () => {
+        return localStorage.getItem("Glb_link");
+    },
+    
     clearLocalStorage: () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");

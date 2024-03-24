@@ -54,7 +54,7 @@ const Signup = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/user/sign-up",
+                "https://apiv1-wsuwijidsa-el.a.run.app/user/sign-up",
                 {
                     method: "POST",
                     headers: {

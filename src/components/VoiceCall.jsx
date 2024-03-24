@@ -74,7 +74,7 @@
 //     const accessToken = localStorageUtils.getAccessToken();
 
 //     try {
-//       const response = await fetch('http://localhost:8000/message/VoiceCall/offer', {
+//       const response = await fetch('https://apiv1-wsuwijidsa-el.a.run.app/message/VoiceCall/offer', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',

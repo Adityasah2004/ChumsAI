@@ -11,9 +11,12 @@ const userId = localStorageUtils.getUserId();
 const CompanionCard = (props) => {
     // const { name, front_src, companion_id, message_count, category, private } = data;
     const { data } = props;
-    console.log(data);
+    console.log("this is companion data at companion card:",data);
+    console.log("this is companion Glb at companion card:",data.Glb_link);
+    console.log("this is companion id at companion card:",data.companion_id);
     const handleCardClick = () => {
         localStorageUtils.setCompanionId(data.companion_id);
+        localStorageUtils.setGlbLink(data.Glb_link);
         const companionId = localStorageUtils.getCompanionId();
         console.log('Companion ID:', companionId);
     };
@@ -71,11 +74,14 @@ const CompanionList = () => {
     const [userDetails, setUserDetails] = useState({});
     //  fetch user details from the server using the user id
     const fetchUserDetails = async () => {
+        const bearerToken = localStorageUtils.getAccessToken();
+        console.log('Bearer Token at companion card fetch user details:', bearerToken);
         try {
-            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`
                 },
             });
             const data = await response.json();
@@ -114,12 +120,12 @@ const CompanionList = () => {
         const fetchCompanionData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:8000/companion/getAllCharacters/${userId}`,
+                    `https://apiv1-wsuwijidsa-el.a.run.app/companion/getAllCharacters/${userId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },
-                    }
+                    } 
                 );
 
                 // Log the fetched data

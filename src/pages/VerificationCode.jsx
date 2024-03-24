@@ -11,7 +11,7 @@ const VerificationCode = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/user/verify_email",
+                "https://apiv1-wsuwijidsa-el.a.run.app/user/verify_email",
                 {
                     method: "POST",
                     headers: {

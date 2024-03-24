@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import localStorageUtils from '../Hooks/localStorageUtils'
 import '../styles/AdminPanelBody.css'
 
 const AdminPanelBody = () => {
     const history = useHistory();
-
+    const bearerToken = localStorageUtils.getAccessToken();
     const [adminMenuOpen, setAdminMenuOpen] = useState(false);
     const [adminCompanions, setAdminCompanions] = useState([]);
     const handleAdminMenu = () => {
@@ -24,11 +25,11 @@ const AdminPanelBody = () => {
 
         async function fetchCompanionDetails() {
             try {
-                const response = await fetch('/admin_get_all_charcters', {
+                const response = await fetch('https://apiv1-wsuwijidsa-el.a.run.app/admin_get_all_charcters', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
-                        // Add any other headers if required
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${bearerToken}`
                     }
                 });
                 if (response.ok) {
@@ -48,7 +49,7 @@ const AdminPanelBody = () => {
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
         history.push('/');
-    };
+    }; 
 
     // cancel button
     const handleReset = (e) => {
@@ -59,10 +60,11 @@ const AdminPanelBody = () => {
     // admin get all companions
     const fetchAllCompanions = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/companion/admin_get_all_charcters`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/companion/admin_get_all_charcters`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`,
                 },
             });
             const data = await response.json();
@@ -77,6 +79,46 @@ const AdminPanelBody = () => {
     useEffect(() => {
         fetchAllCompanions();
     }, []);
+
+    const [formAdminData, setFormAdminData] = useState({
+        Glb_link: "",
+        companion_id: "",
+        user_id: ""
+    })
+    
+    const handleAdminSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+        const response = await fetch(`/router/${formAdminData.companion_id}`, {
+            method: 'PATCH',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formAdminData.Glb_link)
+        });
+    
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail);
+        }
+    
+        console.log('Companion details updated successfully');
+          // Optionally, you can perform additional actions after a successful update
+        } catch (error) {
+        console.error('Error updating companion:', error.message);
+          // Optionally, you can display an error message to the user
+        }
+    };
+
+    const handleInputChange = (field, value) => {
+        setFormAdminData((preData) => ({
+            ...preData,
+            [field]: value,
+        }))
+    }
+
+    console.log("this is admin form data ",formAdminData);
 
     return (
         <div className="admin-panel-body-div w-full md:rounded-xl ">
@@ -178,18 +220,18 @@ const AdminPanelBody = () => {
                     </div>
                 </div>
                 <div className='GCP-form-div'>
-                    <form onSubmit={handlesubmit}>
+                    <form onSubmit={handleAdminSubmit}>
                         <label htmlFor="GCP">
                             <p className='text-white'>Enter GCP public URL</p>
-                            <input type="text" id="GCP" name='GCP' placeholder='Enter GCP public URL' />
+                            <input type="text" id="GCP" name='GCP' placeholder='Enter GCP public URL' value={formAdminData.Glb_link} onChange={(e) => handleInputChange("GLB_link",e.target.value)} required  />
                         </label>
                         <label htmlFor="companion_id">
                             <p className='text-white'>Enter Companion ID</p>
-                            <input type="text" id="companion_id" name='companion_id' placeholder='Enter Companion ID' />
+                            <input type="text" id="companion_id" name='companion_id' placeholder='Enter Companion ID' value={formAdminData.companion_id} onChange={(e) => handleInputChange("companion_id",e.target.value)} required />
                         </label>
                         <label htmlFor="user_id">
                             <p className='text-white'>Enter User ID</p>
-                            <input type="text" id="user_id" name='user_id' placeholder='Enter User ID' />
+                            <input type="text" id="user_id" name='user_id' placeholder='Enter User ID' value={formAdminData.user_id} onChange={(e) => handleInputChange("user_id",e.target.value)} required  />
                         </label>
                         <button type="submit">Submit</button>
                     </form>

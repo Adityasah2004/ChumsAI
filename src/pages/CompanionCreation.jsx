@@ -55,7 +55,7 @@ function CompanionCreation() {
             formData.append('left_side', leftSideImage);
             formData.append('right_side', rightSideImage);
 
-            const apiURL = "http://localhost:8000/companion/upload_character_pics";
+            const apiURL = "https://apiv1-wsuwijidsa-el.a.run.app/companion/upload_character_pics";
             const requestOptions = {
                 method: "POST",
                 headers: {
@@ -359,7 +359,7 @@ function CompanionCreation() {
         const handleSubmit = async (e) => {
             e.preventDefault();
 
-            const url = "http://localhost:8000/companion/";
+            const url = "https://apiv1-wsuwijidsa-el.a.run.app/companion/";
             const bearerToken = accessToken;
 
             try {

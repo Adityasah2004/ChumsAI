@@ -43,7 +43,7 @@ const Chat = () => {
 
     const fetchCompanionDetails = async () => {
         try {
-            const apiUrl = `http://localhost:8000/companion/${companionId}`;
+            const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/companion/${companionId}`;
             const bearerToken = accessToken;
             const requestOptions = {
                 method: "GET",
@@ -69,7 +69,7 @@ const Chat = () => {
     const fetchMessages = async () => {
         // console.log("this is user id in fetchmessages", userId);
         try {
-            const response = await fetch(`http://localhost:8000/message/get_all_character_messages?user_id=${userId}&character_id=${companionId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/message/get_all_character_messages?user_id=${userId}&character_id=${companionId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
@@ -104,7 +104,7 @@ const Chat = () => {
     const fetchUserDetails = async () => {
         console.log("this is user id", userId);
         try {
-            const apiUrl = `http://localhost:8000/user/${userId}`;
+            const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`;
             const bearerToken = accessToken;
             const requestOptions = {
                 method: "GET",
@@ -148,7 +148,7 @@ const Chat = () => {
     const handleDeleteMessage = async (messageId, sender) => {
         try {
             // Make a DELETE request to your backend API
-            const response = await fetch(`http://localhost:8000/message/${messageId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/message/${messageId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -183,8 +183,8 @@ const Chat = () => {
         dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })));
         // setOnline(true);
         try {
-            const apiUrl = `http://localhost:8000/message/Chat`;
-            // const bearerToken = accessToken;
+            const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/message/Chat`;
+            const bearerToken = accessToken;
 
             const requestBody = {
                 Transcription_language_code: "en-US",
@@ -204,7 +204,7 @@ const Chat = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${bearerToken}`,
+                    Authorization: `Bearer ${bearerToken}`,
                 },
                 body: JSON.stringify(requestBody),
             };
@@ -690,7 +690,7 @@ export default Chat;
 // const handleDeleteMessage = async (messageId, sender) => {
 //     try {
 //         // Make a DELETE request to your backend API
-//         const response = await fetch(`http://localhost:8000/message/${messageId}`, {
+//         const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/message/${messageId}`, {
 //             method: 'DELETE',
 //             headers: {
 //                 'Content-Type': 'application/json',

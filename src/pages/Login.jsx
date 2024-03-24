@@ -64,7 +64,7 @@ const Login = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:8000/user/login",
+                "https://apiv1-wsuwijidsa-el.a.run.app/user/login",
                 // (mode === "login" ? "login" : "sign-up"),
                 {
                     method: "POST",

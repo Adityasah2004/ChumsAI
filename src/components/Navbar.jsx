@@ -34,11 +34,14 @@ const Navbar = () => {
 
     //  fetch user details from the server using the user id
     const fetchUserDetails = async () => {
+        const bearerToken = localStorageUtils.getAccessToken();
+        console.log('Bearer Token at Navbar fetch user details:', bearerToken);
         try {
-            const response = await fetch(`http://localhost:8000/user/${userId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`
                 },
             });
             const data = await response.json();
@@ -61,12 +64,12 @@ const Navbar = () => {
         // }
     },[]);
 
-    useEffect(() => {
-        // Check if user details contain admin email
-        if (userId && userDetails.email === "chumsai.tech@gmail.com") {
-            setIsAdmin(true);
-        }
-    }, [userDetails]);
+    // useEffect(() => {
+    //     // Check if user details contain admin email
+    //     if (userId && userDetails.email === "chumsai.tech@gmail.com") {
+    //         setIsAdmin(true);
+    //     }
+    // }, [userDetails]);
 
     return (
         <>

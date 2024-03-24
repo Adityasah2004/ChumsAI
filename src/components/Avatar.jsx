@@ -5,6 +5,7 @@ import { OrbitControls, useAnimations, useFBX } from "@react-three/drei/core"
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from "three";
+import localStorageUtils from "../Hooks/localStorageUtils";
 import useSpeechRecognition from "../Hooks/useSpeechRecognitionHook";
 import { Suspense } from 'react'
 
@@ -24,6 +25,8 @@ const Avatar = (/*{companionId}*/) => {
         H: "viseme_TH",
         X: "viseme_PP",
     };
+    const Glb_link = localStorageUtils.getGlbLink();
+    console.log("Glb_link at avatar", Glb_link)
 
     var {
         text,
@@ -34,7 +37,7 @@ const Avatar = (/*{companionId}*/) => {
     } = useSpeechRecognition()
     // const avatar = useGLTF(`/${companion_id}.glb`);
     // const avatar = useGLTF(`/Avatar3.glb`);
-    const avatar = useLoader(GLTFLoader, `/Avatar3.glb`);
+    const avatar = useLoader(GLTFLoader, Glb_link);
     // const avatar = useLoader(GLTFLoader, `https://storage.googleapis.com/glb_buckets/RocheAvatarv5.glb`);
     const [index, setIndex] = useState(0);
     const [animation, setanimation] = useState("Idle");
@@ -62,9 +65,15 @@ const Avatar = (/*{companionId}*/) => {
 
     //audio use effect
     useEffect(() => {
+        const bearerToken = localStorageUtils.getAccessToken();
+        console.log("bearer at avatar get response",bearerToken)
         if (text != "") {
-            const response = fetch('http://localhost:8000/getResponse?text=' + text, {
-                method: 'POST'
+            const response = fetch('https://apiv1-wsuwijidsa-el.a.run.app/getResponse?text=' + text, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken}`,
+                },
             })
                 .then(response => {
                     // Check if the request was successful (status code 200)
@@ -77,7 +86,7 @@ const Avatar = (/*{companionId}*/) => {
                 .then(data => {
                     const audioUrl = URL.createObjectURL(data);
                     audio = new Audio(audioUrl);
-                    const responsejson = fetch('http://localhost:8000/getJsondata')
+                    const responsejson = fetch('https://apiv1-wsuwijidsa-el.a.run.app/getJsondata')
                         .then(response => {
                             // Check if the request was successful (status code 200)
                             if (!response.ok) {
