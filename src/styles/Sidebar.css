@@ -1,0 +1,54 @@
+.dash-nav,
+.logo-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 1rem;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
+    transition: .8s ease-in-out
+}
+
+.dash-nav,
+.logo-sidebar,
+.logo-sidebar:hover {
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
+    transition: .8s ease-in-out
+}
+
+.logo-sidebar {
+    width: 60px;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #191c24;
+    overflow: hidden
+}
+
+.logo-sidebar:hover {
+    width: 300px
+}
+
+.dash-nav {
+    height: -webkit-fill-available;
+    padding: 1rem;
+    text-decoration: none
+}
+
+.dash-nav a {
+    width: inherit;
+    white-space: nowrap;
+    padding: .5rem
+}
+
+@media screen and (max-width:768px) {
+    .logo-sidebar {
+        display: none
+    }
+}

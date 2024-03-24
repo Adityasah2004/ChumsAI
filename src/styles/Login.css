@@ -1,0 +1,89 @@
+.login-main-div {
+    background-image: url("../assets/login-half-img.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 2rem
+}
+
+.login-main-div input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent
+}
+
+.login-main-div input::-webkit-input-placeholder {
+    color: #ccc
+}
+
+.login-main-div input::-moz-placeholder {
+    color: #ccc
+}
+
+.login-main-div input:-ms-input-placeholder {
+    color: #ccc
+}
+
+.login-main-div input::-ms-input-placeholder {
+    color: #ccc
+}
+
+.login-main-div input::placeholder {
+    color: #ccc
+}
+
+.login-main-div .login-card {
+    /* background: rgba(255, 255, 255, .1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); */
+    border-radius: 20px;
+    padding: 20px;
+    /* -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2); */
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1rem
+}
+
+.login-main-div button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #06B6D4;
+    color: #fff;
+    cursor: pointer
+}
+
+@media screen and (max-width:600px) {
+    .login-main-div {
+        padding: 0 1rem
+    }
+}

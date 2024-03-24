@@ -1,0 +1,17 @@
+.create-comp-card {
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5)
+}
+
+.create-comp-card-img {
+    width: auto;
+    height: 200px;
+    border-radius: .5rem
+}
+
+@media screen and (max-width:768) {
+    .create-comp-card {
+        width: 100%;
+        max-width: 300px
+    }
+}

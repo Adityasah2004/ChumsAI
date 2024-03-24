@@ -1,0 +1,53 @@
+::-webkit-scrollbar {
+    width: 5px
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    border-radius: 5px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555
+}
+
+.ai-message,
+.user-message {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative
+}
+
+.ai-message .message-p {
+    color: #000;
+    background-color: rgba(255, 255, 255, .8)
+}
+
+.user-message {
+    -ms-flex-item-align: end;
+    align-self: flex-end
+}
+
+.user-message .message-p {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .8)
+}
+
+.message-opt-icon {
+    border-radius: 0 0 0 2rem;
+    background-color: rgba(0, 0, 0, .8);
+    padding-bottom: .5rem
+}
+
+.mess-opt-div {
+    z-index: 100
+}
+
+.chat-p {
+    font-size: clamp(.2rem, 4vw, 1rem)
+}

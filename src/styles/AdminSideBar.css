@@ -1,0 +1,54 @@
+.admin-nav,
+.admin-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 1rem;
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
+    transition: .8s ease-in-out
+}
+
+.admin-nav,
+.admin-sidebar,
+.admin-sidebar:hover {
+    -webkit-transition: .8s ease-in-out;
+    -o-transition: .8s ease-in-out;
+    transition: .8s ease-in-out
+}
+
+.admin-sidebar {
+    width: 60px;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #16171d;
+    overflow: hidden
+}
+
+.admin-sidebar:hover {
+    width: 300px
+}
+
+.admin-nav {
+    height: -webkit-fill-available;
+    padding: 1rem;
+    text-decoration: none
+}
+
+.admin-nav a {
+    width: inherit;
+    white-space: nowrap;
+    padding: .5rem
+}
+
+@media screen and (max-width:768px) {
+    .admin-sidebar {
+        display: none
+    }
+}

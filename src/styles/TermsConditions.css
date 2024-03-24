@@ -1,0 +1,32 @@
+.features-div1,
+.features-div2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 1rem
+}
+
+.features-div1 h1 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 500
+}
+
+.features-div1 p,
+.features-div2 p {
+    font-size: clamp(.5rem, 4vw, 1rem)
+}
+
+.features-div2 p {
+    text-align: left
+}

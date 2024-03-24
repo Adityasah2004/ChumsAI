@@ -1,0 +1,36 @@
+.faq-section {
+    padding-left: 8rem;
+    padding-right: 8rem
+}
+
+.faq-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #fff
+}
+
+.MuiCollapse-wrapper {
+    background-color: #000;
+    color: #fff
+}
+
+.MuiSvgIcon-root {
+    color: #fff
+}
+
+.MuiButtonBase-root {
+    color: #fff;
+    border: none
+}
+
+.css-1fderfv-MuiPaper-root-MuiAccordion-root {
+    border: none
+}
+
+@media screen and (max-width:425px) {
+    .faq-section {
+        padding-left: 2rem;
+        padding-right: 2rem
+    }
+}
