@@ -191,7 +191,7 @@ const Chat = () => {
         }
 
         setNewMessage("");
-        dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: false })));
+        dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true})));
         // setOnline(true);
         try {
             const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/message/Chat`;
@@ -201,12 +201,12 @@ const Chat = () => {
                 Transcription_language_code: "en-US",
                 role: "string",
                 content: newMessage,
-                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: false }),
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true}),
                 updatedAt: "string",
                 companionId: companionId,
                 translation_language_code: "en",
                 userId: userId,
-                user_timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: false }),
+                user_timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true}),
             };
 
             console.log("Request Body Structure:", JSON.stringify(requestBody, null, 2));
@@ -232,7 +232,7 @@ const Chat = () => {
             const data = await response.json();
             console.log(data);
 
-            dispatch(addAIMessage(data.response, data.response_timestamp));
+            dispatch(addAIMessage(data.response, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true})));
             setTyping(false);
         } catch (error) {
             setTyping(false);
