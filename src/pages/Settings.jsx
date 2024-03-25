@@ -14,7 +14,13 @@ const Settings = () => {
 
     const fetchUserProfile = async () => {
         try {
-            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`);
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorageUtils.getAccessToken()}`
+                }
+            });
             const data = await response.json();
             console.log(data.data);
             setUserProfileDetails(data.data);
@@ -24,6 +30,9 @@ const Settings = () => {
     }
 
     useEffect(() => {
+        if (!localStorageUtils.getAccessToken() || !localStorageUtils.getUserId()) {
+            handleLogout();
+        }
         fetchUserProfile();
     }, []);
 

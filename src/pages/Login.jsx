@@ -146,7 +146,7 @@ const Login = () => {
                         <input type="text"
                             className="w-full"
                             id="email"
-                            placeholder="name@gmail.com"
+                            placeholder="xyz@gmail.com"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
                             required

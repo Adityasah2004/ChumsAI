@@ -59,9 +59,9 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        // if (userId) {
+        if (userId) {
         fetchUserDetails();
-        // }
+        }
     },[]);
 
     // useEffect(() => {

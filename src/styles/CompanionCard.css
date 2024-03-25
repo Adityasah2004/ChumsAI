@@ -39,14 +39,14 @@
 
 .comp-card {
     width: 300px;
-    height: 300px;
+    height: 290px;
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     box-shadow: 0 0 10px rgba(0, 0, 0, .5)
 }
 
 .comp-card-img {
     width: auto;
-    height: 130px;
+    height: 200px;
     -o-object-fit: cover;
     object-fit: cover;
     border-radius: 0.5rem

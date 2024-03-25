@@ -7,6 +7,7 @@ import '../styles/CompanionCard.css'
 import DashboardCreateCard from './DashboardCreateCard';
 
 const userId = localStorageUtils.getUserId();
+const bearerToken = localStorageUtils.getAccessToken();
 
 const CompanionCard = (props) => {
     // const { name, front_src, companion_id, message_count, category, private } = data;
@@ -21,13 +22,13 @@ const CompanionCard = (props) => {
         console.log('Companion ID:', companionId);
     };
     return (
-        <Link key={props.key} to={`/chat/${userId}/${data.companion_id}`} className="comp-card flex flex-col bg-slate-700 h-full p-2 rounded-xl justify-start gap-5" onClick={handleCardClick}>
+        <Link key={props.key} to={`/chat/${userId}/${data.companion_id}`} className="comp-card flex flex-col bg-slate-700 h-full p-2 rounded-xl justify-start gap-2" onClick={handleCardClick}>
             <div className='flex items-center justify-center'>
                 <img className="comp-card-img" src={data.front_src} alt="AI Companion Image" />
             </div>
             <h2 className="text-white text-xl font-medium">{data.name}</h2>
-                <span className="text-gray-500 text-xs mt-2 mb-2">{userId}</span>
-            <div className='flex justify-between'>
+                {/* <span className="text-gray-500 text-xs mt-2 mb-2">{userId}</span> */}
+            <div className='flex justify-between px-4'>
                 <p className='text-white font-thin text-sm'>{data.category}</p>
                 <div className='flex items-center gap-1 text-white font-light text-sm' title='Message count'>
                     {
@@ -62,7 +63,7 @@ const CompanionList = () => {
     const [companionData, setCompanionData] = useState([]);
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const accessToken = localStorageUtils.getAccessToken();
+    // const accessToken = localStorageUtils.getAccessToken();
 
     const handleLogout = () => {
         alert('Logged out successfully!');
@@ -70,11 +71,15 @@ const CompanionList = () => {
         history.push('/');
     };
 
+    if(!bearerToken || !userId) {
+        handleLogout();
+    }
+
     const [isAdmin, setIsAdmin] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     //  fetch user details from the server using the user id
     const fetchUserDetails = async () => {
-        const bearerToken = localStorageUtils.getAccessToken();
+        
         console.log('Bearer Token at companion card fetch user details:', bearerToken);
         try {
             const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`, {
@@ -112,7 +117,7 @@ const CompanionList = () => {
     }, [userDetails]);
 
     useEffect(() => {
-        if (!userId || !accessToken) {
+        if (!userId || !bearerToken) {
             console.error('User ID or Access Token is missing.');
             return;
         }
@@ -123,7 +128,7 @@ const CompanionList = () => {
                     `https://apiv1-wsuwijidsa-el.a.run.app/companion/getAllCharacters/${userId}`,
                     {
                         headers: {
-                            Authorization: `Bearer ${accessToken}`,
+                            Authorization: `Bearer ${bearerToken}`,
                         },
                     } 
                 );
@@ -147,7 +152,7 @@ const CompanionList = () => {
         };
 
         fetchCompanionData();
-    }, [userId, accessToken]);
+    }, [userId, bearerToken]);
 
     const handleDashboardMenu = () => {
         setMenuOpen(!menuOpen);

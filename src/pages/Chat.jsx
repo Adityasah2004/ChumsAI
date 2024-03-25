@@ -9,19 +9,17 @@ import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 // const {Avatar1} = lazy(() => import('../components/Avatar'));
 import { Link } from 'react-router-dom';
-
+// import avtPlaceholder from '../assets/AI avatar placeholder.png';
 import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 // import MyGLBViewer from '../components/TestAvatar';
 // import { startRecording, stopRecording } from '../components/VoiceCall';
 
 
-// import { startRecording, stopRecording } from '../components/VoiceCall';
-
-
 const Chat = () => {
     const userId = localStorageUtils.getUserId();
-    const accessToken = localStorageUtils.getAccessToken();
+    const bearerToken = localStorageUtils.getAccessToken();
     const companionId = localStorageUtils.getCompanionId();
+    const glbUrl = localStorageUtils.getGlbLink();
 
     const dispatch = useDispatch();
     const [companionDetails, setCompanionDetails] = useState(null);
@@ -29,6 +27,7 @@ const Chat = () => {
     const [showEmoji, setShowEmoji] = useState(false);
     const [newMessage, setNewMessage] = useState('');
     const [comingSoon, setComingSoon] = useState(false);
+    const [avatarProcess, setAvatarProcess] = useState(true);
     const [online, setOnline] = useState(false);
     const [typing, setTyping] = useState(false);
     // const [aimessage ,setaimessage] = usestate('');
@@ -41,10 +40,22 @@ const Chat = () => {
 
     const [messages, setMessages] = useState([]);
 
+    if (!bearerToken || !userId) {
+        handleLogout();
+    }
+
+    const handleLogout = () => {
+        alert('Logged out successfully!');
+        localStorage.removeItem('userId');
+        history.push('/');
+    };
+
+    console.log("bearer token", bearerToken);
+
     const fetchCompanionDetails = async () => {
         try {
             const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/companion/${companionId}`;
-            const bearerToken = accessToken;
+            // const bearerToken = ;
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -72,7 +83,7 @@ const Chat = () => {
             const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/message/get_all_character_messages?user_id=${userId}&character_id=${companionId}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
+                    'Authorization': `Bearer ${bearerToken}`,
                     'Content-Type': 'application/json'
                 }
             });
@@ -105,7 +116,7 @@ const Chat = () => {
         console.log("this is user id", userId);
         try {
             const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/user/${userId}`;
-            const bearerToken = accessToken;
+            // const bearerToken = ;
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -143,7 +154,7 @@ const Chat = () => {
         // }, 3000);
         // return () => clearInterval(interval);
         fetchUserDetails();
-    },[userId]);
+    },[]);
 
     const handleDeleteMessage = async (messageId, sender) => {
         try {
@@ -180,22 +191,22 @@ const Chat = () => {
         }
 
         setNewMessage("");
-        dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })));
+        dispatch(addUserMessage(newMessage, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true})));
         // setOnline(true);
         try {
             const apiUrl = `https://apiv1-wsuwijidsa-el.a.run.app/message/Chat`;
-            const bearerToken = accessToken;
+            // const bearerToken = accessToken;
 
             const requestBody = {
                 Transcription_language_code: "en-US",
                 role: "string",
                 content: newMessage,
-                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true}),
                 updatedAt: "string",
                 companionId: companionId,
                 translation_language_code: "en",
                 userId: userId,
-                user_timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" }),
+                user_timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true}),
             };
 
             console.log("Request Body Structure:", JSON.stringify(requestBody, null, 2));
@@ -221,7 +232,7 @@ const Chat = () => {
             const data = await response.json();
             console.log(data);
 
-            dispatch(addAIMessage(data.response, data.response_timestamp));
+            dispatch(addAIMessage(data.response, new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: true})));
             setTyping(false);
         } catch (error) {
             setTyping(false);
@@ -310,6 +321,12 @@ const Chat = () => {
         }, 10000);
     }
 
+    if(avatarProcess){
+        setTimeout(() => {
+            setAvatarProcess(false);
+        }, 20000);
+    }
+
     const handleEmojiInput = (emojiObject) => {
         setNewMessage(newMessage + emojiObject.emoji);
     }
@@ -333,15 +350,25 @@ const Chat = () => {
     return (
         // <div className={voiceCall || videoCall ? "chat-main-body chat-main-body-voice-call" : "chat-main-body"}>
         <div className="chat-main-body">
-            <div className={`body flex h-screen justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
-                <RenderOnViewportEntry
-                    threshold={0.25}
-                    className="w-full h-full"
-                >
-                    <Avatar1
-                    // companionId={companionId} 
-                    />
-                </RenderOnViewportEntry>
+            <div className={`body flex h-screen items-center justify-center ${modelClassesVoiceCall} ${modelClassesVideoCall}`}>
+               {
+                    glbUrl ?  
+                    <RenderOnViewportEntry
+                        threshold={0.25}
+                        className="w-full h-full"
+                    >
+                        <Avatar1/>  
+                    </RenderOnViewportEntry>    :
+                        <div className='flex items-center justify-center'>
+                            {
+                                avatarProcess &&
+                                    <div className="text-white text-lg bg-black bg-opacity-95 p-4 rounded-lg w-1/2">
+                                        Your avatar is in process of creation. Once it is ready, you will be able to see it here.
+                                    </div>
+                            }
+                        </div>
+                    // <img src={avtPlaceholder} alt="ai placeholder" className='h-full' />
+                }
             </div>
             <RenderOnViewportEntry
                 threshold={0.25}
@@ -349,9 +376,9 @@ const Chat = () => {
             >
 
                 {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
-                {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
+                {/* {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
                 {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
-                {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />}
+                {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />} */}
             </RenderOnViewportEntry>
 
             {/* {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />} */}
@@ -370,9 +397,9 @@ const Chat = () => {
                             </span>
                         </div>
                         {/* <button className='flex' title='Settings' > */}
-                        <span className="material-symbols-outlined flex items-center justify-center cursor-pointer" onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
+                        {/* <span className="material-symbols-outlined flex items-center justify-center cursor-pointer" onClick={handleSettings} style={settings ? { rotate: "90deg", transition: "all 0.4s ease-in-out" } : { rotate: "0deg", transition: "all 0.4s ease-in-out" }}>
                             settings
-                        </span>
+                        </span> */}
                         {/* </button> */}
                     </div>
 

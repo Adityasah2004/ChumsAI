@@ -8,7 +8,7 @@ const App = () => {
   injectSpeedInsights();
   return (
     <BrowserRouter>
-    <RefreshToken/>
+      <RefreshToken />
       <AppRouter />
     </BrowserRouter>
   );

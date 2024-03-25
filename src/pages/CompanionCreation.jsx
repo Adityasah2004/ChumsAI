@@ -119,7 +119,8 @@ function CompanionCreation() {
         user_id: userId,
         user_voice: "",
         voice: "",
-        voice_processing: true
+        voice_processing: true,
+        age: null,
     });
 
 
@@ -359,6 +360,12 @@ function CompanionCreation() {
         const handleSubmit = async (e) => {
             e.preventDefault();
 
+            // check if all the user voice or default voice is selected
+            if (!formData.voice && !formData.user_voice) {
+                alert("Please select a voice for your companion");
+                return;
+            }
+
             const url = "https://apiv1-wsuwijidsa-el.a.run.app/companion/";
             const bearerToken = accessToken;
 
@@ -409,7 +416,7 @@ function CompanionCreation() {
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                     {leftProfileFileName && (
                                         <div className="message-div text-white font-thin">
-                                            <p>{leftProfileFileName}</p>
+                                            <span>{leftProfileFileName}</span>
                                         </div>
                                     )}
                                     <div>
@@ -436,7 +443,7 @@ function CompanionCreation() {
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                     {rightProfileFileName && (
                                         <div className="message-div text-white font-thin">
-                                            <p>{rightProfileFileName}</p>
+                                            <span>{rightProfileFileName}</span>
                                         </div>
                                     )}
                                     <div>
@@ -463,7 +470,7 @@ function CompanionCreation() {
                                 <p className="mb-2 text-sm flex gap-4 flex-col items-center text-gray-500 dark:text-gray-400">
                                     {frontProfileFileName && (
                                         <div className="message-div text-white font-thin">
-                                            <p>{frontProfileFileName}</p>
+                                            <span>{frontProfileFileName}</span>
                                         </div>
                                     )}
                                     <div>
@@ -488,7 +495,7 @@ function CompanionCreation() {
 
                     <div className="flex w-full md:w-4/5 gap-8 px-4 flex-col items-center md:justify-between md:flex-row">
                         <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                            <label htmlFor="character-name" className="text-white">Enter any name for your companion <span className="text-sky-500" title="required field">*</span></label>
+                            <label htmlFor="character-name" className="text-white">Name your character<span className="text-sky-500" title="required field">*</span></label>
                             <input
                                 id="character-name"
                                 type="text"
@@ -500,7 +507,7 @@ function CompanionCreation() {
                             />
                         </div>
                         <div className="mb-4  flex flex-col items-start gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                            <label htmlFor="category" className="text-white">Select Category <span className="text-sky-500" title="required field">*</span></label>
+                            <label htmlFor="category" className="text-white"> Select Category<span className="text-sky-500" title="required field">*</span></label>
                             <select
                                 id="category"
                                 value={formData.category}
@@ -532,7 +539,7 @@ function CompanionCreation() {
                             />
                         </div>
                         <div className="mb-4  w-full flex flex-col items-start gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                            <label htmlFor="greeting" className="text-white">Enter a greeting for your character <span className="text-sky-500" title="required field">*</span></label>
+                            <label htmlFor="greeting" className="text-white">How would you like your character to greet you?<span className="text-sky-500" title="required field">*</span></label>
                             <input
                                 id="greeting"
                                 type="text"
@@ -578,7 +585,7 @@ function CompanionCreation() {
                         </div>
                         <div className="flex flex-col w-full justify-between gap-8 md:gap-6" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                             <div className="flex flex-col gap-2 items-start" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
-                                <label htmlFor="visibility" className="text-white" >Visibility <span className="text-sky-500" title="required field">*</span></label>
+                                <label htmlFor="visibility" className="text-white" > Select Visibility<span className="text-sky-500" title="required field">*</span></label>
                                 <select
                                     id="visibility"
                                     value={formData.private}
@@ -610,7 +617,7 @@ function CompanionCreation() {
                     </div>
 
                     <div className="flex w-full md:w-4/5 gap-8 px-4 flex-col items-center md:justify-between md:flex-row">
-                        {/* <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
+                        <div className="mb-4  flex flex-col items-start justify-between gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                         <label htmlFor="age" className="text-white">Age <span className="text-sky-500" title="required field">*</span></label>
                         <input
                             id="age"
@@ -621,7 +628,7 @@ function CompanionCreation() {
                             className="border rounded-md p-2 w-full bg-black"
                             required
                         />
-                    </div> */}
+                    </div>
                         <div className="mb-4  w-full flex flex-col items-start gap-2" style={{ fontSize: "clamp(0.5rem, 4vw, 1.2rem)", width: "100%", maxWidth: "500px" }}>
                             <label htmlFor="attier" className="text-white">Attier preference <span className="text-sky-500" title="required field">*</span></label>
                             <input
@@ -649,7 +656,7 @@ function CompanionCreation() {
                                 </label>
                             </div>
                             <div className="mb-4 w-fit">
-                                <label className="flex items-start md:items-center">
+                                <label className="flex items-center">
                                     <input
                                         type="checkbox"
                                         checked={formData.enableVoiceInputProcessing}
