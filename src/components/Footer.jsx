@@ -2,13 +2,10 @@
 // import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import logo from '../assets/logoDark.webp';
 import '../styles/Footer.css';
-// import { Link } from "react-router-dom";
-
-// const handleClick = async () => {
-//     history.push("/privacy");
-//     };
+import { Link } from "react-router-dom";
 
 function Down() {
+    
     return (
         <footer className="flex flex-col py-5 items-center">
             {/* <div className="footer-div1 text-white w-full">
@@ -36,8 +33,11 @@ function Down() {
                     <h6 className="text-left">Quick Links</h6>
                     <div className="flex flex-col items-start gap-1">
                         <a href="/" className="text-gray-500 hover:underline">Home</a>
-                        {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}
-                        <a href="/contact" className="text-gray-500 hover:underline">Contact us</a>
+                
+                        {/* <a href="#" className="text-gray-500 hover:underline">Services</a> */}                     
+                        <Link to="/contact" className="text-gray-500 hover:underline">Contact</Link> 
+                                        
+{/*                         <a href="/contact" className="text-gray-500 hover:underline">Contact us</a> */}
                     </div>
                 </div>
                 {/* <div className="flex flex-col gap-3">
@@ -51,8 +51,9 @@ function Down() {
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">Legal</h6>
                     <div className="flex flex-col items-start gap-1">
-                        <a href="/privacy" target='_blank' className="text-gray-500 hover:underline">Privacy Policy</a>
-                        <a href="/terms" target='_blank' className="text-gray-500 hover:underline">Terms & Conditions</a>
+                        
+                        <Link to="/privacy" className="text-gray-500 hover:underline">Privacy Policy</Link>
+                        <Link to="/terms" className="text-gray-500 hover:underline">Terms & Conditions</Link>
                     </div>
                 </div>
                 <div className="flex flex-col gap-3">
