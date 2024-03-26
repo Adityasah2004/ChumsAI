@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import localStorageUtils from "../Hooks/localStorageUtils";
 // import {
 //     Button,
@@ -24,7 +24,7 @@ const Login = () => {
     // const [confirmPassword, setConfirmPassword] = useState("");
     // const [mode, setMode] = useState("login");
     // const [userId, setUserId] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     // const onCloseModal = () => {
     //     setOpenModal(false);
@@ -48,7 +48,7 @@ const Login = () => {
 
     const handleSubmit = async () => {
         // e.preventDefault();
-        // history.push("/dashboard");
+        // navigate("/dashboard");
         const formData = {
             email,
             // first_name: firstName,
@@ -90,7 +90,7 @@ const Login = () => {
                 console.log("Access Token:", localStorage.getItem("accessToken"));
 
                 console.log("Login complete");
-                history.push(`/dashboard/${userId}`);
+                navigate(`/dashboard/${userId}`);
             } else if (response.status === 422) {
                 // Unprocessable Entity - Validation errors
                 const responseData = await response.json();

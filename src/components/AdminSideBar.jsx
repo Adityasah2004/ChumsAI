@@ -1,15 +1,15 @@
 // import { Link } from "react-router-dom";
 import logo from "../assets/logoDark.webp";
 import '../styles/AdminSideBar.css';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function AdminSideBar() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
-        history.push('/');
+        navigate('/');
     };
     return (
         <aside className="admin-sidebar rounded-xl" aria-label="Sidebar">

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/Settings.css';
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Navbar from '../components/Navbar';
 
 // Settings component
 const Settings = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [userProfileDetails, setUserProfileDetails] = useState({});
     const [editCard, setEditCard] = useState(false);
     const userId = localStorageUtils.getUserId();
@@ -40,7 +40,7 @@ const Settings = () => {
     const handleLogout = () => {
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
-        history.push('/');
+        navigate('/');
     };
 
     const handleEditButton = () => {

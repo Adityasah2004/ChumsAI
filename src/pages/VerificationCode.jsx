@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router";
+
 const VerificationCode = () => {
 
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const verificationCode = e.target.verificationCode.value;
@@ -24,7 +27,7 @@ const VerificationCode = () => {
             console.log("Response:", data);
             if (response.status === 200) {
                 alert("Verification successful!");
-                history.push("/login");
+                navigate("/login");
             } else {
                 alert("Verification failed!");
             }

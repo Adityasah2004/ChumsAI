@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logoDark.webp";
 import '../styles/Sidebar.css';
 import localStorageUtils from "../Hooks/localStorageUtils";
@@ -9,7 +9,7 @@ const userId = localStorageUtils.getUserId();
 function Side() {
 
     const [userDetails, setUserDetails] = useState({});
-    const [isAdmin, setIsAdmin] = useState(false);
+    // const [isAdmin, setIsAdmin] = useState(false);
     //  fetch user details from the server using the user id
     const fetchUserDetails = async () => {
         const bearerToken = localStorageUtils.getAccessToken();
@@ -43,19 +43,19 @@ function Side() {
         // }
     }, []);
 
-    useEffect(() => {
-        // Check if user details contain admin email
-        if (userId && userDetails.email === "chumsai.tech@gmail.com") {
-            setIsAdmin(true);
-        }
-    }, [userDetails]);
+    // useEffect(() => {
+    //     // Check if user details contain admin email
+    //     if (userId && userDetails.email === "chumsai.tech@gmail.com") {
+    //         setIsAdmin(true);
+    //     }
+    // }, [userDetails]);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
-        history.push('/');
+        navigate('/');
     };
 
 
@@ -79,15 +79,15 @@ function Side() {
                         </a>
                     </li>
                     {
-                        isAdmin &&
-                        <li>
-                            <Link to="/admin" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group">
-                                <span className="material-symbols-outlined">
-                                    admin_panel_settings
-                                </span>
-                                <span className="ms-3">Admin</span>
-                            </Link>
-                        </li>
+                        // isAdmin &&
+                        // <li>
+                        //     <Link to="/admin" className="flex items-center p-2 gap-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group">
+                        //         <span className="material-symbols-outlined">
+                        //             admin_panel_settings
+                        //         </span>
+                        //         <span className="ms-3">Admin</span>
+                        //     </Link>
+                        // </li>
                     }
                     <li>
                         <Link to={`/companion-creation/${userId}`} className="flex gap-2 items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-slate-800 dark:hover:bg-gray-700 group w-max">

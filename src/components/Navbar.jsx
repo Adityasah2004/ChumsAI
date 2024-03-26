@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/Navbar.css';
 import logo from "../assets/logoDark.webp";
 import localStorageUtils from '../Hooks/localStorageUtils';
 
 const Navbar = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const userId = localStorageUtils.getUserId();
     const [navbarOpen, setNavbarOpen] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    // const [isAdmin, setIsAdmin] = useState(false);
     const [userDetails, setUserDetails] = useState({});
 
     window.onclick = function (event) {
@@ -27,8 +27,8 @@ const Navbar = () => {
         // Implement logout logic
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
-        setIsAdmin(false);
-        history.push('/');
+        // setIsAdmin(false);
+        navigate('/');
         // Redirect to the logout page or perform other logout actions
     };
 
@@ -96,11 +96,11 @@ const Navbar = () => {
                             )
                         }
                         {
-                            isAdmin && (
-                                <Link to="/admin" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                    Admin Panel
-                                </Link>
-                            )
+                            // isAdmin && (
+                            //     <Link to="/admin" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                            //         Admin Panel
+                            //     </Link>
+                            // )
                         }
                         <Link to="/documentation" className="text-white whitespace-nowrap hover:bg-white px-3 py-2 rounded-full hover:text-black" >
                             Documentation
@@ -169,11 +169,11 @@ const Navbar = () => {
                                                 Profile
                                             </Link>
                                             {
-                                                isAdmin && (
-                                                    <Link to="/admin" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
-                                                        Admin Panel
-                                                    </Link>
-                                                )
+                                                // isAdmin && (
+                                                //     <Link to="/admin" className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" >
+                                                //         Admin Panel
+                                                //     </Link>
+                                                // )
                                             }
                                             <button className="text-white whitespace-nowrap  hover:bg-white px-3 py-2 rounded-full hover:text-black" onClick={handleLogout}>
                                                 Logout

@@ -61,8 +61,6 @@ const LandingHero = () => {
                 <div className="w-1/2 hero-img-div">
                     <RenderOnViewportEntry
                         threshold={0.25}
-                        // rootMargin='0px'
-                        // root={null}
                         className="w-full h-full"
                     >
                         <Suspense fallback={<div className="loading w-full h-full flex items-center justify-center">Loading...</div>}>

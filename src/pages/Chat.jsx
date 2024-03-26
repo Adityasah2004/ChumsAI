@@ -8,7 +8,7 @@ import Spline from "@splinetool/react-spline";
 import EmojiPicker from 'emoji-picker-react';
 import { Avatar1 } from '../components/Avatar';
 // const {Avatar1} = lazy(() => import('../components/Avatar'));
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import avtPlaceholder from '../assets/AI avatar placeholder.png';
 import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 // import MyGLBViewer from '../components/TestAvatar';
@@ -16,10 +16,21 @@ import RenderOnViewportEntry from '../components/RenderOnViewportEntry';
 
 
 const Chat = () => {
+    const navigate = useNavigate();
     const userId = localStorageUtils.getUserId();
     const bearerToken = localStorageUtils.getAccessToken();
     const companionId = localStorageUtils.getCompanionId();
     const glbUrl = localStorageUtils.getGlbLink();
+
+    const handleLogout = () => {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('accessToken');
+        alert('You have been logged out');
+        navigate('/');
+        return;
+    };
+
+    console.log("bearer token", bearerToken);
 
     const dispatch = useDispatch();
     const [companionDetails, setCompanionDetails] = useState(null);
@@ -40,17 +51,10 @@ const Chat = () => {
 
     const [messages, setMessages] = useState([]);
 
-    if (!bearerToken || !userId) {
+    if (!bearerToken && !userId) {
         handleLogout();
     }
 
-    const handleLogout = () => {
-        alert('Logged out successfully!');
-        localStorage.removeItem('userId');
-        history.push('/');
-    };
-
-    console.log("bearer token", bearerToken);
 
     const fetchCompanionDetails = async () => {
         try {
@@ -140,21 +144,15 @@ const Chat = () => {
     };
 
     useEffect(() => {
-        fetchCompanionDetails();
-        
-        fetchMessages();
-        setTimeout(() => {
-            setOnline(true);
-        }, 5000);
+        if(userId && bearerToken){
+            fetchCompanionDetails();
+            fetchUserDetails();
+            fetchMessages();
+            setTimeout(() => {
+                setOnline(true);
+            }, 5000);
+        }
     }, []);
-
-    useEffect(() => {
-        // const interval = setInterval(() => {
-        //     fetchMessages();
-        // }, 3000);
-        // return () => clearInterval(interval);
-        fetchUserDetails();
-    },[]);
 
     const handleDeleteMessage = async (messageId, sender) => {
         try {
@@ -253,25 +251,6 @@ const Chat = () => {
         setMessages(combinedMessages);
         console.log("this is combined message", combinedMessages);
     }, [userMessages, aiMessages]);
-
-
-    // useEffect(() => {
-    //     const combinedMessages = [];
-    //     let userIndex = 0;
-    //     let aiIndex = 0;
-
-    //     while (userIndex < userMessages.length || aiIndex < aiMessages.length) {
-    //         if (userMessages[userIndex]) {
-    //             combinedMessages.push({ message: userMessages[userIndex], sender: 'user' });
-    //             userIndex++;
-    //         }
-    //         if (aiMessages[aiIndex]) {
-    //             combinedMessages.push({ message: aiMessages[aiIndex], sender: 'ai' });
-    //             aiIndex++;
-    //         }
-    //     }
-    //     setMessages(combinedMessages);
-    // }, [userMessages, aiMessages]);
 
     const chatEndRef = useRef(null);
     useEffect(() => {

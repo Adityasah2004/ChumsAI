@@ -1,6 +1,7 @@
 import '../styles/DashboardCreateCard.css';
 import { Link } from 'react-router-dom';
 import localStorageUtils from '../Hooks/localStorageUtils';
+import aiPlaceholder from '../assets/AIplaceholder.png';
 
 const userId = localStorageUtils.getUserId();
 
@@ -11,7 +12,7 @@ const DashboardCreateCard = () => {
                 {/* <span className="material-symbols-outlined text-gray-800" style={{fontSize: "200px"}}>
                     add_circle
                 </span> */}
-                <img className="create-comp-card-img" src="../src/assets/AI avatar placeholder.png" alt="ai placeholder" />
+                <img className="create-comp-card-img" src={aiPlaceholder} alt="ai placeholder" />
             </div>
             <div>
                 <h2 className="text-white text-xl mb-2 whitespace-normal lg:whitespace-nowrap">Create your custom companion</h2>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import localStorageUtils from "../Hooks/localStorageUtils";
 import '../styles/Signup.css';
 
@@ -12,7 +12,7 @@ const Signup = () => {
     const [lastName, setLastName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     // const [userId, setUserId] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     // const onCloseModal = () => {
     //     setOpenModal(false);
@@ -80,7 +80,7 @@ const Signup = () => {
 
                 console.log("Signup complete");
                 // history.push("/verify-email");
-                history.push("/login");
+                navigate("/login");
             } else if (response.status === 422) {
                 // Unprocessable Entity - Validation errors
                 const responseData = await response.json();

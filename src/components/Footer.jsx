@@ -1,6 +1,6 @@
 
 // import { FaDiscord, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-import logo from '../assets/logoDark.webp';
+// import logo from '../assets/logoDark.webp';
 import '../styles/Footer.css';
 import { Link } from "react-router-dom";
 
@@ -59,7 +59,7 @@ function Down() {
                 <div className="flex flex-col gap-3">
                     <h6 className="text-left">For Developer</h6>
                     <div className="flex flex-col items-start gap-1">
-                        <a href="/documentation" className="text-gray-500 hover:underline">Documentation</a>
+                        <Link to="/documentation" className="text-gray-500 hover:underline">Documentation</Link>
                         {/* <a href="#" className="text-gray-500 hover:underline">API</a> */}
                     </div>
                 </div>

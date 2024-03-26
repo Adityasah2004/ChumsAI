@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import localStorageUtils from '../Hooks/localStorageUtils'
 import '../styles/AdminPanelBody.css'
 
 const AdminPanelBody = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const bearerToken = localStorageUtils.getAccessToken();
     const [adminMenuOpen, setAdminMenuOpen] = useState(false);
     const [adminCompanions, setAdminCompanions] = useState([]);
@@ -48,7 +48,7 @@ const AdminPanelBody = () => {
     const handleLogout = () => {
         alert('Logged out successfully!');
         localStorage.removeItem('userId');
-        history.push('/');
+        navigate('/');
     }; 
 
     // cancel button
