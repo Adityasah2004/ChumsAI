@@ -109,32 +109,20 @@ const CompanionList = () => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     // Check if user details contain admin email
-    //     if (userId && userDetails.email === "chumsai.tech@gmail.com") {
-    //         setIsAdmin(true);
-    //     }
-    // }, [userDetails]);
-
-    // if (!userId || !bearerToken) {
-    //     console.error('User ID or Access Token is missing.');
-    //     return;
-    // }
-
     const fetchCompanionData = async () => {
         try {
-            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/companion/${userId}`, {
+            const response = await fetch(`https://apiv1-wsuwijidsa-el.a.run.app/companion/getAllCharacters/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${bearerToken}`
+                    Authorization: `Bearer ${bearerToken}`
                 },
             });
 
-            // const data = await response.json();
+            const data = await response.json();
             // console.log('Fetched Companion Data:', data.data);
 
-            setCompanionData(response.data);
+            setCompanionData(data.data);
         } catch (error) {
             console.error('Error fetching companion data:', error);
 
