@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import localStorageUtils from '../Hooks/localStorageUtils';
 import Side from './Sidebar';
@@ -121,7 +121,8 @@ const CompanionList = () => {
 
             // const data = await response.json();
             // console.log('Fetched Companion Data:', data.data);
-
+            // console.log('hello i am working');
+            console.log('Fetched Companion Data:', response);
             setCompanionData(response.data);
         } catch (error) {
             console.error('Error fetching companion data:', error);
@@ -245,7 +246,7 @@ const CompanionList = () => {
                 <div className="dashboard-cards-div">
                     <DashboardCreateCard />
                     {
-                        companionData.map((companion, index) => {
+                        companionData && companionData.map((companion, index) => {
                             return <CompanionCard key={index} data={companion} />;
                         })
                     }
