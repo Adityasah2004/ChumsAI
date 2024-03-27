@@ -122,8 +122,11 @@ const CompanionList = () => {
             // const data = await response.json();
             // console.log('Fetched Companion Data:', data.data);
             // console.log('hello i am working');
-            console.log('Fetched Companion Data:', response);
-            setCompanionData(response.data);
+            const data = await response.json(); // Parse JSON response
+            console.log('Fetched Companion Data:', data);
+            setCompanionData(data);
+            // console.log('Fetched Companion Data:', response);
+            // setCompanionData(response.data);
         } catch (error) {
             console.error('Error fetching companion data:', error);
 
