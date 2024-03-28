@@ -104,9 +104,9 @@ const CompanionList = () => {
     }
 
     useEffect(() => {
-        if (userId) {
-        fetchUserDetails();
-        }
+        // if (userId) {
+        // fetchUserDetails();
+        // }
     }, []);
 
     const fetchCompanionData = async () => {
