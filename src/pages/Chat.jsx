@@ -73,9 +73,9 @@ const Chat = () => {
             }
 
             const data = await response.json();
-
+            console.log("before state", data);
             setCompanionDetails(data);
-
+            console.log("after state", companionDetails);
         } catch (error) {
             console.error("Error fetching details:", error);
         }
@@ -349,16 +349,16 @@ const Chat = () => {
                     // <img src={avtPlaceholder} alt="ai placeholder" className='h-full' />
                 }
             </div>
-            <RenderOnViewportEntry
+            {/* <RenderOnViewportEntry
                 threshold={0.25}
                 className="w-full h-full backg"
-            >
+            > */}
 
-                {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />}
+                {/* {background === 0 && <Spline className='backg' scene="https://prod.spline.design/dCtpCuY7cgegAOnu/scene.splinecode" />} */}
                 {/* {background === 1 && <Spline className='backg' scene="https://prod.spline.design/pIkx9hV8t-YeBdBp/scene.splinecode" />}
                 {background === 2 && <Spline className='backg' scene="https://prod.spline.design/1b7hKCxLGIA7p2cb/scene.splinecode" />}
                 {background === 3 && <Spline className='backg' scene="https://prod.spline.design/DSoIdkwtCPiBmGko/scene.splinecode" />} */}
-            </RenderOnViewportEntry>
+            {/* </RenderOnViewportEntry> */}
 
             {/* {voiceCall && <img src="/voiceWaves.gif" className='rounded-full absolute z-20' alt="Audio waves" />} */}
             {/* <div className={voiceCall || videoCall ? "hidden" : "chat-div relative"}> */}
@@ -415,9 +415,9 @@ const Chat = () => {
                                 time={msg.message[1]} // Ensure you have a time property in your message objects
                                 message={msg.message[0]}
                                 key={msg.message[2]}
-                                name={msg.sender === 'user' ? `${userDetails.first_name}  ${userDetails.last_name}` : companionDetails.name}
+                                name={msg.sender === 'user' ?(userDetails && `${userDetails.first_name}  ${userDetails.last_name}`) : (companionDetails && companionDetails.name)}
                                 cName={`${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
-                                img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : companionDetails.front_src}
+                                img={msg.sender === 'user' ? "https://www.w3schools.com/howto/img_avatar.png" : (companionDetails && companionDetails.front_src)}
                                 sender={msg.sender === 'user' ? 'user' : 'ai'}
                                 onDelete={() => handleDeleteMessage(msg.message[2], msg.message[3])}
                             />
